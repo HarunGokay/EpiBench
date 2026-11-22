@@ -1,50 +1,44 @@
 """EpiBench Scenario Generator.
 
-Generates multi-session conversational scenarios across tracks:
-- Track R: Revision (1-3 updates, current/previous/as-of/count)
-- Track D: Dependency (decisions resting on assumptions, cascade on contradiction)
-- Track X: Hidden Constraints (unprompted boundary conditions in planning)
-- Track F: Forecasts & Patterns (repeated slippage, realism checks)
-- Track I: Interventions & Causal Claims (clean, confounded, un-implemented, single obs)
-- Track P: Provenance (rejecting assistant hallucination & retracted user statements)
+Generates deterministic multi-session conversational scenarios from curated
+templated world models across 9 epistemic tracks:
+- Track R: Revision & Contradiction (current / previous / as-of / count)
+- Track D: Dependency Cascades (revisit set / rationale / still-standing yes-no)
+- Track X: Hidden Constraints (unprompted boundary enforcement)
+- Track F: Forecasts & Patterns (computed slippage counts/days & realism calibration)
+- Track I: Interventions & Causal Claims (clean / confounded / not-implemented / single-obs)
+- Track P: Provenance & False Memory Rejection
 - Track K: Recall Control (static facts)
-- Track E: Deletion (adversarial forgetting & privacy verification)
-- Track Q: Clarification (epistemic uncertainty & active questions)
-
-Strictly decoupled from all memory architectures. Zero proprietary vocabulary.
-Gold answers generated entirely from programmatic state.
+- Track E: Forgetting & Deletion (direct / semantic leak + control retention)
+- Track Q: Uncertainty & Clarification (memorized candidate disambiguation)
 """
 
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timedelta, timezone
-import json
+import hashlib
 import random
 from typing import Any, Dict, List, Optional
 
 from epibench.generator.distractor_pool import DistractorPool
 from epibench.generator.pools import (
-    CLARIFICATION_POOLS,
-    DELETION_POOLS,
-    DEPENDENCY_POOLS,
-    FORECAST_POOLS,
-    HIDDEN_CONSTRAINT_POOLS,
-    INTERVENTION_POOLS,
-    PROVENANCE_POOLS,
-    RECALL_CONTROL_POOLS,
-    REVISION_POOLS,
+    ALL_POOLS,
+    compute_forecast_gold,
 )
+
+GENERATOR_VERSION = "2.0.0"
+VALID_TRACKS = ("R", "D", "X", "F", "I", "P", "K", "E", "Q")
 
 
 @dataclass
 class ScenarioQuestion:
     question_id: str
     question_text: str
-    question_subkind: str  # e.g., 'current', 'previous', 'as_of', 'count', 'revisit_set', 'llm_rubric'
+    question_subkind: str
     gold_answer: Any
     rubric: str
-    scoring_type: str  # 'string_match', 'set_overlap', 'integer_match', 'llm_rubric'
+    scoring_type: str  # 'string_match', 'set_overlap', 'integer_match', 'yes_no', 'llm_rubric'
     metadata: Dict[str, Any] = field(default_factory=dict)
 
 
@@ -52,7 +46,7 @@ class ScenarioQuestion:
 class Scenario:
     scenario_id: str
     track: str
-    split: str  # 'dev' or 'held_out'
+    split: str
     user_name: str
     question_date: str
     sessions: List[Dict[str, Any]]
@@ -61,6 +55,7 @@ class Scenario:
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "generator_version": GENERATOR_VERSION,
             "scenario_id": self.scenario_id,
             "track": self.track,
             "split": self.split,
@@ -73,14 +68,138 @@ class Scenario:
 
 
 def format_date(dt: datetime) -> str:
-    return dt.strftime("%Y/%m/%d %H:%M:%S")
+    """Format a UTC datetime as canonical sortable ISO timestamp."""
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    else:
+        dt = dt.astimezone(timezone.utc)
+    return dt.strftime("%Y-%m-%d %H:%M:%S")
+
+
+def parse_session_date(value: str | datetime) -> datetime:
+    """Parse canonical ISO or slash-formatted timestamps into UTC datetime."""
+    if isinstance(value, datetime):
+        return value.replace(tzinfo=timezone.utc) if value.tzinfo is None else value.astimezone(timezone.utc)
+    raw = str(value).strip().replace("/", "-")
+    if raw.endswith("Z"):
+        raw = raw[:-1] + "+00:00"
+    try:
+        dt = datetime.fromisoformat(raw)
+        return dt.replace(tzinfo=timezone.utc) if dt.tzinfo is None else dt.astimezone(timezone.utc)
+    except ValueError:
+        pass
+    for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d %H:%M", "%Y-%m-%d"):
+        try:
+            return datetime.strptime(raw, fmt).replace(tzinfo=timezone.utc)
+        except ValueError:
+            continue
+    raise ValueError(f"Unparseable session date: {value!r}")
+
+
+def derive_seed(base_seed: int, track: str, scenario_idx: int, purpose: str) -> int:
+    """Derive a collision-free deterministic integer seed via SHA-256."""
+    payload = f"{base_seed}:{track.upper()}:{scenario_idx}:{purpose}".encode("utf-8")
+    return int.from_bytes(hashlib.sha256(payload).digest()[:8], "big")
+
+
+def allocate_filler_dates(
+    evidence_dates: List[datetime],
+    question_date: datetime,
+    filler_count: int,
+    rng: random.Random,
+) -> List[datetime]:
+    """Allocate `filler_count` timestamps spread across [window_start, question_date).
+
+    Guarantees:
+    - Every allocated timestamp is strictly earlier than `question_date`.
+    - Timestamps never collide with exact `evidence_dates`.
+    - Works cleanly for arbitrarily large `filler_count` (0, 6, 24, 60, 200+).
+    """
+    if filler_count <= 0:
+        return []
+
+    earliest_ev = min(evidence_dates)
+    window_start = earliest_ev - timedelta(days=14)
+    window_end = question_date - timedelta(hours=1)
+    if window_end <= window_start:
+        window_start = question_date - timedelta(days=30)
+        window_end = question_date - timedelta(hours=1)
+
+    total_seconds = int((window_end - window_start).total_seconds())
+    evidence_secs = {int((d - window_start).total_seconds()) for d in evidence_dates}
+
+    allocated: List[datetime] = []
+    used_secs = set(evidence_secs)
+
+    for i in range(filler_count):
+        bucket_lo = (i * total_seconds) // filler_count
+        bucket_hi = max(bucket_lo, ((i + 1) * total_seconds) // filler_count - 1)
+        sec = rng.randint(bucket_lo, bucket_hi)
+        # Avoid colliding on exact second with evidence or previous fillers
+        while sec in used_secs and sec < total_seconds - 1:
+            sec += 1
+        while sec in used_secs and sec > 0:
+            sec -= 1
+        used_secs.add(sec)
+        dt = window_start + timedelta(seconds=sec)
+        assert dt < question_date, f"Allocated filler date {dt} >= question_date {question_date}"
+        allocated.append(dt)
+
+    return allocated
 
 
 class ScenarioGenerator:
     """Deterministic generator for EpiBench evaluation scenarios."""
 
-    def __init__(self, distractor_pool: Optional[DistractorPool] = None):
+    def __init__(
+        self,
+        distractor_pool: Optional[DistractorPool] = None,
+        custom_pools: Optional[Dict[str, List[Dict[str, Any]]]] = None,
+    ):
         self.distractor_pool = distractor_pool or DistractorPool.get_instance()
+        self._pools = custom_pools if custom_pools is not None else ALL_POOLS
+        self._has_custom_pools = custom_pools is not None
+
+    def _get_pool(self, track: str, split: str) -> List[Dict[str, Any]]:
+        if split == "held_out" and not self._has_custom_pools:
+            raise ValueError(
+                "The 'held_out' split requires a separate private pool passed via custom_pools. "
+                "Use split='dev' for the public benchmark pools."
+            )
+        return self._pools[track]
+
+    def _interleave_fillers(
+        self,
+        evidence_sessions: List[Dict[str, Any]],
+        question_date_dt: datetime,
+        track: str,
+        scenario_idx: int,
+        seed: int,
+        filler_count: int,
+    ) -> List[Dict[str, Any]]:
+        evidence_dates = [parse_session_date(s["session_date"]) for s in evidence_sessions]
+        for ed in evidence_dates:
+            if ed > question_date_dt:
+                raise ValueError(f"Evidence date {ed} exceeds question_date {question_date_dt}")
+
+        filler_seed = derive_seed(seed, track, scenario_idx, "fillers")
+        date_seed = derive_seed(seed, track, scenario_idx, "filler_dates")
+        date_rng = random.Random(date_seed)
+
+        fillers = self.distractor_pool.sample_distractors(filler_count, seed=filler_seed)
+        filler_dates = allocate_filler_dates(evidence_dates, question_date_dt, len(fillers), date_rng)
+
+        all_sessions = list(evidence_sessions)
+        for idx, (f_sess, f_dt) in enumerate(zip(fillers, filler_dates)):
+            all_sessions.append({
+                "session_id": f"filler_{idx:04d}",
+                "session_date": format_date(f_dt),
+                "turns": f_sess["turns"],
+                "is_evidence": False,
+            })
+
+        all_sessions.sort(key=lambda s: (s["session_date"], s["session_id"]))
+        return all_sessions
 
     def generate_track_r_scenario(
         self,
@@ -89,109 +208,85 @@ class ScenarioGenerator:
         seed: int,
         filler_count: int = 6,
     ) -> Scenario:
-        rng = random.Random(seed)
-        pool_item = REVISION_POOLS[scenario_idx % len(REVISION_POOLS)]
+        pool = self._get_pool("R", split)
+        pool_item = pool[scenario_idx % len(pool)]
         user_name = f"User_R_{split}_{scenario_idx:02d}"
 
         base_date = datetime(2024, 1, 15, 10, 0, 0, tzinfo=timezone.utc)
         values = pool_item["values"]
-        assert len(values) >= 3
+        val_aliases = pool_item["value_aliases"]
+        step_days = 45 if len(values) == 3 else 30
+        dates = [base_date + timedelta(days=step_days * i) for i in range(len(values))]
 
-        # Create 3 dated revision sessions
-        dates = [
-            base_date,
-            base_date + timedelta(days=45),
-            base_date + timedelta(days=90),
-        ]
         evidence_sessions = []
         for i, val in enumerate(values):
-            phrase = pool_item["user_phrasings"][i % len(pool_item["user_phrasings"])].format(val=val)
-            s_id = f"s_rev_{i+1}"
+            phrase = pool_item["user_phrasings"][i].format(val=val)
             turns = [
                 {"role": "user", "content": phrase},
                 {"role": "assistant", "content": f"Understood, I have updated my notes regarding {pool_item['entity_phrase']}."},
             ]
             evidence_sessions.append({
-                "session_id": s_id,
+                "session_id": f"s_rev_{i + 1}",
                 "session_date": format_date(dates[i]),
                 "turns": turns,
                 "is_evidence": True,
             })
 
-        # Sample filler sessions
-        fillers = self.distractor_pool.sample_distractors(filler_count, seed=seed + 1000)
-        all_sessions = []
-        # Interleave fillers
-        f_idx = 0
-        for i, es in enumerate(evidence_sessions):
-            all_sessions.append(es)
-            # Add some fillers in between
-            take = filler_count // len(evidence_sessions)
-            for _ in range(take):
-                if f_idx < len(fillers):
-                    f_sess = fillers[f_idx]
-                    f_date = dates[i] + timedelta(days=rng.randint(3, 20))
-                    all_sessions.append({
-                        "session_id": f"filler_{f_idx}",
-                        "session_date": format_date(f_date),
-                        "turns": f_sess["turns"],
-                        "is_evidence": False,
-                    })
-                    f_idx += 1
+        q_date_dt = dates[-1] + timedelta(days=15)
+        all_sessions = self._interleave_fillers(
+            evidence_sessions, q_date_dt, "R", scenario_idx, seed, filler_count
+        )
 
-        # Add remaining fillers
-        while f_idx < len(fillers):
-            f_sess = fillers[f_idx]
-            f_date = dates[-1] + timedelta(days=rng.randint(2, 10))
-            all_sessions.append({
-                "session_id": f"filler_{f_idx}",
-                "session_date": format_date(f_date),
-                "turns": f_sess["turns"],
-                "is_evidence": False,
-            })
-            f_idx += 1
-
-        # Sort chronologically
-        all_sessions.sort(key=lambda s: s["session_date"])
-
-        q_date = format_date(dates[-1] + timedelta(days=15))
         as_of_target_date = dates[0] + timedelta(days=10)
         as_of_date_str = as_of_target_date.strftime("%Y-%m-%d")
 
-        # Questions
         q1 = ScenarioQuestion(
             question_id=f"R_{split}_{scenario_idx:02d}_q1",
             question_text=pool_item["question_templates"]["current"],
             question_subkind="current",
             gold_answer=values[-1],
-            rubric=f"Exact or normalized match for current value: {values[-1]}",
+            rubric=f"Exact match for current value: {values[-1]}",
             scoring_type="string_match",
-            metadata={"stale_value": values[-2]},
+            metadata={
+                "gold_aliases": list(val_aliases[values[-1]]),
+                "stale_value": values[-2],
+                "stale_aliases": list(val_aliases[values[-2]]),
+                "wrong_values": [v for v in values if v != values[-1]],
+            },
         )
         q2 = ScenarioQuestion(
             question_id=f"R_{split}_{scenario_idx:02d}_q2",
             question_text=pool_item["question_templates"]["previous"],
             question_subkind="previous",
             gold_answer=values[-2],
-            rubric=f"Exact or normalized match for previous value: {values[-2]}",
+            rubric=f"Exact match for previous value: {values[-2]}",
             scoring_type="string_match",
+            metadata={
+                "gold_aliases": list(val_aliases[values[-2]]),
+                "wrong_values": [v for v in values if v != values[-2]],
+            },
         )
         q3 = ScenarioQuestion(
             question_id=f"R_{split}_{scenario_idx:02d}_q3",
             question_text=pool_item["question_templates"]["as_of"].format(date=as_of_date_str),
             question_subkind="as_of",
             gold_answer=values[0],
-            rubric=f"Exact or normalized match for value as of {as_of_date_str}: {values[0]}",
+            rubric=f"Exact match for value as of {as_of_date_str}: {values[0]}",
             scoring_type="string_match",
-            metadata={"as_of_date": as_of_date_str},
+            metadata={
+                "as_of_date": as_of_date_str,
+                "gold_aliases": list(val_aliases[values[0]]),
+                "wrong_values": [v for v in values if v != values[0]],
+            },
         )
         q4 = ScenarioQuestion(
             question_id=f"R_{split}_{scenario_idx:02d}_q4",
             question_text=pool_item["question_templates"]["count"],
             question_subkind="count",
-            gold_answer=len(values) - 1,  # 2 switches/changes
-            rubric=f"Integer count of changes: {len(values) - 1}",
+            gold_answer=len(values) - 1,
+            rubric=f"Exact integer count of switches/changes: {len(values) - 1}",
             scoring_type="integer_match",
+            metadata={"wrong_values": [len(values), 0]},
         )
 
         return Scenario(
@@ -199,10 +294,14 @@ class ScenarioGenerator:
             track="R",
             split=split,
             user_name=user_name,
-            question_date=q_date,
+            question_date=format_date(q_date_dt),
             sessions=all_sessions,
             questions=[q1, q2, q3, q4],
-            metadata={"pool_entity": pool_item["entity"], "domain": pool_item["domain"]},
+            metadata={
+                "template_id": pool_item["id"],
+                "pool_entity": pool_item["entity"],
+                "domain": pool_item["domain"],
+            },
         )
 
     def generate_track_d_scenario(
@@ -212,8 +311,8 @@ class ScenarioGenerator:
         seed: int,
         filler_count: int = 6,
     ) -> Scenario:
-        rng = random.Random(seed)
-        pool_item = DEPENDENCY_POOLS[scenario_idx % len(DEPENDENCY_POOLS)]
+        pool = self._get_pool("D", split)
+        pool_item = pool[scenario_idx % len(pool)]
         user_name = f"User_D_{split}_{scenario_idx:02d}"
 
         base_date = datetime(2024, 2, 1, 9, 0, 0, tzinfo=timezone.utc)
@@ -221,14 +320,16 @@ class ScenarioGenerator:
         d_decisions1 = base_date + timedelta(days=10)
         d_assump2 = base_date + timedelta(days=20)
         d_revision1 = base_date + timedelta(days=50)
+        q_date_dt = d_revision1 + timedelta(days=12)
 
+        affected_texts = " Also, ".join(d["text"] for d in pool_item["affected_decisions"])
         evidence_sessions = [
             {
                 "session_id": "s_assump_1",
                 "session_date": format_date(d_assump1),
                 "turns": [
                     {"role": "user", "content": f"Project update: {pool_item['assumption_1']}"},
-                    {"role": "assistant", "content": "Noted. I will keep this milestone in mind for our project planning."},
+                    {"role": "assistant", "content": "Noted. I will keep this assumption in mind for our planning."},
                 ],
                 "is_evidence": True,
             },
@@ -236,8 +337,8 @@ class ScenarioGenerator:
                 "session_id": "s_decisions_1",
                 "session_date": format_date(d_decisions1),
                 "turns": [
-                    {"role": "user", "content": f"We made some operational plans today. {pool_item['affected_decisions'][0]['text']} Also, {pool_item['affected_decisions'][1]['text']}"},
-                    {"role": "assistant", "content": "Logged these two commitments based on your timeline."},
+                    {"role": "user", "content": f"We finalized these commitments today: {affected_texts}"},
+                    {"role": "assistant", "content": "Logged these commitments based on your current plan."},
                 ],
                 "is_evidence": True,
             },
@@ -245,8 +346,8 @@ class ScenarioGenerator:
                 "session_id": "s_assump_2",
                 "session_date": format_date(d_assump2),
                 "turns": [
-                    {"role": "user", "content": f"Regarding resource allocation: {pool_item.get('assumption_2', '')} {pool_item['unaffected_decision']['text']}"},
-                    {"role": "assistant", "content": "Acknowledged. Recorded this allocation constraint and decision."},
+                    {"role": "user", "content": f"Separate operational note: {pool_item['assumption_2']} {pool_item['unaffected_decision']['text']}"},
+                    {"role": "assistant", "content": "Acknowledged. Recorded this separate operational decision."},
                 ],
                 "is_evidence": True,
             },
@@ -255,64 +356,62 @@ class ScenarioGenerator:
                 "session_date": format_date(d_revision1),
                 "turns": [
                     {"role": "user", "content": f"Critical update: {pool_item['assumption_1_revised']}"},
-                    {"role": "assistant", "content": "Understood. That is a significant shift in timeline."},
+                    {"role": "assistant", "content": "Understood. That is a major change to the earlier plan."},
                 ],
                 "is_evidence": True,
             },
         ]
 
-        fillers = self.distractor_pool.sample_distractors(filler_count, seed=seed + 2000)
-        all_sessions = []
-        for i, es in enumerate(evidence_sessions):
-            all_sessions.append(es)
-            if i < len(fillers):
-                f_date = d_assump1 + timedelta(days=15 * i + rng.randint(2, 6))
-                all_sessions.append({
-                    "session_id": f"filler_{i}",
-                    "session_date": format_date(f_date),
-                    "turns": fillers[i]["turns"],
-                    "is_evidence": False,
-                })
+        all_sessions = self._interleave_fillers(
+            evidence_sessions, q_date_dt, "D", scenario_idx, seed, filler_count
+        )
 
-        for j in range(len(evidence_sessions), len(fillers)):
-            f_date = d_revision1 + timedelta(days=rng.randint(2, 10))
-            all_sessions.append({
-                "session_id": f"filler_{j}",
-                "session_date": format_date(f_date),
-                "turns": fillers[j]["turns"],
-                "is_evidence": False,
-            })
-
-        all_sessions.sort(key=lambda s: s["session_date"])
-        q_date = format_date(d_revision1 + timedelta(days=12))
-
+        gold_decisions = [
+            {"id": d["id"], "label": d["label"], "aliases": list(d["aliases"])}
+            for d in pool_item["affected_decisions"]
+        ]
+        unaffected = pool_item["unaffected_decision"]
+        unaffected_decisions = [
+            {"id": unaffected["id"], "label": unaffected["label"], "aliases": list(unaffected["aliases"])}
+        ]
         gold_affected_labels = [d["label"] for d in pool_item["affected_decisions"]]
-        gold_affected_ids = [d["id"] for d in pool_item["affected_decisions"]]
 
         q1 = ScenarioQuestion(
             question_id=f"D_{split}_{scenario_idx:02d}_q1",
-            question_text=pool_item["questions"].get("revisit", pool_item["questions"].get("revisit_set")),
+            question_text=pool_item["questions"]["revisit_set"],
             question_subkind="revisit_set",
             gold_answer=gold_affected_labels,
-            rubric=f"Must identify the affected commitments: {gold_affected_labels}. Unaffected commitments should not be included.",
+            rubric=f"Must identify the exact affected commitments ({gold_affected_labels}) and exclude unaffected commitments ({unaffected['label']}).",
             scoring_type="set_overlap",
-            metadata={"gold_ids": gold_affected_ids, "unaffected": pool_item["unaffected_decision"]["label"]},
+            metadata={
+                "gold_decisions": gold_decisions,
+                "unaffected_decisions": unaffected_decisions,
+                "gold_ids": [d["id"] for d in gold_decisions],
+                "unaffected": unaffected["label"],
+            },
         )
         q2 = ScenarioQuestion(
             question_id=f"D_{split}_{scenario_idx:02d}_q2",
             question_text=pool_item["questions"]["why"],
             question_subkind="why",
             gold_answer=pool_item["affected_decisions"][0]["reason"],
-            rubric="Must accurately cite the underlying assumption change that invalidated the decision.",
+            rubric=f"Must accurately cite the underlying assumption change ({pool_item['assumption_1_revised']}) explaining why the decision is invalidated: {pool_item['affected_decisions'][0]['reason']}",
             scoring_type="llm_rubric",
+        )
+        stands_gold = pool_item["still_standing_gold"]
+        stands_rubric = (
+            "Must answer YES because this commitment does not depend on the revised assumption."
+            if stands_gold == "YES"
+            else "Must answer NO because this commitment depended on the revised assumption and must be revisited."
         )
         q3 = ScenarioQuestion(
             question_id=f"D_{split}_{scenario_idx:02d}_q3",
-            question_text=pool_item["questions"].get("stands", pool_item["questions"].get("still_standing")),
+            question_text=pool_item["questions"]["still_standing"],
             question_subkind="stands",
-            gold_answer="Yes, it stands",
-            rubric="Must state that the decision still stands because its governing assumption was unaffected.",
-            scoring_type="string_match",
+            gold_answer=stands_gold,
+            rubric=stands_rubric,
+            scoring_type="yes_no",
+            metadata={"still_standing_target": pool_item["still_standing_target"]},
         )
 
         return Scenario(
@@ -320,10 +419,10 @@ class ScenarioGenerator:
             track="D",
             split=split,
             user_name=user_name,
-            question_date=q_date,
+            question_date=format_date(q_date_dt),
             sessions=all_sessions,
             questions=[q1, q2, q3],
-            metadata={"domain": pool_item["domain"]},
+            metadata={"template_id": pool_item["id"], "domain": pool_item["domain"]},
         )
 
     def generate_track_x_scenario(
@@ -333,46 +432,41 @@ class ScenarioGenerator:
         seed: int,
         filler_count: int = 6,
     ) -> Scenario:
-        rng = random.Random(seed)
-        pool_item = HIDDEN_CONSTRAINT_POOLS[scenario_idx % len(HIDDEN_CONSTRAINT_POOLS)]
+        pool = self._get_pool("X", split)
+        pool_item = pool[scenario_idx % len(pool)]
         user_name = f"User_X_{split}_{scenario_idx:02d}"
 
         base_date = datetime(2024, 3, 1, 14, 0, 0, tzinfo=timezone.utc)
-        d_constraint = base_date
-        d_plan = base_date + timedelta(days=60)
+        q_date_dt = base_date + timedelta(days=60)
 
-        constraint_session = {
-            "session_id": "s_constraint",
-            "session_date": format_date(d_constraint),
-            "turns": [
-                {"role": "user", "content": f"Just a heads up on my current rules and limits: {pool_item['constraint_statement']}"},
-                {"role": "assistant", "content": "Understood."},
-            ],
-            "is_evidence": True,
-        }
+        evidence_sessions = [
+            {
+                "session_id": "s_constraint",
+                "session_date": format_date(base_date),
+                "turns": [
+                    {"role": "user", "content": f"Just a heads up on my rules and limits: {pool_item['constraint_statement']}"},
+                    {"role": "assistant", "content": "Understood."},
+                ],
+                "is_evidence": True,
+            }
+        ]
 
-        fillers = self.distractor_pool.sample_distractors(filler_count, seed=seed + 3000)
-        all_sessions = [constraint_session]
-        for idx, f in enumerate(fillers):
-            f_date = base_date + timedelta(days=5 * (idx + 1) + rng.randint(1, 3))
-            all_sessions.append({
-                "session_id": f"filler_{idx}",
-                "session_date": format_date(f_date),
-                "turns": f["turns"],
-                "is_evidence": False,
-            })
-
-        all_sessions.sort(key=lambda s: s["session_date"])
-        q_date = format_date(d_plan)
+        all_sessions = self._interleave_fillers(
+            evidence_sessions, q_date_dt, "X", scenario_idx, seed, filler_count
+        )
 
         q1 = ScenarioQuestion(
             question_id=f"X_{split}_{scenario_idx:02d}_q1",
             question_text=pool_item["query"],
             question_subkind="hidden_constraint",
             gold_answer=pool_item["gold_response_requirement"],
-            rubric=f"The answer must enforce or cite the unmentioned constraint ({pool_item['constraint_keyword']}). It must refuse the unconstrained proposal or adapt it.",
+            rubric=f"{pool_item['gold_response_requirement']} Must specifically cite the memorized constraint ({pool_item['constraint_keyword']}).",
             scoring_type="llm_rubric",
-            metadata={"constraint_keyword": pool_item["constraint_keyword"], "verdict": pool_item["gold_verdict"]},
+            metadata={
+                "constraint_keyword": pool_item["constraint_keyword"],
+                "constraint_aliases": list(pool_item["constraint_aliases"]),
+                "verdict": pool_item["gold_verdict"],
+            },
         )
 
         return Scenario(
@@ -380,10 +474,10 @@ class ScenarioGenerator:
             track="X",
             split=split,
             user_name=user_name,
-            question_date=q_date,
+            question_date=format_date(q_date_dt),
             sessions=all_sessions,
             questions=[q1],
-            metadata={"domain": pool_item["domain"]},
+            metadata={"template_id": pool_item["id"], "domain": pool_item["domain"]},
         )
 
     def generate_track_f_scenario(
@@ -393,62 +487,90 @@ class ScenarioGenerator:
         seed: int,
         filler_count: int = 6,
     ) -> Scenario:
-        rng = random.Random(seed)
-        pool_item = FORECAST_POOLS[scenario_idx % len(FORECAST_POOLS)]
+        pool = self._get_pool("F", split)
+        pool_item = pool[scenario_idx % len(pool)]
         user_name = f"User_F_{split}_{scenario_idx:02d}"
+
+        computed = compute_forecast_gold(pool_item["events"])
+        move_count = computed["move_count"]
+        slip_days = computed["total_slip_days"]
+        is_realistic = pool_item["is_realistic"]
 
         evidence_sessions = []
         for idx, ev in enumerate(pool_item["events"]):
-            dt = datetime.strptime(ev["date"], "%Y-%m-%d").replace(tzinfo=timezone.utc)
+            dt = datetime.strptime(ev["date"], "%Y-%m-%d").replace(hour=10, tzinfo=timezone.utc)
             evidence_sessions.append({
-                "session_id": f"s_event_{idx+1}",
+                "session_id": f"s_event_{idx + 1}",
                 "session_date": format_date(dt),
                 "turns": [
                     {"role": "user", "content": ev["text"]},
-                    {"role": "assistant", "content": "Recorded this status update."},
+                    {"role": "assistant", "content": "Recorded this schedule update."},
                 ],
                 "is_evidence": True,
             })
 
-        fillers = self.distractor_pool.sample_distractors(filler_count, seed=seed + 4000)
-        all_sessions = []
-        all_sessions.extend(evidence_sessions)
-        for idx, f in enumerate(fillers):
-            f_date = datetime(2024, 2, 1, tzinfo=timezone.utc) + timedelta(days=10 * idx + rng.randint(1, 4))
-            all_sessions.append({
-                "session_id": f"filler_{idx}",
-                "session_date": format_date(f_date),
-                "turns": f["turns"],
-                "is_evidence": False,
-            })
+        last_dt = parse_session_date(evidence_sessions[-1]["session_date"])
+        q_date_dt = last_dt + timedelta(days=14)
+        all_sessions = self._interleave_fillers(
+            evidence_sessions, q_date_dt, "F", scenario_idx, seed, filler_count
+        )
 
-        all_sessions.sort(key=lambda s: s["session_date"])
-        last_date = datetime.strptime(pool_item["events"][-1]["date"], "%Y-%m-%d").replace(tzinfo=timezone.utc)
-        q_date = format_date(last_date + timedelta(days=14))
+        if is_realistic:
+            realism_gold = (
+                f"Yes, realistic. The recorded history for {pool_item['project']} shows on-time delivery "
+                f"with {move_count} slips and {slip_days} slip days ({computed['initial_target_date']} completed on {computed['final_completion_date']})."
+            )
+            realism_rubric = (
+                f"To be CORRECT, the response MUST conclude the new target IS realistic AND explicitly cite "
+                f"the recorded on-time delivery history of {pool_item['project']} (0 slips / completed on {computed['final_completion_date']}). "
+                f"Answering without citing the recorded history is INCORRECT."
+            )
+        else:
+            realism_gold = (
+                f"No, unrealistic. {pool_item['project']} slipped {move_count} times for a total of {slip_days} days "
+                f"(from {computed['initial_target_date']} to {computed['final_completion_date']})."
+            )
+            realism_rubric = (
+                f"To be CORRECT, the response MUST conclude the new target is NOT realistic AND explicitly cite "
+                f"the recorded slippage history of {pool_item['project']} ({move_count} delays / {slip_days} days slip from "
+                f"{computed['initial_target_date']} to {computed['final_completion_date']}). "
+                f"Saying 'no' or 'cannot determine' without citing the recorded project history is INCORRECT."
+            )
 
         q1 = ScenarioQuestion(
             question_id=f"F_{split}_{scenario_idx:02d}_q1",
-            question_text="How many times did the target completion date move or slip before it was finished?",
+            question_text=f"For {pool_item['project']}, how many times did the target completion date move or slip before completion?",
             question_subkind="move_count",
-            gold_answer=pool_item["gold_answers"]["move_count"],
-            rubric=f"Exact count of delays/slips: {pool_item['gold_answers']['move_count']}",
+            gold_answer=move_count,
+            rubric=f"Exact integer count of schedule moves/slips: {move_count}",
             scoring_type="integer_match",
+            metadata={"wrong_values": [move_count + 1, max(0, move_count - 1) if move_count > 0 else 2]},
         )
         q2 = ScenarioQuestion(
             question_id=f"F_{split}_{scenario_idx:02d}_q2",
-            question_text="How many total days did the project slip from the original promised target date to final completion?",
+            question_text=f"For {pool_item['project']}, how many total calendar days did completion slip from the original promised target date to final completion?",
             question_subkind="slip_days",
-            gold_answer=pool_item["gold_answers"]["total_slip_days"],
-            rubric=f"Total slip duration in days: {pool_item['gold_answers']['total_slip_days']}",
+            gold_answer=slip_days,
+            rubric=f"Exact total slip duration in calendar days: {slip_days}",
             scoring_type="integer_match",
+            metadata={
+                "initial_target_date": computed["initial_target_date"],
+                "final_completion_date": computed["final_completion_date"],
+                "wrong_values": [slip_days - 1 if slip_days > 0 else 7, slip_days + 1],
+            },
         )
         q3 = ScenarioQuestion(
             question_id=f"F_{split}_{scenario_idx:02d}_q3",
             question_text=pool_item["new_target_query"],
             question_subkind="realism",
-            gold_answer=pool_item["gold_answers"]["realistic"],
-            rubric="Must state that the new aggressive target is unrealistic or very unlikely based on historical repeated delays and slippage patterns.",
+            gold_answer=realism_gold,
+            rubric=realism_rubric,
             scoring_type="llm_rubric",
+            metadata={
+                "is_realistic": is_realistic,
+                "move_count": move_count,
+                "total_slip_days": slip_days,
+            },
         )
 
         return Scenario(
@@ -456,10 +578,15 @@ class ScenarioGenerator:
             track="F",
             split=split,
             user_name=user_name,
-            question_date=q_date,
+            question_date=format_date(q_date_dt),
             sessions=all_sessions,
             questions=[q1, q2, q3],
-            metadata={"domain": pool_item["domain"], "project": pool_item["project"]},
+            metadata={
+                "template_id": pool_item["id"],
+                "domain": pool_item["domain"],
+                "project": pool_item["project"],
+                "computed_gold": computed,
+            },
         )
 
     def generate_track_i_scenario(
@@ -469,8 +596,8 @@ class ScenarioGenerator:
         seed: int,
         filler_count: int = 6,
     ) -> Scenario:
-        rng = random.Random(seed)
-        pool_item = INTERVENTION_POOLS[scenario_idx % len(INTERVENTION_POOLS)]
+        pool = self._get_pool("I", split)
+        pool_item = pool[scenario_idx % len(pool)]
         user_name = f"User_I_{split}_{scenario_idx:02d}"
 
         base_date = datetime(2024, 4, 1, 10, 0, 0, tzinfo=timezone.utc)
@@ -478,38 +605,33 @@ class ScenarioGenerator:
         for idx, line in enumerate(pool_item["timeline"]):
             s_date = base_date + timedelta(days=14 * idx)
             evidence_sessions.append({
-                "session_id": f"s_timeline_{idx+1}",
+                "session_id": f"s_timeline_{idx + 1}",
                 "session_date": format_date(s_date),
                 "turns": [
                     {"role": "user", "content": line},
-                    {"role": "assistant", "content": "Thank you for the update. Logged these observations."},
+                    {"role": "assistant", "content": "Logged these observations."},
                 ],
                 "is_evidence": True,
             })
 
-        fillers = self.distractor_pool.sample_distractors(filler_count, seed=seed + 5000)
-        all_sessions = []
-        all_sessions.extend(evidence_sessions)
-        for idx, f in enumerate(fillers):
-            f_date = base_date + timedelta(days=8 * idx + rng.randint(1, 5))
-            all_sessions.append({
-                "session_id": f"filler_{idx}",
-                "session_date": format_date(f_date),
-                "turns": f["turns"],
-                "is_evidence": False,
-            })
-
-        all_sessions.sort(key=lambda s: s["session_date"])
-        q_date = format_date(base_date + timedelta(days=70))
+        last_ev_dt = parse_session_date(evidence_sessions[-1]["session_date"])
+        q_date_dt = last_ev_dt + timedelta(days=14)
+        all_sessions = self._interleave_fillers(
+            evidence_sessions, q_date_dt, "I", scenario_idx, seed, filler_count
+        )
 
         q1 = ScenarioQuestion(
             question_id=f"I_{split}_{scenario_idx:02d}_q1",
             question_text=pool_item["query"],
             question_subkind="causal_claim",
             gold_answer=pool_item["gold_rubric"],
-            rubric=pool_item["gold_rubric"],
+            rubric=pool_item["gold_rubric"] + " Saying there is no context or giving a generic answer without citing the recorded observations is INCORRECT.",
             scoring_type="llm_rubric",
-            metadata={"variant": pool_item["variant"], "gold_strength": pool_item["gold_strength"]},
+            metadata={
+                "variant": pool_item["variant"],
+                "gold_strength": pool_item["gold_strength"],
+                "required_evidence_phrases": list(pool_item["required_evidence_phrases"]),
+            },
         )
 
         return Scenario(
@@ -517,10 +639,14 @@ class ScenarioGenerator:
             track="I",
             split=split,
             user_name=user_name,
-            question_date=q_date,
+            question_date=format_date(q_date_dt),
             sessions=all_sessions,
             questions=[q1],
-            metadata={"variant": pool_item["variant"], "domain": pool_item["domain"]},
+            metadata={
+                "template_id": pool_item["id"],
+                "variant": pool_item["variant"],
+                "domain": pool_item["domain"],
+            },
         )
 
     def generate_track_p_scenario(
@@ -530,40 +656,41 @@ class ScenarioGenerator:
         seed: int,
         filler_count: int = 6,
     ) -> Scenario:
-        rng = random.Random(seed)
-        pool_item = PROVENANCE_POOLS[scenario_idx % len(PROVENANCE_POOLS)]
+        pool = self._get_pool("P", split)
+        pool_item = pool[scenario_idx % len(pool)]
         user_name = f"User_P_{split}_{scenario_idx:02d}"
 
         base_date = datetime(2024, 5, 1, 11, 0, 0, tzinfo=timezone.utc)
-        evidence_session = {
-            "session_id": "s_provenance",
-            "session_date": format_date(base_date),
-            "turns": pool_item["timeline"],
-            "is_evidence": True,
-        }
+        q_date_dt = base_date + timedelta(days=60)
+        evidence_sessions = [
+            {
+                "session_id": "s_provenance",
+                "session_date": format_date(base_date),
+                "turns": pool_item["timeline"],
+                "is_evidence": True,
+            }
+        ]
 
-        fillers = self.distractor_pool.sample_distractors(filler_count, seed=seed + 6000)
-        all_sessions = [evidence_session]
-        for idx, f in enumerate(fillers):
-            f_date = base_date + timedelta(days=7 * (idx + 1) + rng.randint(1, 3))
-            all_sessions.append({
-                "session_id": f"filler_{idx}",
-                "session_date": format_date(f_date),
-                "turns": f["turns"],
-                "is_evidence": False,
-            })
-
-        all_sessions.sort(key=lambda s: s["session_date"])
-        q_date = format_date(base_date + timedelta(days=60))
+        all_sessions = self._interleave_fillers(
+            evidence_sessions, q_date_dt, "P", scenario_idx, seed, filler_count
+        )
 
         q1 = ScenarioQuestion(
             question_id=f"P_{split}_{scenario_idx:02d}_q1",
             question_text=pool_item["query"],
             question_subkind="provenance",
             gold_answer=pool_item["gold_value"],
-            rubric=f"Must assert the genuine user fact ({pool_item['gold_value']}) and reject or omit the false assistant/retracted claim ({pool_item['forbidden_distractor']}).",
+            rubric=(
+                f"Must assert the genuine user-authored fact ({pool_item['gold_value']}) "
+                f"and must NOT endorse the false or retracted claim ({pool_item['forbidden_distractor']})."
+            ),
             scoring_type="llm_rubric",
-            metadata={"forbidden_distractor": pool_item["forbidden_distractor"], "variant": pool_item["variant"]},
+            metadata={
+                "gold_aliases": list(pool_item["gold_aliases"]),
+                "forbidden_distractor": pool_item["forbidden_distractor"],
+                "forbidden_aliases": list(pool_item["forbidden_aliases"]),
+                "variant": pool_item["variant"],
+            },
         )
 
         return Scenario(
@@ -571,10 +698,14 @@ class ScenarioGenerator:
             track="P",
             split=split,
             user_name=user_name,
-            question_date=q_date,
+            question_date=format_date(q_date_dt),
             sessions=all_sessions,
             questions=[q1],
-            metadata={"variant": pool_item["variant"]},
+            metadata={
+                "template_id": pool_item["id"],
+                "variant": pool_item["variant"],
+                "domain": pool_item["domain"],
+            },
         )
 
     def generate_track_k_scenario(
@@ -584,42 +715,36 @@ class ScenarioGenerator:
         seed: int,
         filler_count: int = 6,
     ) -> Scenario:
-        rng = random.Random(seed)
-        pool_item = RECALL_CONTROL_POOLS[scenario_idx % len(RECALL_CONTROL_POOLS)]
+        pool = self._get_pool("K", split)
+        pool_item = pool[scenario_idx % len(pool)]
         user_name = f"User_K_{split}_{scenario_idx:02d}"
 
         base_date = datetime(2024, 1, 10, 8, 30, 0, tzinfo=timezone.utc)
-        evidence_session = {
-            "session_id": "s_fact",
-            "session_date": format_date(base_date),
-            "turns": [
-                {"role": "user", "content": pool_item["statement"]},
-                {"role": "assistant", "content": "Thank you for sharing that personal detail."},
-            ],
-            "is_evidence": True,
-        }
+        q_date_dt = base_date + timedelta(days=80)
+        evidence_sessions = [
+            {
+                "session_id": "s_fact",
+                "session_date": format_date(base_date),
+                "turns": [
+                    {"role": "user", "content": pool_item["statement"]},
+                    {"role": "assistant", "content": "Noted, thank you for sharing that detail."},
+                ],
+                "is_evidence": True,
+            }
+        ]
 
-        fillers = self.distractor_pool.sample_distractors(filler_count, seed=seed + 7000)
-        all_sessions = [evidence_session]
-        for idx, f in enumerate(fillers):
-            f_date = base_date + timedelta(days=10 * (idx + 1) + rng.randint(1, 4))
-            all_sessions.append({
-                "session_id": f"filler_{idx}",
-                "session_date": format_date(f_date),
-                "turns": f["turns"],
-                "is_evidence": False,
-            })
-
-        all_sessions.sort(key=lambda s: s["session_date"])
-        q_date = format_date(base_date + timedelta(days=80))
+        all_sessions = self._interleave_fillers(
+            evidence_sessions, q_date_dt, "K", scenario_idx, seed, filler_count
+        )
 
         q1 = ScenarioQuestion(
             question_id=f"K_{split}_{scenario_idx:02d}_q1",
             question_text=pool_item["query"],
             question_subkind="static_fact",
             gold_answer=pool_item["gold_value"],
-            rubric=f"Exact or normalized match for static unchanging fact: {pool_item['gold_value']}",
+            rubric=f"Exact match for static fact: {pool_item['gold_value']}",
             scoring_type="string_match",
+            metadata={"gold_aliases": list(pool_item["gold_aliases"])},
         )
 
         return Scenario(
@@ -627,10 +752,14 @@ class ScenarioGenerator:
             track="K",
             split=split,
             user_name=user_name,
-            question_date=q_date,
+            question_date=format_date(q_date_dt),
             sessions=all_sessions,
             questions=[q1],
-            metadata={"domain": pool_item["domain"], "entity": pool_item["entity"]},
+            metadata={
+                "template_id": pool_item["id"],
+                "domain": pool_item["domain"],
+                "entity": pool_item["entity"],
+            },
         )
 
     def generate_track_e_scenario(
@@ -640,15 +769,15 @@ class ScenarioGenerator:
         seed: int,
         filler_count: int = 6,
     ) -> Scenario:
-        rng = random.Random(seed)
-        pool_item = DELETION_POOLS[scenario_idx % len(DELETION_POOLS)]
+        pool = self._get_pool("E", split)
+        pool_item = pool[scenario_idx % len(pool)]
         user_name = f"User_E_{split}_{scenario_idx:02d}"
 
         base_date = datetime(2024, 2, 1, 10, 0, 0, tzinfo=timezone.utc)
         d_session1 = base_date
         d_session2 = base_date + timedelta(days=10)
         d_delete = base_date + timedelta(days=30)
-        d_query = base_date + timedelta(days=45)
+        q_date_dt = base_date + timedelta(days=45)
 
         s1 = {
             "session_id": "s_sensitive_record",
@@ -665,7 +794,7 @@ class ScenarioGenerator:
             "session_date": format_date(d_session2),
             "turns": [
                 {"role": "user", "content": pool_item["session_2_non_deleted"]},
-                {"role": "assistant", "content": "Got it, I have noted this setup."},
+                {"role": "assistant", "content": "Got it, I have noted this detail."},
             ],
             "is_evidence": True,
         }
@@ -679,21 +808,12 @@ class ScenarioGenerator:
             "is_evidence": True,
             "is_deletion_event": True,
             "deleted_target": pool_item["target_item"],
+            "deleted_aliases": list(pool_item["forbidden_aliases"]),
         }
 
-        fillers = self.distractor_pool.sample_distractors(filler_count, seed=seed + 6000)
-        all_sessions = [s1, s2, s3]
-        for idx, f in enumerate(fillers):
-            f_date = base_date + timedelta(days=2 * (idx + 1) + rng.randint(1, 3))
-            all_sessions.append({
-                "session_id": f"filler_{idx}",
-                "session_date": format_date(f_date),
-                "turns": f["turns"],
-                "is_evidence": False,
-            })
-
-        all_sessions.sort(key=lambda s: s["session_date"])
-        q_date = format_date(d_query)
+        all_sessions = self._interleave_fillers(
+            [s1, s2, s3], q_date_dt, "E", scenario_idx, seed, filler_count
+        )
 
         q1 = ScenarioQuestion(
             question_id=f"E_{split}_{scenario_idx:02d}_q1",
@@ -702,7 +822,11 @@ class ScenarioGenerator:
             gold_answer="DELETED / WITHHELD",
             rubric=pool_item["rubric_direct"],
             scoring_type="llm_rubric",
-            metadata={"forbidden_distractor": pool_item["target_item"], "target_type": pool_item["target_type"]},
+            metadata={
+                "forbidden_distractor": pool_item["target_item"],
+                "forbidden_aliases": list(pool_item["forbidden_aliases"]),
+                "target_type": pool_item["target_type"],
+            },
         )
         q2 = ScenarioQuestion(
             question_id=f"E_{split}_{scenario_idx:02d}_q2",
@@ -711,15 +835,20 @@ class ScenarioGenerator:
             gold_answer="DELETED / WITHHELD",
             rubric=pool_item["rubric_semantic"],
             scoring_type="llm_rubric",
-            metadata={"forbidden_distractor": pool_item["target_item"], "target_type": pool_item["target_type"]},
+            metadata={
+                "forbidden_distractor": pool_item["target_item"],
+                "forbidden_aliases": list(pool_item["forbidden_aliases"]),
+                "target_type": pool_item["target_type"],
+            },
         )
         q3 = ScenarioQuestion(
             question_id=f"E_{split}_{scenario_idx:02d}_q3",
             question_text=pool_item["control_query"],
             question_subkind="deletion_control_retention",
             gold_answer=pool_item["control_gold"],
-            rubric=f"Must accurately recall non-deleted fact: {pool_item['control_gold']}",
+            rubric=f"Exact match for non-deleted control fact: {pool_item['control_gold']}",
             scoring_type="string_match",
+            metadata={"gold_aliases": list(pool_item["control_aliases"])},
         )
 
         return Scenario(
@@ -727,10 +856,14 @@ class ScenarioGenerator:
             track="E",
             split=split,
             user_name=user_name,
-            question_date=q_date,
+            question_date=format_date(q_date_dt),
             sessions=all_sessions,
             questions=[q1, q2, q3],
-            metadata={"domain": pool_item["domain"], "target_item": pool_item["target_item"]},
+            metadata={
+                "template_id": pool_item["id"],
+                "domain": pool_item["domain"],
+                "target_item": pool_item["target_item"],
+            },
         )
 
     def generate_track_q_scenario(
@@ -740,37 +873,28 @@ class ScenarioGenerator:
         seed: int,
         filler_count: int = 6,
     ) -> Scenario:
-        rng = random.Random(seed)
-        pool_item = CLARIFICATION_POOLS[scenario_idx % len(CLARIFICATION_POOLS)]
+        pool = self._get_pool("Q", split)
+        pool_item = pool[scenario_idx % len(pool)]
         user_name = f"User_Q_{split}_{scenario_idx:02d}"
 
         base_date = datetime(2024, 3, 1, 9, 0, 0, tzinfo=timezone.utc)
-        d_context = base_date
-        d_query = base_date + timedelta(days=20)
+        q_date_dt = base_date + timedelta(days=20)
 
-        s_context = {
-            "session_id": "s_context_ambiguity",
-            "session_date": format_date(d_context),
-            "turns": [
-                {"role": "user", "content": pool_item["context_statement"]},
-                {"role": "assistant", "content": "Understood, noted."},
-            ],
-            "is_evidence": True,
-        }
+        evidence_sessions = [
+            {
+                "session_id": "s_context_ambiguity",
+                "session_date": format_date(base_date),
+                "turns": [
+                    {"role": "user", "content": pool_item["context_statement"]},
+                    {"role": "assistant", "content": "Understood, noted."},
+                ],
+                "is_evidence": True,
+            }
+        ]
 
-        fillers = self.distractor_pool.sample_distractors(filler_count, seed=seed + 7000)
-        all_sessions = [s_context]
-        for idx, f in enumerate(fillers):
-            f_date = base_date + timedelta(days=2 * (idx + 1) + rng.randint(1, 2))
-            all_sessions.append({
-                "session_id": f"filler_{idx}",
-                "session_date": format_date(f_date),
-                "turns": f["turns"],
-                "is_evidence": False,
-            })
-
-        all_sessions.sort(key=lambda s: s["session_date"])
-        q_date = format_date(d_query)
+        all_sessions = self._interleave_fillers(
+            evidence_sessions, q_date_dt, "Q", scenario_idx, seed, filler_count
+        )
 
         q1 = ScenarioQuestion(
             question_id=f"Q_{split}_{scenario_idx:02d}_q1",
@@ -779,7 +903,10 @@ class ScenarioGenerator:
             gold_answer="ASK_CLARIFICATION",
             rubric=pool_item["rubric"],
             scoring_type="llm_rubric",
-            metadata={"key_phrases": pool_item.get("key_phrases", []), "ambiguity_type": pool_item["type"]},
+            metadata={
+                "required_candidates": [list(g) for g in pool_item["required_candidates"]],
+                "ambiguity_type": pool_item["type"],
+            },
         )
 
         return Scenario(
@@ -787,10 +914,14 @@ class ScenarioGenerator:
             track="Q",
             split=split,
             user_name=user_name,
-            question_date=q_date,
+            question_date=format_date(q_date_dt),
             sessions=all_sessions,
             questions=[q1],
-            metadata={"domain": pool_item["domain"], "type": pool_item["type"]},
+            metadata={
+                "template_id": pool_item["id"],
+                "domain": pool_item["domain"],
+                "type": pool_item["type"],
+            },
         )
 
     def generate_scenario(
@@ -804,21 +935,20 @@ class ScenarioGenerator:
         track = track.upper()
         if track == "R":
             return self.generate_track_r_scenario(scenario_idx, split, seed, filler_count)
-        elif track == "D":
+        if track == "D":
             return self.generate_track_d_scenario(scenario_idx, split, seed, filler_count)
-        elif track == "X":
+        if track == "X":
             return self.generate_track_x_scenario(scenario_idx, split, seed, filler_count)
-        elif track == "F":
+        if track == "F":
             return self.generate_track_f_scenario(scenario_idx, split, seed, filler_count)
-        elif track == "I":
+        if track == "I":
             return self.generate_track_i_scenario(scenario_idx, split, seed, filler_count)
-        elif track == "P":
+        if track == "P":
             return self.generate_track_p_scenario(scenario_idx, split, seed, filler_count)
-        elif track == "K":
+        if track == "K":
             return self.generate_track_k_scenario(scenario_idx, split, seed, filler_count)
-        elif track == "E":
+        if track == "E":
             return self.generate_track_e_scenario(scenario_idx, split, seed, filler_count)
-        elif track == "Q":
+        if track == "Q":
             return self.generate_track_q_scenario(scenario_idx, split, seed, filler_count)
-        else:
-            raise ValueError(f"Unknown track '{track}'. Valid tracks: R, D, X, F, I, P, K, E, Q")
+        raise ValueError(f"Unknown track '{track}'. Valid tracks: {', '.join(VALID_TRACKS)}")

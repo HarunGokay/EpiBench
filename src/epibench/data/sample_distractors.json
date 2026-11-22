@@ -3,420 +3,240 @@
     "session_id": "bundled_distractor_000",
     "topic": "sourdough starter",
     "turns": [
-      {
-        "role": "user",
-        "content": "Can you explain how to feed a sourdough starter at 100% hydration?"
-      },
-      {
-        "role": "assistant",
-        "content": "Combine equal parts by weight of flour and water."
-      }
+      {"role": "user", "content": "Can you explain how to feed a sourdough starter at 100% hydration?"},
+      {"role": "assistant", "content": "Combine equal weights of unbleached flour and room-temperature water after discarding half the starter."}
     ]
   },
   {
     "session_id": "bundled_distractor_001",
-    "topic": "gardening tips",
+    "topic": "tomato gardening",
     "turns": [
-      {
-        "role": "user",
-        "content": "What are good companion plants for tomatoes?"
-      },
-      {
-        "role": "assistant",
-        "content": "Basil, marigolds, and carrots make excellent companion plants."
-      }
+      {"role": "user", "content": "What are good companion plants for backyard tomatoes?"},
+      {"role": "assistant", "content": "Basil, marigolds, chives, and carrots pair well with tomatoes and help deter common garden pests."}
     ]
   },
   {
     "session_id": "bundled_distractor_002",
-    "topic": "coffee brewing",
+    "topic": "pour-over coffee",
     "turns": [
-      {
-        "role": "user",
-        "content": "What water temperature is ideal for pour-over coffee?"
-      },
-      {
-        "role": "assistant",
-        "content": "The recommended temperature is between 90C and 96C."
-      }
+      {"role": "user", "content": "What water temperature is ideal for light-roast pour-over coffee?"},
+      {"role": "assistant", "content": "Aim for water between 93C and 96C to extract floral and citrus notes without scorching the grounds."}
     ]
   },
   {
     "session_id": "bundled_distractor_003",
-    "topic": "running shoes",
+    "topic": "classic sci-fi books",
     "turns": [
-      {
-        "role": "user",
-        "content": "How often should I replace marathon training shoes?"
-      },
-      {
-        "role": "assistant",
-        "content": "Typically every 300 to 500 miles depending on running surface."
-      }
+      {"role": "user", "content": "Can you suggest three classic science fiction novels from the twentieth century?"},
+      {"role": "assistant", "content": "Dune by Frank Herbert, The Left Hand of Darkness by Ursula K. Le Guin, and Neuromancer by William Gibson."}
     ]
   },
   {
     "session_id": "bundled_distractor_004",
-    "topic": "book recommendations",
+    "topic": "dense sourdough bread",
     "turns": [
-      {
-        "role": "user",
-        "content": "Can you suggest classic science fiction novels?"
-      },
-      {
-        "role": "assistant",
-        "content": "Dune by Frank Herbert, Foundation by Isaac Asimov, and Neuromancer."
-      }
+      {"role": "user", "content": "Why is my homemade sourdough loaf coming out dense in the center?"},
+      {"role": "assistant", "content": "Dense crumb usually points to under-fermentation during bulk rise or an inactive starter."}
     ]
   },
   {
     "session_id": "bundled_distractor_005",
-    "topic": "baking bread",
+    "topic": "day hike packing",
     "turns": [
-      {
-        "role": "user",
-        "content": "Why is my sourdough loaf coming out dense?"
-      },
-      {
-        "role": "assistant",
-        "content": "Dense loaves often result from under-fermentation or weak gluten development."
-      }
+      {"role": "user", "content": "What essentials should I pack for a six-mile woodland day hike?"},
+      {"role": "assistant", "content": "Bring a paper trail map, two liters of water, high-energy snacks, a basic first aid pouch, and a rain shell."}
     ]
   },
   {
     "session_id": "bundled_distractor_006",
-    "topic": "hiking gear",
+    "topic": "monstera houseplant",
     "turns": [
-      {
-        "role": "user",
-        "content": "What essentials should I pack for a day hike?"
-      },
-      {
-        "role": "assistant",
-        "content": "Navigation, hydration, trail snacks, first aid kit, and weather layers."
-      }
+      {"role": "user", "content": "How do I care for an indoor Monstera Deliciosa plant?"},
+      {"role": "assistant", "content": "Keep it in bright indirect sunlight, water when the top two inches of potting mix feel dry, and wipe dust off the leaves."}
     ]
   },
   {
     "session_id": "bundled_distractor_007",
-    "topic": "indoor plants",
+    "topic": "fresh egg pasta",
     "turns": [
-      {
-        "role": "user",
-        "content": "How do I care for a Monstera Deliciosa?"
-      },
-      {
-        "role": "assistant",
-        "content": "Provide bright indirect light and water when top soil feels dry."
-      }
+      {"role": "user", "content": "What is the classic ratio of flour to eggs for fresh tagliatelle?"},
+      {"role": "assistant", "content": "Use roughly 100 grams of tipo 00 flour per large egg, then rest the kneaded dough for thirty minutes."}
     ]
   },
   {
     "session_id": "bundled_distractor_008",
-    "topic": "pasta making",
+    "topic": "perseid meteor shower",
     "turns": [
-      {
-        "role": "user",
-        "content": "What is the ratio of flour to eggs for fresh pasta?"
-      },
-      {
-        "role": "assistant",
-        "content": "The traditional ratio is 100 grams of flour per whole egg."
-      }
+      {"role": "user", "content": "When is the best time of year to watch the Perseid meteor shower?"},
+      {"role": "assistant", "content": "The Perseids typically peak between August 11 and August 13, with the clearest viewing after midnight away from city lights."}
     ]
   },
   {
     "session_id": "bundled_distractor_009",
-    "topic": "stargazing",
+    "topic": "cast iron seasoning",
     "turns": [
-      {
-        "role": "user",
-        "content": "When is the best time of year to view the Perseid meteor shower?"
-      },
-      {
-        "role": "assistant",
-        "content": "The Perseids peak annually between August 11th and August 13th."
-      }
+      {"role": "user", "content": "How should I re-season a cast iron skillet that lost its nonstick finish?"},
+      {"role": "assistant", "content": "Scrub off any rust, rub a whisper-thin coat of grapeseed oil over the pan, and bake upside down at 450F for one hour."}
     ]
   },
   {
     "session_id": "bundled_distractor_010",
-    "topic": "sourdough starter",
+    "topic": "origami cranes",
     "turns": [
-      {
-        "role": "user",
-        "content": "Can you explain how to feed a sourdough starter at 100% hydration?"
-      },
-      {
-        "role": "assistant",
-        "content": "Combine equal parts by weight of flour and water."
-      }
+      {"role": "user", "content": "What paper weight works best for folding crisp origami cranes?"},
+      {"role": "assistant", "content": "Thin kami paper around 60 gsm holds sharp creases cleanly without tearing at the wingtips."}
     ]
   },
   {
     "session_id": "bundled_distractor_011",
-    "topic": "gardening tips",
+    "topic": "chess openings",
     "turns": [
-      {
-        "role": "user",
-        "content": "What are good companion plants for tomatoes?"
-      },
-      {
-        "role": "assistant",
-        "content": "Basil, marigolds, and carrots make excellent companion plants."
-      }
+      {"role": "user", "content": "What is the main positional idea behind the Caro-Kann Defense in chess?"},
+      {"role": "assistant", "content": "Black prepares to challenge the center with d5 while keeping the light-squared bishop free to develop outside the pawn chain."}
     ]
   },
   {
     "session_id": "bundled_distractor_012",
-    "topic": "coffee brewing",
+    "topic": "bird watching binoculars",
     "turns": [
-      {
-        "role": "user",
-        "content": "What water temperature is ideal for pour-over coffee?"
-      },
-      {
-        "role": "assistant",
-        "content": "The recommended temperature is between 90C and 96C."
-      }
+      {"role": "user", "content": "What magnification specs are best for general backyard bird watching binoculars?"},
+      {"role": "assistant", "content": "8x42 binoculars give a wide field of view, steady handheld tracking, and good brightness at dawn and dusk."}
     ]
   },
   {
     "session_id": "bundled_distractor_013",
-    "topic": "running shoes",
+    "topic": "watercolor paper",
     "turns": [
-      {
-        "role": "user",
-        "content": "How often should I replace marathon training shoes?"
-      },
-      {
-        "role": "assistant",
-        "content": "Typically every 300 to 500 miles depending on running surface."
-      }
+      {"role": "user", "content": "What is the difference between hot-press and cold-press watercolor paper?"},
+      {"role": "assistant", "content": "Hot-press paper is smooth for fine ink and botanical detail, while cold-press has light texture that holds washes evenly."}
     ]
   },
   {
     "session_id": "bundled_distractor_014",
-    "topic": "book recommendations",
+    "topic": "guitar string gauges",
     "turns": [
-      {
-        "role": "user",
-        "content": "Can you suggest classic science fiction novels?"
-      },
-      {
-        "role": "assistant",
-        "content": "Dune by Frank Herbert, Foundation by Isaac Asimov, and Neuromancer."
-      }
+      {"role": "user", "content": "Should a beginner acoustic guitarist start with light or medium gauge strings?"},
+      {"role": "assistant", "content": "Light gauge 12-53 or extra-light 10-47 phosphor bronze strings are easier on fingertips while still sounding warm."}
     ]
   },
   {
     "session_id": "bundled_distractor_015",
-    "topic": "baking bread",
+    "topic": "compost pile ratios",
     "turns": [
-      {
-        "role": "user",
-        "content": "Why is my sourdough loaf coming out dense?"
-      },
-      {
-        "role": "assistant",
-        "content": "Dense loaves often result from under-fermentation or weak gluten development."
-      }
+      {"role": "user", "content": "Why does my backyard compost bin smell sour instead of earthy?"},
+      {"role": "assistant", "content": "Too many wet kitchen scraps create anaerobic pockets; mix in shredded dry leaves or cardboard and turn the pile for airflow."}
     ]
   },
   {
     "session_id": "bundled_distractor_016",
-    "topic": "hiking gear",
+    "topic": "vinyl record storage",
     "turns": [
-      {
-        "role": "user",
-        "content": "What essentials should I pack for a day hike?"
-      },
-      {
-        "role": "assistant",
-        "content": "Navigation, hydration, trail snacks, first aid kit, and weather layers."
-      }
+      {"role": "user", "content": "How should I store vintage vinyl LPs to prevent warping?"},
+      {"role": "assistant", "content": "Store records vertically like books in anti-static inner sleeves away from direct sunlight and heating vents."}
     ]
   },
   {
     "session_id": "bundled_distractor_017",
-    "topic": "indoor plants",
+    "topic": "cloud formations",
     "turns": [
-      {
-        "role": "user",
-        "content": "How do I care for a Monstera Deliciosa?"
-      },
-      {
-        "role": "assistant",
-        "content": "Provide bright indirect light and water when top soil feels dry."
-      }
+      {"role": "user", "content": "How can I tell cumulus clouds apart from stratocumulus clouds?"},
+      {"role": "assistant", "content": "Cumulus clouds appear as puffy isolated cotton balls with flat bases, while stratocumulus form lumpy continuous gray layers."}
     ]
   },
   {
     "session_id": "bundled_distractor_018",
-    "topic": "pasta making",
+    "topic": "knife sharpening stones",
     "turns": [
-      {
-        "role": "user",
-        "content": "What is the ratio of flour to eggs for fresh pasta?"
-      },
-      {
-        "role": "assistant",
-        "content": "The traditional ratio is 100 grams of flour per whole egg."
-      }
+      {"role": "user", "content": "What whetstone grit progression is practical for kitchen chef knives?"},
+      {"role": "assistant", "content": "A 1000-grit stone handles routine sharpening, followed by a 3000-grit or 4000-grit stone to refine and polish the edge."}
     ]
   },
   {
     "session_id": "bundled_distractor_019",
-    "topic": "stargazing",
+    "topic": "green tea steeping",
     "turns": [
-      {
-        "role": "user",
-        "content": "When is the best time of year to view the Perseid meteor shower?"
-      },
-      {
-        "role": "assistant",
-        "content": "The Perseids peak annually between August 11th and August 13th."
-      }
+      {"role": "user", "content": "Why does my sencha green tea taste bitter when brewed with boiling water?"},
+      {"role": "assistant", "content": "Boiling water extracts excess catechins; steep sencha at roughly 75C to 80C for sixty to ninety seconds."}
     ]
   },
   {
     "session_id": "bundled_distractor_020",
-    "topic": "sourdough starter",
+    "topic": "fountain pen nibs",
     "turns": [
-      {
-        "role": "user",
-        "content": "Can you explain how to feed a sourdough starter at 100% hydration?"
-      },
-      {
-        "role": "assistant",
-        "content": "Combine equal parts by weight of flour and water."
-      }
+      {"role": "user", "content": "How often should I flush a fountain pen with distilled water?"},
+      {"role": "assistant", "content": "Flush the nib and feed every few weeks or whenever switching ink brands to prevent dried pigment buildup."}
     ]
   },
   {
     "session_id": "bundled_distractor_021",
-    "topic": "gardening tips",
+    "topic": "tide pool creatures",
     "turns": [
-      {
-        "role": "user",
-        "content": "What are good companion plants for tomatoes?"
-      },
-      {
-        "role": "assistant",
-        "content": "Basil, marigolds, and carrots make excellent companion plants."
-      }
+      {"role": "user", "content": "What marine animals are commonly spotted in rocky Pacific tide pools?"},
+      {"role": "assistant", "content": "Look for giant green anemones, purple ochre sea stars, hermit crabs, barnacles, and tiny sculpin fish."}
     ]
   },
   {
     "session_id": "bundled_distractor_022",
-    "topic": "coffee brewing",
+    "topic": "jazz standards",
     "turns": [
-      {
-        "role": "user",
-        "content": "What water temperature is ideal for pour-over coffee?"
-      },
-      {
-        "role": "assistant",
-        "content": "The recommended temperature is between 90C and 96C."
-      }
+      {"role": "user", "content": "Which classic jazz albums are great entry points for learning modal jazz?"},
+      {"role": "assistant", "content": "Miles Davis's Kind of Blue, John Coltrane's Impressions, and Herbie Hancock's Maiden Voyage are foundational."}
     ]
   },
   {
     "session_id": "bundled_distractor_023",
-    "topic": "running shoes",
+    "topic": "woodworking joints",
     "turns": [
-      {
-        "role": "user",
-        "content": "How often should I replace marathon training shoes?"
-      },
-      {
-        "role": "assistant",
-        "content": "Typically every 300 to 500 miles depending on running surface."
-      }
+      {"role": "user", "content": "When is a dovetail joint preferred over a rabbet joint in cabinetry?"},
+      {"role": "assistant", "content": "Dovetails resist pulling forces from repeated drawer opening without relying solely on nails or screws."}
     ]
   },
   {
     "session_id": "bundled_distractor_024",
-    "topic": "book recommendations",
+    "topic": "herb drying",
     "turns": [
-      {
-        "role": "user",
-        "content": "Can you suggest classic science fiction novels?"
-      },
-      {
-        "role": "assistant",
-        "content": "Dune by Frank Herbert, Foundation by Isaac Asimov, and Neuromancer."
-      }
+      {"role": "user", "content": "What is the easiest way to dry fresh rosemary and thyme from a windowsill pot?"},
+      {"role": "assistant", "content": "Tie small stems loosely with twine and hang them upside down in a dry, shaded room with steady air circulation for two weeks."}
     ]
   },
   {
     "session_id": "bundled_distractor_025",
-    "topic": "baking bread",
+    "topic": "stargazing constellations",
     "turns": [
-      {
-        "role": "user",
-        "content": "Why is my sourdough loaf coming out dense?"
-      },
-      {
-        "role": "assistant",
-        "content": "Dense loaves often result from under-fermentation or weak gluten development."
-      }
+      {"role": "user", "content": "How do I locate the Cassiopeia constellation in the northern autumn sky?"},
+      {"role": "assistant", "content": "Look opposite the Big Dipper across Polaris for five bright stars arranged in a distinct W or M shape."}
     ]
   },
   {
     "session_id": "bundled_distractor_026",
-    "topic": "hiking gear",
+    "topic": "fermenting sauerkraut",
     "turns": [
-      {
-        "role": "user",
-        "content": "What essentials should I pack for a day hike?"
-      },
-      {
-        "role": "assistant",
-        "content": "Navigation, hydration, trail snacks, first aid kit, and weather layers."
-      }
+      {"role": "user", "content": "What percentage of salt by weight is used for lacto-fermented cabbage?"},
+      {"role": "assistant", "content": "A two percent salt ratio by cabbage weight draws out crisp brine while supporting beneficial lactic acid bacteria."}
     ]
   },
   {
     "session_id": "bundled_distractor_027",
-    "topic": "indoor plants",
+    "topic": "mechanical keyboards",
     "turns": [
-      {
-        "role": "user",
-        "content": "How do I care for a Monstera Deliciosa?"
-      },
-      {
-        "role": "assistant",
-        "content": "Provide bright indirect light and water when top soil feels dry."
-      }
+      {"role": "user", "content": "What is the tactile difference between linear and tactile mechanical key switches?"},
+      {"role": "assistant", "content": "Linear switches press down smoothly from top to bottom, whereas tactile switches include a subtle actuation bump halfway down."}
     ]
   },
   {
     "session_id": "bundled_distractor_028",
-    "topic": "pasta making",
+    "topic": "terrarium drainage",
     "turns": [
-      {
-        "role": "user",
-        "content": "What is the ratio of flour to eggs for fresh pasta?"
-      },
-      {
-        "role": "assistant",
-        "content": "The traditional ratio is 100 grams of flour per whole egg."
-      }
+      {"role": "user", "content": "Do closed glass moss terrariums need a layer of pebbles at the bottom?"},
+      {"role": "assistant", "content": "Yes, a shallow pebble false bottom topped with mesh and activated charcoal prevents excess moisture from rotting moss roots."}
     ]
   },
   {
     "session_id": "bundled_distractor_029",
-    "topic": "stargazing",
+    "topic": "film photography exposure",
     "turns": [
-      {
-        "role": "user",
-        "content": "When is the best time of year to view the Perseid meteor shower?"
-      },
-      {
-        "role": "assistant",
-        "content": "The Perseids peak annually between August 11th and August 13th."
-      }
+      {"role": "user", "content": "What does the Sunny 16 rule help estimate in manual film photography?"},
+      {"role": "assistant", "content": "On a bright sunny day, set the aperture to f/16 and match the shutter speed roughly to the reciprocal of your film ISO."}
     ]
   }
 ]
