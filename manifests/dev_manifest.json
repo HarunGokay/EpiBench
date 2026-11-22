@@ -16,7 +16,7 @@
     "Q"
   ],
   "total_scenarios": 108,
-  "manifest_sha256": "a468e61b91eb0c2e7d9cd2b26b1a2353d9ccf5b5442a7db1de09c4fb8201faa0",
+  "manifest_sha256": "4d842cf9bd844a64793a5cd78cacf3757b0dca35141030827fd41bfd9ed6b9cb",
   "scenarios": [
     {
       "scenario_id": "R_dev_00",
@@ -216,7 +216,7 @@
       "template_id": "x_00_knee_meniscus",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "b924c305e15db498d24a166d36131cf879e81a66dbeae55fe9b9a87a976230d9"
+      "sha256": "a7398bbe0e79534ceef640da7580b4cecfdba5c222571e5833eb4395fc167582"
     },
     {
       "scenario_id": "X_dev_01",
@@ -240,7 +240,7 @@
       "template_id": "x_03_shellfish_allergy",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "047c62c4d46ef5fd7c60dee502d72f829852c89a5c3167443654d710a606d203"
+      "sha256": "81ae4b9eadef20e896d3e4cd3a19002acc8eac83eee135bee2195ef99876d9b4"
     },
     {
       "scenario_id": "X_dev_04",
@@ -304,7 +304,7 @@
       "template_id": "x_11_school_nut_free",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "ea71f51d4011ff29bae2a9c67b1c23340a0f60cde9bae6cffbd8749425959920"
+      "sha256": "ab7bff24ae38bf374da02b5d3c2bf646ea9f37cda11de67b3abaa5d8d646c6c4"
     },
     {
       "scenario_id": "F_dev_00",
@@ -696,7 +696,7 @@
       "template_id": "e_00_api_key",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "a9af1b79c65a8938b4e045207254dbdbc882e1411611e8886bac4e5a016f8b0d"
+      "sha256": "42dc3edeb2379b1f7ef14cbcbc86a368eeea737321594dff86170dccaffb084b"
     },
     {
       "scenario_id": "E_dev_01",
@@ -704,7 +704,7 @@
       "template_id": "e_01_glucose_lab",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "e3af41910708700eba99c859d9154a76b0fa4d34f896f315968a361702bbc749"
+      "sha256": "2bce1edfb9d497cba5a31ce34e7a9673c54b240fd94a4914f15ae1f137621a58"
     },
     {
       "scenario_id": "E_dev_02",
@@ -712,7 +712,7 @@
       "template_id": "e_02_exec_salary",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "8f84c583131715ffa929ce07946c9802fe79a9603edd6211462d2cbf07d0eec4"
+      "sha256": "ea37d240012f0243d773d4d0d59aebbe2462995124c22819dfc3cda51788e2bd"
     },
     {
       "scenario_id": "E_dev_03",
@@ -720,7 +720,7 @@
       "template_id": "e_03_door_pin",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "5e14fa53b0eeb94268607b338479b039f75f0424594f14f9db93ff8f8efd087b"
+      "sha256": "1f8b21a68881a77c04afccdaefe40f096665c085e758f691c5c8a831c3924977"
     },
     {
       "scenario_id": "E_dev_04",
@@ -728,7 +728,7 @@
       "template_id": "e_04_passport_number",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "809a7cb4f4d3d4f6e50eed6e625b04a9cf4996ba9597b66ac9c3ba3ae97c40cc"
+      "sha256": "05a9e3b27c3a68d9ecf489a4491211be48d98623a92b8ef8a9ba5667951892c2"
     },
     {
       "scenario_id": "E_dev_05",
@@ -736,7 +736,7 @@
       "template_id": "e_05_bank_routing",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "652f0dd4a52184bde5f1aea02d12d8a8b429cb4a25cc6783198116c12045e17e"
+      "sha256": "368c1748d604189ee586f2452580149ec2f4a8e400958143a8bd822502613912"
     },
     {
       "scenario_id": "E_dev_06",
@@ -744,7 +744,7 @@
       "template_id": "e_06_prescription_med",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "47bf53aa1697055e03e52d08c3259378164227fbb4be041f6bc4d0521b7b5af4"
+      "sha256": "ef1f29fbb94469083874f9fcd808d17c78ad2b44e10051315a7978bf26fa42af"
     },
     {
       "scenario_id": "E_dev_07",
@@ -752,7 +752,7 @@
       "template_id": "e_07_db_password",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "8b7a3d45144697db6348ab87aa6bf278bd723b5815f120190c8ce8c1f3ccf72e"
+      "sha256": "cd13ab5088723aa529156c4574bbaa9197cf0597dadf29dd9470cf7418fa749b"
     },
     {
       "scenario_id": "E_dev_08",
@@ -760,7 +760,7 @@
       "template_id": "e_08_merger_codename",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "32f7d8adec495209e24808dea7c62676dcd3b9119f9069c72937f0e7029990e9"
+      "sha256": "e8a53093919d60547dd86c9fc4897edb68401223e1ced05fe07e7a03d6fb325d"
     },
     {
       "scenario_id": "E_dev_09",
@@ -768,7 +768,7 @@
       "template_id": "e_09_ssh_recovery_code",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "4b76c1988b5827e06623a250fd85a7c8efa599129a36b40ffb70755cb90c5538"
+      "sha256": "b4f88c6095ad983e7539685afa3e004a1179d5ed90a24f00e665d652f7cb7b65"
     },
     {
       "scenario_id": "E_dev_10",
@@ -776,7 +776,7 @@
       "template_id": "e_10_tax_id",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "fd5a788461389e3f1a4813dc7f8e03505c0119f11d5e155bb8bc4fa14979ff8c"
+      "sha256": "b8f9465fa873b3e6ed33a11bcd0c1d8003536f4b3e5773b8a61723342bd9da13"
     },
     {
       "scenario_id": "E_dev_11",
@@ -784,7 +784,7 @@
       "template_id": "e_11_biometric_pin",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "88994a79859dd9f2012dd5e9c2ebc206a5573c4418d92cba7b3462696f2f95a4"
+      "sha256": "83f5c2bc3ac855ac681642f1c0c95c50f6b128034533b0a803ddfefe24ef6832"
     },
     {
       "scenario_id": "Q_dev_00",
@@ -808,7 +808,7 @@
       "template_id": "q_02_two_dashboards",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "bf97d76800fb99a3f6e55262969bafb3104c435e3e10876dcad4e30427e40113"
+      "sha256": "83785608fc9a0b3ebe928661f30c6660c1b772fcd4df262ca7396b5ed201ff6e"
     },
     {
       "scenario_id": "Q_dev_03",

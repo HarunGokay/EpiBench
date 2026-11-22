@@ -7,8 +7,9 @@ Programmatic question types require a final line `FINAL ANSWER: <answer>`.
 
 from __future__ import annotations
 
+import asyncio
 import logging
-from typing import Any, Optional
+from typing import Any, Dict, Optional
 
 import httpx
 
@@ -57,25 +58,26 @@ def build_reader_prompt(
         format_rule = (
             "FORMAT REQUIREMENT:\n"
             "- You may briefly reason first if needed.\n"
-            "- On the final line, list ONLY the exact names/labels of the affected decisions or commitments from the conversation, separated by semicolons, strictly in the format:\n"
+            "- On the final line, list ONLY the concise names/labels of the affected decisions or commitments from the conversation, separated by semicolons, strictly in the format:\n"
             "FINAL ANSWER: <item 1>; <item 2>\n"
             "- Do NOT include unaffected decisions on the FINAL ANSWER line.\n"
             "- If no decisions are affected, end with:\n"
             "FINAL ANSWER: NONE\n"
-            "- If the retrieved context does not contain enough information to answer, end with:\n"
+            "- If the retrieved context contains no relevant history for this topic, end with:\n"
             "FINAL ANSWER: UNKNOWN"
         )
     else:
         format_rule = (
             "FORMAT REQUIREMENT:\n"
-            "- Provide a direct, factual, concise answer citing the specific evidence from the retrieved conversation context.\n"
-            "- If the retrieved context does not contain enough information to answer, state clearly that the context does not contain enough information."
+            "- Provide a direct, factual, concise answer grounded in the retrieved conversation history.\n"
+            "- Apply direct logical reasoning from the retrieved history when answering: for example, explain how an updated assumption invalidates dependent commitments, evaluate whether a newly proposed target is realistic based on recorded project slippage/on-time history, enforce any memorized rules or constraints, or—when the retrieved history contains multiple matching candidates or conflicting unconfirmed figures—explicitly name ALL of them and ask the user to clarify.\n"
+            "- Only say the context does not contain enough information if the retrieved context has NO relevant prior facts for the question."
         )
 
     return (
         "You are a helpful and accurate personal AI assistant. Answer the user's question "
-        "strictly based on the provided context retrieved from past conversations. "
-        "Do not guess or fabricate facts that are not supported by the retrieved context.\n\n"
+        "based on the provided context retrieved from past conversations. "
+        "Do not fabricate facts that are not in the retrieved context.\n\n"
         f"TODAY'S REFERENCE DATE: {question_date}\n\n"
         "RETRIEVED CONVERSATION CONTEXT:\n"
         f"{context if context.strip() else '[No past context retrieved]'}\n\n"
@@ -119,11 +121,38 @@ class ReaderLLM:
             "generationConfig": {"temperature": 0.0},
         }
 
-        async with httpx.AsyncClient(timeout=45.0) as client:
-            resp = await client.post(url, json=payload)
-            if resp.status_code != 200:
-                raise RuntimeError(f"Reader LLM API error {resp.status_code}: {resp.text}")
-            data = resp.json()
+        last_err: Optional[Exception] = None
+        data: Dict[str, Any] = {}
+        async with httpx.AsyncClient(timeout=60.0) as client:
+            for attempt in range(5):
+                try:
+                    resp = await client.post(url, json=payload)
+                    if resp.status_code == 200:
+                        data = resp.json()
+                        last_err = None
+                        break
+                    if resp.status_code in (429, 500, 502, 503, 504) and attempt < 4:
+                        backoff = 2.0 * (2 ** attempt)
+                        logger.warning(
+                            "Reader LLM transient HTTP %d (attempt %d/5); retrying in %.1fs",
+                            resp.status_code,
+                            attempt + 1,
+                            backoff,
+                        )
+                        await asyncio.sleep(backoff)
+                        continue
+                    raise RuntimeError(f"Reader LLM API error {resp.status_code}: {resp.text}")
+                except (httpx.TimeoutException, httpx.ConnectError, httpx.ReadError) as exc:
+                    last_err = exc
+                    if attempt < 4:
+                        backoff = 2.0 * (2 ** attempt)
+                        logger.warning("Reader LLM network error (%s); retrying in %.1fs", exc, backoff)
+                        await asyncio.sleep(backoff)
+                        continue
+                    raise RuntimeError(f"Reader LLM network error after retries: {exc}") from exc
+
+        if last_err is not None:
+            raise last_err
 
         usage = data.get("usageMetadata", {})
         in_tok = usage.get("promptTokenCount", 0)

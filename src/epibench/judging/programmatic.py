@@ -314,16 +314,23 @@ def score_set_overlap(
     else:
         pred_items = [part.strip() for part in extracted.split(";") if part.strip()]
 
-    # Build exact normalized alias -> spec lookup maps
-    gold_alias_map: Dict[str, Dict[str, Any]] = {}
-    for spec in gold_specs:
-        for alias in spec["aliases"]:
-            gold_alias_map[normalize(alias)] = spec
+    def _whole_phrase_in(norm_alias: str, norm_item: str) -> bool:
+        if not norm_alias or not norm_item:
+            return False
+        if norm_alias == norm_item:
+            return True
+        pattern = r"(?<![a-z0-9$])" + re.escape(norm_alias) + r"(?![a-z0-9%])"
+        return re.search(pattern, norm_item) is not None
 
-    unaff_alias_map: Dict[str, Dict[str, Any]] = {}
-    for spec in unaff_specs:
-        for alias in spec["aliases"]:
-            unaff_alias_map[normalize(alias)] = spec
+    # Pre-normalize explicit aliases for gold and unaffected decisions
+    gold_norm_specs = [
+        (spec, [normalize(a) for a in spec["aliases"] if normalize(a)])
+        for spec in gold_specs
+    ]
+    unaff_norm_specs = [
+        (spec, [normalize(a) for a in spec["aliases"] if normalize(a)])
+        for spec in unaff_specs
+    ]
 
     matched_gold_ids = set()
     detected_golds: List[str] = []
@@ -335,15 +342,28 @@ def score_set_overlap(
         norm_item = normalize(raw_item)
         if not norm_item:
             continue
-        if norm_item in gold_alias_map:
-            spec = gold_alias_map[norm_item]
+
+        # Any match against an unaffected decision's explicit alias is strictly a false positive
+        hit_unaff = [
+            spec for spec, aliases in unaff_norm_specs
+            if any(_whole_phrase_in(na, norm_item) for na in aliases)
+        ]
+        if hit_unaff:
+            false_positives += 1
+            detected_unaffected.append(hit_unaff[0]["label"])
+            continue
+
+        hit_golds = [
+            spec for spec, aliases in gold_norm_specs
+            if any(_whole_phrase_in(na, norm_item) for na in aliases)
+        ]
+        if len(hit_golds) == 1:
+            spec = hit_golds[0]
             if spec["id"] not in matched_gold_ids:
                 matched_gold_ids.add(spec["id"])
                 detected_golds.append(spec["label"])
-        elif norm_item in unaff_alias_map:
-            false_positives += 1
-            detected_unaffected.append(unaff_alias_map[norm_item]["label"])
         else:
+            # Either unrecognized (0 matches) or ambiguous/merged (>1 distinct decisions in one item)
             false_positives += 1
             unrecognized_items.append(raw_item)
 

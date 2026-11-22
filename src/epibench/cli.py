@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import argparse
+import asyncio
+import os
 from pathlib import Path
 import sys
 
@@ -26,6 +28,34 @@ def _cmd_manifest(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_validate(args: argparse.Namespace) -> int:
+    from epibench.runners.validate import format_validity_table, run_validity_gate
+
+    tracks = [t.strip().upper() for t in args.tracks.split(",") if t.strip()]
+    api_key = os.getenv("GEMINI_API_KEY", "")
+    offline = bool(args.offline)
+    if not offline and not api_key:
+        print("GEMINI_API_KEY not set; falling back to --offline (validity unverified live).")
+        offline = True
+
+    report = asyncio.run(
+        run_validity_gate(
+            tracks=tracks,
+            scenarios_per_track=args.scenarios_per_track,
+            filler_count=args.filler_count,
+            seed=args.seed,
+            budget_usd=args.budget_usd,
+            api_key=api_key,
+            offline=offline,
+            output_dir=Path(args.output_dir),
+            reader_model=args.reader_model,
+            judge_model=args.judge_model,
+        )
+    )
+    print(format_validity_table(report))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="epibench",
@@ -43,6 +73,17 @@ def main(argv: list[str] | None = None) -> int:
     p_manifest.add_argument("--tracks", type=str, default="R,D,X,F,I,P,K,E,Q")
     p_manifest.add_argument("--output", type=str, default="manifests/dev_manifest.json")
 
+    p_val = subparsers.add_parser("validate", help="Run null_memory vs oracle track validity gate")
+    p_val.add_argument("--tracks", type=str, default="R,D,X,F,I,P,K,E,Q")
+    p_val.add_argument("--scenarios-per-track", type=int, default=12)
+    p_val.add_argument("--filler-count", type=int, default=6)
+    p_val.add_argument("--seed", type=int, default=20261122)
+    p_val.add_argument("--budget-usd", type=float, default=2.0)
+    p_val.add_argument("--output-dir", type=str, default="results/validity")
+    p_val.add_argument("--reader-model", type=str, default="gemini-3.5-flash-lite")
+    p_val.add_argument("--judge-model", type=str, default="gemini-3.5-flash")
+    p_val.add_argument("--offline", action="store_true", help="Use deterministic offline fakes instead of LLM API")
+
     args = parser.parse_args(argv)
     if args.command == "version":
         from epibench import __version__
@@ -51,6 +92,8 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     if args.command == "manifest":
         return _cmd_manifest(args)
+    if args.command == "validate":
+        return _cmd_validate(args)
 
     parser.print_help()
     return 0
