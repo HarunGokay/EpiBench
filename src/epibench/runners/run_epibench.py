@@ -61,7 +61,7 @@ from epibench.metrics.eval_metrics import compute_dimensional_report
 from epibench.metrics.schema import validate_results_schema
 from epibench.metrics.statistics import compute_pairwise_comparisons, wilson_ci
 from epibench.runners.fakes import FakeEmbedder, FakeJudge, FakeReader
-from epibench.runners.metering import CURRENT_SYSTEM_VAR, SpendTracker
+from epibench.runners.metering import CURRENT_SPEND_BUCKET_VAR, CURRENT_SYSTEM_VAR, SpendTracker
 from epibench.runners.reader import READER_PROMPT_VERSION, ReaderLLM
 from epibench.utils import get_git_commit_sha
 
@@ -280,14 +280,18 @@ class EpiBenchRunner:
 
         for sys_name, adapter in adapters.items():
             sys_token = CURRENT_SYSTEM_VAR.set(sys_name)
+            spend_bucket: List[float] = []
+            bucket_token = CURRENT_SPEND_BUCKET_VAR.set(spend_bucket)
             try:
                 sc_result["system_results"][sys_name] = await self._evaluate_single_system(
                     scenario=scenario,
                     sys_name=sys_name,
                     adapter=adapter,
                     rng=rng,
+                    spend_bucket=spend_bucket,
                 )
             finally:
+                CURRENT_SPEND_BUCKET_VAR.reset(bucket_token)
                 CURRENT_SYSTEM_VAR.reset(sys_token)
 
         return sc_result
@@ -298,6 +302,7 @@ class EpiBenchRunner:
         sys_name: str,
         adapter: BaseMemoryAdapter,
         rng: random.Random,
+        spend_bucket: Optional[List[float]] = None,
     ) -> Dict[str, Any]:
         tenant_id = f"epi_{scenario.scenario_id}_{sys_name}"
         spend_before_sys = self.spend_tracker.get_system_spend(sys_name)
@@ -466,10 +471,13 @@ class EpiBenchRunner:
         else:
             scenario_pass = (correct_q == num_q)
 
-        scenario_spend_usd = max(
-            0.0,
-            (self.spend_tracker.get_system_spend(sys_name) - spend_before_sys),
-        )
+        if spend_bucket is not None:
+            scenario_spend_usd = max(0.0, float(sum(spend_bucket)))
+        else:
+            scenario_spend_usd = max(
+                0.0,
+                (self.spend_tracker.get_system_spend(sys_name) - spend_before_sys),
+            )
         # Add adapter-reported ingest_cost_usd only if adapter didn't already record through spend_tracker
         if ingest_info["ingest_cost_usd"] > 0 and scenario_spend_usd < ingest_info["ingest_cost_usd"]:
             scenario_spend_usd += ingest_info["ingest_cost_usd"]
@@ -527,6 +535,9 @@ class EpiBenchRunner:
                 manifest_entries.append({
                     "scenario_id": sc.scenario_id,
                     "track": sc.track,
+                    "template_id": sc.metadata.get("template_id", ""),
+                    "session_count": len(sc.sessions),
+                    "question_count": len(sc.questions),
                     "sha256": scenario_sha256(sc.to_dict()),
                 })
 
@@ -675,7 +686,7 @@ class EpiBenchRunner:
             total_ingest_cost = sum(s.get("ingest_cost_usd", 0.0) for s in sys_scenarios)
             tracked_spend = self.spend_tracker.get_system_spend(sys_name)
             recorded_sc_spend = sum(s.get("scenario_spend_usd", 0.0) for s in sys_scenarios)
-            total_sys_spend = max(tracked_spend, recorded_sc_spend, total_ingest_cost)
+            total_sys_spend = tracked_spend if tracked_spend > 0 else max(recorded_sc_spend, total_ingest_cost)
 
             # Build dimensional evaluation inputs: Track E uses joint outcome for privacy_and_deletion
             # and deletion_control_retention separately for retention_control
@@ -796,6 +807,7 @@ async def main() -> None:
     parser.add_argument("--secondary-audit-rate", type=float, default=DEFAULT_SECONDARY_AUDIT_RATE)
     parser.add_argument("--offline", action="store_true", help="Run offline with FakeReader and FakeJudge.")
     parser.add_argument("--no-resume", action="store_true", help="Ignore existing checkpoints.")
+    parser.add_argument("--concurrency", type=int, default=1, help="Number of scenarios to run concurrently.")
     args = parser.parse_args()
 
     api_key = os.getenv("GEMINI_API_KEY", "")
@@ -826,6 +838,7 @@ async def main() -> None:
         seed=args.seed,
         filler_count=args.filler_count,
         resume=not args.no_resume,
+        concurrency=args.concurrency,
     )
     total_sec = time.perf_counter() - t_start
 

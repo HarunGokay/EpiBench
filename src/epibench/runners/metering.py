@@ -9,15 +9,18 @@ from __future__ import annotations
 
 from collections import defaultdict
 from contextvars import ContextVar
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 # Default token pricing rates (USD per 1M tokens)
 RATE_INPUT_PER_M: float = 0.075
 RATE_OUTPUT_PER_M: float = 0.30
 RATE_CACHED_INPUT_PER_M: float = 0.01875
 
-# Async-safe task-local variable attributing LLM API spend to the active system
+# Async-safe task-local variables attributing LLM API spend to active system and scenario task
 CURRENT_SYSTEM_VAR: ContextVar[Optional[str]] = ContextVar("epibench_current_system", default=None)
+CURRENT_SPEND_BUCKET_VAR: ContextVar[Optional[List[float]]] = ContextVar(
+    "epibench_current_spend_bucket", default=None
+)
 
 
 class HardBudgetCapReached(Exception):
@@ -71,6 +74,10 @@ class SpendTracker:
         active_sys = system_name or CURRENT_SYSTEM_VAR.get()
         if active_sys:
             self.spend_by_system[active_sys] += cost
+
+        bucket = CURRENT_SPEND_BUCKET_VAR.get()
+        if bucket is not None:
+            bucket.append(cost)
 
         if self.total_spend_usd >= self.hard_cap_usd:
             raise HardBudgetCapReached(

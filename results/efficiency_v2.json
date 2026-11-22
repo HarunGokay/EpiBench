@@ -1,0 +1,167 @@
+{
+  "benchmark": "EpiBench Memory Efficiency & Scale Benchmark",
+  "scorer_version": "2.0.0",
+  "generator_version": "2.0.0",
+  "date_utc": "2026-11-22T23:27:26.649632+00:00",
+  "git_commit_sha": "68dc821",
+  "seed": 20261122,
+  "token_budget": 1500,
+  "use_fake_embedder": false,
+  "scales": [
+    100,
+    1000
+  ],
+  "systems": [
+    "null_memory",
+    "oracle",
+    "recent_context",
+    "vector_rag",
+    "hybrid_rag"
+  ],
+  "by_scale": {
+    "100": {
+      "null_memory": {
+        "turn_count": 100,
+        "session_count": 50,
+        "planted_facts_retrieved": 0,
+        "planted_facts_total": 5,
+        "fact_retrieval_recall_pct": 0.0,
+        "fact_retrieval_ci_95": [
+          0.0,
+          43.45
+        ],
+        "ingest_time_s": 0.0,
+        "avg_retrieval_latency_ms": 0.0,
+        "avg_context_tokens": 0.0
+      },
+      "oracle": {
+        "turn_count": 100,
+        "session_count": 50,
+        "planted_facts_retrieved": 5,
+        "planted_facts_total": 5,
+        "fact_retrieval_recall_pct": 100.0,
+        "fact_retrieval_ci_95": [
+          56.55,
+          100.0
+        ],
+        "ingest_time_s": 0.0,
+        "avg_retrieval_latency_ms": 0.01,
+        "avg_context_tokens": 209.0
+      },
+      "recent_context": {
+        "turn_count": 100,
+        "session_count": 50,
+        "planted_facts_retrieved": 3,
+        "planted_facts_total": 5,
+        "fact_retrieval_recall_pct": 60.0,
+        "fact_retrieval_ci_95": [
+          23.07,
+          88.24
+        ],
+        "ingest_time_s": 0.0,
+        "avg_retrieval_latency_ms": 0.03,
+        "avg_context_tokens": 1479.0
+      },
+      "vector_rag": {
+        "turn_count": 100,
+        "session_count": 50,
+        "planted_facts_retrieved": 5,
+        "planted_facts_total": 5,
+        "fact_retrieval_recall_pct": 100.0,
+        "fact_retrieval_ci_95": [
+          56.55,
+          100.0
+        ],
+        "ingest_time_s": 0.7985,
+        "avg_retrieval_latency_ms": 4.95,
+        "avg_context_tokens": 1580.4
+      },
+      "hybrid_rag": {
+        "turn_count": 100,
+        "session_count": 50,
+        "planted_facts_retrieved": 5,
+        "planted_facts_total": 5,
+        "fact_retrieval_recall_pct": 100.0,
+        "fact_retrieval_ci_95": [
+          56.55,
+          100.0
+        ],
+        "ingest_time_s": 0.1748,
+        "avg_retrieval_latency_ms": 5.35,
+        "avg_context_tokens": 1576.8
+      }
+    },
+    "1000": {
+      "null_memory": {
+        "turn_count": 1000,
+        "session_count": 500,
+        "planted_facts_retrieved": 0,
+        "planted_facts_total": 5,
+        "fact_retrieval_recall_pct": 0.0,
+        "fact_retrieval_ci_95": [
+          0.0,
+          43.45
+        ],
+        "ingest_time_s": 0.0,
+        "avg_retrieval_latency_ms": 0.0,
+        "avg_context_tokens": 0.0
+      },
+      "oracle": {
+        "turn_count": 1000,
+        "session_count": 500,
+        "planted_facts_retrieved": 5,
+        "planted_facts_total": 5,
+        "fact_retrieval_recall_pct": 100.0,
+        "fact_retrieval_ci_95": [
+          56.55,
+          100.0
+        ],
+        "ingest_time_s": 0.0,
+        "avg_retrieval_latency_ms": 0.01,
+        "avg_context_tokens": 209.0
+      },
+      "recent_context": {
+        "turn_count": 1000,
+        "session_count": 500,
+        "planted_facts_retrieved": 1,
+        "planted_facts_total": 5,
+        "fact_retrieval_recall_pct": 20.0,
+        "fact_retrieval_ci_95": [
+          3.62,
+          62.45
+        ],
+        "ingest_time_s": 0.0,
+        "avg_retrieval_latency_ms": 0.09,
+        "avg_context_tokens": 1494.0
+      },
+      "vector_rag": {
+        "turn_count": 1000,
+        "session_count": 500,
+        "planted_facts_retrieved": 5,
+        "planted_facts_total": 5,
+        "fact_retrieval_recall_pct": 100.0,
+        "fact_retrieval_ci_95": [
+          56.55,
+          100.0
+        ],
+        "ingest_time_s": 1.9802,
+        "avg_retrieval_latency_ms": 23.83,
+        "avg_context_tokens": 1557.2
+      },
+      "hybrid_rag": {
+        "turn_count": 1000,
+        "session_count": 500,
+        "planted_facts_retrieved": 5,
+        "planted_facts_total": 5,
+        "fact_retrieval_recall_pct": 100.0,
+        "fact_retrieval_ci_95": [
+          56.55,
+          100.0
+        ],
+        "ingest_time_s": 2.1266,
+        "avg_retrieval_latency_ms": 31.06,
+        "avg_context_tokens": 1574.8
+      }
+    }
+  }
+}
