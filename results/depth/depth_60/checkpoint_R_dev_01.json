@@ -1,0 +1,303 @@
+{
+  "scenario_id": "R_dev_01",
+  "track": "R",
+  "split": "dev",
+  "user_name": "User_R_dev_01",
+  "question_date": "2024/04/29 10:00:00",
+  "session_count": 63,
+  "question_count": 4,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 4,
+      "total_questions": 4,
+      "avg_retrieval_latency_ms": 40.46,
+      "avg_context_tokens": 1487.0,
+      "ingest_latency_ms": 230580.56,
+      "ingest_cost_usd": 0.0859,
+      "questions": [
+        {
+          "question_id": "R_dev_01_q1",
+          "question_subkind": "current",
+          "question_text": "Which gym does the user currently attend?",
+          "gold_answer": "Lifetime Fitness",
+          "hypothesis": "The user currently attends Lifetime Fitness.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match",
+            "is_stale_answer": false
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Location: The user is based in Boston. | Sustainable Shopping Principles: The user placed an online order with Thrive Market on March 26, 2024 [2024-03-26] and spent around $150 on organic and sustainable products as part of their sustainable shopping eff...",
+          "context_tokens": 1485,
+          "retrieval_latency_ms": 73.14
+        },
+        {
+          "question_id": "R_dev_01_q2",
+          "question_subkind": "previous",
+          "question_text": "Which gym did the user attend right before their current gym?",
+          "gold_answer": "Crunch Fitness",
+          "hypothesis": "Based on the provided context, the user attended Crunch Fitness right before their current gym (Lifetime Fitness).",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Location: The user is based in Boston. | Sustainable Shopping Principles: The user placed an online order with Thrive Market on March 26, 2024 [2024-03-26] and spent around $150 on organic and sustainable products as part of their sustainable shopping eff...",
+          "context_tokens": 1486,
+          "retrieval_latency_ms": 28.65
+        },
+        {
+          "question_id": "R_dev_01_q3",
+          "question_subkind": "as_of",
+          "question_text": "Which gym was the user attending as of 2024-01-25?",
+          "gold_answer": "Equinox",
+          "hypothesis": "Based on the provided context, as of January 25, 2024, the user had signed up for a membership at Equinox on January 15, 2024.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Location: The user is based in Boston. | Sustainable Shopping Principles: The user placed an online order with Thrive Market on March 26, 2024 [2024-03-26] and spent around $150 on organic and sustainable products as part of their sustainable shopping eff...",
+          "context_tokens": 1483,
+          "retrieval_latency_ms": 32.1
+        },
+        {
+          "question_id": "R_dev_01_q4",
+          "question_subkind": "count",
+          "question_text": "How many times has the user changed gyms?",
+          "gold_answer": 2,
+          "hypothesis": "Based on the provided context, the user has changed gyms 3 times:\n1. They moved their gym membership from their previous gym to Lifetime Fitness because they were unhappy with the crowds.\n2. They cancelled their Lifetime/previous gym membership and joined Crunch Fitness.\n3. They subsequently changed their gym membership to Equinox (superseded on November 22, 2026).",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Location: The user is based in Boston. | Sustainable Shopping Principles: The user placed an online order with Thrive Market on March 26, 2024 [2024-03-26] and spent around $150 on organic and sustainable products as part of their sustainable shopping eff...",
+          "context_tokens": 1494,
+          "retrieval_latency_ms": 27.95
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 4,
+      "total_questions": 4,
+      "avg_retrieval_latency_ms": 31.7,
+      "avg_context_tokens": 630.5,
+      "ingest_latency_ms": 56933.16,
+      "ingest_cost_usd": 0.056,
+      "questions": [
+        {
+          "question_id": "R_dev_01_q1",
+          "question_subkind": "current",
+          "question_text": "Which gym does the user currently attend?",
+          "gold_answer": "Lifetime Fitness",
+          "hypothesis": "The user currently attends Lifetime Fitness.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match",
+            "is_stale_answer": false
+          },
+          "retrieved_context_preview": "User switched their gym membership to Lifetime Fitness after being unhappy with the crowd at their previous gym\n\nUser signed up for a gym membership at Equinox around January 15, 2024\n\nUser cancelled their old gym membership and joined Crunch Fitness around February 29, 2024\n\nUser moved into their c...",
+          "context_tokens": 531,
+          "retrieval_latency_ms": 31.32
+        },
+        {
+          "question_id": "R_dev_01_q2",
+          "question_subkind": "previous",
+          "question_text": "Which gym did the user attend right before their current gym?",
+          "gold_answer": "Crunch Fitness",
+          "hypothesis": "Crunch Fitness",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "User switched their gym membership to Lifetime Fitness after being unhappy with the crowd at their previous gym\n\nUser signed up for a gym membership at Equinox around January 15, 2024\n\nUser cancelled their old gym membership and joined Crunch Fitness around February 29, 2024\n\nUser moved into their c...",
+          "context_tokens": 663,
+          "retrieval_latency_ms": 31.78
+        },
+        {
+          "question_id": "R_dev_01_q3",
+          "question_subkind": "as_of",
+          "question_text": "Which gym was the user attending as of 2024-01-25?",
+          "gold_answer": "Equinox",
+          "hypothesis": "Equinox",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "User signed up for a gym membership at Equinox around January 15, 2024\n\nUser cancelled their old gym membership and joined Crunch Fitness around February 29, 2024\n\nUser attended a networking workshop at their alma mater on April 22, 2024, which helped them refine their elevator pitch\n\nUser started a...",
+          "context_tokens": 706,
+          "retrieval_latency_ms": 34.17
+        },
+        {
+          "question_id": "R_dev_01_q4",
+          "question_subkind": "count",
+          "question_text": "How many times has the user changed gyms?",
+          "gold_answer": 2,
+          "hypothesis": "Based on the provided context, the user has changed gyms 3 times:\n1. They switched to Lifetime Fitness after being unhappy with the crowd at their previous gym.\n2. They signed up for a membership at Equinox around January 15, 2024.\n3. They cancelled their old membership and joined Crunch Fitness around February 29, 2024.",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "User switched their gym membership to Lifetime Fitness after being unhappy with the crowd at their previous gym\n\nUser has started spending significantly more time on video calls for work due to pandemic-related changes\n\nUser signed up for a gym membership at Equinox around January 15, 2024\n\nUser can...",
+          "context_tokens": 622,
+          "retrieval_latency_ms": 29.53
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 0.5,
+      "scenario_pass": false,
+      "correct_questions": 2,
+      "total_questions": 4,
+      "avg_retrieval_latency_ms": 30.91,
+      "avg_context_tokens": 1257.0,
+      "ingest_latency_ms": 5845.98,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "R_dev_01_q1",
+          "question_subkind": "current",
+          "question_text": "Which gym does the user currently attend?",
+          "gold_answer": "Lifetime Fitness",
+          "hypothesis": "Lifetime Fitness",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match",
+            "is_stale_answer": false
+          },
+          "retrieved_context_preview": "[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/02/29 10:00:00] User: I cancelled my old gym and joined Crunch Fitness instead.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/...",
+          "context_tokens": 1203,
+          "retrieval_latency_ms": 26.59
+        },
+        {
+          "question_id": "R_dev_01_q2",
+          "question_subkind": "previous",
+          "question_text": "Which gym did the user attend right before their current gym?",
+          "gold_answer": "Crunch Fitness",
+          "hypothesis": "Based on the provided context, there is no mention of the name of the user's previous gym; it only states that they cancelled their old gym and joined Crunch Fitness.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/02/29 10:00:00] User: I cancelled my old gym and joined Crunch Fitness instead.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/...",
+          "context_tokens": 1337,
+          "retrieval_latency_ms": 32.6
+        },
+        {
+          "question_id": "R_dev_01_q3",
+          "question_subkind": "as_of",
+          "question_text": "Which gym was the user attending as of 2024-01-25?",
+          "gold_answer": "Equinox",
+          "hypothesis": "The provided context does not contain information about which gym the user was attending as of January 25, 2024 (the user stated they joined Crunch Fitness on February 29, 2024).",
+          "is_correct": false,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/02/29 10:00:00] User: I cancelled my old gym and joined Crunch Fitness instead.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/...",
+          "context_tokens": 1439,
+          "retrieval_latency_ms": 33.48
+        },
+        {
+          "question_id": "R_dev_01_q4",
+          "question_subkind": "count",
+          "question_text": "How many times has the user changed gyms?",
+          "gold_answer": 2,
+          "hypothesis": "Based on the provided context, there is no information about how many times the user has changed gyms.",
+          "is_correct": false,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/01/22 10:00:00] Assistant: **Serum Frequency:**\n\nFor the Drunk Elephant serum, you can use it once or twice a day, depending on your skin type and concerns. If you're using it at night, you can consider adding it to your morning routine as well, especially if you're targeting specific skin con...",
+          "context_tokens": 1049,
+          "retrieval_latency_ms": 30.97
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 4,
+      "total_questions": 4,
+      "avg_retrieval_latency_ms": 27.69,
+      "avg_context_tokens": 1424.5,
+      "ingest_latency_ms": 5831.42,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "R_dev_01_q1",
+          "question_subkind": "current",
+          "question_text": "Which gym does the user currently attend?",
+          "gold_answer": "Lifetime Fitness",
+          "hypothesis": "Based on the provided context, the user currently attends Lifetime Fitness.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match",
+            "is_stale_answer": false
+          },
+          "retrieved_context_preview": "[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n--...",
+          "context_tokens": 1386,
+          "retrieval_latency_ms": 33.43
+        },
+        {
+          "question_id": "R_dev_01_q2",
+          "question_subkind": "previous",
+          "question_text": "Which gym did the user attend right before their current gym?",
+          "gold_answer": "Crunch Fitness",
+          "hypothesis": "Crunch Fitness",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/02/29 10:00:00] User: I cancelled my old gym and joined Crunch Fitness instead.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/...",
+          "context_tokens": 1332,
+          "retrieval_latency_ms": 24.51
+        },
+        {
+          "question_id": "R_dev_01_q3",
+          "question_subkind": "as_of",
+          "question_text": "Which gym was the user attending as of 2024-01-25?",
+          "gold_answer": "Equinox",
+          "hypothesis": "Equinox",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n--...",
+          "context_tokens": 1490,
+          "retrieval_latency_ms": 31.25
+        },
+        {
+          "question_id": "R_dev_01_q4",
+          "question_subkind": "count",
+          "question_text": "How many times has the user changed gyms?",
+          "gold_answer": 2,
+          "hypothesis": "The user has changed gyms 2 times based on the provided context (switching from Equinox to Crunch Fitness, and then from Crunch Fitness to Lifetime Fitness).",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n--...",
+          "context_tokens": 1490,
+          "retrieval_latency_ms": 21.58
+        }
+      ]
+    }
+  }
+}

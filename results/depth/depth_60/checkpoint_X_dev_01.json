@@ -1,0 +1,163 @@
+{
+  "scenario_id": "X_dev_01",
+  "track": "X",
+  "split": "dev",
+  "user_name": "User_X_dev_01",
+  "question_date": "2024/04/30 14:00:00",
+  "session_count": 61,
+  "question_count": 1,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 87.04,
+      "avg_context_tokens": 1489.0,
+      "ingest_latency_ms": 305137.84,
+      "ingest_cost_usd": 0.0999,
+      "questions": [
+        {
+          "question_id": "X_dev_01_q1",
+          "question_subkind": "hidden_constraint",
+          "question_text": "I am traveling to the Chicago conference and found the Hyatt Regency right next door for $340 per night. Should I go ahead and book it directly on the corporate portal?",
+          "gold_answer": "No, you cannot book it directly because it exceeds the $220/night corporate limit; it requires formal executive exception approval.",
+          "hypothesis": "No, you should not book it directly without approval. According to your company travel policy, individual hotel room bookings are strictly capped at $220 per night, and anything higher requires formal executive exception approval.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly enforced the unmentioned budget constraint of $220 per night and refused the $340 booking proposal without proper approval.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned budget constraint of $220 per night and refused the $340 booking proposal without proper approval.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "secondary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The response successfully enforces the unmentioned constraint ($220 night cap) and refuses the unconstrained proposal ($340 per night) by advising against direct booking without approval.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The response successfully enforces the unmentioned constraint ($220 night cap) and refuses the unconstrained proposal ($340 per night) by advising against direct booking without approval.\"\n}\n```",
+              "judge_type": "secondary"
+            },
+            "judge_agreement": true
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Aunt Role: The user is an aunt to her nephew Ethan. | Location and Age: The user lives in California, zip code 92115, and is 32 years old. | Employment Tenure: The user works as a Senior Data Analyst at XYZ Corp and recently celebrated their 3-year work a...",
+          "context_tokens": 1489,
+          "retrieval_latency_ms": 87.04
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 50.15,
+      "avg_context_tokens": 678.0,
+      "ingest_latency_ms": 62580.15,
+      "ingest_cost_usd": 0.0573,
+      "questions": [
+        {
+          "question_id": "X_dev_01_q1",
+          "question_subkind": "hidden_constraint",
+          "question_text": "I am traveling to the Chicago conference and found the Hyatt Regency right next door for $340 per night. Should I go ahead and book it directly on the corporate portal?",
+          "gold_answer": "No, you cannot book it directly because it exceeds the $220/night corporate limit; it requires formal executive exception approval.",
+          "hypothesis": "No, you should not book it directly without approval, because your company travel policy strictly caps individual hotel room bookings at $220 per night, and any higher rate requires formal executive exception approval.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly enforced the unmentioned $220 hotel rate limit constraint and refused/adapted the unconstrained $340 per night booking proposal.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned $220 hotel rate limit constraint and refused/adapted the unconstrained $340 per night booking proposal.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "User's company travel policy strictly caps individual hotel room bookings at $220 per night, with any higher rate requiring formal executive exception approval\n\nUser prefers Trust Wallet over MetaMask because they find it faster, appreciate the ease of restoring multiple wallets from a mnemonic and ...",
+          "context_tokens": 678,
+          "retrieval_latency_ms": 50.15
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 34.63,
+      "avg_context_tokens": 1435.0,
+      "ingest_latency_ms": 5996.73,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "X_dev_01_q1",
+          "question_subkind": "hidden_constraint",
+          "question_text": "I am traveling to the Chicago conference and found the Hyatt Regency right next door for $340 per night. Should I go ahead and book it directly on the corporate portal?",
+          "gold_answer": "No, you cannot book it directly because it exceeds the $220/night corporate limit; it requires formal executive exception approval.",
+          "hypothesis": "No, you should not book it directly without approval. According to your company travel policy, individual hotel room bookings are strictly capped at $220 per night, and anything higher requires formal executive exception approval.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly enforced the unmentioned budget constraint of $220 per night and advised against booking the $340 room without approval.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned budget constraint of $220 per night and advised against booking the $340 room without approval.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "secondary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The response successfully enforces the unmentioned $220 constraint from the rubric and correctly refuses the unconstrained proposal of booking at $340 per night without the proper exception approval.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The response successfully enforces the unmentioned $220 constraint from the rubric and correctly refuses the unconstrained proposal of booking at $340 per night without the proper exception approval.\"\n}\n```",
+              "judge_type": "secondary"
+            },
+            "judge_agreement": true
+          },
+          "retrieved_context_preview": "[2024/03/01 14:00:00] User: Just a heads up on my current rules and limits: My company travel policy strictly caps individual hotel room bookings at $220 per night, requiring formal executive exception approval for anything higher.\n\n---\n\n[2024/12/04 14:00:00] Assistant: That's the right attitude! Su...",
+          "context_tokens": 1435,
+          "retrieval_latency_ms": 34.63
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 33.07,
+      "avg_context_tokens": 1464.0,
+      "ingest_latency_ms": 6021.13,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "X_dev_01_q1",
+          "question_subkind": "hidden_constraint",
+          "question_text": "I am traveling to the Chicago conference and found the Hyatt Regency right next door for $340 per night. Should I go ahead and book it directly on the corporate portal?",
+          "gold_answer": "No, you cannot book it directly because it exceeds the $220/night corporate limit; it requires formal executive exception approval.",
+          "hypothesis": "No, you should not book the Hyatt Regency for $340 per night on the corporate portal. According to your company travel policy, individual hotel room bookings are strictly capped at $220 per night, and anything higher requires formal executive exception approval.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly enforced the unmentioned constraint of the $220 hotel cap and refused the unconstrained $340 booking proposal.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned constraint of the $220 hotel cap and refused the unconstrained $340 booking proposal.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/12/04 14:00:00] User: I feel good about the offer. I've done my research, and I think $320,000 is a fair price considering the market value of the property. I'm also confident that the inspection contingency will protect me in case any issues are found. I'm prepared to negotiate, and I'm hopin...",
+          "context_tokens": 1464,
+          "retrieval_latency_ms": 33.07
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "scenario_id": "X_dev_02",
+  "track": "X",
+  "split": "dev",
+  "user_name": "User_X_dev_02",
+  "question_date": "2024/04/30 14:00:00",
+  "session_count": 7,
+  "question_count": 1,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 61.19,
+      "avg_context_tokens": 1483.0,
+      "ingest_latency_ms": 36294.08,
+      "ingest_cost_usd": 0.0119,
+      "questions": [
+        {
+          "question_id": "X_dev_02_q1",
+          "question_subkind": "hidden_constraint",
+          "question_text": "The backend team wants to deploy a new distributed load-testing test suite on staging that requests 12 vCPUs. Can we spin that up alongside the existing staging pods?",
+          "gold_answer": "No, it cannot be spun up because the 12 vCPU request exceeds the staging cluster's strict hard limit of 8 vCPUs total.",
+          "hypothesis": "No, you cannot spin that up. The staging Kubernetes cluster has a strict hard resource limit of at most 8 vCPUs total across all running pods, and the new test suite requests 12 vCPUs, which exceeds this limit.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly enforced the unmentioned constraint (the 8 vCPU limit) and refused the proposal to spin up the 12 vCPU test suite.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned constraint (the 8 vCPU limit) and refused the proposal to spin up the 12 vCPU test suite.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Display Integration (Vinyl Record Collection): The user plans to create a music-themed diorama or scene using their Tame Impala, King Gizzard & the Lizard Wizard, and Unknown Mortal Orchestra Funko POP! figures alongside vinyl records, possibly incorpor...",
+          "context_tokens": 1483,
+          "retrieval_latency_ms": 61.19
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 8.87,
+      "avg_context_tokens": 1351.0,
+      "ingest_latency_ms": 569.45,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "X_dev_02_q1",
+          "question_subkind": "hidden_constraint",
+          "question_text": "The backend team wants to deploy a new distributed load-testing test suite on staging that requests 12 vCPUs. Can we spin that up alongside the existing staging pods?",
+          "gold_answer": "No, it cannot be spun up because the 12 vCPU request exceeds the staging cluster's strict hard limit of 8 vCPUs total.",
+          "hypothesis": "No, you cannot spin that up alongside the existing staging pods. The staging Kubernetes cluster has a strict hard resource limit of at most 8 vCPUs total across all running pods, and the new test suite alone requests 12 vCPUs.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly enforced the unmentioned constraint (the 8 vCPU limit) and refused the proposal to spin up the 12 vCPU test suite alongside existing pods.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned constraint (the 8 vCPU limit) and refused the proposal to spin up the 12 vCPU test suite alongside existing pods.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/03/01 14:00:00] User: Just a heads up on my current rules and limits: Our staging Kubernetes cluster has a strict hard resource limit of at most 8 vCPUs total across all running pods.\n\n---\n\n[2024/03/22 14:00:00] Assistant: Taking a photography class can be a fantastic way to meet like-minded p...",
+          "context_tokens": 1351,
+          "retrieval_latency_ms": 8.87
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 7.2,
+      "avg_context_tokens": 967.0,
+      "ingest_latency_ms": 582.42,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "X_dev_02_q1",
+          "question_subkind": "hidden_constraint",
+          "question_text": "The backend team wants to deploy a new distributed load-testing test suite on staging that requests 12 vCPUs. Can we spin that up alongside the existing staging pods?",
+          "gold_answer": "No, it cannot be spun up because the 12 vCPU request exceeds the staging cluster's strict hard limit of 8 vCPUs total.",
+          "hypothesis": "No, you cannot spin that up alongside the existing staging pods. Our staging Kubernetes cluster has a strict hard resource limit of at most 8 vCPUs total across all running pods, and the new test suite requests 12 vCPUs, which exceeds this limit.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly enforced the hidden constraint (8 vCPUs limit) and refused the unconstrained proposal to spin up a 12 vCPU test suite.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the hidden constraint (8 vCPUs limit) and refused the unconstrained proposal to spin up a 12 vCPU test suite.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/03/01 14:00:00] User: Just a heads up on my current rules and limits: Our staging Kubernetes cluster has a strict hard resource limit of at most 8 vCPUs total across all running pods.\n\n---\n\n[2024/04/03 14:00:00] Assistant: That's a fantastic idea! Using shelf dividers to create a nested organi...",
+          "context_tokens": 967,
+          "retrieval_latency_ms": 7.2
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 16.09,
+      "avg_context_tokens": 778.0,
+      "ingest_latency_ms": 7520.94,
+      "ingest_cost_usd": 0.0065,
+      "questions": [
+        {
+          "question_id": "X_dev_02_q1",
+          "question_subkind": "hidden_constraint",
+          "question_text": "The backend team wants to deploy a new distributed load-testing test suite on staging that requests 12 vCPUs. Can we spin that up alongside the existing staging pods?",
+          "gold_answer": "No, it cannot be spun up because the 12 vCPU request exceeds the staging cluster's strict hard limit of 8 vCPUs total.",
+          "hypothesis": "No, you cannot spin that up alongside the existing staging pods. The staging Kubernetes cluster has a strict hard resource limit of at most 8 vCPUs total across all running pods, and the new test suite requests 12 vCPUs.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly enforced the hidden 8 vCPU constraint by refusing the 12 vCPU request and citing the cluster's resource limit.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the hidden 8 vCPU constraint by refusing the 12 vCPU request and citing the cluster's resource limit.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "User's staging Kubernetes cluster has a strict hard resource limit of at most 8 vCPUs total across all running pods\n\nUser has a collection of 12 Spider-Man figures, having recently acquired new Spider-Man: No Way Home figures at a comic-con event around mid-March or early April 2024\n\nUser has a bag ...",
+          "context_tokens": 778,
+          "retrieval_latency_ms": 16.09
+        }
+      ]
+    },
+    "full_context": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 0.02,
+      "avg_context_tokens": 1495.0,
+      "ingest_latency_ms": 0.0,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "X_dev_02_q1",
+          "question_subkind": "hidden_constraint",
+          "question_text": "The backend team wants to deploy a new distributed load-testing test suite on staging that requests 12 vCPUs. Can we spin that up alongside the existing staging pods?",
+          "gold_answer": "No, it cannot be spun up because the 12 vCPU request exceeds the staging cluster's strict hard limit of 8 vCPUs total.",
+          "hypothesis": "No, you cannot spin that up alongside the existing staging pods. Our staging Kubernetes cluster has a strict hard resource limit of at most 8 vCPUs total across all running pods, and the new test suite requests 12 vCPUs, which exceeds this limit.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly enforced the unmentioned constraint (the 8 vCPU limit) and refused the unconstrained proposal to deploy the 12 vCPU test suite alongside existing pods.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned constraint (the 8 vCPU limit) and refused the unconstrained proposal to deploy the 12 vCPU test suite alongside existing pods.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/03/01 14:00:00] User: Just a heads up on my current rules and limits: Our staging Kubernetes cluster has a strict hard resource limit of at most 8 vCPUs total across all running pods.\n\n[2024/03/01 14:00:00] Assistant: Thank you for letting me know. I will strictly keep this boundary in mind.\n\n...",
+          "context_tokens": 1495,
+          "retrieval_latency_ms": 0.02
+        }
+      ]
+    }
+  }
+}

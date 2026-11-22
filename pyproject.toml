@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "epibench"
+version = "1.0.0"
+description = "Epistemic long-term memory benchmark"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [
+    { name = "Harun Gokay" }
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "pydantic>=2.0.0",
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "google-genai>=0.1.0",
+    "fastembed>=0.3.0",
+    "rank-bm25>=0.2.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+]
+baselines = [
+    "mem0ai>=0.1.0",
+    "qdrant-client>=1.7.0",
+]
+
+[tool.setuptools.package-dir]
+"epibench" = "."
+"epibench.adapters" = "adapters"
+"epibench.generator" = "generator"
+"epibench.judging" = "judging"
+"epibench.metrics" = "metrics"
+"epibench.runners" = "runners"
+
+[tool.setuptools]
+packages = [
+    "epibench",
+    "epibench.adapters",
+    "epibench.generator",
+    "epibench.judging",
+    "epibench.metrics",
+    "epibench.runners",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["..", "."]
+testpaths = ["tests"]
+python_files = "test_*.py"
+asyncio_mode = "auto"

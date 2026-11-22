@@ -1,0 +1,186 @@
+{
+  "scenario_id": "P_dev_01",
+  "track": "P",
+  "split": "dev",
+  "user_name": "User_P_dev_01",
+  "question_date": "2024/06/30 11:00:00",
+  "session_count": 7,
+  "question_count": 1,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 36.17,
+      "avg_context_tokens": 1480.0,
+      "ingest_latency_ms": 36601.94,
+      "ingest_cost_usd": 0.0126,
+      "questions": [
+        {
+          "question_id": "P_dev_01_q1",
+          "question_subkind": "provenance",
+          "question_text": "Where is the user currently planning to live?",
+          "gold_answer": "Chicago (the Seattle relocation was revoked/cancelled)",
+          "hypothesis": "The user is currently planning to stay and live in Chicago, having signed a new lease there.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identified that the user is planning to live in Chicago and signed a new lease there, adhering to the ground truth while omitting the retracted Seattle relocation.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that the user is planning to live in Chicago and signed a new lease there, adhering to the ground truth while omitting the retracted Seattle relocation.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "is_contaminated": false
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Industry and Role: The user works in the tech industry, specifically in software development.\nActive Goals & Projects: Article Sections (Article Writing Tasks): The user requested the writing of two specific sections ('Introduction' and '- Details of Dela...",
+          "context_tokens": 1480,
+          "retrieval_latency_ms": 36.17
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 0.0,
+      "scenario_pass": false,
+      "correct_questions": 0,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 6.38,
+      "avg_context_tokens": 1492.0,
+      "ingest_latency_ms": 477.68,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "P_dev_01_q1",
+          "question_subkind": "provenance",
+          "question_text": "Where is the user currently planning to live?",
+          "gold_answer": "Chicago (the Seattle relocation was revoked/cancelled)",
+          "hypothesis": "Based on the provided context, the user mentions their \"new neighborhood\" and their \"old neighborhood,\" but the specific location or address is not provided.",
+          "is_correct": false,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The assistant failed to state the true user-authored fact (Chicago) and claimed the location was not provided, violating the provenance rule.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to state the true user-authored fact (Chicago) and claimed the location was not provided, violating the provenance rule.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "is_contaminated": false
+          },
+          "retrieved_context_preview": "[2024/05/23 11:00:00] User: I'll definitely try out some of these recommendations. By the way, I've been noticing that a lot of the shops and restaurants in my area have Spanish language signs and menus, which is a nice change of pace from my old neighborhood where everything was mostly in English.\n...",
+          "context_tokens": 1492,
+          "retrieval_latency_ms": 6.38
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 5.9,
+      "avg_context_tokens": 1037.0,
+      "ingest_latency_ms": 471.25,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "P_dev_01_q1",
+          "question_subkind": "provenance",
+          "question_text": "Where is the user currently planning to live?",
+          "gold_answer": "Chicago (the Seattle relocation was revoked/cancelled)",
+          "hypothesis": "Based on the provided context, the user is planning to stay in Chicago.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identified that the user is planning to stay in Chicago and omitted the retracted Seattle relocation, adhering to the provenance rule.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that the user is planning to stay in Chicago and omitted the retracted Seattle relocation, adhering to the provenance rule.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "is_contaminated": false
+          },
+          "retrieved_context_preview": "[2024/05/01 11:00:00] User: I got a job offer in Seattle, so I will be relocating there at the end of August.\n\n---\n\n[2024/05/16 11:00:00] User: ddd\n\n---\n\n[2024/05/16 11:00:00] User: ni hao\n\n---\n\n[2024/05/10 11:00:00] User: imagine minature worlds\n\n---\n\n[2024/05/10 11:00:00] Assistant: Here are ten p...",
+          "context_tokens": 1037,
+          "retrieval_latency_ms": 5.9
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 20.96,
+      "avg_context_tokens": 753.0,
+      "ingest_latency_ms": 6317.97,
+      "ingest_cost_usd": 0.0061,
+      "questions": [
+        {
+          "question_id": "P_dev_01_q1",
+          "question_subkind": "provenance",
+          "question_text": "Where is the user currently planning to live?",
+          "gold_answer": "Chicago (the Seattle relocation was revoked/cancelled)",
+          "hypothesis": "Based on the provided context, the user is currently planning to live in Chicago (having signed a new lease to stay there after their Seattle job offer was revoked).",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly asserts the true user fact that the user is planning to live in Chicago due to the revocation of the Seattle relocation, adhering to the provenance rule.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly asserts the true user fact that the user is planning to live in Chicago due to the revocation of the Seattle relocation, adhering to the provenance rule.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "is_contaminated": true
+          },
+          "retrieved_context_preview": "User plans to take a structured local college course to build a foundation in French grammar and vocabulary\n\nUser received a job offer in Seattle and planned to relocate there at the end of August 2024, but the company instituted a hiring freeze and revoked the offer\n\nUser plans to supplement their ...",
+          "context_tokens": 753,
+          "retrieval_latency_ms": 20.96
+        }
+      ]
+    },
+    "full_context": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 0.03,
+      "avg_context_tokens": 1484.0,
+      "ingest_latency_ms": 0.01,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "P_dev_01_q1",
+          "question_subkind": "provenance",
+          "question_text": "Where is the user currently planning to live?",
+          "gold_answer": "Chicago (the Seattle relocation was revoked/cancelled)",
+          "hypothesis": "The user is currently planning to live in Chicago, where they signed a new lease.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly states that the user is planning to live in Chicago based on the new lease, while omitting the retracted Seattle relocation plan.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly states that the user is planning to live in Chicago based on the new lease, while omitting the retracted Seattle relocation plan.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "is_contaminated": false
+          },
+          "retrieved_context_preview": "[2024/05/01 11:00:00] User: I got a job offer in Seattle, so I will be relocating there at the end of August.\n\n[2024/05/01 11:00:00] Assistant: Congratulations on the job offer! Let me know if you need help finding apartments in Seattle.\n\n[2024/05/01 11:00:00] User: Actually, scratch that\u2014the Seattl...",
+          "context_tokens": 1484,
+          "retrieval_latency_ms": 0.03
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,339 @@
+{
+  "scenario_id": "F_dev_00",
+  "track": "F",
+  "split": "dev",
+  "user_name": "User_F_dev_00",
+  "question_date": "2024/04/08 00:00:00",
+  "session_count": 10,
+  "question_count": 3,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 0.0,
+      "scenario_pass": false,
+      "correct_questions": 0,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 27.12,
+      "avg_context_tokens": 1078.0,
+      "ingest_latency_ms": 74564.5,
+      "ingest_cost_usd": 0.0117,
+      "questions": [
+        {
+          "question_id": "F_dev_00_q1",
+          "question_subkind": "move_count",
+          "question_text": "How many times did the target completion date move or slip before it was finished?",
+          "gold_answer": 2,
+          "hypothesis": "Based on the provided context, the Alpha release target completion date slipped or moved once (from February 1st, 2023, to March 1st, 2023, due to architecture roadblocks) before it was eventually completed and deployed on March 25th, 2024.",
+          "is_correct": false,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Viewing Style and Traits: The user has become a more patient viewer willing to watch slow-burning or cerebral films, and is increasingly emotionally invested in characters, storylines, and themes long after viewing.\nActive Goals & Projects: Commitment (Al...",
+          "context_tokens": 1078,
+          "retrieval_latency_ms": 34.87
+        },
+        {
+          "question_id": "F_dev_00_q2",
+          "question_subkind": "slip_days",
+          "question_text": "How many total days did the project slip from the original promised target date to final completion?",
+          "gold_answer": 52,
+          "hypothesis": "Based on the provided context, the original target date for the Alpha release was February 1st, 2023, and it was completed and deployed on March 25th, 2024. This is a total span of 418 days.",
+          "is_correct": false,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Viewing Style and Traits: The user has become a more patient viewer willing to watch slow-burning or cerebral films, and is increasingly emotionally invested in characters, storylines, and themes long after viewing.\nActive Goals & Projects: Commitment (Al...",
+          "context_tokens": 1078,
+          "retrieval_latency_ms": 21.4
+        },
+        {
+          "question_id": "F_dev_00_q3",
+          "question_subkind": "realism",
+          "question_text": "The team just announced that the much larger Beta release will be fully delivered in just 7 calendar days. Given our past delivery history, is this 7-day target realistic?",
+          "gold_answer": "No, unrealistic. The team repeatedly slipped the smaller Alpha release by 52 days across 2 delays, making a 7-day Beta delivery unrealistic.",
+          "hypothesis": "Based on the provided context, there is no information regarding a Beta release or a 7-day target for it, so it is not possible to determine if this target is realistic.",
+          "is_correct": false,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The assistant failed to meet the ground truth criteria, which required stating that the 7-day target is unrealistic based on historical delays, instead claiming there was no information in the context.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to meet the ground truth criteria, which required stating that the 7-day target is unrealistic based on historical delays, instead claiming there was no information in the context.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Viewing Style and Traits: The user has become a more patient viewer willing to watch slow-burning or cerebral films, and is increasingly emotionally invested in characters, storylines, and themes long after viewing.\nActive Goals & Projects: Commitment (Al...",
+          "context_tokens": 1078,
+          "retrieval_latency_ms": 25.09
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 0.3333333333333333,
+      "scenario_pass": false,
+      "correct_questions": 1,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 7.68,
+      "avg_context_tokens": 1378.7,
+      "ingest_latency_ms": 644.77,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "F_dev_00_q1",
+          "question_subkind": "move_count",
+          "question_text": "How many times did the target completion date move or slip before it was finished?",
+          "gold_answer": 2,
+          "hypothesis": "Based on the provided context, the target completion date for the Alpha release moved or slipped 2 times before it was finally completed and deployed on March 25th:\n\n1. It was pushed from its original target to March 1st due to architecture roadblocks.\n2. It slipped again to March 25th due to third-party SDK integration failure.",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/02/22 00:00:00] User: I've been meaning to organize my home screen for a while now, and I think I'll dedicate some time this weekend to do it. By the way, I did a big backup of my phone's data on January 15th, which took a few hours to complete.\n\n---\n\n[2024/01/25 00:00:00] User: We ran into ar...",
+          "context_tokens": 1285,
+          "retrieval_latency_ms": 7.68
+        },
+        {
+          "question_id": "F_dev_00_q2",
+          "question_subkind": "slip_days",
+          "question_text": "How many total days did the project slip from the original promised target date to final completion?",
+          "gold_answer": 52,
+          "hypothesis": "Based on the provided context, the original target date for the Alpha release was February 1st, and it was ultimately pushed to March 25th due to roadblocks and SDK integration issues. This is a total slip of 53 days.",
+          "is_correct": false,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/01/25 00:00:00] User: We ran into architecture roadblocks; Alpha release target is pushed to March 1st.\n\n---\n\n[2024/02/22 00:00:00] User: I've been meaning to organize my home screen for a while now, and I think I'll dedicate some time this weekend to do it. By the way, I did a big backup of m...",
+          "context_tokens": 1434,
+          "retrieval_latency_ms": 7.56
+        },
+        {
+          "question_id": "F_dev_00_q3",
+          "question_subkind": "realism",
+          "question_text": "The team just announced that the much larger Beta release will be fully delivered in just 7 calendar days. Given our past delivery history, is this 7-day target realistic?",
+          "gold_answer": "No, unrealistic. The team repeatedly slipped the smaller Alpha release by 52 days across 2 delays, making a 7-day Beta delivery unrealistic.",
+          "hypothesis": "Based on the provided context, there is no information regarding a Beta release or a 7-day target for it. Therefore, the context does not contain enough information to answer whether this target is realistic.",
+          "is_correct": false,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The assistant stated there was no information to answer the question, failing to evaluate the target against historical delivery patterns as required by the ground truth criteria.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant stated there was no information to answer the question, failing to evaluate the target against historical delivery patterns as required by the ground truth criteria.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/01/25 00:00:00] User: We ran into architecture roadblocks; Alpha release target is pushed to March 1st.\n\n---\n\n[2024/03/03 00:00:00] Assistant: Another solution could be to create a national language policy that prioritizes the promotion and preservation of all languages, not just those recogni...",
+          "context_tokens": 1417,
+          "retrieval_latency_ms": 7.79
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 0.3333333333333333,
+      "scenario_pass": false,
+      "correct_questions": 1,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 7.97,
+      "avg_context_tokens": 1291.0,
+      "ingest_latency_ms": 633.24,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "F_dev_00_q1",
+          "question_subkind": "move_count",
+          "question_text": "How many times did the target completion date move or slip before it was finished?",
+          "gold_answer": 2,
+          "hypothesis": "Based on the provided context, the target completion date for the Alpha release slipped 3 times before it was finally completed and deployed on March 25th:\n\n1. First slipped from February 1st to March 1st (due to architecture roadblocks).\n2. Slipped again from March 1st to March 25th (due to third-party SDK integration failure).",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/03/25 00:00:00] User: Alpha release was finally completed and deployed today.\n\n---\n\n[2024/01/10 00:00:00] User: We committed to completing the Alpha release by February 1st.\n\n---\n\n[2024/01/25 00:00:00] User: We ran into architecture roadblocks; Alpha release target is pushed to March 1st.\n\n---...",
+          "context_tokens": 1252,
+          "retrieval_latency_ms": 7.66
+        },
+        {
+          "question_id": "F_dev_00_q2",
+          "question_subkind": "slip_days",
+          "question_text": "How many total days did the project slip from the original promised target date to final completion?",
+          "gold_answer": 52,
+          "hypothesis": "Based on the provided context, the original committed completion date for the Alpha release was February 1st, 2024, and it was finally completed and deployed on March 25th, 2024. This represents a total slip of 53 days.",
+          "is_correct": false,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/01/25 00:00:00] User: We ran into architecture roadblocks; Alpha release target is pushed to March 1st.\n\n---\n\n[2024/03/25 00:00:00] User: Alpha release was finally completed and deployed today.\n\n---\n\n[2024/01/10 00:00:00] User: We committed to completing the Alpha release by February 1st.\n\n---...",
+          "context_tokens": 1300,
+          "retrieval_latency_ms": 7.54
+        },
+        {
+          "question_id": "F_dev_00_q3",
+          "question_subkind": "realism",
+          "question_text": "The team just announced that the much larger Beta release will be fully delivered in just 7 calendar days. Given our past delivery history, is this 7-day target realistic?",
+          "gold_answer": "No, unrealistic. The team repeatedly slipped the smaller Alpha release by 52 days across 2 delays, making a 7-day Beta delivery unrealistic.",
+          "hypothesis": "Based on the provided context, there is no information regarding a Beta release or a 7-day target for it. Therefore, the context does not contain enough information to determine if this target is realistic.",
+          "is_correct": false,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The assistant failed to evaluate the 7-day target based on historical delivery delays as required by the ground truth criteria, instead incorrectly claiming there was no information in the context.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to evaluate the 7-day target based on historical delivery delays as required by the ground truth criteria, instead incorrectly claiming there was no information in the context.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "secondary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The response under test failed to satisfy the ground truth rubric, which required stating that the 7-day target is unrealistic based on historical delays. Instead, the response claimed there was no information in the context regarding the Beta release or target.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The response under test failed to satisfy the ground truth rubric, which required stating that the 7-day target is unrealistic based on historical delays. Instead, the response claimed there was no information in the context regarding the Beta release or target.\"\n}\n```",
+              "judge_type": "secondary"
+            },
+            "judge_agreement": true
+          },
+          "retrieved_context_preview": "[2024/01/10 00:00:00] User: We committed to completing the Alpha release by February 1st.\n\n---\n\n[2024/03/25 00:00:00] User: Alpha release was finally completed and deployed today.\n\n---\n\n[2024/01/25 00:00:00] User: We ran into architecture roadblocks; Alpha release target is pushed to March 1st.\n\n---...",
+          "context_tokens": 1321,
+          "retrieval_latency_ms": 8.72
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 0.3333333333333333,
+      "scenario_pass": false,
+      "correct_questions": 1,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 24.12,
+      "avg_context_tokens": 592.7,
+      "ingest_latency_ms": 8646.05,
+      "ingest_cost_usd": 0.008,
+      "questions": [
+        {
+          "question_id": "F_dev_00_q1",
+          "question_subkind": "move_count",
+          "question_text": "How many times did the target completion date move or slip before it was finished?",
+          "gold_answer": 2,
+          "hypothesis": "Based on the provided context, the target completion date for the Alpha release moved or slipped 3 times:\n1. First, it was pushed from February 1, 2024, to March 1, 2024 (due to architecture roadblocks).\n2. Second, it slipped again from March 1, 2024, to March 25, 2024 (due to a third-party SDK integration failure).\n3. Finally, it was successfully completed and deployed on March 25, 2024.",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "User experienced a third-party SDK integration failure causing the Alpha release date to slip to March 25, 2024\n\nUser encountered architecture roadblocks causing the Alpha release target to be pushed to March 1, 2024\n\nUser committed to completing the Alpha release by February 1, 2024\n\nUser successfu...",
+          "context_tokens": 578,
+          "retrieval_latency_ms": 18.25
+        },
+        {
+          "question_id": "F_dev_00_q2",
+          "question_subkind": "slip_days",
+          "question_text": "How many total days did the project slip from the original promised target date to final completion?",
+          "gold_answer": 52,
+          "hypothesis": "Based on the provided context, the original promised target date for the Alpha release was February 1, 2024, and it was successfully completed and deployed on March 25, 2024. \n\nFrom February 1 to March 25 is a total slip of **53 days**.",
+          "is_correct": false,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "User experienced a third-party SDK integration failure causing the Alpha release date to slip to March 25, 2024\n\nUser encountered architecture roadblocks causing the Alpha release target to be pushed to March 1, 2024\n\nUser committed to completing the Alpha release by February 1, 2024\n\nUser successfu...",
+          "context_tokens": 622,
+          "retrieval_latency_ms": 30.2
+        },
+        {
+          "question_id": "F_dev_00_q3",
+          "question_subkind": "realism",
+          "question_text": "The team just announced that the much larger Beta release will be fully delivered in just 7 calendar days. Given our past delivery history, is this 7-day target realistic?",
+          "gold_answer": "No, unrealistic. The team repeatedly slipped the smaller Alpha release by 52 days across 2 delays, making a 7-day Beta delivery unrealistic.",
+          "hypothesis": "Based on the provided context, there is no information regarding a Beta release or a 7-day delivery target. The context only contains information about the Alpha release.",
+          "is_correct": false,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The assistant failed to evaluate the realism of the 7-day target based on historical delivery patterns as required by the gold target, instead falsely claiming there was no information about it in the context.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to evaluate the realism of the 7-day target based on historical delivery patterns as required by the gold target, instead falsely claiming there was no information about it in the context.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "User encountered architecture roadblocks causing the Alpha release target to be pushed to March 1, 2024\n\nUser successfully completed and deployed the Alpha release on March 25, 2024\n\nUser committed to completing the Alpha release by February 1, 2024\n\nUser experienced a third-party SDK integration fa...",
+          "context_tokens": 578,
+          "retrieval_latency_ms": 23.9
+        }
+      ]
+    },
+    "full_context": {
+      "scenario_accuracy": 0.0,
+      "scenario_pass": false,
+      "correct_questions": 0,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 0.03,
+      "avg_context_tokens": 1488.0,
+      "ingest_latency_ms": 0.01,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "F_dev_00_q1",
+          "question_subkind": "move_count",
+          "question_text": "How many times did the target completion date move or slip before it was finished?",
+          "gold_answer": 2,
+          "hypothesis": "Based on the provided context, the target completion date for the Alpha release was pushed back 1 time (from February 1st to March 1st).",
+          "is_correct": false,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/01/10 00:00:00] User: We committed to completing the Alpha release by February 1st.\n\n[2024/01/10 00:00:00] Assistant: Recorded this status update.\n\n[2024/01/25 00:00:00] User: We ran into architecture roadblocks; Alpha release target is pushed to March 1st.\n\n[2024/01/25 00:00:00] Assistant: Re...",
+          "context_tokens": 1488,
+          "retrieval_latency_ms": 0.03
+        },
+        {
+          "question_id": "F_dev_00_q2",
+          "question_subkind": "slip_days",
+          "question_text": "How many total days did the project slip from the original promised target date to final completion?",
+          "gold_answer": 52,
+          "hypothesis": "The provided context does not contain information about the final completion date of the project (it only mentions the target dates being pushed to February 1st and then March 1st), so the total days of slippage cannot be determined.",
+          "is_correct": false,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/01/10 00:00:00] User: We committed to completing the Alpha release by February 1st.\n\n[2024/01/10 00:00:00] Assistant: Recorded this status update.\n\n[2024/01/25 00:00:00] User: We ran into architecture roadblocks; Alpha release target is pushed to March 1st.\n\n[2024/01/25 00:00:00] Assistant: Re...",
+          "context_tokens": 1488,
+          "retrieval_latency_ms": 0.02
+        },
+        {
+          "question_id": "F_dev_00_q3",
+          "question_subkind": "realism",
+          "question_text": "The team just announced that the much larger Beta release will be fully delivered in just 7 calendar days. Given our past delivery history, is this 7-day target realistic?",
+          "gold_answer": "No, unrealistic. The team repeatedly slipped the smaller Alpha release by 52 days across 2 delays, making a 7-day Beta delivery unrealistic.",
+          "hypothesis": "Based on the provided context, there is no mention or information regarding a Beta release or a 7-day delivery target for it. Therefore, the context does not contain enough information to answer whether this target is realistic.",
+          "is_correct": false,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The assistant stated there is no mention of the Beta release or 7-day target in the context, failing to use the provided information and missing the ground truth criteria that the target is unrealistic based on past delivery history.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant stated there is no mention of the Beta release or 7-day target in the context, failing to use the provided information and missing the ground truth criteria that the target is unrealistic based on past delivery history.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/01/10 00:00:00] User: We committed to completing the Alpha release by February 1st.\n\n[2024/01/10 00:00:00] Assistant: Recorded this status update.\n\n[2024/01/25 00:00:00] User: We ran into architecture roadblocks; Alpha release target is pushed to March 1st.\n\n[2024/01/25 00:00:00] Assistant: Re...",
+          "context_tokens": 1488,
+          "retrieval_latency_ms": 0.02
+        }
+      ]
+    }
+  }
+}

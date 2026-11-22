@@ -1,0 +1,422 @@
+[
+  {
+    "session_id": "bundled_distractor_000",
+    "topic": "sourdough starter",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Can you explain how to feed a sourdough starter at 100% hydration?"
+      },
+      {
+        "role": "assistant",
+        "content": "Combine equal parts by weight of flour and water."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_001",
+    "topic": "gardening tips",
+    "turns": [
+      {
+        "role": "user",
+        "content": "What are good companion plants for tomatoes?"
+      },
+      {
+        "role": "assistant",
+        "content": "Basil, marigolds, and carrots make excellent companion plants."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_002",
+    "topic": "coffee brewing",
+    "turns": [
+      {
+        "role": "user",
+        "content": "What water temperature is ideal for pour-over coffee?"
+      },
+      {
+        "role": "assistant",
+        "content": "The recommended temperature is between 90C and 96C."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_003",
+    "topic": "running shoes",
+    "turns": [
+      {
+        "role": "user",
+        "content": "How often should I replace marathon training shoes?"
+      },
+      {
+        "role": "assistant",
+        "content": "Typically every 300 to 500 miles depending on running surface."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_004",
+    "topic": "book recommendations",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Can you suggest classic science fiction novels?"
+      },
+      {
+        "role": "assistant",
+        "content": "Dune by Frank Herbert, Foundation by Isaac Asimov, and Neuromancer."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_005",
+    "topic": "baking bread",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Why is my sourdough loaf coming out dense?"
+      },
+      {
+        "role": "assistant",
+        "content": "Dense loaves often result from under-fermentation or weak gluten development."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_006",
+    "topic": "hiking gear",
+    "turns": [
+      {
+        "role": "user",
+        "content": "What essentials should I pack for a day hike?"
+      },
+      {
+        "role": "assistant",
+        "content": "Navigation, hydration, trail snacks, first aid kit, and weather layers."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_007",
+    "topic": "indoor plants",
+    "turns": [
+      {
+        "role": "user",
+        "content": "How do I care for a Monstera Deliciosa?"
+      },
+      {
+        "role": "assistant",
+        "content": "Provide bright indirect light and water when top soil feels dry."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_008",
+    "topic": "pasta making",
+    "turns": [
+      {
+        "role": "user",
+        "content": "What is the ratio of flour to eggs for fresh pasta?"
+      },
+      {
+        "role": "assistant",
+        "content": "The traditional ratio is 100 grams of flour per whole egg."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_009",
+    "topic": "stargazing",
+    "turns": [
+      {
+        "role": "user",
+        "content": "When is the best time of year to view the Perseid meteor shower?"
+      },
+      {
+        "role": "assistant",
+        "content": "The Perseids peak annually between August 11th and August 13th."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_010",
+    "topic": "sourdough starter",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Can you explain how to feed a sourdough starter at 100% hydration?"
+      },
+      {
+        "role": "assistant",
+        "content": "Combine equal parts by weight of flour and water."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_011",
+    "topic": "gardening tips",
+    "turns": [
+      {
+        "role": "user",
+        "content": "What are good companion plants for tomatoes?"
+      },
+      {
+        "role": "assistant",
+        "content": "Basil, marigolds, and carrots make excellent companion plants."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_012",
+    "topic": "coffee brewing",
+    "turns": [
+      {
+        "role": "user",
+        "content": "What water temperature is ideal for pour-over coffee?"
+      },
+      {
+        "role": "assistant",
+        "content": "The recommended temperature is between 90C and 96C."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_013",
+    "topic": "running shoes",
+    "turns": [
+      {
+        "role": "user",
+        "content": "How often should I replace marathon training shoes?"
+      },
+      {
+        "role": "assistant",
+        "content": "Typically every 300 to 500 miles depending on running surface."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_014",
+    "topic": "book recommendations",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Can you suggest classic science fiction novels?"
+      },
+      {
+        "role": "assistant",
+        "content": "Dune by Frank Herbert, Foundation by Isaac Asimov, and Neuromancer."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_015",
+    "topic": "baking bread",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Why is my sourdough loaf coming out dense?"
+      },
+      {
+        "role": "assistant",
+        "content": "Dense loaves often result from under-fermentation or weak gluten development."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_016",
+    "topic": "hiking gear",
+    "turns": [
+      {
+        "role": "user",
+        "content": "What essentials should I pack for a day hike?"
+      },
+      {
+        "role": "assistant",
+        "content": "Navigation, hydration, trail snacks, first aid kit, and weather layers."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_017",
+    "topic": "indoor plants",
+    "turns": [
+      {
+        "role": "user",
+        "content": "How do I care for a Monstera Deliciosa?"
+      },
+      {
+        "role": "assistant",
+        "content": "Provide bright indirect light and water when top soil feels dry."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_018",
+    "topic": "pasta making",
+    "turns": [
+      {
+        "role": "user",
+        "content": "What is the ratio of flour to eggs for fresh pasta?"
+      },
+      {
+        "role": "assistant",
+        "content": "The traditional ratio is 100 grams of flour per whole egg."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_019",
+    "topic": "stargazing",
+    "turns": [
+      {
+        "role": "user",
+        "content": "When is the best time of year to view the Perseid meteor shower?"
+      },
+      {
+        "role": "assistant",
+        "content": "The Perseids peak annually between August 11th and August 13th."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_020",
+    "topic": "sourdough starter",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Can you explain how to feed a sourdough starter at 100% hydration?"
+      },
+      {
+        "role": "assistant",
+        "content": "Combine equal parts by weight of flour and water."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_021",
+    "topic": "gardening tips",
+    "turns": [
+      {
+        "role": "user",
+        "content": "What are good companion plants for tomatoes?"
+      },
+      {
+        "role": "assistant",
+        "content": "Basil, marigolds, and carrots make excellent companion plants."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_022",
+    "topic": "coffee brewing",
+    "turns": [
+      {
+        "role": "user",
+        "content": "What water temperature is ideal for pour-over coffee?"
+      },
+      {
+        "role": "assistant",
+        "content": "The recommended temperature is between 90C and 96C."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_023",
+    "topic": "running shoes",
+    "turns": [
+      {
+        "role": "user",
+        "content": "How often should I replace marathon training shoes?"
+      },
+      {
+        "role": "assistant",
+        "content": "Typically every 300 to 500 miles depending on running surface."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_024",
+    "topic": "book recommendations",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Can you suggest classic science fiction novels?"
+      },
+      {
+        "role": "assistant",
+        "content": "Dune by Frank Herbert, Foundation by Isaac Asimov, and Neuromancer."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_025",
+    "topic": "baking bread",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Why is my sourdough loaf coming out dense?"
+      },
+      {
+        "role": "assistant",
+        "content": "Dense loaves often result from under-fermentation or weak gluten development."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_026",
+    "topic": "hiking gear",
+    "turns": [
+      {
+        "role": "user",
+        "content": "What essentials should I pack for a day hike?"
+      },
+      {
+        "role": "assistant",
+        "content": "Navigation, hydration, trail snacks, first aid kit, and weather layers."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_027",
+    "topic": "indoor plants",
+    "turns": [
+      {
+        "role": "user",
+        "content": "How do I care for a Monstera Deliciosa?"
+      },
+      {
+        "role": "assistant",
+        "content": "Provide bright indirect light and water when top soil feels dry."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_028",
+    "topic": "pasta making",
+    "turns": [
+      {
+        "role": "user",
+        "content": "What is the ratio of flour to eggs for fresh pasta?"
+      },
+      {
+        "role": "assistant",
+        "content": "The traditional ratio is 100 grams of flour per whole egg."
+      }
+    ]
+  },
+  {
+    "session_id": "bundled_distractor_029",
+    "topic": "stargazing",
+    "turns": [
+      {
+        "role": "user",
+        "content": "When is the best time of year to view the Perseid meteor shower?"
+      },
+      {
+        "role": "assistant",
+        "content": "The Perseids peak annually between August 11th and August 13th."
+      }
+    ]
+  }
+]

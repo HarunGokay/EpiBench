@@ -1,0 +1,189 @@
+{
+  "scenario_id": "I_dev_02",
+  "track": "I",
+  "split": "dev",
+  "user_name": "User_I_dev_02",
+  "question_date": "2024/06/10 10:00:00",
+  "session_count": 9,
+  "question_count": 1,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 37.17,
+      "avg_context_tokens": 1481.0,
+      "ingest_latency_ms": 36541.63,
+      "ingest_cost_usd": 0.0118,
+      "questions": [
+        {
+          "question_id": "I_dev_02_q1",
+          "question_subkind": "causal_claim",
+          "question_text": "Did cancelling unused streaming subscriptions reduce the user's credit card bill?",
+          "gold_answer": "False / Not implemented: The user never actually cancelled the streaming subscriptions; the bill decreased due to the absence of the annual car insurance expense.",
+          "hypothesis": "No, cancelling the unused streaming subscriptions did not reduce the user's credit card bill because the user failed to cancel them due to being busy with work, resulting in all 5 being billed as usual.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identified that the streaming subscriptions were not actually cancelled, and therefore did not cause a reduction in the credit card bill.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that the streaming subscriptions were not actually cancelled, and therefore did not cause a reduction in the credit card bill.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Intent (Home Office Desk Upgrade): User is thinking about getting a new compact desk for their home office due to working from home more frequently. | Intent (Furniture Replacement): User is thinking about getting new furniture to replace donated pieces...",
+          "context_tokens": 1481,
+          "retrieval_latency_ms": 37.17
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 7.66,
+      "avg_context_tokens": 1455.0,
+      "ingest_latency_ms": 626.25,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "I_dev_02_q1",
+          "question_subkind": "causal_claim",
+          "question_text": "Did cancelling unused streaming subscriptions reduce the user's credit card bill?",
+          "gold_answer": "False / Not implemented: The user never actually cancelled the streaming subscriptions; the bill decreased due to the absence of the annual car insurance expense.",
+          "hypothesis": "No, cancelling the unused streaming subscriptions did not reduce the user's credit card bill because the user was too busy with work and forgot to log in to cancel them, so all 5 billed as usual.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identified that cancelling the streaming subscriptions did not happen (because the user forgot), thus preventing an overclaim of causality regarding the credit card bill.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that cancelling the streaming subscriptions did not happen (because the user forgot), thus preventing an overclaim of causality regarding the credit card bill.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/04/01 10:00:00] User: I noticed my monthly credit card bill was very high ($3,400) and decided I should cancel my 5 unused video streaming services.\n\n---\n\n[2024/04/29 10:00:00] User: The following month, my credit card bill dropped to $1,800 because I didn't have to buy annual car insurance li...",
+          "context_tokens": 1455,
+          "retrieval_latency_ms": 7.66
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 7.82,
+      "avg_context_tokens": 1444.0,
+      "ingest_latency_ms": 666.42,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "I_dev_02_q1",
+          "question_subkind": "causal_claim",
+          "question_text": "Did cancelling unused streaming subscriptions reduce the user's credit card bill?",
+          "gold_answer": "False / Not implemented: The user never actually cancelled the streaming subscriptions; the bill decreased due to the absence of the annual car insurance expense.",
+          "hypothesis": "No, cancelling the unused streaming subscriptions did not reduce the user's credit card bill because the user was too busy with work and forgot to log in to cancel them, resulting in all 5 billing as usual.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identified that cancelling the streaming subscriptions did not reduce the bill, noting that the user never actually performed the cancellations.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that cancelling the streaming subscriptions did not reduce the bill, noting that the user never actually performed the cancellations.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/04/01 10:00:00] User: I noticed my monthly credit card bill was very high ($3,400) and decided I should cancel my 5 unused video streaming services.\n\n---\n\n[2024/04/29 10:00:00] User: The following month, my credit card bill dropped to $1,800 because I didn't have to buy annual car insurance li...",
+          "context_tokens": 1444,
+          "retrieval_latency_ms": 7.82
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 21.21,
+      "avg_context_tokens": 615.0,
+      "ingest_latency_ms": 8774.21,
+      "ingest_cost_usd": 0.008,
+      "questions": [
+        {
+          "question_id": "I_dev_02_q1",
+          "question_subkind": "causal_claim",
+          "question_text": "Did cancelling unused streaming subscriptions reduce the user's credit card bill?",
+          "gold_answer": "False / Not implemented: The user never actually cancelled the streaming subscriptions; the bill decreased due to the absence of the annual car insurance expense.",
+          "hypothesis": "No, cancelling the unused streaming subscriptions did not reduce the user's credit card bill because they forgot to cancel them due to being busy with work, resulting in all of them being billed as usual.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identified that cancelling the streaming subscriptions did not reduce the bill, noting that they were not actually cancelled due to being busy with work.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that cancelling the streaming subscriptions did not reduce the bill, noting that they were not actually cancelled due to being busy with work.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "User noticed a very high monthly credit card bill of $3,400 around April 1, 2024, and decided to cancel 5 unused video streaming services\n\nUser's monthly credit card bill dropped to $1,800 in May 2024 because they did not have to purchase annual car insurance like they did the previous month\n\nUser w...",
+          "context_tokens": 615,
+          "retrieval_latency_ms": 21.21
+        }
+      ]
+    },
+    "full_context": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 0.02,
+      "avg_context_tokens": 1499.0,
+      "ingest_latency_ms": 0.0,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "I_dev_02_q1",
+          "question_subkind": "causal_claim",
+          "question_text": "Did cancelling unused streaming subscriptions reduce the user's credit card bill?",
+          "gold_answer": "False / Not implemented: The user never actually cancelled the streaming subscriptions; the bill decreased due to the absence of the annual car insurance expense.",
+          "hypothesis": "Based on the provided context, there is no information about whether cancelling the unused streaming subscriptions reduced the user's credit card bill.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identified that there is no evidence in the context to support the claim, adhering to the rule that it must not falsely validate the intervention when the action was not actually implemented.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that there is no evidence in the context to support the claim, adhering to the rule that it must not falsely validate the intervention when the action was not actually implemented.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "secondary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The response under test claims there is no information about whether cancelling the subscriptions reduced the bill, whereas the ground truth establishes that the user never actually cancelled them (and the bill decreased due to car insurance). The response missed the factual truth available in the context/rubric.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The response under test claims there is no information about whether cancelling the subscriptions reduced the bill, whereas the ground truth establishes that the user never actually cancelled them (and the bill decreased due to car insurance). The response missed the factual truth available in the context/rubric.\"\n}\n```",
+              "judge_type": "secondary"
+            },
+            "judge_agreement": false
+          },
+          "retrieved_context_preview": "[2024/04/01 10:00:00] User: I noticed my monthly credit card bill was very high ($3,400) and decided I should cancel my 5 unused video streaming services.\n\n[2024/04/01 10:00:00] Assistant: Thank you for the update. Logged these observations.\n\n[2024/04/02 10:00:00] User: I'm thinking of upgrading my ...",
+          "context_tokens": 1499,
+          "retrieval_latency_ms": 0.02
+        }
+      ]
+    }
+  }
+}

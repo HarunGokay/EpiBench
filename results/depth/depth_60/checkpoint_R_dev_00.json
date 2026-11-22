@@ -1,0 +1,303 @@
+{
+  "scenario_id": "R_dev_00",
+  "track": "R",
+  "split": "dev",
+  "user_name": "User_R_dev_00",
+  "question_date": "2024/04/29 10:00:00",
+  "session_count": 63,
+  "question_count": 4,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 4,
+      "total_questions": 4,
+      "avg_retrieval_latency_ms": 56.07,
+      "avg_context_tokens": 1478.0,
+      "ingest_latency_ms": 276520.85,
+      "ingest_cost_usd": 0.0957,
+      "questions": [
+        {
+          "question_id": "R_dev_00_q1",
+          "question_subkind": "current",
+          "question_text": "What is the team's current primary production database engine?",
+          "gold_answer": "PostgreSQL 16",
+          "hypothesis": "PostgreSQL 16",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match",
+            "is_stale_answer": false
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Cultural Sensitivity: The user values cultural respect and is concerned about avoiding offense, specifically asking whether it is appropriate for outsiders to wear traditional attire of the tribes in Meghalaya. | Carbon Offset and Airline Miles: The user ...",
+          "context_tokens": 1473,
+          "retrieval_latency_ms": 120.62
+        },
+        {
+          "question_id": "R_dev_00_q2",
+          "question_subkind": "previous",
+          "question_text": "What was the team's primary production database engine before the current one?",
+          "gold_answer": "CockroachDB",
+          "hypothesis": "Based on the provided context, the primary production database was migrated to CockroachDB on February 29, 2024, before being switched to PostgreSQL 16 due to latency issues.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Cultural Sensitivity: The user values cultural respect and is concerned about avoiding offense, specifically asking whether it is appropriate for outsiders to wear traditional attire of the tribes in Meghalaya. | Carbon Offset and Airline Miles: The user ...",
+          "context_tokens": 1486,
+          "retrieval_latency_ms": 33.45
+        },
+        {
+          "question_id": "R_dev_00_q3",
+          "question_subkind": "as_of",
+          "question_text": "What was the primary database engine as of 2024-01-25?",
+          "gold_answer": "PostgreSQL 14",
+          "hypothesis": "Based on the provided context, there is no mention of what the primary database engine was specifically as of 2024-01-25. (Later migrations are noted, such as switching to CockroachDB on February 29, 2024, and to PostgreSQL 16 on April 14, 2024.)",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Cultural Sensitivity: The user values cultural respect and is concerned about avoiding offense, specifically asking whether it is appropriate for outsiders to wear traditional attire of the tribes in Meghalaya. | Carbon Offset and Airline Miles: The user ...",
+          "context_tokens": 1481,
+          "retrieval_latency_ms": 34.83
+        },
+        {
+          "question_id": "R_dev_00_q4",
+          "question_subkind": "count",
+          "question_text": "How many times did the team switch or upgrade their primary database engine?",
+          "gold_answer": 2,
+          "hypothesis": "Based on the provided context, the primary database engine was switched or upgraded 2 times: \n\n1. On February 29, 2024, the production database was migrated to CockroachDB.\n2. On April 14, 2024, the primary database was switched to PostgreSQL 16 due to latency issues.",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Cultural Sensitivity: The user values cultural respect and is concerned about avoiding offense, specifically asking whether it is appropriate for outsiders to wear traditional attire of the tribes in Meghalaya. | Carbon Offset and Airline Miles: The user ...",
+          "context_tokens": 1472,
+          "retrieval_latency_ms": 35.39
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 4,
+      "total_questions": 4,
+      "avg_retrieval_latency_ms": 28.1,
+      "avg_context_tokens": 758.8,
+      "ingest_latency_ms": 59998.95,
+      "ingest_cost_usd": 0.0574,
+      "questions": [
+        {
+          "question_id": "R_dev_00_q1",
+          "question_subkind": "current",
+          "question_text": "What is the team's current primary production database engine?",
+          "gold_answer": "PostgreSQL 16",
+          "hypothesis": "PostgreSQL 16",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match",
+            "is_stale_answer": false
+          },
+          "retrieved_context_preview": "User migrated their production database from PostgreSQL 14 to CockroachDB around February 29, 2024\n\nUser's primary database was running on PostgreSQL 14 as of January 15, 2024\n\nUser switched their primary database from CockroachDB to PostgreSQL 16 on April 14, 2024, due to latency issues\n\nUser is us...",
+          "context_tokens": 794,
+          "retrieval_latency_ms": 27.84
+        },
+        {
+          "question_id": "R_dev_00_q2",
+          "question_subkind": "previous",
+          "question_text": "What was the team's primary production database engine before the current one?",
+          "gold_answer": "CockroachDB",
+          "hypothesis": "Based on the provided context, before switching to PostgreSQL 16 on April 14, 2024, the primary database engine was CockroachDB.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "User migrated their production database from PostgreSQL 14 to CockroachDB around February 29, 2024\n\nUser's primary database was running on PostgreSQL 14 as of January 15, 2024\n\nUser switched their primary database from CockroachDB to PostgreSQL 16 on April 14, 2024, due to latency issues\n\nUser is us...",
+          "context_tokens": 778,
+          "retrieval_latency_ms": 26.78
+        },
+        {
+          "question_id": "R_dev_00_q3",
+          "question_subkind": "as_of",
+          "question_text": "What was the primary database engine as of 2024-01-25?",
+          "gold_answer": "PostgreSQL 14",
+          "hypothesis": "PostgreSQL 14",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "User's primary database was running on PostgreSQL 14 as of January 15, 2024\n\nUser switched their primary database from CockroachDB to PostgreSQL 16 on April 14, 2024, due to latency issues\n\nUser migrated their production database from PostgreSQL 14 to CockroachDB around February 29, 2024\n\nUser track...",
+          "context_tokens": 753,
+          "retrieval_latency_ms": 29.88
+        },
+        {
+          "question_id": "R_dev_00_q4",
+          "question_subkind": "count",
+          "question_text": "How many times did the team switch or upgrade their primary database engine?",
+          "gold_answer": 2,
+          "hypothesis": "Based on the provided context, the database engine was switched or upgraded 3 times:\n\n1. They were running on **PostgreSQL 14** as of January 15, 2024.\n2. They migrated their production database from PostgreSQL 14 to **CockroachDB** around February 29, 2024.\n3. They switched their primary database from CockroachDB to **PostgreSQL 16** on April 14, 2024.",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "User switched their primary database from CockroachDB to PostgreSQL 16 on April 14, 2024, due to latency issues\n\nUser's primary database was running on PostgreSQL 14 as of January 15, 2024\n\nUser has been using a built-in laptop microphone for live streaming and is considering upgrading to a dedicate...",
+          "context_tokens": 710,
+          "retrieval_latency_ms": 27.91
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 4,
+      "total_questions": 4,
+      "avg_retrieval_latency_ms": 30.31,
+      "avg_context_tokens": 1341.5,
+      "ingest_latency_ms": 5880.11,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "R_dev_00_q1",
+          "question_subkind": "current",
+          "question_text": "What is the team's current primary production database engine?",
+          "gold_answer": "PostgreSQL 16",
+          "hypothesis": "PostgreSQL 16",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match",
+            "is_stale_answer": false
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] User: We are currently running our primary database on PostgreSQL 14.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding the productio...",
+          "context_tokens": 1081,
+          "retrieval_latency_ms": 33.43
+        },
+        {
+          "question_id": "R_dev_00_q2",
+          "question_subkind": "previous",
+          "question_text": "What was the team's primary production database engine before the current one?",
+          "gold_answer": "CockroachDB",
+          "hypothesis": "Before the current primary database engine (PostgreSQL 16), the team's primary production database engine was CockroachDB (having previously migrated from PostgreSQL 14).",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/01/15 10:00:00] User: We are currently running our primary database on PostgreSQL 14.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding the productio...",
+          "context_tokens": 1343,
+          "retrieval_latency_ms": 30.83
+        },
+        {
+          "question_id": "R_dev_00_q3",
+          "question_subkind": "as_of",
+          "question_text": "What was the primary database engine as of 2024-01-25?",
+          "gold_answer": "PostgreSQL 14",
+          "hypothesis": "Based on the provided context, the primary database was PostgreSQL 14 as of January 15, 2024, and it was later migrated to CockroachDB on February 29, 2024. Therefore, on January 25, 2024, the primary database engine was PostgreSQL 14.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] User: We are currently running our primary database on PostgreSQL 14.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/04/14 10:00:00] User: Due to latency issues, we just switched our primary database to ...",
+          "context_tokens": 1483,
+          "retrieval_latency_ms": 33.66
+        },
+        {
+          "question_id": "R_dev_00_q4",
+          "question_subkind": "count",
+          "question_text": "How many times did the team switch or upgrade their primary database engine?",
+          "gold_answer": 2,
+          "hypothesis": "The team switched or upgraded their primary database engine 2 times: first from PostgreSQL 14 to PostgreSQL 16, and subsequently to CockroachDB.",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] User: We are currently running our primary database on PostgreSQL 14.\n\n---\n\n[2024/04/14 10:00:00] User: Due to latency issues, we just switched our primary database to PostgreSQL 16.\n\n---\n\n[2024/01/22 10:00:00] Assistant: As an AI language model, I don't have personal experienc...",
+          "context_tokens": 1459,
+          "retrieval_latency_ms": 23.33
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 0.75,
+      "scenario_pass": false,
+      "correct_questions": 3,
+      "total_questions": 4,
+      "avg_retrieval_latency_ms": 27.64,
+      "avg_context_tokens": 1017.0,
+      "ingest_latency_ms": 5809.87,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "R_dev_00_q1",
+          "question_subkind": "current",
+          "question_text": "What is the team's current primary production database engine?",
+          "gold_answer": "PostgreSQL 16",
+          "hypothesis": "Based on the provided context, the production database was migrated to CockroachDB.",
+          "is_correct": false,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match",
+            "is_stale_answer": true
+          },
+          "retrieved_context_preview": "[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding t...",
+          "context_tokens": 820,
+          "retrieval_latency_ms": 21.91
+        },
+        {
+          "question_id": "R_dev_00_q2",
+          "question_subkind": "previous",
+          "question_text": "What was the team's primary production database engine before the current one?",
+          "gold_answer": "CockroachDB",
+          "hypothesis": "Before migrating to CockroachDB, the primary production database engine was PostgreSQL 14.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding t...",
+          "context_tokens": 1191,
+          "retrieval_latency_ms": 30.57
+        },
+        {
+          "question_id": "R_dev_00_q3",
+          "question_subkind": "as_of",
+          "question_text": "What was the primary database engine as of 2024-01-25?",
+          "gold_answer": "PostgreSQL 14",
+          "hypothesis": "Based on the provided context, the primary database engine as of January 25, 2024, was CockroachDB (migrated on February 29, 2024, but noted as PostgreSQL 14 prior to that and CockroachDB in the February entry; wait, looking at the dates:\n\n- Jan 15, 2024: PostgreSQL 14\n- Jan 29, 2024: (MLHC question)\n- Feb 29, 2024: CockroachDB\n\nSo as of January 25, 2024, the primary database was PostgreSQL 14.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] User: We are currently running our primary database on PostgreSQL 14.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding the productio...",
+          "context_tokens": 879,
+          "retrieval_latency_ms": 26.86
+        },
+        {
+          "question_id": "R_dev_00_q4",
+          "question_subkind": "count",
+          "question_text": "How many times did the team switch or upgrade their primary database engine?",
+          "gold_answer": 2,
+          "hypothesis": "Based on the provided context, the team changed or switched their primary database engine 2 times:\n1. They migrated to CockroachDB (mentioned on February 29, 2024).\n2. They switched their primary database to PostgreSQL 16 due to latency issues (mentioned on April 14, 2024).",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding t...",
+          "context_tokens": 1178,
+          "retrieval_latency_ms": 31.21
+        }
+      ]
+    }
+  }
+}

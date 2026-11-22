@@ -1,0 +1,146 @@
+{
+  "scenario_id": "K_dev_00",
+  "track": "K",
+  "split": "dev",
+  "user_name": "User_K_dev_00",
+  "question_date": "2024/03/30 08:30:00",
+  "session_count": 7,
+  "question_count": 1,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 33.75,
+      "avg_context_tokens": 1174.0,
+      "ingest_latency_ms": 30324.02,
+      "ingest_cost_usd": 0.009,
+      "questions": [
+        {
+          "question_id": "K_dev_00_q1",
+          "question_subkind": "static_fact",
+          "question_text": "What is the user's hometown?",
+          "gold_answer": "Madison, Wisconsin",
+          "hypothesis": "The user was born and grew up in Madison, Wisconsin.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Vehicle: The user owns a 2018 Honda Civic Si. | Hometown: The user was born and grew up in Madison, Wisconsin.\nActive Goals & Projects: Intentions (VIR Track Day and Suspension Testing): The user intends to improve their braking technique, specifically fo...",
+          "context_tokens": 1174,
+          "retrieval_latency_ms": 33.75
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 0.0,
+      "scenario_pass": false,
+      "correct_questions": 0,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 6.99,
+      "avg_context_tokens": 1327.0,
+      "ingest_latency_ms": 579.23,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "K_dev_00_q1",
+          "question_subkind": "static_fact",
+          "question_text": "What is the user's hometown?",
+          "gold_answer": "Madison, Wisconsin",
+          "hypothesis": "The provided context does not contain information about the user's hometown.",
+          "is_correct": false,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/02/20 08:30:00] User: I'm not interested in any of those things. What's something unique to do in Kyoto that not many people know about?\n\n---\n\n[2024/02/20 08:30:00] User: What are some traditional cultural experiences to have in Kyoto?\n\n---\n\n[2024/02/20 08:30:00] Assistant: Certainly, here are...",
+          "context_tokens": 1327,
+          "retrieval_latency_ms": 6.99
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 4.98,
+      "avg_context_tokens": 1126.0,
+      "ingest_latency_ms": 572.06,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "K_dev_00_q1",
+          "question_subkind": "static_fact",
+          "question_text": "What is the user's hometown?",
+          "gold_answer": "Madison, Wisconsin",
+          "hypothesis": "Madison, Wisconsin",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/02/20 08:30:00] User: What are some traditional cultural experiences to have in Kyoto?\n\n---\n\n[2024/02/20 08:30:00] Assistant: Certainly, here are some additional recommendations:\n\n1. Arashiyama Bamboo Grove: A peaceful and serene walk through a bamboo forest\n2. Fushimi Sake District: Visit sak...",
+          "context_tokens": 1126,
+          "retrieval_latency_ms": 4.98
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 20.38,
+      "avg_context_tokens": 828.0,
+      "ingest_latency_ms": 7559.96,
+      "ingest_cost_usd": 0.0065,
+      "questions": [
+        {
+          "question_id": "K_dev_00_q1",
+          "question_subkind": "static_fact",
+          "question_text": "What is the user's hometown?",
+          "gold_answer": "Madison, Wisconsin",
+          "hypothesis": "Madison, Wisconsin.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "User was born and grew up in Madison, Wisconsin before moving away for college\n\nUser is interested in using the Apple News app to stay up-to-date on current events, customize their news feed, and follow specific topics and publications\n\nUser was recommended news aggregator apps including Apple News,...",
+          "context_tokens": 828,
+          "retrieval_latency_ms": 20.38
+        }
+      ]
+    },
+    "full_context": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 0.02,
+      "avg_context_tokens": 1482.0,
+      "ingest_latency_ms": 0.0,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "K_dev_00_q1",
+          "question_subkind": "static_fact",
+          "question_text": "What is the user's hometown?",
+          "gold_answer": "Madison, Wisconsin",
+          "hypothesis": "Madison, Wisconsin",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/10 08:30:00] User: I was born and grew up in Madison, Wisconsin before moving away for college.\n\n[2024/01/10 08:30:00] Assistant: Thank you for sharing that personal detail.\n\n[2024/01/22 08:30:00] User: I'm looking for some new workout playlists to try out. Do you have any recommendations f...",
+          "context_tokens": 1482,
+          "retrieval_latency_ms": 0.02
+        }
+      ]
+    }
+  }
+}

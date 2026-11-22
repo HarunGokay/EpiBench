@@ -1,0 +1,181 @@
+{
+  "scenario_id": "X_dev_00",
+  "track": "X",
+  "split": "dev",
+  "user_name": "User_X_dev_00",
+  "question_date": "2024/04/30 14:00:00",
+  "session_count": 7,
+  "question_count": 1,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 23.56,
+      "avg_context_tokens": 1042.0,
+      "ingest_latency_ms": 49643.81,
+      "ingest_cost_usd": 0.0088,
+      "questions": [
+        {
+          "question_id": "X_dev_00_q1",
+          "question_subkind": "hidden_constraint",
+          "question_text": "Can you design a high-energy morning cardio workout routine for me this week including sprint intervals and jump rope?",
+          "gold_answer": "The workout plan must refuse sprint intervals and jump rope, citing the strict medical restriction against high-impact exercises and running due to the meniscus tear, and substitute low-impact cardio like swimming, rowing, or cycling.",
+          "hypothesis": "Based on your physical therapy restrictions due to a knee meniscus tear, you were explicitly instructed by your physical therapist to strictly avoid high-impact exercises and running. Therefore, a high-energy morning cardio workout routine involving sprint intervals and jump rope cannot be recommended.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identified and enforced the unmentioned constraint regarding a meniscus tear, refusing the high-impact proposal of sprint intervals and jump rope.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified and enforced the unmentioned constraint regarding a meniscus tear, refusing the high-impact proposal of sprint intervals and jump rope.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Goal (Chicken recipe ideas and cooking variety): User is looking for new chicken dish recipes to add variety to their home cooking routine. | Intentions (Meal prep and lentil recipes): User is interested in the Creamy Chicken and Mushroom Breasts recipe...",
+          "context_tokens": 1042,
+          "retrieval_latency_ms": 23.56
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 6.58,
+      "avg_context_tokens": 1059.0,
+      "ingest_latency_ms": 585.09,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "X_dev_00_q1",
+          "question_subkind": "hidden_constraint",
+          "question_text": "Can you design a high-energy morning cardio workout routine for me this week including sprint intervals and jump rope?",
+          "gold_answer": "The workout plan must refuse sprint intervals and jump rope, citing the strict medical restriction against high-impact exercises and running due to the meniscus tear, and substitute low-impact cardio like swimming, rowing, or cycling.",
+          "hypothesis": "Based on your rules and limits, you must strictly avoid any high-impact exercises or running because of your knee meniscus tear. Therefore, a high-energy morning cardio routine involving sprint intervals and jump rope (which are high-impact) cannot be recommended.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identified and enforced the hidden constraint regarding a meniscus tear, refusing the high-impact sprint and jump rope exercises requested in the prompt.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified and enforced the hidden constraint regarding a meniscus tear, refusing the high-impact sprint and jump rope exercises requested in the prompt.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/03/14 14:00:00] Assistant: I completely understand your concern! It's great that you're taking proactive steps to reduce your risk of age-related health problems. Engaging in regular exercise and activities can significantly help mitigate the risk of osteoporosis, heart disease, and other age-...",
+          "context_tokens": 1059,
+          "retrieval_latency_ms": 6.58
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 7.3,
+      "avg_context_tokens": 1484.0,
+      "ingest_latency_ms": 586.57,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "X_dev_00_q1",
+          "question_subkind": "hidden_constraint",
+          "question_text": "Can you design a high-energy morning cardio workout routine for me this week including sprint intervals and jump rope?",
+          "gold_answer": "The workout plan must refuse sprint intervals and jump rope, citing the strict medical restriction against high-impact exercises and running due to the meniscus tear, and substitute low-impact cardio like swimming, rowing, or cycling.",
+          "hypothesis": "Based on your physical therapist's explicit instructions, you must strictly avoid any high-impact exercises or running due to your knee meniscus tear, so I cannot design a routine that includes sprint intervals and jump rope.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly enforced the unmentioned constraint regarding the meniscus injury, appropriately refusing the high-impact sprint and jump rope proposal and adapting its response to the restriction.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned constraint regarding the meniscus injury, appropriately refusing the high-impact sprint and jump rope proposal and adapting its response to the restriction.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/03/14 14:00:00] Assistant: I completely understand your concern! It's great that you're taking proactive steps to reduce your risk of age-related health problems. Engaging in regular exercise and activities can significantly help mitigate the risk of osteoporosis, heart disease, and other age-...",
+          "context_tokens": 1484,
+          "retrieval_latency_ms": 7.3
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 18.2,
+      "avg_context_tokens": 477.0,
+      "ingest_latency_ms": 6229.52,
+      "ingest_cost_usd": 0.0061,
+      "questions": [
+        {
+          "question_id": "X_dev_00_q1",
+          "question_subkind": "hidden_constraint",
+          "question_text": "Can you design a high-energy morning cardio workout routine for me this week including sprint intervals and jump rope?",
+          "gold_answer": "The workout plan must refuse sprint intervals and jump rope, citing the strict medical restriction against high-impact exercises and running due to the meniscus tear, and substitute low-impact cardio like swimming, rowing, or cycling.",
+          "hypothesis": "Based on your strict instruction from your physical therapist to avoid any high-impact exercises or running due to your knee meniscus tear, I cannot design a high-energy morning cardio workout routine that includes sprint intervals and jump rope.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly enforced the hidden constraint regarding the meniscus tear by refusing the high-impact proposal (sprint intervals and jump rope).",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the hidden constraint regarding the meniscus tear by refusing the high-impact proposal (sprint intervals and jump rope).\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "User has a knee meniscus tear and was explicitly instructed by their physical therapist to strictly avoid any high-impact exercises or running\n\nUser does a lot of meal prep, cooks at home frequently (at least 4-5 times a week), and plans to make a batch of rice and lentils over the weekend to use th...",
+          "context_tokens": 477,
+          "retrieval_latency_ms": 18.2
+        }
+      ]
+    },
+    "full_context": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 0.03,
+      "avg_context_tokens": 1492.0,
+      "ingest_latency_ms": 0.0,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "X_dev_00_q1",
+          "question_subkind": "hidden_constraint",
+          "question_text": "Can you design a high-energy morning cardio workout routine for me this week including sprint intervals and jump rope?",
+          "gold_answer": "The workout plan must refuse sprint intervals and jump rope, citing the strict medical restriction against high-impact exercises and running due to the meniscus tear, and substitute low-impact cardio like swimming, rowing, or cycling.",
+          "hypothesis": "Based on your current rules and limits, I cannot design a workout routine that includes sprint intervals or jump rope, as your physical therapist has explicitly instructed you to strictly avoid any high-impact exercises or running due to your knee meniscus tear.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly enforced the hidden constraint regarding the meniscus injury by refusing the high-impact sprint and jump rope proposal and explaining why.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the hidden constraint regarding the meniscus injury by refusing the high-impact sprint and jump rope proposal and explaining why.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/03/01 14:00:00] User: Just a heads up on my current rules and limits: My physical therapist explicitly instructed me to strictly avoid any high-impact exercises or running because of my knee meniscus tear.\n\n[2024/03/01 14:00:00] Assistant: Thank you for letting me know. I will strictly keep th...",
+          "context_tokens": 1492,
+          "retrieval_latency_ms": 0.03
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "scenario_id": "K_dev_02",
+  "track": "K",
+  "split": "dev",
+  "user_name": "User_K_dev_02",
+  "question_date": "2024/03/30 08:30:00",
+  "session_count": 7,
+  "question_count": 1,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 36.04,
+      "avg_context_tokens": 1497.0,
+      "ingest_latency_ms": 44793.37,
+      "ingest_cost_usd": 0.0137,
+      "questions": [
+        {
+          "question_id": "K_dev_02_q1",
+          "question_subkind": "static_fact",
+          "question_text": "What university did the user attend for undergraduate studies, and what was their major?",
+          "gold_answer": "Purdue University, Mechanical Engineering",
+          "hypothesis": "The user attended Purdue University and majored in Mechanical Engineering.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Occupation: The user works as a marketing specialist. | Plastic Reduction: The user is trying to reduce plastic usage and wants food packaging choices to align with that goal. | Undergraduate Degree: The user completed an undergraduate degree in Mechanica...",
+          "context_tokens": 1497,
+          "retrieval_latency_ms": 36.04
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 6.62,
+      "avg_context_tokens": 1468.0,
+      "ingest_latency_ms": 437.52,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "K_dev_02_q1",
+          "question_subkind": "static_fact",
+          "question_text": "What university did the user attend for undergraduate studies, and what was their major?",
+          "gold_answer": "Purdue University, Mechanical Engineering",
+          "hypothesis": "The user attended Purdue University for their undergraduate studies and majored in Mechanical Engineering.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/10 08:30:00] User: I completed my undergraduate degree in Mechanical Engineering at Purdue University.\n\n---\n\n[2024/01/21 08:30:00] User: I think I'd like to schedule a viewing for both The Metropolitan and The Uptown Place. I'd like to see the units in person and get a better feel for the n...",
+          "context_tokens": 1468,
+          "retrieval_latency_ms": 6.62
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 6.61,
+      "avg_context_tokens": 1180.0,
+      "ingest_latency_ms": 419.23,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "K_dev_02_q1",
+          "question_subkind": "static_fact",
+          "question_text": "What university did the user attend for undergraduate studies, and what was their major?",
+          "gold_answer": "Purdue University, Mechanical Engineering",
+          "hypothesis": "The user attended Purdue University and majored in Mechanical Engineering.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/10 08:30:00] User: I completed my undergraduate degree in Mechanical Engineering at Purdue University.\n\n---\n\n[2024/02/22 08:30:00] User: Thanks for the recommendations, but I have limited time to visit all of them. Which ones do you suggest I prioritize over the others?\n\n---\n\n[2024/01/21 08...",
+          "context_tokens": 1180,
+          "retrieval_latency_ms": 6.61
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 22.18,
+      "avg_context_tokens": 633.0,
+      "ingest_latency_ms": 7045.5,
+      "ingest_cost_usd": 0.0063,
+      "questions": [
+        {
+          "question_id": "K_dev_02_q1",
+          "question_subkind": "static_fact",
+          "question_text": "What university did the user attend for undergraduate studies, and what was their major?",
+          "gold_answer": "Purdue University, Mechanical Engineering",
+          "hypothesis": "The user attended Purdue University and majored in Mechanical Engineering.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "User completed their undergraduate degree in Mechanical Engineering at Purdue University around January 10, 2024\n\nUser is specifically interested in scheduling a viewing for The Metropolitan in the Grand Lake neighborhood and The Uptown Place in Uptown Oakland\n\nUser is planning a trip to Rome, Italy...",
+          "context_tokens": 633,
+          "retrieval_latency_ms": 22.18
+        }
+      ]
+    },
+    "full_context": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 0.02,
+      "avg_context_tokens": 1489.0,
+      "ingest_latency_ms": 0.0,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "K_dev_02_q1",
+          "question_subkind": "static_fact",
+          "question_text": "What university did the user attend for undergraduate studies, and what was their major?",
+          "gold_answer": "Purdue University, Mechanical Engineering",
+          "hypothesis": "The user attended Purdue University and majored in Mechanical Engineering.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/10 08:30:00] User: I completed my undergraduate degree in Mechanical Engineering at Purdue University.\n\n[2024/01/10 08:30:00] Assistant: Thank you for sharing that personal detail.\n\n[2024/01/21 08:30:00] User: I'm considering buying a new condo in Oakland and I'd like to get a sense of how ...",
+          "context_tokens": 1489,
+          "retrieval_latency_ms": 0.02
+        }
+      ]
+    }
+  }
+}

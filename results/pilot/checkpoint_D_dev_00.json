@@ -1,0 +1,408 @@
+{
+  "scenario_id": "D_dev_00",
+  "track": "D",
+  "split": "dev",
+  "user_name": "User_D_dev_00",
+  "question_date": "2024/04/03 09:00:00",
+  "session_count": 10,
+  "question_count": 3,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 3,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 27.06,
+      "avg_context_tokens": 1160.0,
+      "ingest_latency_ms": 30867.45,
+      "ingest_cost_usd": 0.011,
+      "questions": [
+        {
+          "question_id": "D_dev_00_q1",
+          "question_subkind": "revisit_set",
+          "question_text": "Which decisions should be revisited or rescheduled following the latest project updates?",
+          "gold_answer": [
+            "paid mobile advertising campaign",
+            "press embargo lifting date"
+          ],
+          "hypothesis": "Following the mobile app release date being postponed to December 1st [2023-12-01] (superseding the October 15th release date), the operational plans and schedule created on February 11th, 2024, should be revisited and rescheduled. Specifically:\n- The tech blog press embargo lift (previously set for the morning of October 15th)\n- The $5,000 paid launch ad campaign (previously scheduled to start on October 16th)",
+          "is_correct": true,
+          "scoring_type": "set_overlap",
+          "evaluation_details": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 2,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "detected_golds": [
+              "paid mobile advertising campaign",
+              "press embargo lifting date"
+            ],
+            "detected_unaffected": [],
+            "is_correct": true,
+            "method": "programmatic_set_overlap"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Learning Intent (Agile Project Management Learning): The user wants to learn more about agile project management and seeks recommendations for online resources or courses on implementing Agile methodologies in real-world projects. | Learning Intent (Cyb...",
+          "context_tokens": 1160,
+          "retrieval_latency_ms": 34.98
+        },
+        {
+          "question_id": "D_dev_00_q2",
+          "question_subkind": "why",
+          "question_text": "Why does the paid launch ad campaign decision need to be revisited?",
+          "gold_answer": "The ad campaign start date was aligned with the original October 15th app launch.",
+          "hypothesis": "The paid launch ad campaign decision needs to be revisited because the mobile app release date was postponed to December 1st, 2023, whereas the ad campaign was originally scheduled to start on October 16th, 2023, following the initial October 15th release date.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant accurately cites the underlying assumption change\u2014specifically, the postponement of the mobile app release date\u2014that invalidated the original schedule for the paid launch ad campaign.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant accurately cites the underlying assumption change\u2014specifically, the postponement of the mobile app release date\u2014that invalidated the original schedule for the paid launch ad campaign.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Learning Intent (Agile Project Management Learning): The user wants to learn more about agile project management and seeks recommendations for online resources or courses on implementing Agile methodologies in real-world projects. | Learning Intent (Cyb...",
+          "context_tokens": 1160,
+          "retrieval_latency_ms": 21.56
+        },
+        {
+          "question_id": "D_dev_00_q3",
+          "question_subkind": "stands",
+          "question_text": "Does the cloud hosting tier selection still stand or does it need to be revisited?",
+          "gold_answer": "Yes, it stands",
+          "hypothesis": "The cloud hosting tier selection still stands. You selected the Standard 4-node cluster plan to stay strictly within the $1,500 monthly cloud budget.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Learning Intent (Agile Project Management Learning): The user wants to learn more about agile project management and seeks recommendations for online resources or courses on implementing Agile methodologies in real-world projects. | Learning Intent (Cyb...",
+          "context_tokens": 1160,
+          "retrieval_latency_ms": 24.63
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 0.3333333333333333,
+      "scenario_pass": false,
+      "correct_questions": 1,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 6.54,
+      "avg_context_tokens": 1174.7,
+      "ingest_latency_ms": 593.07,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "D_dev_00_q1",
+          "question_subkind": "revisit_set",
+          "question_text": "Which decisions should be revisited or rescheduled following the latest project updates?",
+          "gold_answer": [
+            "paid mobile advertising campaign",
+            "press embargo lifting date"
+          ],
+          "hypothesis": "Based on the provided context, the mobile app release date is scheduled for October 15th, but the context does not contain enough information to determine which specific decisions should be revisited or rescheduled following this project update.",
+          "is_correct": false,
+          "scoring_type": "set_overlap",
+          "evaluation_details": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "true_positives": 0,
+            "false_negatives": 2,
+            "false_positives": 0,
+            "detected_golds": [],
+            "detected_unaffected": [],
+            "is_correct": false,
+            "method": "programmatic_set_overlap"
+          },
+          "retrieved_context_preview": "[2024/02/01 09:00:00] User: Project update: The mobile app release date is scheduled for October 15th.\n\n---\n\n[2024/02/01 09:00:00] Assistant: Noted. I will keep this milestone in mind for our project planning.\n\n---\n\n[2024/03/24 09:00:00] User: I'm looking to learn more about agile project management...",
+          "context_tokens": 1082,
+          "retrieval_latency_ms": 7.29
+        },
+        {
+          "question_id": "D_dev_00_q2",
+          "question_subkind": "why",
+          "question_text": "Why does the paid launch ad campaign decision need to be revisited?",
+          "gold_answer": "The ad campaign start date was aligned with the original October 15th app launch.",
+          "hypothesis": "Based on the provided context, there is no mention that the paid launch ad campaign decision needs to be revisited.",
+          "is_correct": false,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The assistant failed to provide the gold target answer, incorrectly claiming there is no mention of the campaign decision needing to be revisited, likely due to a lack of context.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to provide the gold target answer, incorrectly claiming there is no mention of the campaign decision needing to be revisited, likely due to a lack of context.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/02/11 09:00:00] User: We made some operational plans today. Because the app launches on October 15th, I scheduled the $5,000 paid launch ad campaign to start October 16th. Also, Based on the October 15th launch date, we set the tech blog press embargo to lift on the morning of October 15th.\n\n-...",
+          "context_tokens": 1128,
+          "retrieval_latency_ms": 6.82
+        },
+        {
+          "question_id": "D_dev_00_q3",
+          "question_subkind": "stands",
+          "question_text": "Does the cloud hosting tier selection still stand or does it need to be revisited?",
+          "gold_answer": "Yes, it stands",
+          "hypothesis": "Based on the provided context, the cloud hosting tier selection was made to stay strictly within the $1,500 monthly cloud budget using the Standard 4-node cluster plan. The context does not contain any information indicating whether this selection still stands or needs to be revisited.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/02/21 09:00:00] User: Regarding resource allocation: Our maximum monthly cloud infrastructure budget is $1,500. To stay strictly within our $1,500 monthly cloud budget, we selected the Standard 4-node cluster plan.\n\n---\n\n[2024/02/07 09:00:00] Assistant: McCormick Place is a huge convention cen...",
+          "context_tokens": 1314,
+          "retrieval_latency_ms": 5.51
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 0.6666666666666666,
+      "scenario_pass": false,
+      "correct_questions": 2,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 6.61,
+      "avg_context_tokens": 1217.3,
+      "ingest_latency_ms": 583.77,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "D_dev_00_q1",
+          "question_subkind": "revisit_set",
+          "question_text": "Which decisions should be revisited or rescheduled following the latest project updates?",
+          "gold_answer": [
+            "paid mobile advertising campaign",
+            "press embargo lifting date"
+          ],
+          "hypothesis": "Following the postponement of the mobile app release date to December 1st, the following operational plans that were originally tied to the October 15th launch date should be revisited or rescheduled:\n\n1. **The paid launch ad campaign:** Originally scheduled to start on October 16th (with a $5,000 budget).\n2. **The tech blog press embargo:** Originally set to lift on the morning of October 15th.",
+          "is_correct": true,
+          "scoring_type": "set_overlap",
+          "evaluation_details": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 2,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "detected_golds": [
+              "paid mobile advertising campaign",
+              "press embargo lifting date"
+            ],
+            "detected_unaffected": [],
+            "is_correct": true,
+            "method": "programmatic_set_overlap"
+          },
+          "retrieved_context_preview": "[2024/02/01 09:00:00] Assistant: Noted. I will keep this milestone in mind for our project planning.\n\n---\n\n[2024/02/01 09:00:00] User: Project update: The mobile app release date is scheduled for October 15th.\n\n---\n\n[2024/02/11 09:00:00] Assistant: Logged these two commitments based on your timeline...",
+          "context_tokens": 1167,
+          "retrieval_latency_ms": 6.97
+        },
+        {
+          "question_id": "D_dev_00_q2",
+          "question_subkind": "why",
+          "question_text": "Why does the paid launch ad campaign decision need to be revisited?",
+          "gold_answer": "The ad campaign start date was aligned with the original October 15th app launch.",
+          "hypothesis": "The paid launch ad campaign decision needs to be revisited because the mobile app release date was postponed from October 15th to December 1st.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant accurately cited the change in the mobile app release date (the underlying assumption change) that invalidated the previous paid launch ad campaign decision, satisfying the gold target criteria.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant accurately cited the change in the mobile app release date (the underlying assumption change) that invalidated the previous paid launch ad campaign decision, satisfying the gold target criteria.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/02/11 09:00:00] User: We made some operational plans today. Because the app launches on October 15th, I scheduled the $5,000 paid launch ad campaign to start October 16th. Also, Based on the October 15th launch date, we set the tech blog press embargo to lift on the morning of October 15th.\n\n-...",
+          "context_tokens": 1266,
+          "retrieval_latency_ms": 5.84
+        },
+        {
+          "question_id": "D_dev_00_q3",
+          "question_subkind": "stands",
+          "question_text": "Does the cloud hosting tier selection still stand or does it need to be revisited?",
+          "gold_answer": "Yes, it stands",
+          "hypothesis": "Based on the provided context, there is no information indicating whether the cloud hosting tier selection needs to be revisited following the app's release date change.",
+          "is_correct": false,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/02/21 09:00:00] User: Regarding resource allocation: Our maximum monthly cloud infrastructure budget is $1,500. To stay strictly within our $1,500 monthly cloud budget, we selected the Standard 4-node cluster plan.\n\n---\n\n[2024/02/01 09:00:00] Assistant: Noted. I will keep this milestone in min...",
+          "context_tokens": 1219,
+          "retrieval_latency_ms": 7.02
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 3,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 17.03,
+      "avg_context_tokens": 640.0,
+      "ingest_latency_ms": 8522.19,
+      "ingest_cost_usd": 0.0083,
+      "questions": [
+        {
+          "question_id": "D_dev_00_q1",
+          "question_subkind": "revisit_set",
+          "question_text": "Which decisions should be revisited or rescheduled following the latest project updates?",
+          "gold_answer": [
+            "paid mobile advertising campaign",
+            "press embargo lifting date"
+          ],
+          "hypothesis": "Following the latest project updates, the following decisions should be revisited or rescheduled:\n\n1. **The paid launch ad campaign**: Originally scheduled to start on October 16, 2024, following the mobile app launch, it needs to be rescheduled to align with the new mobile app release date of December 1, 2024.\n2. **The tech blog press embargo**: Originally set to lift on the morning of October 15, 2024, to coincide with the original mobile app launch date, it needs to be rescheduled to match the new December 1, 2024 release date.",
+          "is_correct": true,
+          "scoring_type": "set_overlap",
+          "evaluation_details": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 2,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "detected_golds": [
+              "paid mobile advertising campaign",
+              "press embargo lifting date"
+            ],
+            "detected_unaffected": [],
+            "is_correct": true,
+            "method": "programmatic_set_overlap"
+          },
+          "retrieved_context_preview": "User scheduled a $5,000 paid launch ad campaign to start on October 16, 2024, following the mobile app launch\n\nUser postponed the mobile app release date to December 1, 2024, representing a significant shift in the project timeline\n\nUser expressed interest in learning about agile project management,...",
+          "context_tokens": 640,
+          "retrieval_latency_ms": 15.14
+        },
+        {
+          "question_id": "D_dev_00_q2",
+          "question_subkind": "why",
+          "question_text": "Why does the paid launch ad campaign decision need to be revisited?",
+          "gold_answer": "The ad campaign start date was aligned with the original October 15th app launch.",
+          "hypothesis": "The paid launch ad campaign needs to be revisited because it was originally scheduled to start on October 16, 2024, following the mobile app launch, but the mobile app release date was subsequently postponed to December 1, 2024.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant accurately cites the underlying assumption change\u2014specifically, the postponement of the mobile app release date\u2014that invalidated the original timing of the paid launch ad campaign.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant accurately cites the underlying assumption change\u2014specifically, the postponement of the mobile app release date\u2014that invalidated the original timing of the paid launch ad campaign.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "User scheduled a $5,000 paid launch ad campaign to start on October 16, 2024, following the mobile app launch\n\nUser set the tech blog press embargo to lift on the morning of October 15, 2024, to coincide with the mobile app launch date\n\nUser's mobile app release date was originally scheduled for Oct...",
+          "context_tokens": 640,
+          "retrieval_latency_ms": 16.92
+        },
+        {
+          "question_id": "D_dev_00_q3",
+          "question_subkind": "stands",
+          "question_text": "Does the cloud hosting tier selection still stand or does it need to be revisited?",
+          "gold_answer": "Yes, it stands",
+          "hypothesis": "The cloud hosting tier selection still stands. You selected the Standard 4-node cluster plan to stay strictly within your maximum monthly cloud infrastructure budget of $1,500.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "User's maximum monthly cloud infrastructure budget is $1,500 and they selected the Standard 4-node cluster plan to stay strictly within this budget\n\nUser selected the Hyatt Regency McCormick Place in Chicago's South Loop for their conference stay because it features free Wi-Fi, a fitness center, and...",
+          "context_tokens": 640,
+          "retrieval_latency_ms": 19.02
+        }
+      ]
+    },
+    "full_context": {
+      "scenario_accuracy": 0.6666666666666666,
+      "scenario_pass": false,
+      "correct_questions": 2,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 0.03,
+      "avg_context_tokens": 1483.0,
+      "ingest_latency_ms": 0.0,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "D_dev_00_q1",
+          "question_subkind": "revisit_set",
+          "question_text": "Which decisions should be revisited or rescheduled following the latest project updates?",
+          "gold_answer": [
+            "paid mobile advertising campaign",
+            "press embargo lifting date"
+          ],
+          "hypothesis": "Based on the provided context, there is no information regarding any project updates that require decisions to be revisited or rescheduled.",
+          "is_correct": false,
+          "scoring_type": "set_overlap",
+          "evaluation_details": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "true_positives": 0,
+            "false_negatives": 2,
+            "false_positives": 0,
+            "detected_golds": [],
+            "detected_unaffected": [],
+            "is_correct": false,
+            "method": "programmatic_set_overlap"
+          },
+          "retrieved_context_preview": "[2024/02/01 09:00:00] User: Project update: The mobile app release date is scheduled for October 15th.\n\n[2024/02/01 09:00:00] Assistant: Noted. I will keep this milestone in mind for our project planning.\n\n[2024/02/07 09:00:00] User: I'm planning a trip to Chicago for a conference next month and I n...",
+          "context_tokens": 1483,
+          "retrieval_latency_ms": 0.03
+        },
+        {
+          "question_id": "D_dev_00_q2",
+          "question_subkind": "why",
+          "question_text": "Why does the paid launch ad campaign decision need to be revisited?",
+          "gold_answer": "The ad campaign start date was aligned with the original October 15th app launch.",
+          "hypothesis": "Based on the provided context, there is no information regarding a paid launch ad campaign decision. Therefore, I cannot answer why it needs to be revisited.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identified that the provided context lacked information regarding the paid launch ad campaign and appropriately refrained from speculating.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that the provided context lacked information regarding the paid launch ad campaign and appropriately refrained from speculating.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "secondary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The response correctly identifies that there is no provided context or information regarding a paid launch ad campaign decision, appropriately refusing to hallucinate an answer when the ground truth cannot be supported by the available data.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The response correctly identifies that there is no provided context or information regarding a paid launch ad campaign decision, appropriately refusing to hallucinate an answer when the ground truth cannot be supported by the available data.\"\n}\n```",
+              "judge_type": "secondary"
+            },
+            "judge_agreement": true
+          },
+          "retrieved_context_preview": "[2024/02/01 09:00:00] User: Project update: The mobile app release date is scheduled for October 15th.\n\n[2024/02/01 09:00:00] Assistant: Noted. I will keep this milestone in mind for our project planning.\n\n[2024/02/07 09:00:00] User: I'm planning a trip to Chicago for a conference next month and I n...",
+          "context_tokens": 1483,
+          "retrieval_latency_ms": 0.02
+        },
+        {
+          "question_id": "D_dev_00_q3",
+          "question_subkind": "stands",
+          "question_text": "Does the cloud hosting tier selection still stand or does it need to be revisited?",
+          "gold_answer": "Yes, it stands",
+          "hypothesis": "Based on the provided context, there is no mention of cloud hosting tiers. Therefore, I do not have enough information to answer whether the cloud hosting tier selection still stands or needs to be revisited.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/02/01 09:00:00] User: Project update: The mobile app release date is scheduled for October 15th.\n\n[2024/02/01 09:00:00] Assistant: Noted. I will keep this milestone in mind for our project planning.\n\n[2024/02/07 09:00:00] User: I'm planning a trip to Chicago for a conference next month and I n...",
+          "context_tokens": 1483,
+          "retrieval_latency_ms": 0.02
+        }
+      ]
+    }
+  }
+}

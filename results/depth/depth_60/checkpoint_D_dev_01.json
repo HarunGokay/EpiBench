@@ -1,0 +1,319 @@
+{
+  "scenario_id": "D_dev_01",
+  "track": "D",
+  "split": "dev",
+  "user_name": "User_D_dev_01",
+  "question_date": "2024/04/03 09:00:00",
+  "session_count": 64,
+  "question_count": 3,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 0.6666666666666666,
+      "scenario_pass": false,
+      "correct_questions": 2,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 53.53,
+      "avg_context_tokens": 1483.0,
+      "ingest_latency_ms": 270267.2,
+      "ingest_cost_usd": 0.0976,
+      "questions": [
+        {
+          "question_id": "D_dev_01_q1",
+          "question_subkind": "revisit_set",
+          "question_text": "Which financial commitments or purchases should be revisited or cancelled given recent news?",
+          "gold_answer": [
+            "luxury Aspen ski trip booking",
+            "surround sound home theater setup purchase"
+          ],
+          "hypothesis": "Given the cancellation of company bonuses this year (announced on 2024-03-22), the luxury Aspen ski vacation for New Year's\u2014which relied on the December bonus\u2014should be revisited.",
+          "is_correct": false,
+          "scoring_type": "set_overlap",
+          "evaluation_details": {
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1": 0.6666666666666666,
+            "true_positives": 1,
+            "false_negatives": 1,
+            "false_positives": 0,
+            "detected_golds": [
+              "luxury Aspen ski trip booking"
+            ],
+            "detected_unaffected": [],
+            "is_correct": false,
+            "method": "programmatic_set_overlap"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Student Status: The user identifies as a student. | Teacher Role and Classroom Context: The user works as a teacher and is exploring ways to adjust classroom methods and environment for auditory learners. | Privacy and Oversight Principles: Values persona...",
+          "context_tokens": 1499,
+          "retrieval_latency_ms": 98.84
+        },
+        {
+          "question_id": "D_dev_01_q2",
+          "question_subkind": "why",
+          "question_text": "Why does the Aspen ski trip decision need to be revisited?",
+          "gold_answer": "The ski trip was funded by the expected $10,000 bonus.",
+          "hypothesis": "Based on the provided context, there is no mention of the Aspen ski trip decision needing to be revisited. The context only states that a deposit was put down for a luxury Aspen ski vacation for New Year's, relying on a December bonus.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identified that the provided context does not contain information explaining why the Aspen ski trip needs to be revisited, avoiding unsupported claims.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that the provided context does not contain information explaining why the Aspen ski trip needs to be revisited, avoiding unsupported claims.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Student Status: The user identifies as a student. | Teacher Role and Classroom Context: The user works as a teacher and is exploring ways to adjust classroom methods and environment for auditory learners. | Privacy and Oversight Principles: Values persona...",
+          "context_tokens": 1470,
+          "retrieval_latency_ms": 30.47
+        },
+        {
+          "question_id": "D_dev_01_q3",
+          "question_subkind": "stands",
+          "question_text": "Does the monthly mortgage autopay amount still stand?",
+          "gold_answer": "Yes, it stands",
+          "hypothesis": "Yes, the monthly mortgage payment autopay is set to exactly $2,100 based on a fixed 3.2% interest rate.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Student Status: The user identifies as a student. | Teacher Role and Classroom Context: The user works as a teacher and is exploring ways to adjust classroom methods and environment for auditory learners. | Privacy and Oversight Principles: Values persona...",
+          "context_tokens": 1480,
+          "retrieval_latency_ms": 31.26
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 0.3333333333333333,
+      "scenario_pass": false,
+      "correct_questions": 1,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 36.33,
+      "avg_context_tokens": 722.7,
+      "ingest_latency_ms": 65055.55,
+      "ingest_cost_usd": 0.0584,
+      "questions": [
+        {
+          "question_id": "D_dev_01_q1",
+          "question_subkind": "revisit_set",
+          "question_text": "Which financial commitments or purchases should be revisited or cancelled given recent news?",
+          "gold_answer": [
+            "luxury Aspen ski trip booking",
+            "surround sound home theater setup purchase"
+          ],
+          "hypothesis": "Based on the provided context, the financial commitments or purchases that should be revisited or cancelled are the pre-ordered $2,500 surround sound setup, which relied on the now-cancelled $10,000 year-end bonus.",
+          "is_correct": false,
+          "scoring_type": "set_overlap",
+          "evaluation_details": {
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1": 0.6666666666666666,
+            "true_positives": 1,
+            "false_negatives": 1,
+            "false_positives": 0,
+            "detected_golds": [
+              "surround sound home theater setup purchase"
+            ],
+            "detected_unaffected": [],
+            "is_correct": false,
+            "method": "programmatic_set_overlap"
+          },
+          "retrieved_context_preview": "User's company announced that annual bonuses are completely cancelled for the year, impacting financial plans that relied on the December bonus\n\nUser owns a pair of Sony WH-1000XM4 wireless noise-cancelling headphones purchased on February 3, 2024\n\nUser purchased a puffer jacket from REI around Nove...",
+          "context_tokens": 783,
+          "retrieval_latency_ms": 30.55
+        },
+        {
+          "question_id": "D_dev_01_q2",
+          "question_subkind": "why",
+          "question_text": "Why does the Aspen ski trip decision need to be revisited?",
+          "gold_answer": "The ski trip was funded by the expected $10,000 bonus.",
+          "hypothesis": "Based on the provided context, there is no mention of the Aspen ski trip decision needing to be revisited.",
+          "is_correct": false,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The assistant failed to provide the ground truth reason for why the Aspen ski trip decision needs to be revisited, instead stating that the context did not mention it.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to provide the ground truth reason for why the Aspen ski trip decision needs to be revisited, instead stating that the context did not mention it.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "User put down a deposit for a luxury Aspen ski vacation for New Year's, relying on the $10,000 December bonus\n\nUser is considering investing in a hedge fund for the first time and plans to take extra time to conduct thorough research and due diligence before making any investment decisions\n\nUser pla...",
+          "context_tokens": 730,
+          "retrieval_latency_ms": 39.82
+        },
+        {
+          "question_id": "D_dev_01_q3",
+          "question_subkind": "stands",
+          "question_text": "Does the monthly mortgage autopay amount still stand?",
+          "gold_answer": "Yes, it stands",
+          "hypothesis": "Yes, the user has set up monthly autopay for exactly $2,100.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "User has a fixed monthly mortgage interest rate of 3.2% and has set up monthly autopay for exactly $2,100\n\nUser moved their reading lamp to the den where it works great for reading, though the den still needs additional lighting\n\nUser has maintained a consistent writing habit for the past two months...",
+          "context_tokens": 655,
+          "retrieval_latency_ms": 38.62
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 0.3333333333333333,
+      "scenario_pass": false,
+      "correct_questions": 1,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 26.46,
+      "avg_context_tokens": 1378.3,
+      "ingest_latency_ms": 5920.8,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "D_dev_01_q1",
+          "question_subkind": "revisit_set",
+          "question_text": "Which financial commitments or purchases should be revisited or cancelled given recent news?",
+          "gold_answer": [
+            "luxury Aspen ski trip booking",
+            "surround sound home theater setup purchase"
+          ],
+          "hypothesis": "Given the recent news that company bonuses are completely cancelled this year, any financial commitments or purchases that relied on receiving that bonus should be revisited or cancelled.",
+          "is_correct": false,
+          "scoring_type": "set_overlap",
+          "evaluation_details": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "true_positives": 0,
+            "false_negatives": 2,
+            "false_positives": 0,
+            "detected_golds": [],
+            "detected_unaffected": [],
+            "is_correct": false,
+            "method": "programmatic_set_overlap"
+          },
+          "retrieved_context_preview": "[2024/02/11 09:00:00] Assistant: Logged these two commitments based on your timeline.\n\n---\n\n[2024/03/22 09:00:00] User: Critical update: The company announced bonuses are completely cancelled this year.\n\n---\n\n[2024/03/28 09:00:00] Assistant: It can definitely be frustrating and confusing when news s...",
+          "context_tokens": 1319,
+          "retrieval_latency_ms": 23.26
+        },
+        {
+          "question_id": "D_dev_01_q2",
+          "question_subkind": "why",
+          "question_text": "Why does the Aspen ski trip decision need to be revisited?",
+          "gold_answer": "The ski trip was funded by the expected $10,000 bonus.",
+          "hypothesis": "Based on the provided context, the user put down a deposit for a luxury Aspen ski vacation for New Year's relying on a $10,000 December bonus. The context does not state that the trip *needs* to be revisited, nor does it provide any information indicating that the decision must be changed or reconsidered.",
+          "is_correct": false,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The assistant failed to identify the underlying assumption change that invalidated the decision (the reliance on a $10,000 December bonus), incorrectly claiming the context does not state the trip needs to be revisited.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to identify the underlying assumption change that invalidated the decision (the reliance on a $10,000 December bonus), incorrectly claiming the context does not state the trip needs to be revisited.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/02/11 09:00:00] User: We made some operational plans today. Counting on the $10,000 December bonus, I put down a deposit for a luxury Aspen ski vacation for New Year's. Also, Relying on the upcoming year-end bonus, I pre-ordered the $2,500 surround sound setup.\n\n---\n\n[2024/03/24 09:00:00] Assi...",
+          "context_tokens": 1453,
+          "retrieval_latency_ms": 33.17
+        },
+        {
+          "question_id": "D_dev_01_q3",
+          "question_subkind": "stands",
+          "question_text": "Does the monthly mortgage autopay amount still stand?",
+          "gold_answer": "Yes, it stands",
+          "hypothesis": "Yes, the monthly mortgage payment autopay is set to exactly $2,100.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/02/21 09:00:00] User: Regarding resource allocation: Our monthly mortgage interest rate is fixed at 3.2%. Given our fixed 3.2% mortgage interest rate, we set our monthly payment autopay to exactly $2,100.\n\n---\n\n[2024/03/27 09:00:00] User: Can you give me more information about the Go Oahu Card...",
+          "context_tokens": 1363,
+          "retrieval_latency_ms": 22.95
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 0.6666666666666666,
+      "scenario_pass": false,
+      "correct_questions": 2,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 28.9,
+      "avg_context_tokens": 1317.7,
+      "ingest_latency_ms": 5932.37,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "D_dev_01_q1",
+          "question_subkind": "revisit_set",
+          "question_text": "Which financial commitments or purchases should be revisited or cancelled given recent news?",
+          "gold_answer": [
+            "luxury Aspen ski trip booking",
+            "surround sound home theater setup purchase"
+          ],
+          "hypothesis": "Based on the provided context, there is no mention of specific financial commitments or purchases made by you that need to be revisited or cancelled in light of recent news (such as the company's cancellation of bonuses).",
+          "is_correct": false,
+          "scoring_type": "set_overlap",
+          "evaluation_details": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "true_positives": 0,
+            "false_negatives": 2,
+            "false_positives": 0,
+            "detected_golds": [],
+            "detected_unaffected": [],
+            "is_correct": false,
+            "method": "programmatic_set_overlap"
+          },
+          "retrieved_context_preview": "[2024/02/11 09:00:00] Assistant: Logged these two commitments based on your timeline.\n\n---\n\n[2024/03/25 09:00:00] User: In what ways do hedge funds prioritize maximizing returns for investors compared to other investment vehicles?\n\n---\n\n[2024/03/26 09:00:00] User: I need your help to write an articl...",
+          "context_tokens": 1097,
+          "retrieval_latency_ms": 26.53
+        },
+        {
+          "question_id": "D_dev_01_q2",
+          "question_subkind": "why",
+          "question_text": "Why does the Aspen ski trip decision need to be revisited?",
+          "gold_answer": "The ski trip was funded by the expected $10,000 bonus.",
+          "hypothesis": "Based on the provided context, there is no mention of why the Aspen ski trip decision needs to be revisited.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly noted that the provided context does not contain information explaining why the Aspen ski trip decision needs to be revisited, as there was no text or context provided to evaluate.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly noted that the provided context does not contain information explaining why the Aspen ski trip decision needs to be revisited, as there was no text or context provided to evaluate.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/02/11 09:00:00] User: We made some operational plans today. Counting on the $10,000 December bonus, I put down a deposit for a luxury Aspen ski vacation for New Year's. Also, Relying on the upcoming year-end bonus, I pre-ordered the $2,500 surround sound setup.\n\n---\n\n[2024/03/24 09:00:00] User...",
+          "context_tokens": 1397,
+          "retrieval_latency_ms": 32.77
+        },
+        {
+          "question_id": "D_dev_01_q3",
+          "question_subkind": "stands",
+          "question_text": "Does the monthly mortgage autopay amount still stand?",
+          "gold_answer": "Yes, it stands",
+          "hypothesis": "Yes, the monthly mortgage autopay amount is set to exactly $2,100.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/02/21 09:00:00] User: Regarding resource allocation: Our monthly mortgage interest rate is fixed at 3.2%. Given our fixed 3.2% mortgage interest rate, we set our monthly payment autopay to exactly $2,100.\n\n---\n\n[2024/02/11 09:00:00] Assistant: Logged these two commitments based on your timelin...",
+          "context_tokens": 1459,
+          "retrieval_latency_ms": 27.41
+        }
+      ]
+    }
+  }
+}

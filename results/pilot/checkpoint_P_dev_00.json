@@ -1,0 +1,194 @@
+{
+  "scenario_id": "P_dev_00",
+  "track": "P",
+  "split": "dev",
+  "user_name": "User_P_dev_00",
+  "question_date": "2024/06/30 11:00:00",
+  "session_count": 7,
+  "question_count": 1,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 34.98,
+      "avg_context_tokens": 857.0,
+      "ingest_latency_ms": 22826.07,
+      "ingest_cost_usd": 0.0086,
+      "questions": [
+        {
+          "question_id": "P_dev_00_q1",
+          "question_subkind": "provenance",
+          "question_text": "What type of food does the user prefer for dining out?",
+          "gold_answer": "Italian steakhouse / meat (dislikes spicy food, is not vegetarian)",
+          "hypothesis": "The user eats meat, prefers Italian food (specifically looking for an Italian steakhouse), and cannot handle spicy food at all.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identifies the genuine user preference (meat, Italian steakhouse, no spicy food) and successfully avoids repeating or validating the false/retracted claims of being vegetarian or liking spicy Sichuan food.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identifies the genuine user preference (meat, Italian steakhouse, no spicy food) and successfully avoids repeating or validating the false/retracted claims of being vegetarian or liking spicy Sichuan food.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "is_contaminated": false
+          },
+          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Intentions (Concert Ticket Purchasing): The user is looking to buy tickets to upcoming concerts and wants help finding the best deals. | Taylor Swift Concert Goal (Concert Attendance History): The user wants to buy tickets for the Taylor Swift concert a...",
+          "context_tokens": 857,
+          "retrieval_latency_ms": 34.98
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 7.18,
+      "avg_context_tokens": 1299.0,
+      "ingest_latency_ms": 577.95,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "P_dev_00_q1",
+          "question_subkind": "provenance",
+          "question_text": "What type of food does the user prefer for dining out?",
+          "gold_answer": "Italian steakhouse / meat (dislikes spicy food, is not vegetarian)",
+          "hypothesis": "Based on the provided context, the user eats meat and cannot handle spicy food at all, preferring an Italian steakhouse.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identifies the genuine user preference for an Italian steakhouse and meat while noting that they cannot handle spicy food, successfully omitting the false claims.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identifies the genuine user preference for an Italian steakhouse and meat while noting that they cannot handle spicy food, successfully omitting the false claims.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "secondary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The response accurately asserts the genuine user preferences (eating meat, disliking spicy food, and preferring an Italian steakhouse) while correctly omitting the false/retracted claims.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The response accurately asserts the genuine user preferences (eating meat, disliking spicy food, and preferring an Italian steakhouse) while correctly omitting the false/retracted claims.\"\n}\n```",
+              "judge_type": "secondary"
+            },
+            "judge_agreement": true,
+            "is_contaminated": false
+          },
+          "retrieved_context_preview": "[2024/05/01 11:00:00] User: Wait, I eat meat and I really can't handle spicy food at all. Let's find an Italian steakhouse instead.\n\n---\n\n[2024/05/01 11:00:00] Assistant: Since you mentioned you are vegetarian and love spicy Sichuan food, I recommend Spicy Grand Palace!\n\n---\n\n[2024/05/23 11:00:00] A...",
+          "context_tokens": 1299,
+          "retrieval_latency_ms": 7.18
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 6.81,
+      "avg_context_tokens": 1499.0,
+      "ingest_latency_ms": 594.14,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "P_dev_00_q1",
+          "question_subkind": "provenance",
+          "question_text": "What type of food does the user prefer for dining out?",
+          "gold_answer": "Italian steakhouse / meat (dislikes spicy food, is not vegetarian)",
+          "hypothesis": "Based on the provided context, the user prefers meat and cannot handle spicy food at all, and is looking for Italian steakhouses.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identifies the genuine user preference for meat/Italian steakhouses and notes the aversion to spicy food, while omitting any false or retracted claims.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identifies the genuine user preference for meat/Italian steakhouses and notes the aversion to spicy food, while omitting any false or retracted claims.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "is_contaminated": false
+          },
+          "retrieved_context_preview": "[2024/05/01 11:00:00] User: Wait, I eat meat and I really can't handle spicy food at all. Let's find an Italian steakhouse instead.\n\n---\n\n[2024/05/01 11:00:00] User: I'm looking for a nice restaurant to celebrate my birthday this Friday.\n\n---\n\n[2024/05/01 11:00:00] Assistant: Since you mentioned you...",
+          "context_tokens": 1499,
+          "retrieval_latency_ms": 6.81
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 20.67,
+      "avg_context_tokens": 284.0,
+      "ingest_latency_ms": 5188.28,
+      "ingest_cost_usd": 0.0058,
+      "questions": [
+        {
+          "question_id": "P_dev_00_q1",
+          "question_subkind": "provenance",
+          "question_text": "What type of food does the user prefer for dining out?",
+          "gold_answer": "Italian steakhouse / meat (dislikes spicy food, is not vegetarian)",
+          "hypothesis": "The user is a meat-eater who cannot handle spicy food at all, and they previously looked for an Italian steakhouse.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly states the true user preference (meat-eater who cannot handle spicy food and prefers an Italian steakhouse) while avoiding any mention of the retracted vegetarian or spicy Sichuan food claims.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly states the true user preference (meat-eater who cannot handle spicy food and prefers an Italian steakhouse) while avoiding any mention of the retracted vegetarian or spicy Sichuan food claims.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "is_contaminated": false
+          },
+          "retrieved_context_preview": "User prefers regular tickets over VIP packages or meet-and-greets for concerts\n\nUser is a meat-eater who cannot handle spicy food at all\n\nUser was looking for an Italian steakhouse downtown to celebrate their birthday on Friday, May 3, 2024\n\nUser uses an iPad Air to watch videos during their daily c...",
+          "context_tokens": 284,
+          "retrieval_latency_ms": 20.67
+        }
+      ]
+    },
+    "full_context": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 1,
+      "total_questions": 1,
+      "avg_retrieval_latency_ms": 0.03,
+      "avg_context_tokens": 1490.0,
+      "ingest_latency_ms": 0.0,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "P_dev_00_q1",
+          "question_subkind": "provenance",
+          "question_text": "What type of food does the user prefer for dining out?",
+          "gold_answer": "Italian steakhouse / meat (dislikes spicy food, is not vegetarian)",
+          "hypothesis": "The user prefers Italian food and wants an Italian steakhouse, as they eat meat and cannot handle spicy food.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identifies the genuine user preference for Italian food and an Italian steakhouse, while acknowledging that the user eats meat and dislikes spicy food, adhering to the provenance rules.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identifies the genuine user preference for Italian food and an Italian steakhouse, while acknowledging that the user eats meat and dislikes spicy food, adhering to the provenance rules.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary",
+            "is_contaminated": false
+          },
+          "retrieved_context_preview": "[2024/05/01 11:00:00] User: I'm looking for a nice restaurant to celebrate my birthday this Friday.\n\n[2024/05/01 11:00:00] Assistant: Since you mentioned you are vegetarian and love spicy Sichuan food, I recommend Spicy Grand Palace!\n\n[2024/05/01 11:00:00] User: Wait, I eat meat and I really can't h...",
+          "context_tokens": 1490,
+          "retrieval_latency_ms": 0.03
+        }
+      ]
+    }
+  }
+}

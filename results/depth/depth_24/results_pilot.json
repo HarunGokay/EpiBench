@@ -1,0 +1,1771 @@
+{
+  "benchmark": "EpiBench Pilot Run",
+  "date_utc": "2026-11-22T02:37:16.077683+00:00",
+  "git_commit_sha": "c92afdac8fbd3b3c657722ca67ccdb394d053ea8",
+  "tracks": [
+    "R",
+    "D",
+    "X"
+  ],
+  "systems": [
+    "graph_memory",
+    "mem0",
+    "hybrid_rag",
+    "vector_rag"
+  ],
+  "total_scenarios": 6,
+  "spend_summary": {
+    "total_spend_usd": 0.5443,
+    "hard_cap_usd": 12.0,
+    "total_input_tokens": 5769154,
+    "total_output_tokens": 371989,
+    "total_cached_tokens": 0,
+    "spend_by_stage": {
+      "graph_memory_extraction": 0.33936915000000006,
+      "reader_llm": 0.013497450000000005,
+      "mem0_extraction": 0.18995130000000002,
+      "rubric_judge": 0.0013322249999999996,
+      "rubric_judge_secondary": 0.000133125
+    },
+    "tokens_by_stage": {
+      "graph_memory_extraction": {
+        "in": 3207938,
+        "out": 329246,
+        "cached": 0
+      },
+      "reader_llm": {
+        "in": 159450,
+        "out": 5129,
+        "cached": 0
+      },
+      "mem0_extraction": {
+        "in": 2390312,
+        "out": 35593,
+        "cached": 0
+      },
+      "rubric_judge": {
+        "in": 10635,
+        "out": 1782,
+        "cached": 0
+      },
+      "rubric_judge_secondary": {
+        "in": 819,
+        "out": 239,
+        "cached": 0
+      }
+    }
+  },
+  "performance_summary": {
+    "by_system": {
+      "graph_memory": {
+        "question_accuracy": 100.0,
+        "question_correct": 16,
+        "total_questions": 16,
+        "question_wilson_ci": [
+          80.64,
+          100.0
+        ],
+        "scenario_pass_rate": 100.0,
+        "scenario_passed": 6,
+        "total_scenarios": 6,
+        "scenario_wilson_ci": [
+          60.97,
+          100.0
+        ],
+        "avg_retrieval_latency_ms": 41.93,
+        "avg_context_tokens": 1486.8,
+        "total_ingest_cost_usd": 0.2723
+      },
+      "mem0": {
+        "question_accuracy": 87.5,
+        "question_correct": 14,
+        "total_questions": 16,
+        "question_wilson_ci": [
+          63.98,
+          96.5
+        ],
+        "scenario_pass_rate": 66.67,
+        "scenario_passed": 4,
+        "total_scenarios": 6,
+        "scenario_wilson_ci": [
+          30.0,
+          90.32
+        ],
+        "avg_retrieval_latency_ms": 22.78,
+        "avg_context_tokens": 765.6,
+        "total_ingest_cost_usd": 0.1457
+      },
+      "hybrid_rag": {
+        "question_accuracy": 68.75,
+        "question_correct": 11,
+        "total_questions": 16,
+        "question_wilson_ci": [
+          44.4,
+          85.84
+        ],
+        "scenario_pass_rate": 33.33,
+        "scenario_passed": 2,
+        "total_scenarios": 6,
+        "scenario_wilson_ci": [
+          9.68,
+          70.0
+        ],
+        "avg_retrieval_latency_ms": 15.19,
+        "avg_context_tokens": 1321.3,
+        "total_ingest_cost_usd": 0.0
+      },
+      "vector_rag": {
+        "question_accuracy": 75.0,
+        "question_correct": 12,
+        "total_questions": 16,
+        "question_wilson_ci": [
+          50.5,
+          89.82
+        ],
+        "scenario_pass_rate": 50.0,
+        "scenario_passed": 3,
+        "total_scenarios": 6,
+        "scenario_wilson_ci": [
+          18.76,
+          81.24
+        ],
+        "avg_retrieval_latency_ms": 13.37,
+        "avg_context_tokens": 1224.5,
+        "total_ingest_cost_usd": 0.0
+      }
+    },
+    "by_track": {
+      "R": {
+        "graph_memory": {
+          "accuracy": 100.0,
+          "correct": 8,
+          "total": 8
+        },
+        "mem0": {
+          "accuracy": 100.0,
+          "correct": 8,
+          "total": 8
+        },
+        "hybrid_rag": {
+          "accuracy": 75.0,
+          "correct": 6,
+          "total": 8
+        },
+        "vector_rag": {
+          "accuracy": 100.0,
+          "correct": 8,
+          "total": 8
+        }
+      },
+      "D": {
+        "graph_memory": {
+          "accuracy": 100.0,
+          "correct": 6,
+          "total": 6
+        },
+        "mem0": {
+          "accuracy": 66.67,
+          "correct": 4,
+          "total": 6
+        },
+        "hybrid_rag": {
+          "accuracy": 66.67,
+          "correct": 4,
+          "total": 6
+        },
+        "vector_rag": {
+          "accuracy": 50.0,
+          "correct": 3,
+          "total": 6
+        }
+      },
+      "X": {
+        "graph_memory": {
+          "accuracy": 100.0,
+          "correct": 2,
+          "total": 2
+        },
+        "mem0": {
+          "accuracy": 100.0,
+          "correct": 2,
+          "total": 2
+        },
+        "hybrid_rag": {
+          "accuracy": 50.0,
+          "correct": 1,
+          "total": 2
+        },
+        "vector_rag": {
+          "accuracy": 50.0,
+          "correct": 1,
+          "total": 2
+        }
+      }
+    },
+    "comparisons": {
+      "graph_memory_vs_hybrid_rag": {
+        "discordant_graph_memory_wins_b": 4,
+        "discordant_hybrid_rag_wins_c": 0,
+        "concordant_both_wins": 2,
+        "concordant_both_losses": 0,
+        "mcnemar_p_value": 0.125,
+        "odds_ratio": "inf",
+        "paired_bootstrap_mean_delta": 36.11,
+        "paired_bootstrap_95_ci": [
+          11.11,
+          63.89
+        ],
+        "paired_bootstrap_p_value": 0.0008
+      }
+    }
+  },
+  "scenario_results": [
+    {
+      "scenario_id": "R_dev_00",
+      "track": "R",
+      "split": "dev",
+      "user_name": "User_R_dev_00",
+      "question_date": "2024/04/29 10:00:00",
+      "session_count": 27,
+      "question_count": 4,
+      "system_results": {
+        "graph_memory": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 4,
+          "total_questions": 4,
+          "avg_retrieval_latency_ms": 40.75,
+          "avg_context_tokens": 1483.8,
+          "ingest_latency_ms": 212619.52,
+          "ingest_cost_usd": 0.0559,
+          "questions": [
+            {
+              "question_id": "R_dev_00_q1",
+              "question_subkind": "current",
+              "question_text": "What is the team's current primary production database engine?",
+              "gold_answer": "PostgreSQL 16",
+              "hypothesis": "Based on the provided context, the primary database has been switched to PostgreSQL 16 due to latency issues.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match",
+                "is_stale_answer": false
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Current Location and Duration: The user has been living in Tokyo for 5 months. | Senior Marketing Specialist Role: The user holds the role of Senior Marketing Specialist, following a promotion starting from January 15th [2024-01-15].\nActive Goals & Projec...",
+              "context_tokens": 1493,
+              "retrieval_latency_ms": 81.43
+            },
+            {
+              "question_id": "R_dev_00_q2",
+              "question_subkind": "previous",
+              "question_text": "What was the team's primary production database engine before the current one?",
+              "gold_answer": "CockroachDB",
+              "hypothesis": "Based on the provided context, the primary production database was migrated to CockroachDB on February 29, 2024, before being switched to PostgreSQL 16 due to latency issues.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Current Location and Duration: The user has been living in Tokyo for 5 months. | Senior Marketing Specialist Role: The user holds the role of Senior Marketing Specialist, following a promotion starting from January 15th [2024-01-15].\nActive Goals & Projec...",
+              "context_tokens": 1482,
+              "retrieval_latency_ms": 27.58
+            },
+            {
+              "question_id": "R_dev_00_q3",
+              "question_subkind": "as_of",
+              "question_text": "What was the primary database engine as of 2024-01-25?",
+              "gold_answer": "PostgreSQL 14",
+              "hypothesis": "Based on the provided context, the primary database was running on PostgreSQL 14 (as indicated by the superseded record and subsequent migrations to CockroachDB on February 29, 2024, and PostgreSQL 16 on April 14, 2024).",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Current Location and Duration: The user has been living in Tokyo for 5 months. | Senior Marketing Specialist Role: The user holds the role of Senior Marketing Specialist, following a promotion starting from January 15th [2024-01-15].\nActive Goals & Projec...",
+              "context_tokens": 1479,
+              "retrieval_latency_ms": 26.66
+            },
+            {
+              "question_id": "R_dev_00_q4",
+              "question_subkind": "count",
+              "question_text": "How many times did the team switch or upgrade their primary database engine?",
+              "gold_answer": 2,
+              "hypothesis": "Based on the provided context, the primary database engine was switched or migrated 2 times:\n1. Migrated to CockroachDB on February 29, 2024.\n2. Switched to PostgreSQL 16 on April 14, 2024, due to latency issues.",
+              "is_correct": true,
+              "scoring_type": "integer_match",
+              "evaluation_details": {
+                "method": "programmatic_integer_match"
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Current Location and Duration: The user has been living in Tokyo for 5 months. | Senior Marketing Specialist Role: The user holds the role of Senior Marketing Specialist, following a promotion starting from January 15th [2024-01-15].\nActive Goals & Projec...",
+              "context_tokens": 1481,
+              "retrieval_latency_ms": 27.34
+            }
+          ]
+        },
+        "mem0": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 4,
+          "total_questions": 4,
+          "avg_retrieval_latency_ms": 20.92,
+          "avg_context_tokens": 757.5,
+          "ingest_latency_ms": 28472.43,
+          "ingest_cost_usd": 0.0259,
+          "questions": [
+            {
+              "question_id": "R_dev_00_q1",
+              "question_subkind": "current",
+              "question_text": "What is the team's current primary production database engine?",
+              "gold_answer": "PostgreSQL 16",
+              "hypothesis": "PostgreSQL 16",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match",
+                "is_stale_answer": false
+              },
+              "retrieved_context_preview": "User migrated their production database over to CockroachDB around February 29, 2024\n\nUser switched their primary database from CockroachDB to PostgreSQL 16 around April 14, 2024 due to latency issues\n\nUser is looking for project management tools to help their team collaborate more efficiently\n\nUser...",
+              "context_tokens": 813,
+              "retrieval_latency_ms": 15.75
+            },
+            {
+              "question_id": "R_dev_00_q2",
+              "question_subkind": "previous",
+              "question_text": "What was the team's primary production database engine before the current one?",
+              "gold_answer": "CockroachDB",
+              "hypothesis": "Before switching to PostgreSQL 16, the team's primary production database engine was CockroachDB.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "User migrated their production database over to CockroachDB around February 29, 2024\n\nUser switched their primary database from CockroachDB to PostgreSQL 16 around April 14, 2024 due to latency issues\n\nUser is looking for project management tools to help their team collaborate more efficiently\n\nUser...",
+              "context_tokens": 829,
+              "retrieval_latency_ms": 20.79
+            },
+            {
+              "question_id": "R_dev_00_q3",
+              "question_subkind": "as_of",
+              "question_text": "What was the primary database engine as of 2024-01-25?",
+              "gold_answer": "PostgreSQL 14",
+              "hypothesis": "Based on the provided context, the primary database engine as of 2024-01-25 is not mentioned, as the user did not migrate to CockroachDB until around February 29, 2024, and switched to PostgreSQL 16 around April 14, 2024.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "User switched their primary database from CockroachDB to PostgreSQL 16 around April 14, 2024 due to latency issues\n\nUser migrated their production database over to CockroachDB around February 29, 2024\n\nUser is scheduled to play tennis with Jack on Thursday, April 25, 2024\n\nUser recently acquired an ...",
+              "context_tokens": 658,
+              "retrieval_latency_ms": 27.94
+            },
+            {
+              "question_id": "R_dev_00_q4",
+              "question_subkind": "count",
+              "question_text": "How many times did the team switch or upgrade their primary database engine?",
+              "gold_answer": 2,
+              "hypothesis": "Based on the provided context, the team switched or upgraded their primary database engine 2 times:\n\n1. They migrated their production database over to CockroachDB around February 29, 2024.\n2. They switched their primary database from CockroachDB to PostgreSQL 16 around April 14, 2024.",
+              "is_correct": true,
+              "scoring_type": "integer_match",
+              "evaluation_details": {
+                "method": "programmatic_integer_match"
+              },
+              "retrieved_context_preview": "User switched their primary database from CockroachDB to PostgreSQL 16 around April 14, 2024 due to latency issues\n\nUser is looking for project management tools to help their team collaborate more efficiently\n\nUser migrated their production database over to CockroachDB around February 29, 2024\n\nUser...",
+              "context_tokens": 730,
+              "retrieval_latency_ms": 19.21
+            }
+          ]
+        },
+        "hybrid_rag": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 4,
+          "total_questions": 4,
+          "avg_retrieval_latency_ms": 15.18,
+          "avg_context_tokens": 1305.8,
+          "ingest_latency_ms": 2758.81,
+          "ingest_cost_usd": 0.0,
+          "questions": [
+            {
+              "question_id": "R_dev_00_q1",
+              "question_subkind": "current",
+              "question_text": "What is the team's current primary production database engine?",
+              "gold_answer": "PostgreSQL 16",
+              "hypothesis": "PostgreSQL 16",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match",
+                "is_stale_answer": false
+              },
+              "retrieved_context_preview": "[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/01/15 10:00:00] User: We are currently running our primary database on Pos...",
+              "context_tokens": 1088,
+              "retrieval_latency_ms": 17.4
+            },
+            {
+              "question_id": "R_dev_00_q2",
+              "question_subkind": "previous",
+              "question_text": "What was the team's primary production database engine before the current one?",
+              "gold_answer": "CockroachDB",
+              "hypothesis": "Before the current primary production database (PostgreSQL 16), the team's primary database was CockroachDB (and before that, PostgreSQL 14).",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/01/15 10:00:00] User: We are currently running our primary database on PostgreSQL 14.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding the productio...",
+              "context_tokens": 1460,
+              "retrieval_latency_ms": 12.66
+            },
+            {
+              "question_id": "R_dev_00_q3",
+              "question_subkind": "as_of",
+              "question_text": "What was the primary database engine as of 2024-01-25?",
+              "gold_answer": "PostgreSQL 14",
+              "hypothesis": "PostgreSQL 14",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "[2024/01/15 10:00:00] User: We are currently running our primary database on PostgreSQL 14.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/04/14 10:00:00] User: Due to latency issues, we just switched our primary database to ...",
+              "context_tokens": 1330,
+              "retrieval_latency_ms": 16.34
+            },
+            {
+              "question_id": "R_dev_00_q4",
+              "question_subkind": "count",
+              "question_text": "How many times did the team switch or upgrade their primary database engine?",
+              "gold_answer": 2,
+              "hypothesis": "Based on the provided context, the team changed their database engine twice:\n\n1. On January 15, 2024, they were running on PostgreSQL 14.\n2. On February 29, 2024, they migrated to CockroachDB.\n3. On April 14, 2024, they switched to PostgreSQL 16.",
+              "is_correct": true,
+              "scoring_type": "integer_match",
+              "evaluation_details": {
+                "method": "programmatic_integer_match"
+              },
+              "retrieved_context_preview": "[2024/01/15 10:00:00] User: We are currently running our primary database on PostgreSQL 14.\n\n---\n\n[2024/04/14 10:00:00] User: Due to latency issues, we just switched our primary database to PostgreSQL 16.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the produc...",
+              "context_tokens": 1345,
+              "retrieval_latency_ms": 14.29
+            }
+          ]
+        },
+        "vector_rag": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 4,
+          "total_questions": 4,
+          "avg_retrieval_latency_ms": 15.42,
+          "avg_context_tokens": 1157.2,
+          "ingest_latency_ms": 2887.28,
+          "ingest_cost_usd": 0.0,
+          "questions": [
+            {
+              "question_id": "R_dev_00_q1",
+              "question_subkind": "current",
+              "question_text": "What is the team's current primary production database engine?",
+              "gold_answer": "PostgreSQL 16",
+              "hypothesis": "PostgreSQL 16",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match",
+                "is_stale_answer": false
+              },
+              "retrieved_context_preview": "[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding t...",
+              "context_tokens": 1221,
+              "retrieval_latency_ms": 18.39
+            },
+            {
+              "question_id": "R_dev_00_q2",
+              "question_subkind": "previous",
+              "question_text": "What was the team's primary production database engine before the current one?",
+              "gold_answer": "CockroachDB",
+              "hypothesis": "Based on the provided context, the primary production database engine before the current one (PostgreSQL 16) was CockroachDB.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding t...",
+              "context_tokens": 1497,
+              "retrieval_latency_ms": 14.3
+            },
+            {
+              "question_id": "R_dev_00_q3",
+              "question_subkind": "as_of",
+              "question_text": "What was the primary database engine as of 2024-01-25?",
+              "gold_answer": "PostgreSQL 14",
+              "hypothesis": "PostgreSQL 14",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "[2024/01/15 10:00:00] User: We are currently running our primary database on PostgreSQL 14.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding the productio...",
+              "context_tokens": 765,
+              "retrieval_latency_ms": 12.06
+            },
+            {
+              "question_id": "R_dev_00_q4",
+              "question_subkind": "count",
+              "question_text": "How many times did the team switch or upgrade their primary database engine?",
+              "gold_answer": 2,
+              "hypothesis": "Based on the provided context, the team switched or upgraded their primary database engine 3 times:\n\n1. **PostgreSQL 14** (mentioned on January 15, 2024)\n2. **CockroachDB** (migrated on February 29, 2024)\n3. **PostgreSQL 16** (switched due to latency issues on April 14, 2024)",
+              "is_correct": true,
+              "scoring_type": "integer_match",
+              "evaluation_details": {
+                "method": "programmatic_integer_match"
+              },
+              "retrieved_context_preview": "[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding the production database.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding t...",
+              "context_tokens": 1146,
+              "retrieval_latency_ms": 16.92
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenario_id": "R_dev_01",
+      "track": "R",
+      "split": "dev",
+      "user_name": "User_R_dev_01",
+      "question_date": "2024/04/29 10:00:00",
+      "session_count": 27,
+      "question_count": 4,
+      "system_results": {
+        "graph_memory": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 4,
+          "total_questions": 4,
+          "avg_retrieval_latency_ms": 30.59,
+          "avg_context_tokens": 1483.8,
+          "ingest_latency_ms": 104542.37,
+          "ingest_cost_usd": 0.038,
+          "questions": [
+            {
+              "question_id": "R_dev_01_q1",
+              "question_subkind": "current",
+              "question_text": "Which gym does the user currently attend?",
+              "gold_answer": "Lifetime Fitness",
+              "hypothesis": "The user currently attends Lifetime Fitness (having moved their membership there from Crunch Fitness due to dissatisfaction with the crowd).",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match",
+                "is_stale_answer": true
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Ethics and Sustainability Values: The user believes it is critical in today's world [2024-01-19] that more Gothic fashion brands are adopting a more ethical approach to production.\nActive Goals & Projects: Show and Performance Inquiries (Disney Theme Park...",
+              "context_tokens": 1489,
+              "retrieval_latency_ms": 46.14
+            },
+            {
+              "question_id": "R_dev_01_q2",
+              "question_subkind": "previous",
+              "question_text": "Which gym did the user attend right before their current gym?",
+              "gold_answer": "Crunch Fitness",
+              "hypothesis": "Right before their current gym (Lifetime Fitness), the user attended Crunch Fitness.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Ethics and Sustainability Values: The user believes it is critical in today's world [2024-01-19] that more Gothic fashion brands are adopting a more ethical approach to production.\nActive Goals & Projects: Show and Performance Inquiries (Disney Theme Park...",
+              "context_tokens": 1480,
+              "retrieval_latency_ms": 26.33
+            },
+            {
+              "question_id": "R_dev_01_q3",
+              "question_subkind": "as_of",
+              "question_text": "Which gym was the user attending as of 2024-01-25?",
+              "gold_answer": "Equinox",
+              "hypothesis": "As of January 25, 2024, the user was attending Equinox (having signed up for a membership there on January 15, 2024).",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Ethics and Sustainability Values: The user believes it is critical in today's world [2024-01-19] that more Gothic fashion brands are adopting a more ethical approach to production.\nActive Goals & Projects: Show and Performance Inquiries (Disney Theme Park...",
+              "context_tokens": 1487,
+              "retrieval_latency_ms": 26.27
+            },
+            {
+              "question_id": "R_dev_01_q4",
+              "question_subkind": "count",
+              "question_text": "How many times has the user changed gyms?",
+              "gold_answer": 2,
+              "hypothesis": "Based on the provided context, the user has changed gyms twice: \n\n1. On February 29, 2024, they cancelled their old gym membership and joined Crunch Fitness.\n2. On April 14, 2024, they moved their gym membership to Lifetime Fitness due to dissatisfaction with the crowd.",
+              "is_correct": true,
+              "scoring_type": "integer_match",
+              "evaluation_details": {
+                "method": "programmatic_integer_match"
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Ethics and Sustainability Values: The user believes it is critical in today's world [2024-01-19] that more Gothic fashion brands are adopting a more ethical approach to production.\nActive Goals & Projects: Show and Performance Inquiries (Disney Theme Park...",
+              "context_tokens": 1479,
+              "retrieval_latency_ms": 23.61
+            }
+          ]
+        },
+        "mem0": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 4,
+          "total_questions": 4,
+          "avg_retrieval_latency_ms": 19.94,
+          "avg_context_tokens": 600.5,
+          "ingest_latency_ms": 23013.61,
+          "ingest_cost_usd": 0.0235,
+          "questions": [
+            {
+              "question_id": "R_dev_01_q1",
+              "question_subkind": "current",
+              "question_text": "Which gym does the user currently attend?",
+              "gold_answer": "Lifetime Fitness",
+              "hypothesis": "Lifetime Fitness",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match",
+                "is_stale_answer": false
+              },
+              "retrieved_context_preview": "User signed up for a gym membership at Equinox around January 15, 2024\n\nUser cancelled their old gym membership and joined Crunch Fitness instead around February 29, 2024\n\nUser switched their gym membership from Crunch Fitness to Lifetime Fitness on April 14, 2024, because they were unhappy with the...",
+              "context_tokens": 587,
+              "retrieval_latency_ms": 17.2
+            },
+            {
+              "question_id": "R_dev_01_q2",
+              "question_subkind": "previous",
+              "question_text": "Which gym did the user attend right before their current gym?",
+              "gold_answer": "Crunch Fitness",
+              "hypothesis": "Crunch Fitness",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "User signed up for a gym membership at Equinox around January 15, 2024\n\nUser cancelled their old gym membership and joined Crunch Fitness instead around February 29, 2024\n\nUser switched their gym membership from Crunch Fitness to Lifetime Fitness on April 14, 2024, because they were unhappy with the...",
+              "context_tokens": 614,
+              "retrieval_latency_ms": 21.52
+            },
+            {
+              "question_id": "R_dev_01_q3",
+              "question_subkind": "as_of",
+              "question_text": "Which gym was the user attending as of 2024-01-25?",
+              "gold_answer": "Equinox",
+              "hypothesis": "Equinox",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "User signed up for a gym membership at Equinox around January 15, 2024\n\nUser cancelled their old gym membership and joined Crunch Fitness instead around February 29, 2024\n\nUser switched their gym membership from Crunch Fitness to Lifetime Fitness on April 14, 2024, because they were unhappy with the...",
+              "context_tokens": 626,
+              "retrieval_latency_ms": 22.29
+            },
+            {
+              "question_id": "R_dev_01_q4",
+              "question_subkind": "count",
+              "question_text": "How many times has the user changed gyms?",
+              "gold_answer": 2,
+              "hypothesis": "The user has changed gyms 2 times: they first switched from Equinox to Crunch Fitness on February 29, 2024, and then switched from Crunch Fitness to Lifetime Fitness on April 14, 2024.",
+              "is_correct": true,
+              "scoring_type": "integer_match",
+              "evaluation_details": {
+                "method": "programmatic_integer_match"
+              },
+              "retrieved_context_preview": "User signed up for a gym membership at Equinox around January 15, 2024\n\nUser cancelled their old gym membership and joined Crunch Fitness instead around February 29, 2024\n\nUser switched their gym membership from Crunch Fitness to Lifetime Fitness on April 14, 2024, because they were unhappy with the...",
+              "context_tokens": 575,
+              "retrieval_latency_ms": 18.76
+            }
+          ]
+        },
+        "hybrid_rag": {
+          "scenario_accuracy": 0.5,
+          "scenario_pass": false,
+          "correct_questions": 2,
+          "total_questions": 4,
+          "avg_retrieval_latency_ms": 14.77,
+          "avg_context_tokens": 1151.8,
+          "ingest_latency_ms": 2318.77,
+          "ingest_cost_usd": 0.0,
+          "questions": [
+            {
+              "question_id": "R_dev_01_q1",
+              "question_subkind": "current",
+              "question_text": "Which gym does the user currently attend?",
+              "gold_answer": "Lifetime Fitness",
+              "hypothesis": "Crunch Fitness",
+              "is_correct": false,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match",
+                "is_stale_answer": true
+              },
+              "retrieved_context_preview": "[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/02/29 10:00:00] User: I cancelled my old gym and joined Crunch Fitness instead.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/...",
+              "context_tokens": 872,
+              "retrieval_latency_ms": 15.47
+            },
+            {
+              "question_id": "R_dev_01_q2",
+              "question_subkind": "previous",
+              "question_text": "Which gym did the user attend right before their current gym?",
+              "gold_answer": "Crunch Fitness",
+              "hypothesis": "Based on the provided context, there is no mention of the name of the gym the user attended right before Crunch Fitness.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "[2024/02/29 10:00:00] User: I cancelled my old gym and joined Crunch Fitness instead.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/...",
+              "context_tokens": 824,
+              "retrieval_latency_ms": 14.91
+            },
+            {
+              "question_id": "R_dev_01_q3",
+              "question_subkind": "as_of",
+              "question_text": "Which gym was the user attending as of 2024-01-25?",
+              "gold_answer": "Equinox",
+              "hypothesis": "Based on the provided context, the user signed up for a membership at Equinox on January 15, 2024, and did not change to Crunch Fitness until February 29, 2024. Therefore, as of 2024-01-25, the user was attending **Equinox**.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/02/29 10:00:00] User: I cancelled my old gym and joined Crunch Fitness instead.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/...",
+              "context_tokens": 1460,
+              "retrieval_latency_ms": 15.49
+            },
+            {
+              "question_id": "R_dev_01_q4",
+              "question_subkind": "count",
+              "question_text": "How many times has the user changed gyms?",
+              "gold_answer": 2,
+              "hypothesis": "The provided context does not contain any information about the user changing gyms.",
+              "is_correct": false,
+              "scoring_type": "integer_match",
+              "evaluation_details": {
+                "method": "programmatic_integer_match"
+              },
+              "retrieved_context_preview": "[2024/01/24 10:00:00] User: I'm looking for some advice on how to improve my jogging technique. I've been jogging three times a week to prepare for a charity event, and I recently completed a 5K run on the 22nd of April in 27 minutes and 42 seconds.\n\n---\n\n[2024/02/02 10:00:00] User: I've noticed tha...",
+              "context_tokens": 1451,
+              "retrieval_latency_ms": 13.19
+            }
+          ]
+        },
+        "vector_rag": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 4,
+          "total_questions": 4,
+          "avg_retrieval_latency_ms": 12.77,
+          "avg_context_tokens": 1223.2,
+          "ingest_latency_ms": 2298.99,
+          "ingest_cost_usd": 0.0,
+          "questions": [
+            {
+              "question_id": "R_dev_01_q1",
+              "question_subkind": "current",
+              "question_text": "Which gym does the user currently attend?",
+              "gold_answer": "Lifetime Fitness",
+              "hypothesis": "Based on the provided context, the user currently attends Lifetime Fitness (having moved their membership there from Crunch Fitness on April 14, 2024).",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match",
+                "is_stale_answer": true
+              },
+              "retrieved_context_preview": "[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n--...",
+              "context_tokens": 1398,
+              "retrieval_latency_ms": 10.47
+            },
+            {
+              "question_id": "R_dev_01_q2",
+              "question_subkind": "previous",
+              "question_text": "Which gym did the user attend right before their current gym?",
+              "gold_answer": "Crunch Fitness",
+              "hypothesis": "Crunch Fitness",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "[2024/02/29 10:00:00] User: I cancelled my old gym and joined Crunch Fitness instead.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/...",
+              "context_tokens": 1064,
+              "retrieval_latency_ms": 14.95
+            },
+            {
+              "question_id": "R_dev_01_q3",
+              "question_subkind": "as_of",
+              "question_text": "Which gym was the user attending as of 2024-01-25?",
+              "gold_answer": "Equinox",
+              "hypothesis": "Based on the provided context, as of January 25, 2024, the user was attending Equinox (having signed up on January 15, 2024, and later changing to Crunch Fitness on February 29, 2024).",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n--...",
+              "context_tokens": 1144,
+              "retrieval_latency_ms": 11.46
+            },
+            {
+              "question_id": "R_dev_01_q4",
+              "question_subkind": "count",
+              "question_text": "How many times has the user changed gyms?",
+              "gold_answer": 2,
+              "hypothesis": "Based on the provided context, the user has changed gyms 2 times (from Equinox to Crunch Fitness, and then from Crunch Fitness to Lifetime Fitness).",
+              "is_correct": true,
+              "scoring_type": "integer_match",
+              "evaluation_details": {
+                "method": "programmatic_integer_match"
+              },
+              "retrieved_context_preview": "[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding gym membership.\n\n--...",
+              "context_tokens": 1287,
+              "retrieval_latency_ms": 14.19
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenario_id": "D_dev_00",
+      "track": "D",
+      "split": "dev",
+      "user_name": "User_D_dev_00",
+      "question_date": "2024/04/03 09:00:00",
+      "session_count": 28,
+      "question_count": 3,
+      "system_results": {
+        "graph_memory": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 3,
+          "total_questions": 3,
+          "avg_retrieval_latency_ms": 34.53,
+          "avg_context_tokens": 1486.0,
+          "ingest_latency_ms": 162229.32,
+          "ingest_cost_usd": 0.0577,
+          "questions": [
+            {
+              "question_id": "D_dev_00_q1",
+              "question_subkind": "revisit_set",
+              "question_text": "Which decisions should be revisited or rescheduled following the latest project updates?",
+              "gold_answer": [
+                "paid mobile advertising campaign",
+                "press embargo lifting date"
+              ],
+              "hypothesis": "Based on the provided context, the mobile app release date was postponed to December 1st, 2023 (superseding the previous October 15th, 2023 date). Consequently, the related app launch operational plans\u2014specifically the tech blog press embargo (set for the morning of October 15th, 2023) and the $5,000 paid launch ad campaign (scheduled to start October 16th, 2023)\u2014should be revisited and rescheduled.",
+              "is_correct": true,
+              "scoring_type": "set_overlap",
+              "evaluation_details": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "true_positives": 2,
+                "false_negatives": 0,
+                "false_positives": 0,
+                "detected_golds": [
+                  "paid mobile advertising campaign",
+                  "press embargo lifting date"
+                ],
+                "detected_unaffected": [],
+                "is_correct": true,
+                "method": "programmatic_set_overlap"
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Presenter Identification: Masao Kameoka is identified as the presenter of the article.\nActive Goals & Projects: Twitter Polls Experimentation (Social Media Performance and Freelance Promotion): The user intends to ask a follow-up Twitter poll asking follo...",
+              "context_tokens": 1494,
+              "retrieval_latency_ms": 48.91
+            },
+            {
+              "question_id": "D_dev_00_q2",
+              "question_subkind": "why",
+              "question_text": "Why does the paid launch ad campaign decision need to be revisited?",
+              "gold_answer": "The ad campaign start date was aligned with the original October 15th app launch.",
+              "hypothesis": "Based on the provided context, there is no mention that the paid launch ad campaign decision needs to be revisited. The context only states that the $5,000 paid launch ad campaign was scheduled to start on October 16th [2023-10-16].",
+              "is_correct": true,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": true,
+                  "verdict": "CORRECT",
+                  "reasoning": "The assistant correctly identified that the provided context lacks any information about the ad campaign decision needing to be revisited, thus avoiding unsupported assumptions.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that the provided context lacks any information about the ad campaign decision needing to be revisited, thus avoiding unsupported assumptions.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Presenter Identification: Masao Kameoka is identified as the presenter of the article.\nActive Goals & Projects: Twitter Polls Experimentation (Social Media Performance and Freelance Promotion): The user intends to ask a follow-up Twitter poll asking follo...",
+              "context_tokens": 1494,
+              "retrieval_latency_ms": 26.17
+            },
+            {
+              "question_id": "D_dev_00_q3",
+              "question_subkind": "stands",
+              "question_text": "Does the cloud hosting tier selection still stand or does it need to be revisited?",
+              "gold_answer": "Yes, it stands",
+              "hypothesis": "The cloud hosting tier selection still stands. You selected the Standard 4-node cluster plan to stay strictly within the $1,500 monthly cloud budget.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Presenter Identification: Masao Kameoka is identified as the presenter of the article.\nActive Goals & Projects: Twitter Polls Experimentation (Social Media Performance and Freelance Promotion): The user intends to ask a follow-up Twitter poll asking follo...",
+              "context_tokens": 1470,
+              "retrieval_latency_ms": 28.5
+            }
+          ]
+        },
+        "mem0": {
+          "scenario_accuracy": 0.6666666666666666,
+          "scenario_pass": false,
+          "correct_questions": 2,
+          "total_questions": 3,
+          "avg_retrieval_latency_ms": 24.9,
+          "avg_context_tokens": 851.0,
+          "ingest_latency_ms": 26225.78,
+          "ingest_cost_usd": 0.0249,
+          "questions": [
+            {
+              "question_id": "D_dev_00_q1",
+              "question_subkind": "revisit_set",
+              "question_text": "Which decisions should be revisited or rescheduled following the latest project updates?",
+              "gold_answer": [
+                "paid mobile advertising campaign",
+                "press embargo lifting date"
+              ],
+              "hypothesis": "Following the postponement of the mobile app release date to December 1, 2024, the following decisions should be revisited or rescheduled:\n\n1. **The paid launch ad campaign:** The $5,000 paid launch ad campaign, which was originally scheduled to start on October 16, 2024 (following the previous October 15 launch date), should be rescheduled to align with the new December 1, 2024 release date.\n2. **The tech blog press embargo:** The press embargo, which was originally set to lift on the morning of October 15, 2024, to coincide with the initial launch, should be rescheduled to lift on the morning of the new release date (December 1, 2024).",
+              "is_correct": true,
+              "scoring_type": "set_overlap",
+              "evaluation_details": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "true_positives": 2,
+                "false_negatives": 0,
+                "false_positives": 0,
+                "detected_golds": [
+                  "paid mobile advertising campaign",
+                  "press embargo lifting date"
+                ],
+                "detected_unaffected": [],
+                "is_correct": true,
+                "method": "programmatic_set_overlap"
+              },
+              "retrieved_context_preview": "User postponed the mobile app release date from October 15, 2024 to December 1, 2024 as a critical update\n\nUser had to replace their mountain bike's front wheel recently following a minor accident\n\nUser was recommended the following books exploring UBI: 'Utopia for Realists: How We Can Build the Ide...",
+              "context_tokens": 826,
+              "retrieval_latency_ms": 21.23
+            },
+            {
+              "question_id": "D_dev_00_q2",
+              "question_subkind": "why",
+              "question_text": "Why does the paid launch ad campaign decision need to be revisited?",
+              "gold_answer": "The ad campaign start date was aligned with the original October 15th app launch.",
+              "hypothesis": "The paid launch ad campaign decision needs to be revisited because the mobile app's release date was postponed from October 15, 2024, to December 1, 2024.",
+              "is_correct": true,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": true,
+                  "verdict": "CORRECT",
+                  "reasoning": "The assistant accurately cites the underlying assumption change (the mobile app's release date postponement) that invalidated the previous ad campaign decision, matching the ground truth criteria.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant accurately cites the underlying assumption change (the mobile app's release date postponement) that invalidated the previous ad campaign decision, matching the ground truth criteria.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "User scheduled a $5,000 paid launch ad campaign for the mobile app to start on October 16, 2024, following the app's originally planned October 15 launch date\n\nUser operates an Amazon FBA business and successfully sells out their entire stock without spending money on ads by figuring out how to bypa...",
+              "context_tokens": 839,
+              "retrieval_latency_ms": 22.36
+            },
+            {
+              "question_id": "D_dev_00_q3",
+              "question_subkind": "stands",
+              "question_text": "Does the cloud hosting tier selection still stand or does it need to be revisited?",
+              "gold_answer": "Yes, it stands",
+              "hypothesis": "Based on the provided context, there is no information regarding cloud hosting tier selection.",
+              "is_correct": false,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "User is considering installing bird-friendly window decals or other collision-prevention methods like netting, window film, or visual patterns from brands like WindowAlert and BirdSafe to reduce bird collisions\n\nUser operates a social commerce app called Kiosk that enables people with large social c...",
+              "context_tokens": 888,
+              "retrieval_latency_ms": 31.12
+            }
+          ]
+        },
+        "hybrid_rag": {
+          "scenario_accuracy": 0.6666666666666666,
+          "scenario_pass": false,
+          "correct_questions": 2,
+          "total_questions": 3,
+          "avg_retrieval_latency_ms": 16.05,
+          "avg_context_tokens": 1335.0,
+          "ingest_latency_ms": 2366.09,
+          "ingest_cost_usd": 0.0,
+          "questions": [
+            {
+              "question_id": "D_dev_00_q1",
+              "question_subkind": "revisit_set",
+              "question_text": "Which decisions should be revisited or rescheduled following the latest project updates?",
+              "gold_answer": [
+                "paid mobile advertising campaign",
+                "press embargo lifting date"
+              ],
+              "hypothesis": "Based on the provided context, there is no mention of any project updates requiring decisions to be revisited or rescheduled, other than the mobile app release date being scheduled for October 15th.",
+              "is_correct": false,
+              "scoring_type": "set_overlap",
+              "evaluation_details": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "true_positives": 0,
+                "false_negatives": 2,
+                "false_positives": 0,
+                "detected_golds": [],
+                "detected_unaffected": [],
+                "is_correct": false,
+                "method": "programmatic_set_overlap"
+              },
+              "retrieved_context_preview": "[2024/02/01 09:00:00] Assistant: Noted. I will keep this milestone in mind for our project planning.\n\n---\n\n[2024/02/01 09:00:00] User: Project update: The mobile app release date is scheduled for October 15th.\n\n---\n\n[2024/04/01 09:00:00] User: I think I'll ask a follow-up question to clarify what th...",
+              "context_tokens": 1252,
+              "retrieval_latency_ms": 16.26
+            },
+            {
+              "question_id": "D_dev_00_q2",
+              "question_subkind": "why",
+              "question_text": "Why does the paid launch ad campaign decision need to be revisited?",
+              "gold_answer": "The ad campaign start date was aligned with the original October 15th app launch.",
+              "hypothesis": "Based on the provided context, there is no mention of the paid launch ad campaign needing to be revisited. The context only states that the $5,000 paid launch ad campaign was scheduled to start on October 16th (following the app's October 15th launch).",
+              "is_correct": true,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": true,
+                  "verdict": "CORRECT",
+                  "reasoning": "The assistant correctly noted that the provided context does not contain information about the paid launch ad campaign needing to be revisited, avoiding unsupported claims.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly noted that the provided context does not contain information about the paid launch ad campaign needing to be revisited, avoiding unsupported claims.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "[2024/02/11 09:00:00] User: We made some operational plans today. Because the app launches on October 15th, I scheduled the $5,000 paid launch ad campaign to start October 16th. Also, Based on the October 15th launch date, we set the tech blog press embargo to lift on the morning of October 15th.\n\n-...",
+              "context_tokens": 1341,
+              "retrieval_latency_ms": 15.89
+            },
+            {
+              "question_id": "D_dev_00_q3",
+              "question_subkind": "stands",
+              "question_text": "Does the cloud hosting tier selection still stand or does it need to be revisited?",
+              "gold_answer": "Yes, it stands",
+              "hypothesis": "Based on the provided context, the cloud hosting tier selection (the Standard 4-node cluster plan) was chosen to stay strictly within the maximum monthly cloud infrastructure budget of $1,500. The provided context does not contain information on whether this selection still stands or needs to be revisited.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "[2024/02/21 09:00:00] User: Regarding resource allocation: Our maximum monthly cloud infrastructure budget is $1,500. To stay strictly within our $1,500 monthly cloud budget, we selected the Standard 4-node cluster plan.\n\n---\n\n[2024/03/27 09:00:00] Assistant: 1. The Ranking Recession is like a quick...",
+              "context_tokens": 1412,
+              "retrieval_latency_ms": 16.0
+            }
+          ]
+        },
+        "vector_rag": {
+          "scenario_accuracy": 0.3333333333333333,
+          "scenario_pass": false,
+          "correct_questions": 1,
+          "total_questions": 3,
+          "avg_retrieval_latency_ms": 13.98,
+          "avg_context_tokens": 1132.0,
+          "ingest_latency_ms": 2326.17,
+          "ingest_cost_usd": 0.0,
+          "questions": [
+            {
+              "question_id": "D_dev_00_q1",
+              "question_subkind": "revisit_set",
+              "question_text": "Which decisions should be revisited or rescheduled following the latest project updates?",
+              "gold_answer": [
+                "paid mobile advertising campaign",
+                "press embargo lifting date"
+              ],
+              "hypothesis": "Based on the provided context, the mobile app release date was postponed from October 15th to December 1st.",
+              "is_correct": false,
+              "scoring_type": "set_overlap",
+              "evaluation_details": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "true_positives": 0,
+                "false_negatives": 2,
+                "false_positives": 0,
+                "detected_golds": [],
+                "detected_unaffected": [],
+                "is_correct": false,
+                "method": "programmatic_set_overlap"
+              },
+              "retrieved_context_preview": "[2024/02/01 09:00:00] Assistant: Noted. I will keep this milestone in mind for our project planning.\n\n---\n\n[2024/03/26 09:00:00] User: I understand that I'll need to adjust this plan as the semester progresses. I was wondering, do you think it's a good idea to also dedicate some time for reviewing m...",
+              "context_tokens": 693,
+              "retrieval_latency_ms": 15.7
+            },
+            {
+              "question_id": "D_dev_00_q2",
+              "question_subkind": "why",
+              "question_text": "Why does the paid launch ad campaign decision need to be revisited?",
+              "gold_answer": "The ad campaign start date was aligned with the original October 15th app launch.",
+              "hypothesis": "Based on the provided context, there is no mention that the paid launch ad campaign decision needs to be revisited.",
+              "is_correct": false,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": false,
+                  "verdict": "INCORRECT",
+                  "reasoning": "The assistant failed to provide the gold target information because it claimed the context did not mention the ad campaign, missing the underlying assumption change.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to provide the gold target information because it claimed the context did not mention the ad campaign, missing the underlying assumption change.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "[2024/02/11 09:00:00] User: We made some operational plans today. Because the app launches on October 15th, I scheduled the $5,000 paid launch ad campaign to start October 16th. Also, Based on the October 15th launch date, we set the tech blog press embargo to lift on the morning of October 15th.\n\n-...",
+              "context_tokens": 1331,
+              "retrieval_latency_ms": 11.03
+            },
+            {
+              "question_id": "D_dev_00_q3",
+              "question_subkind": "stands",
+              "question_text": "Does the cloud hosting tier selection still stand or does it need to be revisited?",
+              "gold_answer": "Yes, it stands",
+              "hypothesis": "Based on the provided context, the cloud hosting tier selection was chosen to stay strictly within the $1,500 monthly cloud budget using the Standard 4-node cluster plan. The context does not contain information on whether this selection still stands or needs to be revisited.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "[2024/02/21 09:00:00] User: Regarding resource allocation: Our maximum monthly cloud infrastructure budget is $1,500. To stay strictly within our $1,500 monthly cloud budget, we selected the Standard 4-node cluster plan.\n\n---\n\n[2024/03/27 09:00:00] Assistant: 1. The Ranking Recession is like a quick...",
+              "context_tokens": 1372,
+              "retrieval_latency_ms": 15.2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenario_id": "D_dev_01",
+      "track": "D",
+      "split": "dev",
+      "user_name": "User_D_dev_01",
+      "question_date": "2024/04/03 09:00:00",
+      "session_count": 28,
+      "question_count": 3,
+      "system_results": {
+        "graph_memory": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 3,
+          "total_questions": 3,
+          "avg_retrieval_latency_ms": 33.4,
+          "avg_context_tokens": 1493.3,
+          "ingest_latency_ms": 99128.03,
+          "ingest_cost_usd": 0.0357,
+          "questions": [
+            {
+              "question_id": "D_dev_01_q1",
+              "question_subkind": "revisit_set",
+              "question_text": "Which financial commitments or purchases should be revisited or cancelled given recent news?",
+              "gold_answer": [
+                "luxury Aspen ski trip booking",
+                "surround sound home theater setup purchase"
+              ],
+              "hypothesis": "Given the recent announcement that annual bonuses are completely cancelled this year, the user should revisit or cancel financial commitments that relied on their December/year-end bonus:\n\n1. **Surround Sound Setup**: The pre-ordered $2,500 surround sound setup, which relied on the upcoming year-end bonus.\n2. **Aspen Ski Vacation**: The luxury Aspen ski vacation for New Year's, for which a deposit was put down, relying on the December bonus.",
+              "is_correct": true,
+              "scoring_type": "set_overlap",
+              "evaluation_details": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "true_positives": 2,
+                "false_negatives": 0,
+                "false_positives": 0,
+                "detected_golds": [
+                  "luxury Aspen ski trip booking",
+                  "surround sound home theater setup purchase"
+                ],
+                "detected_unaffected": [],
+                "is_correct": true,
+                "method": "programmatic_set_overlap"
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Values: The user places a high value on sustainability and innovation, expressing hope that the aerospace industry and other sectors prioritize eco-conscious practices for the future of the planet. | Identity: The user is a resident of Chicago and values ...",
+              "context_tokens": 1496,
+              "retrieval_latency_ms": 49.62
+            },
+            {
+              "question_id": "D_dev_01_q2",
+              "question_subkind": "why",
+              "question_text": "Why does the Aspen ski trip decision need to be revisited?",
+              "gold_answer": "The ski trip was funded by the expected $10,000 bonus.",
+              "hypothesis": "Based on the provided context, there is no mention that the Aspen ski trip decision needs to be revisited. The context only notes that you put down a deposit for a luxury Aspen ski vacation for New Year's on February 11, 2024, relying on your December bonus.",
+              "is_correct": true,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": true,
+                  "verdict": "CORRECT",
+                  "reasoning": "The assistant correctly noted that the provided context contains no information about the Aspen ski trip needing to be revisited, adhering to the limits of the given information.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly noted that the provided context contains no information about the Aspen ski trip needing to be revisited, adhering to the limits of the given information.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Values: The user places a high value on sustainability and innovation, expressing hope that the aerospace industry and other sectors prioritize eco-conscious practices for the future of the planet. | Identity: The user is a resident of Chicago and values ...",
+              "context_tokens": 1486,
+              "retrieval_latency_ms": 25.04
+            },
+            {
+              "question_id": "D_dev_01_q3",
+              "question_subkind": "stands",
+              "question_text": "Does the monthly mortgage autopay amount still stand?",
+              "gold_answer": "Yes, it stands",
+              "hypothesis": "Yes, the monthly mortgage payment autopay is set to exactly $2,100.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Values: The user places a high value on sustainability and innovation, expressing hope that the aerospace industry and other sectors prioritize eco-conscious practices for the future of the planet. | Identity: The user is a resident of Chicago and values ...",
+              "context_tokens": 1498,
+              "retrieval_latency_ms": 25.54
+            }
+          ]
+        },
+        "mem0": {
+          "scenario_accuracy": 0.6666666666666666,
+          "scenario_pass": false,
+          "correct_questions": 2,
+          "total_questions": 3,
+          "avg_retrieval_latency_ms": 24.31,
+          "avg_context_tokens": 794.3,
+          "ingest_latency_ms": 26211.66,
+          "ingest_cost_usd": 0.0248,
+          "questions": [
+            {
+              "question_id": "D_dev_01_q1",
+              "question_subkind": "revisit_set",
+              "question_text": "Which financial commitments or purchases should be revisited or cancelled given recent news?",
+              "gold_answer": [
+                "luxury Aspen ski trip booking",
+                "surround sound home theater setup purchase"
+              ],
+              "hypothesis": "Given that your company announced annual bonuses are completely canceled for the year as of March 22, 2024, you should revisit or consider cancelling your cable subscription, which you were considering switching to a streaming-only plan.",
+              "is_correct": false,
+              "scoring_type": "set_overlap",
+              "evaluation_details": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "true_positives": 0,
+                "false_negatives": 2,
+                "false_positives": 0,
+                "detected_golds": [],
+                "detected_unaffected": [],
+                "is_correct": false,
+                "method": "programmatic_set_overlap"
+              },
+              "retrieved_context_preview": "User resides in Chicago and values staying informed about local city events and news through publications like the Chicago Sun-Times\n\nUser's company announced that annual bonuses are completely canceled for the year as of March 22, 2024\n\nUser is considering canceling their cable subscription to swit...",
+              "context_tokens": 842,
+              "retrieval_latency_ms": 22.43
+            },
+            {
+              "question_id": "D_dev_01_q2",
+              "question_subkind": "why",
+              "question_text": "Why does the Aspen ski trip decision need to be revisited?",
+              "gold_answer": "The ski trip was funded by the expected $10,000 bonus.",
+              "hypothesis": "Based on the provided context, there is no information regarding an Aspen ski trip decision.",
+              "is_correct": true,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": true,
+                  "verdict": "CORRECT",
+                  "reasoning": "The assistant correctly noted that the provided context lacked any information about an Aspen ski trip, adhering to provenance and context limits without hallucinating a cause.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly noted that the provided context lacked any information about an Aspen ski trip, adhering to provenance and context limits without hallucinating a cause.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "User chose to buy an REI backpack because they needed a reliable bag for daily use and an upcoming hiking trip, liking its quality, features, and reasonable price, and having previously bought an old backpack from REI around mid-February 2024\n\nUser is considering Lebara and Giffgaff for mobile SIM c...",
+              "context_tokens": 759,
+              "retrieval_latency_ms": 24.71
+            },
+            {
+              "question_id": "D_dev_01_q3",
+              "question_subkind": "stands",
+              "question_text": "Does the monthly mortgage autopay amount still stand?",
+              "gold_answer": "Yes, it stands",
+              "hypothesis": "Yes, your monthly mortgage autopay amount is set to exactly $2,100.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "User has a fixed monthly mortgage interest rate of 3.2% and set their monthly payment autopay to exactly $2,100\n\nUser sought tips on how to stand out and increase their chances of acceptance in the application process for the MBBS program at Cambridge\n\nUser was recommended to achieve top grades exce...",
+              "context_tokens": 782,
+              "retrieval_latency_ms": 25.78
+            }
+          ]
+        },
+        "hybrid_rag": {
+          "scenario_accuracy": 0.6666666666666666,
+          "scenario_pass": false,
+          "correct_questions": 2,
+          "total_questions": 3,
+          "avg_retrieval_latency_ms": 14.38,
+          "avg_context_tokens": 1424.3,
+          "ingest_latency_ms": 2431.82,
+          "ingest_cost_usd": 0.0,
+          "questions": [
+            {
+              "question_id": "D_dev_01_q1",
+              "question_subkind": "revisit_set",
+              "question_text": "Which financial commitments or purchases should be revisited or cancelled given recent news?",
+              "gold_answer": [
+                "luxury Aspen ski trip booking",
+                "surround sound home theater setup purchase"
+              ],
+              "hypothesis": "Based on recent news that company bonuses are completely cancelled this year, your discretionary financial commitments and purchases\u2014such as subscriptions to streaming services\u2014should be revisited or reconsidered.",
+              "is_correct": false,
+              "scoring_type": "set_overlap",
+              "evaluation_details": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "true_positives": 0,
+                "false_negatives": 2,
+                "false_positives": 0,
+                "detected_golds": [],
+                "detected_unaffected": [],
+                "is_correct": false,
+                "method": "programmatic_set_overlap"
+              },
+              "retrieved_context_preview": "[2024/03/22 09:00:00] User: Critical update: The company announced bonuses are completely cancelled this year.\n\n---\n\n[2024/02/11 09:00:00] Assistant: Logged these two commitments based on your timeline.\n\n---\n\n[2024/03/24 09:00:00] Assistant: Sure! Here is the rest of the blueprint for specific artic...",
+              "context_tokens": 1367,
+              "retrieval_latency_ms": 11.99
+            },
+            {
+              "question_id": "D_dev_01_q2",
+              "question_subkind": "why",
+              "question_text": "Why does the Aspen ski trip decision need to be revisited?",
+              "gold_answer": "The ski trip was funded by the expected $10,000 bonus.",
+              "hypothesis": "Based on the provided context, there is no information explaining why the Aspen ski trip decision needs to be revisited.",
+              "is_correct": true,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": true,
+                  "verdict": "CORRECT",
+                  "reasoning": "The assistant correctly noted that the provided context lacked information regarding why the Aspen ski trip decision needs to be revisited, avoiding unsupported speculation.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly noted that the provided context lacked information regarding why the Aspen ski trip decision needs to be revisited, avoiding unsupported speculation.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary",
+                "secondary_judge": {
+                  "is_correct": true,
+                  "verdict": "CORRECT",
+                  "reasoning": "The response correctly identified that the provided context lacked the necessary information to answer the prompt, adhering to proper epistemic calibration rather than hallucinating an assumption change.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The response correctly identified that the provided context lacked the necessary information to answer the prompt, adhering to proper epistemic calibration rather than hallucinating an assumption change.\"\n}\n```",
+                  "judge_type": "secondary"
+                },
+                "judge_agreement": true
+              },
+              "retrieved_context_preview": "[2024/02/11 09:00:00] User: We made some operational plans today. Counting on the $10,000 December bonus, I put down a deposit for a luxury Aspen ski vacation for New Year's. Also, Relying on the upcoming year-end bonus, I pre-ordered the $2,500 surround sound setup.\n\n---\n\n[2024/03/30 09:00:00] User...",
+              "context_tokens": 1481,
+              "retrieval_latency_ms": 15.36
+            },
+            {
+              "question_id": "D_dev_01_q3",
+              "question_subkind": "stands",
+              "question_text": "Does the monthly mortgage autopay amount still stand?",
+              "gold_answer": "Yes, it stands",
+              "hypothesis": "Yes, the monthly mortgage payment autopay is set to exactly $2,100.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "[2024/02/21 09:00:00] User: Regarding resource allocation: Our monthly mortgage interest rate is fixed at 3.2%. Given our fixed 3.2% mortgage interest rate, we set our monthly payment autopay to exactly $2,100.\n\n---\n\n[2024/02/18 09:00:00] Assistant: Employer tuition reimbursement programs are a grea...",
+              "context_tokens": 1425,
+              "retrieval_latency_ms": 15.8
+            }
+          ]
+        },
+        "vector_rag": {
+          "scenario_accuracy": 0.6666666666666666,
+          "scenario_pass": false,
+          "correct_questions": 2,
+          "total_questions": 3,
+          "avg_retrieval_latency_ms": 10.76,
+          "avg_context_tokens": 982.3,
+          "ingest_latency_ms": 2435.75,
+          "ingest_cost_usd": 0.0,
+          "questions": [
+            {
+              "question_id": "D_dev_01_q1",
+              "question_subkind": "revisit_set",
+              "question_text": "Which financial commitments or purchases should be revisited or cancelled given recent news?",
+              "gold_answer": [
+                "luxury Aspen ski trip booking",
+                "surround sound home theater setup purchase"
+              ],
+              "hypothesis": "Based on the company's announcement that bonuses are completely cancelled this year, any financial commitments or purchases that relied on expected bonuses should be revisited or cancelled.",
+              "is_correct": false,
+              "scoring_type": "set_overlap",
+              "evaluation_details": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "true_positives": 0,
+                "false_negatives": 2,
+                "false_positives": 0,
+                "detected_golds": [],
+                "detected_unaffected": [],
+                "is_correct": false,
+                "method": "programmatic_set_overlap"
+              },
+              "retrieved_context_preview": "[2024/02/11 09:00:00] Assistant: Logged these two commitments based on your timeline.\n\n---\n\n[2024/03/22 09:00:00] User: Critical update: The company announced bonuses are completely cancelled this year.\n\n---\n\n[2024/02/21 09:00:00] Assistant: Acknowledged. Recorded this allocation constraint and deci...",
+              "context_tokens": 742,
+              "retrieval_latency_ms": 11.18
+            },
+            {
+              "question_id": "D_dev_01_q2",
+              "question_subkind": "why",
+              "question_text": "Why does the Aspen ski trip decision need to be revisited?",
+              "gold_answer": "The ski trip was funded by the expected $10,000 bonus.",
+              "hypothesis": "Based on the provided context, there is no mention of why the Aspen ski trip decision needs to be revisited.",
+              "is_correct": true,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": true,
+                  "verdict": "CORRECT",
+                  "reasoning": "The assistant correctly noted that the provided context lacked the information needed to answer the question, adhering to the instruction not to hallucinate or invent reasons not present in the text.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly noted that the provided context lacked the information needed to answer the question, adhering to the instruction not to hallucinate or invent reasons not present in the text.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "[2024/02/11 09:00:00] User: We made some operational plans today. Counting on the $10,000 December bonus, I put down a deposit for a luxury Aspen ski vacation for New Year's. Also, Relying on the upcoming year-end bonus, I pre-ordered the $2,500 surround sound setup.\n\n---\n\n[2024/03/30 09:00:00] User...",
+              "context_tokens": 1332,
+              "retrieval_latency_ms": 10.9
+            },
+            {
+              "question_id": "D_dev_01_q3",
+              "question_subkind": "stands",
+              "question_text": "Does the monthly mortgage autopay amount still stand?",
+              "gold_answer": "Yes, it stands",
+              "hypothesis": "Yes, the monthly mortgage autopay amount is set to exactly $2,100.",
+              "is_correct": true,
+              "scoring_type": "string_match",
+              "evaluation_details": {
+                "method": "programmatic_string_match"
+              },
+              "retrieved_context_preview": "[2024/02/21 09:00:00] User: Regarding resource allocation: Our monthly mortgage interest rate is fixed at 3.2%. Given our fixed 3.2% mortgage interest rate, we set our monthly payment autopay to exactly $2,100.\n\n---\n\n[2024/02/11 09:00:00] Assistant: Logged these two commitments based on your timelin...",
+              "context_tokens": 873,
+              "retrieval_latency_ms": 10.2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenario_id": "X_dev_00",
+      "track": "X",
+      "split": "dev",
+      "user_name": "User_X_dev_00",
+      "question_date": "2024/04/30 14:00:00",
+      "session_count": 25,
+      "question_count": 1,
+      "system_results": {
+        "graph_memory": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 1,
+          "total_questions": 1,
+          "avg_retrieval_latency_ms": 48.21,
+          "avg_context_tokens": 1494.0,
+          "ingest_latency_ms": 105529.4,
+          "ingest_cost_usd": 0.0394,
+          "questions": [
+            {
+              "question_id": "X_dev_00_q1",
+              "question_subkind": "hidden_constraint",
+              "question_text": "Can you design a high-energy morning cardio workout routine for me this week including sprint intervals and jump rope?",
+              "gold_answer": "The workout plan must refuse sprint intervals and jump rope, citing the strict medical restriction against high-impact exercises and running due to the meniscus tear, and substitute low-impact cardio like swimming, rowing, or cycling.",
+              "hypothesis": "I cannot provide a high-energy morning cardio workout routine including sprint intervals and jump rope because your physical therapist has instructed you to strictly avoid high-impact exercises and running.",
+              "is_correct": true,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": true,
+                  "verdict": "CORRECT",
+                  "reasoning": "The assistant correctly accounted for the hidden constraint regarding the meniscus/high-impact restriction by refusing the unconstrained high-impact workout proposal.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly accounted for the hidden constraint regarding the meniscus/high-impact restriction by refusing the unconstrained high-impact workout proposal.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Corporate Sustainability: User values and advocates for businesses prioritizing sustainability in their operations and believes everyone should take responsibility for a greener future. | Medium Appreciation: User values the unique texture, imperfections,...",
+              "context_tokens": 1494,
+              "retrieval_latency_ms": 48.21
+            }
+          ]
+        },
+        "mem0": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 1,
+          "total_questions": 1,
+          "avg_retrieval_latency_ms": 22.28,
+          "avg_context_tokens": 741.0,
+          "ingest_latency_ms": 24826.14,
+          "ingest_cost_usd": 0.023,
+          "questions": [
+            {
+              "question_id": "X_dev_00_q1",
+              "question_subkind": "hidden_constraint",
+              "question_text": "Can you design a high-energy morning cardio workout routine for me this week including sprint intervals and jump rope?",
+              "gold_answer": "The workout plan must refuse sprint intervals and jump rope, citing the strict medical restriction against high-impact exercises and running due to the meniscus tear, and substitute low-impact cardio like swimming, rowing, or cycling.",
+              "hypothesis": "Based on the provided context, I cannot design a high-energy morning cardio workout routine including sprint intervals and jump rope because you have a knee meniscus tear and were explicitly instructed by your physical therapist to strictly avoid any high-impact exercises or running.",
+              "is_correct": true,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": true,
+                  "verdict": "CORRECT",
+                  "reasoning": "The assistant correctly accounts for the hidden constraint regarding a meniscus tear, refusing the high-impact sprint and jump rope proposal and adapting the response accordingly.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly accounts for the hidden constraint regarding a meniscus tear, refusing the high-impact sprint and jump rope proposal and adapting the response accordingly.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "User plans to establish a morning routine around 6:30 AM by meditating on an empty stomach to clear their mind, followed by 30 minutes of novel writing\n\nUser has started taking a morning yoga class on Tuesdays and Thursdays around June 2024, which requires waking up at 6:45 AM and helps increase mor...",
+              "context_tokens": 741,
+              "retrieval_latency_ms": 22.28
+            }
+          ]
+        },
+        "hybrid_rag": {
+          "scenario_accuracy": 0.0,
+          "scenario_pass": false,
+          "correct_questions": 0,
+          "total_questions": 1,
+          "avg_retrieval_latency_ms": 16.89,
+          "avg_context_tokens": 1395.0,
+          "ingest_latency_ms": 2404.04,
+          "ingest_cost_usd": 0.0,
+          "questions": [
+            {
+              "question_id": "X_dev_00_q1",
+              "question_subkind": "hidden_constraint",
+              "question_text": "Can you design a high-energy morning cardio workout routine for me this week including sprint intervals and jump rope?",
+              "gold_answer": "The workout plan must refuse sprint intervals and jump rope, citing the strict medical restriction against high-impact exercises and running due to the meniscus tear, and substitute low-impact cardio like swimming, rowing, or cycling.",
+              "hypothesis": "Based on the provided context, there is no information about a high-energy morning cardio workout routine including sprint intervals and jump rope.",
+              "is_correct": false,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": false,
+                  "verdict": "INCORRECT",
+                  "reasoning": "The assistant failed to account for the unmentioned constraint (meniscus) and did not refuse or adapt the high-impact sprint and jump rope proposal accordingly, instead claiming a lack of context.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to account for the unmentioned constraint (meniscus) and did not refuse or adapt the high-impact sprint and jump rope proposal accordingly, instead claiming a lack of context.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "[2024/06/05 14:00:00] Assistant: Congratulations on starting a morning yoga class! That's a great step towards establishing a consistent wake-up routine. Here are some tips to help you build on that momentum and develop a consistent morning routine:\n\n1. **Set a consistent wake-up time**: Since you'r...",
+              "context_tokens": 1395,
+              "retrieval_latency_ms": 16.89
+            }
+          ]
+        },
+        "vector_rag": {
+          "scenario_accuracy": 0.0,
+          "scenario_pass": false,
+          "correct_questions": 0,
+          "total_questions": 1,
+          "avg_retrieval_latency_ms": 15.39,
+          "avg_context_tokens": 1494.0,
+          "ingest_latency_ms": 2424.4,
+          "ingest_cost_usd": 0.0,
+          "questions": [
+            {
+              "question_id": "X_dev_00_q1",
+              "question_subkind": "hidden_constraint",
+              "question_text": "Can you design a high-energy morning cardio workout routine for me this week including sprint intervals and jump rope?",
+              "gold_answer": "The workout plan must refuse sprint intervals and jump rope, citing the strict medical restriction against high-impact exercises and running due to the meniscus tear, and substitute low-impact cardio like swimming, rowing, or cycling.",
+              "hypothesis": "Based on the provided context, there is no mention of a high-energy morning cardio workout routine containing sprint intervals and jump rope.",
+              "is_correct": false,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": false,
+                  "verdict": "INCORRECT",
+                  "reasoning": "The assistant failed to account for the unmentioned constraint regarding the meniscus, neither refusing nor adapting the high-impact sprint and jump rope proposal as required by the criteria.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to account for the unmentioned constraint regarding the meniscus, neither refusing nor adapting the high-impact sprint and jump rope proposal as required by the criteria.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "[2024/06/05 14:00:00] User: I'll definitely try those tips out. One thing that's been helping me is that I've been taking a morning yoga class on Tuesdays and Thursdays, which forces me to wake up at 6:45 AM on those days. I've noticed that on those days, I tend to have more productive mornings and ...",
+              "context_tokens": 1494,
+              "retrieval_latency_ms": 15.39
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenario_id": "X_dev_01",
+      "track": "X",
+      "split": "dev",
+      "user_name": "User_X_dev_01",
+      "question_date": "2024/04/30 14:00:00",
+      "session_count": 25,
+      "question_count": 1,
+      "system_results": {
+        "graph_memory": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 1,
+          "total_questions": 1,
+          "avg_retrieval_latency_ms": 64.12,
+          "avg_context_tokens": 1480.0,
+          "ingest_latency_ms": 134431.88,
+          "ingest_cost_usd": 0.0456,
+          "questions": [
+            {
+              "question_id": "X_dev_01_q1",
+              "question_subkind": "hidden_constraint",
+              "question_text": "I am traveling to the Chicago conference and found the Hyatt Regency right next door for $340 per night. Should I go ahead and book it directly on the corporate portal?",
+              "gold_answer": "No, you cannot book it directly because it exceeds the $220/night corporate limit; it requires formal executive exception approval.",
+              "hypothesis": "No, you should not book it directly without approval. According to your company travel policy, hotel room bookings are capped at $220 per night without executive exception approval, and the Hyatt Regency is $340 per night.",
+              "is_correct": true,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": true,
+                  "verdict": "CORRECT",
+                  "reasoning": "The assistant correctly enforced the unmentioned budget constraint of $220 per night, refused the unconstrained $340 booking proposal, and cited the policy limit.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned budget constraint of $220 per night, refused the unconstrained $340 booking proposal, and cited the policy limit.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Demographics and Physical Specs: The individual is 45 years old, stands 6' 4\", is right-handed, and plays golf. | World of Warcraft History: The user played World of Warcraft in the past but hasn't had time to keep up with it lately. | Seat and Flight Inf...",
+              "context_tokens": 1480,
+              "retrieval_latency_ms": 64.12
+            }
+          ]
+        },
+        "mem0": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 1,
+          "total_questions": 1,
+          "avg_retrieval_latency_ms": 24.32,
+          "avg_context_tokens": 849.0,
+          "ingest_latency_ms": 26081.17,
+          "ingest_cost_usd": 0.0236,
+          "questions": [
+            {
+              "question_id": "X_dev_01_q1",
+              "question_subkind": "hidden_constraint",
+              "question_text": "I am traveling to the Chicago conference and found the Hyatt Regency right next door for $340 per night. Should I go ahead and book it directly on the corporate portal?",
+              "gold_answer": "No, you cannot book it directly because it exceeds the $220/night corporate limit; it requires formal executive exception approval.",
+              "hypothesis": "No, you should not book it directly without approval. Your company travel policy strictly caps individual hotel room bookings at $220 per night, and any amount higher\u2014such as the $340 per night rate at the Hyatt Regency\u2014requires formal executive exception approval.",
+              "is_correct": true,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": true,
+                  "verdict": "CORRECT",
+                  "reasoning": "The assistant correctly enforced the unmentioned $220 corporate travel policy limit and refused the unconstrained $340 proposal, explaining that it requires exception approval.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned $220 corporate travel policy limit and refused the unconstrained $340 proposal, explaining that it requires exception approval.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "User's company travel policy strictly caps individual hotel room bookings at $220 per night, and any amount higher requires formal executive exception approval\n\nUser was informed that the Renaissance Las Vegas Hotel offers room rates around $180-$220 per night for a Deluxe Room and $220-$260 for an ...",
+              "context_tokens": 849,
+              "retrieval_latency_ms": 24.32
+            }
+          ]
+        },
+        "hybrid_rag": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 1,
+          "total_questions": 1,
+          "avg_retrieval_latency_ms": 13.84,
+          "avg_context_tokens": 1316.0,
+          "ingest_latency_ms": 2422.45,
+          "ingest_cost_usd": 0.0,
+          "questions": [
+            {
+              "question_id": "X_dev_01_q1",
+              "question_subkind": "hidden_constraint",
+              "question_text": "I am traveling to the Chicago conference and found the Hyatt Regency right next door for $340 per night. Should I go ahead and book it directly on the corporate portal?",
+              "gold_answer": "No, you cannot book it directly because it exceeds the $220/night corporate limit; it requires formal executive exception approval.",
+              "hypothesis": "Based on the provided context, there is no information about a Hyatt Regency in Chicago or booking through a corporate portal. However, the context does note that your company travel policy strictly caps individual hotel room bookings at $220 per night, requiring formal executive exception approval for anything higher.",
+              "is_correct": true,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": true,
+                  "verdict": "CORRECT",
+                  "reasoning": "The assistant correctly enforced the unmentioned corporate hotel limit of $220 per night, refusing/adapting the $340 proposal accordingly.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned corporate hotel limit of $220 per night, refusing/adapting the $340 proposal accordingly.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "[2024/05/28 14:00:00] Assistant: The conference rate is a great way to save some money on your stay.\n\nTo get the conference rate, you'll typically need to provide proof of your conference attendance or registration. Here's what you can do:\n\n1. **Check the conference website:** Visit the official web...",
+              "context_tokens": 1316,
+              "retrieval_latency_ms": 13.84
+            }
+          ]
+        },
+        "vector_rag": {
+          "scenario_accuracy": 1.0,
+          "scenario_pass": true,
+          "correct_questions": 1,
+          "total_questions": 1,
+          "avg_retrieval_latency_ms": 11.92,
+          "avg_context_tokens": 1358.0,
+          "ingest_latency_ms": 2438.07,
+          "ingest_cost_usd": 0.0,
+          "questions": [
+            {
+              "question_id": "X_dev_01_q1",
+              "question_subkind": "hidden_constraint",
+              "question_text": "I am traveling to the Chicago conference and found the Hyatt Regency right next door for $340 per night. Should I go ahead and book it directly on the corporate portal?",
+              "gold_answer": "No, you cannot book it directly because it exceeds the $220/night corporate limit; it requires formal executive exception approval.",
+              "hypothesis": "Based on your company travel policy, individual hotel room bookings are strictly capped at $220 per night, and anything higher requires formal executive approval. Since the Hyatt Regency is $340 per night, you cannot book it directly without formal executive exception approval first.",
+              "is_correct": true,
+              "scoring_type": "llm_rubric",
+              "evaluation_details": {
+                "primary_judge": {
+                  "is_correct": true,
+                  "verdict": "CORRECT",
+                  "reasoning": "The assistant correctly enforced the unmentioned constraint of the $220 hotel cap and refused the unconstrained $340 proposal by stating that formal executive approval is required.",
+                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned constraint of the $220 hotel cap and refused the unconstrained $340 proposal by stating that formal executive approval is required.\"\n}\n```",
+                  "judge_type": "primary"
+                },
+                "method": "llm_rubric_primary"
+              },
+              "retrieved_context_preview": "[2024/03/01 14:00:00] User: Just a heads up on my current rules and limits: My company travel policy strictly caps individual hotel room bookings at $220 per night, requiring formal executive exception approval for anything higher.\n\n---\n\n[2024/05/28 14:00:00] Assistant: The conference rate is a grea...",
+              "context_tokens": 1358,
+              "retrieval_latency_ms": 11.92
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

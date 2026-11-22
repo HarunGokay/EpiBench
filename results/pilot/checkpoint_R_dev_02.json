@@ -1,0 +1,376 @@
+{
+  "scenario_id": "R_dev_02",
+  "track": "R",
+  "split": "dev",
+  "user_name": "User_R_dev_02",
+  "question_date": "2024/04/29 10:00:00",
+  "session_count": 9,
+  "question_count": 4,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 4,
+      "total_questions": 4,
+      "avg_retrieval_latency_ms": 25.23,
+      "avg_context_tokens": 780.0,
+      "ingest_latency_ms": 35448.29,
+      "ingest_cost_usd": 0.0143,
+      "questions": [
+        {
+          "question_id": "R_dev_02_q1",
+          "question_subkind": "current",
+          "question_text": "What is the user's current monthly savings target?",
+          "gold_answer": "$900",
+          "hypothesis": "The user's current monthly savings target is $900.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match",
+            "is_stale_answer": false
+          },
+          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Goal (Monthly Savings Goal): Revised monthly savings target to $900 due to unexpected car expenses. | Buckinghamshire History (Local History Interests): Interested in learning about lesser-known historical events, figures, and landmarks in Buckinghamshi...",
+          "context_tokens": 780,
+          "retrieval_latency_ms": 31.52
+        },
+        {
+          "question_id": "R_dev_02_q2",
+          "question_subkind": "previous",
+          "question_text": "What was the user's monthly savings target prior to the current goal?",
+          "gold_answer": "$1,200",
+          "hypothesis": "Prior to the current monthly savings target of $900, the user's monthly savings target was $1,200.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Goal (Monthly Savings Goal): Revised monthly savings target to $900 due to unexpected car expenses. | Buckinghamshire History (Local History Interests): Interested in learning about lesser-known historical events, figures, and landmarks in Buckinghamshi...",
+          "context_tokens": 780,
+          "retrieval_latency_ms": 22.52
+        },
+        {
+          "question_id": "R_dev_02_q3",
+          "question_subkind": "as_of",
+          "question_text": "What was the monthly savings target as of 2024-01-25?",
+          "gold_answer": "$750",
+          "hypothesis": "As of 2024-01-25, the monthly savings target was $750.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Goal (Monthly Savings Goal): Revised monthly savings target to $900 due to unexpected car expenses. | Buckinghamshire History (Local History Interests): Interested in learning about lesser-known historical events, figures, and landmarks in Buckinghamshi...",
+          "context_tokens": 780,
+          "retrieval_latency_ms": 24.57
+        },
+        {
+          "question_id": "R_dev_02_q4",
+          "question_subkind": "count",
+          "question_text": "How many times has the user adjusted their monthly savings target?",
+          "gold_answer": 2,
+          "hypothesis": "Based on the provided context, the user has adjusted their monthly savings target 3 times:\n1. Initially establishing a goal of $750.\n2. Increasing the target to $1,200 on 2024-02-29 after getting a raise.\n3. Revising the target to $900 on 2024-04-14 due to unexpected car expenses.",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Goal (Monthly Savings Goal): Revised monthly savings target to $900 due to unexpected car expenses. | Buckinghamshire History (Local History Interests): Interested in learning about lesser-known historical events, figures, and landmarks in Buckinghamshi...",
+          "context_tokens": 780,
+          "retrieval_latency_ms": 22.32
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 0.75,
+      "scenario_pass": false,
+      "correct_questions": 3,
+      "total_questions": 4,
+      "avg_retrieval_latency_ms": 5.77,
+      "avg_context_tokens": 1177.0,
+      "ingest_latency_ms": 513.67,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "R_dev_02_q1",
+          "question_subkind": "current",
+          "question_text": "What is the user's current monthly savings target?",
+          "gold_answer": "$900",
+          "hypothesis": "The user's current monthly savings target is $900.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match",
+            "is_stale_answer": false
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n---\n\n[2024/02/29 10:00:00] User: I got a raise, so I'm increasing my monthly savings ta...",
+          "context_tokens": 1210,
+          "retrieval_latency_ms": 5.6
+        },
+        {
+          "question_id": "R_dev_02_q2",
+          "question_subkind": "previous",
+          "question_text": "What was the user's monthly savings target prior to the current goal?",
+          "gold_answer": "$1,200",
+          "hypothesis": "Prior to the current monthly savings goal of $900, the user's savings target was $1,200.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] User: I'm establishing a strict monthly savings goal of $750.\n\n---\n\n[2024/04/14 10:00:00] User: Unexpected car expenses came up, so I had to revise my monthly savings goal to $900.\n\n---\n\n[2024/02/29 10:00:00] User: I got a raise, so I'm increasing my monthly savings target to $...",
+          "context_tokens": 1210,
+          "retrieval_latency_ms": 6.08
+        },
+        {
+          "question_id": "R_dev_02_q3",
+          "question_subkind": "as_of",
+          "question_text": "What was the monthly savings target as of 2024-01-25?",
+          "gold_answer": "$750",
+          "hypothesis": "As of 2024-01-25, your monthly savings target was $750.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n---\n\n[2024/01/15 10:00:00] User: I'm establishing a strict monthly savings goal of $750...",
+          "context_tokens": 1210,
+          "retrieval_latency_ms": 5.2
+        },
+        {
+          "question_id": "R_dev_02_q4",
+          "question_subkind": "count",
+          "question_text": "How many times has the user adjusted their monthly savings target?",
+          "gold_answer": 2,
+          "hypothesis": "The user has adjusted their monthly savings target 3 times.",
+          "is_correct": false,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding mon...",
+          "context_tokens": 1078,
+          "retrieval_latency_ms": 6.18
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 4,
+      "total_questions": 4,
+      "avg_retrieval_latency_ms": 6.09,
+      "avg_context_tokens": 1328.2,
+      "ingest_latency_ms": 511.26,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "R_dev_02_q1",
+          "question_subkind": "current",
+          "question_text": "What is the user's current monthly savings target?",
+          "gold_answer": "$900",
+          "hypothesis": "Your current monthly savings target is $900.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match",
+            "is_stale_answer": false
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] User: I'm establishing a strict monthly savings goal of $750.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target...",
+          "context_tokens": 1467,
+          "retrieval_latency_ms": 5.87
+        },
+        {
+          "question_id": "R_dev_02_q2",
+          "question_subkind": "previous",
+          "question_text": "What was the user's monthly savings target prior to the current goal?",
+          "gold_answer": "$1,200",
+          "hypothesis": "Prior to the current goal, the user's monthly savings target was $1,200.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] User: I'm establishing a strict monthly savings goal of $750.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target...",
+          "context_tokens": 1467,
+          "retrieval_latency_ms": 6.53
+        },
+        {
+          "question_id": "R_dev_02_q3",
+          "question_subkind": "as_of",
+          "question_text": "What was the monthly savings target as of 2024-01-25?",
+          "gold_answer": "$750",
+          "hypothesis": "As of 2024-01-25, your monthly savings target was $750.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n---\n\n[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding mon...",
+          "context_tokens": 1280,
+          "retrieval_latency_ms": 5.21
+        },
+        {
+          "question_id": "R_dev_02_q4",
+          "question_subkind": "count",
+          "question_text": "How many times has the user adjusted their monthly savings target?",
+          "gold_answer": 2,
+          "hypothesis": "Based on the provided context, the user has adjusted their monthly savings target 3 times:\n\n1. **January 15, 2024:** Established an initial goal of $750.\n2. **February 29, 2024:** Increased the target to $1,200.\n3. **April 14, 2024:** Revised the target to $900 due to unexpected car expenses.",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/04/14 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n---\n\n[2024/02/29 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n---\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding mon...",
+          "context_tokens": 1099,
+          "retrieval_latency_ms": 6.74
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 4,
+      "total_questions": 4,
+      "avg_retrieval_latency_ms": 17.2,
+      "avg_context_tokens": 725.0,
+      "ingest_latency_ms": 8164.51,
+      "ingest_cost_usd": 0.0077,
+      "questions": [
+        {
+          "question_id": "R_dev_02_q1",
+          "question_subkind": "current",
+          "question_text": "What is the user's current monthly savings target?",
+          "gold_answer": "$900",
+          "hypothesis": "The user's current monthly savings target is $900, which was revised on April 14, 2024.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match",
+            "is_stale_answer": false
+          },
+          "retrieved_context_preview": "User increased their monthly savings target to $1,200 on February 29, 2024, after receiving a raise, changing it from their previous target\n\nUser established a strict monthly savings goal of $750 around January 15, 2024\n\nUser revised their monthly savings goal to $900 on April 14, 2024, after encoun...",
+          "context_tokens": 725,
+          "retrieval_latency_ms": 17.37
+        },
+        {
+          "question_id": "R_dev_02_q2",
+          "question_subkind": "previous",
+          "question_text": "What was the user's monthly savings target prior to the current goal?",
+          "gold_answer": "$1,200",
+          "hypothesis": "Based on the provided context, the user's monthly savings target prior to the current goal ($900) was $1,200.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "User established a strict monthly savings goal of $750 around January 15, 2024\n\nUser increased their monthly savings target to $1,200 on February 29, 2024, after receiving a raise, changing it from their previous target\n\nUser revised their monthly savings goal to $900 on April 14, 2024, after encoun...",
+          "context_tokens": 725,
+          "retrieval_latency_ms": 17.37
+        },
+        {
+          "question_id": "R_dev_02_q3",
+          "question_subkind": "as_of",
+          "question_text": "What was the monthly savings target as of 2024-01-25?",
+          "gold_answer": "$750",
+          "hypothesis": "$750",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "User established a strict monthly savings goal of $750 around January 15, 2024\n\nUser increased their monthly savings target to $1,200 on February 29, 2024, after receiving a raise, changing it from their previous target\n\nUser revised their monthly savings goal to $900 on April 14, 2024, after encoun...",
+          "context_tokens": 725,
+          "retrieval_latency_ms": 17.05
+        },
+        {
+          "question_id": "R_dev_02_q4",
+          "question_subkind": "count",
+          "question_text": "How many times has the user adjusted their monthly savings target?",
+          "gold_answer": 2,
+          "hypothesis": "The user has adjusted their monthly savings target 2 times.",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "User increased their monthly savings target to $1,200 on February 29, 2024, after receiving a raise, changing it from their previous target\n\nUser revised their monthly savings goal to $900 on April 14, 2024, after encountering unexpected car expenses, changing it from their previous target\n\nUser est...",
+          "context_tokens": 725,
+          "retrieval_latency_ms": 16.98
+        }
+      ]
+    },
+    "full_context": {
+      "scenario_accuracy": 0.25,
+      "scenario_pass": false,
+      "correct_questions": 1,
+      "total_questions": 4,
+      "avg_retrieval_latency_ms": 0.02,
+      "avg_context_tokens": 1487.0,
+      "ingest_latency_ms": 0.0,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "R_dev_02_q1",
+          "question_subkind": "current",
+          "question_text": "What is the user's current monthly savings target?",
+          "gold_answer": "$900",
+          "hypothesis": "The user's monthly savings target is $750.",
+          "is_correct": false,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match",
+            "is_stale_answer": false
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] User: I'm establishing a strict monthly savings goal of $750.\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n[2024/01/20 10:00:00] User: I'm planning to do some grocery shopping at Target this weekend. Can you help me fi...",
+          "context_tokens": 1487,
+          "retrieval_latency_ms": 0.02
+        },
+        {
+          "question_id": "R_dev_02_q2",
+          "question_subkind": "previous",
+          "question_text": "What was the user's monthly savings target prior to the current goal?",
+          "gold_answer": "$1,200",
+          "hypothesis": "Based on the provided context, there is no mention of a monthly savings target prior to the current goal established on January 15, 2024 ($750).",
+          "is_correct": false,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] User: I'm establishing a strict monthly savings goal of $750.\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n[2024/01/20 10:00:00] User: I'm planning to do some grocery shopping at Target this weekend. Can you help me fi...",
+          "context_tokens": 1487,
+          "retrieval_latency_ms": 0.02
+        },
+        {
+          "question_id": "R_dev_02_q3",
+          "question_subkind": "as_of",
+          "question_text": "What was the monthly savings target as of 2024-01-25?",
+          "gold_answer": "$750",
+          "hypothesis": "Your monthly savings target is $750.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] User: I'm establishing a strict monthly savings goal of $750.\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n[2024/01/20 10:00:00] User: I'm planning to do some grocery shopping at Target this weekend. Can you help me fi...",
+          "context_tokens": 1487,
+          "retrieval_latency_ms": 0.03
+        },
+        {
+          "question_id": "R_dev_02_q4",
+          "question_subkind": "count",
+          "question_text": "How many times has the user adjusted their monthly savings target?",
+          "gold_answer": 2,
+          "hypothesis": "Based on the provided context, the user has established or adjusted their monthly savings target 1 time (setting it to $750 on January 15, 2024).",
+          "is_correct": false,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/01/15 10:00:00] User: I'm establishing a strict monthly savings goal of $750.\n\n[2024/01/15 10:00:00] Assistant: Understood, I have updated my notes regarding monthly savings target.\n\n[2024/01/20 10:00:00] User: I'm planning to do some grocery shopping at Target this weekend. Can you help me fi...",
+          "context_tokens": 1487,
+          "retrieval_latency_ms": 0.02
+        }
+      ]
+    }
+  }
+}

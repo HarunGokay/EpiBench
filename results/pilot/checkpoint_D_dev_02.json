@@ -1,0 +1,399 @@
+{
+  "scenario_id": "D_dev_02",
+  "track": "D",
+  "split": "dev",
+  "user_name": "User_D_dev_02",
+  "question_date": "2024/04/03 09:00:00",
+  "session_count": 10,
+  "question_count": 3,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 0.6666666666666666,
+      "scenario_pass": false,
+      "correct_questions": 2,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 29.36,
+      "avg_context_tokens": 1477.0,
+      "ingest_latency_ms": 52411.12,
+      "ingest_cost_usd": 0.0193,
+      "questions": [
+        {
+          "question_id": "D_dev_02_q1",
+          "question_subkind": "revisit_set",
+          "question_text": "Which scheduled contractor appointments need to be rescheduled or revisited?",
+          "gold_answer": [
+            "countertop templating measurement appointment",
+            "sink and dishwasher plumbing connection appointment"
+          ],
+          "hypothesis": "Based on the provided context, the kitchen cabinet delivery was delayed until August 25th (2023-08-25). Because of this, any contractor appointments dependent on the original cabinet delivery or installation schedule (such as the countertop templating planned for July 14th, 2023, and the finish plumber reservation planned for July 16th, 2023) need to be rescheduled or revisited.",
+          "is_correct": false,
+          "scoring_type": "set_overlap",
+          "evaluation_details": {
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1": 0.6666666666666666,
+            "true_positives": 1,
+            "false_negatives": 1,
+            "false_positives": 0,
+            "detected_golds": [
+              "countertop templating measurement appointment"
+            ],
+            "detected_unaffected": [],
+            "is_correct": false,
+            "method": "programmatic_set_overlap"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Location: The user is located in downtown LA, 90014.\nActive Goals & Projects: Storyteller Role (Storytelling Engagement): The user requested the AI to act as a storyteller, providing entertaining, imaginative, and captivating stories for an audience. | Pe...",
+          "context_tokens": 1479,
+          "retrieval_latency_ms": 39.15
+        },
+        {
+          "question_id": "D_dev_02_q2",
+          "question_subkind": "why",
+          "question_text": "Why does the countertop templating appointment need to be revisited?",
+          "gold_answer": "Countertop templating requires lower cabinets to already be installed in place.",
+          "hypothesis": "Based on the provided context, the countertop templating crew was originally booked for July 14th [2023-07-14] following cabinet installation by July 12th [2023-07-12]. However, the cabinet delivery was delayed until August 25th [2023-08-25], which impacts the schedule.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant accurately identifies that the underlying assumption\u2014the cabinet installation date\u2014changed due to a delivery delay, which invalidated the original templating schedule.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant accurately identifies that the underlying assumption\u2014the cabinet installation date\u2014changed due to a delivery delay, which invalidated the original templating schedule.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Location: The user is located in downtown LA, 90014.\nActive Goals & Projects: Storyteller Role (Storytelling Engagement): The user requested the AI to act as a storyteller, providing entertaining, imaginative, and captivating stories for an audience. | Pe...",
+          "context_tokens": 1476,
+          "retrieval_latency_ms": 24.46
+        },
+        {
+          "question_id": "D_dev_02_q3",
+          "question_subkind": "stands",
+          "question_text": "Does the living room hardwood refinishing schedule still stand?",
+          "gold_answer": "Yes, it stands",
+          "hypothesis": "Yes, the living room hardwood refinishing is scheduled for June 20th, 2023, because the flooring contractor has availability in June.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Location: The user is located in downtown LA, 90014.\nActive Goals & Projects: Storyteller Role (Storytelling Engagement): The user requested the AI to act as a storyteller, providing entertaining, imaginative, and captivating stories for an audience. | Pe...",
+          "context_tokens": 1476,
+          "retrieval_latency_ms": 24.45
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 0.0,
+      "scenario_pass": false,
+      "correct_questions": 0,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 5.43,
+      "avg_context_tokens": 1271.0,
+      "ingest_latency_ms": 434.18,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "D_dev_02_q1",
+          "question_subkind": "revisit_set",
+          "question_text": "Which scheduled contractor appointments need to be rescheduled or revisited?",
+          "gold_answer": [
+            "countertop templating measurement appointment",
+            "sink and dishwasher plumbing connection appointment"
+          ],
+          "hypothesis": "The living room hardwood floor refinishing is scheduled for June 20th.",
+          "is_correct": false,
+          "scoring_type": "set_overlap",
+          "evaluation_details": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "true_positives": 0,
+            "false_negatives": 2,
+            "false_positives": 0,
+            "detected_golds": [],
+            "detected_unaffected": [],
+            "is_correct": false,
+            "method": "programmatic_set_overlap"
+          },
+          "retrieved_context_preview": "[2024/02/21 09:00:00] User: Regarding resource allocation: The living room hardwood floor contractor has availability in June. Because the flooring crew is free in June, we scheduled the living room hardwood refinishing for June 20th.\n\n---\n\n[2024/02/21 09:00:00] Assistant: I'd be happy to help you f...",
+          "context_tokens": 1489,
+          "retrieval_latency_ms": 5.26
+        },
+        {
+          "question_id": "D_dev_02_q2",
+          "question_subkind": "why",
+          "question_text": "Why does the countertop templating appointment need to be revisited?",
+          "gold_answer": "Countertop templating requires lower cabinets to already be installed in place.",
+          "hypothesis": "Based on the provided context, there is no mention that the countertop templating appointment needs to be revisited. The context only states that the countertop templating crew was booked for July 14th because the cabinets will be installed by July 12th.",
+          "is_correct": false,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The assistant failed to answer the question based on the ground truth criteria, instead incorrectly stating that there was no mention of the countertop templating appointment needing to be revisited.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to answer the question based on the ground truth criteria, instead incorrectly stating that there was no mention of the countertop templating appointment needing to be revisited.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/02/11 09:00:00] User: We made some operational plans today. Since the cabinets will be installed by July 12th, I booked the countertop templating crew for July 14th. Also, Assuming cabinets are delivered July 10th, I reserved the finish plumber for July 16th.\n\n---\n\n[2024/03/04 09:00:00] User: ...",
+          "context_tokens": 958,
+          "retrieval_latency_ms": 5.21
+        },
+        {
+          "question_id": "D_dev_02_q3",
+          "question_subkind": "stands",
+          "question_text": "Does the living room hardwood refinishing schedule still stand?",
+          "gold_answer": "Yes, it stands",
+          "hypothesis": "Based on the provided context, the living room hardwood refinishing is scheduled for June 20th. There is no information indicating whether this schedule has changed.",
+          "is_correct": false,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/02/21 09:00:00] User: Regarding resource allocation: The living room hardwood floor contractor has availability in June. Because the flooring crew is free in June, we scheduled the living room hardwood refinishing for June 20th.\n\n---\n\n[2024/02/21 09:00:00] Assistant: Cafe Demitasse is a great ...",
+          "context_tokens": 1366,
+          "retrieval_latency_ms": 5.81
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 0.6666666666666666,
+      "scenario_pass": false,
+      "correct_questions": 2,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 5.58,
+      "avg_context_tokens": 1111.7,
+      "ingest_latency_ms": 417.16,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "D_dev_02_q1",
+          "question_subkind": "revisit_set",
+          "question_text": "Which scheduled contractor appointments need to be rescheduled or revisited?",
+          "gold_answer": [
+            "countertop templating measurement appointment",
+            "sink and dishwasher plumbing connection appointment"
+          ],
+          "hypothesis": "Based on the updated cabinet delivery date of August 25th (delayed from July 10th), the following contractor appointments\u2014which were originally planned around the July delivery and installation dates\u2014need to be revisited or rescheduled:\n\n1. **Countertop templating crew** (originally booked for July 14th)\n2. **Finish plumber** (originally reserved for July 16th) \n3. **Cabinet installation** (originally planned for July 12th)",
+          "is_correct": false,
+          "scoring_type": "set_overlap",
+          "evaluation_details": {
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1": 0.6666666666666666,
+            "true_positives": 1,
+            "false_negatives": 1,
+            "false_positives": 0,
+            "detected_golds": [
+              "countertop templating measurement appointment"
+            ],
+            "detected_unaffected": [],
+            "is_correct": false,
+            "method": "programmatic_set_overlap"
+          },
+          "retrieved_context_preview": "[2024/02/11 09:00:00] Assistant: Logged these two commitments based on your timeline.\n\n---\n\n[2024/02/01 09:00:00] Assistant: Noted. I will keep this milestone in mind for our project planning.\n\n---\n\n[2024/02/21 09:00:00] Assistant: Acknowledged. Recorded this allocation constraint and decision.\n\n---...",
+          "context_tokens": 1428,
+          "retrieval_latency_ms": 5.46
+        },
+        {
+          "question_id": "D_dev_02_q2",
+          "question_subkind": "why",
+          "question_text": "Why does the countertop templating appointment need to be revisited?",
+          "gold_answer": "Countertop templating requires lower cabinets to already be installed in place.",
+          "hypothesis": "Based on the provided context, the countertop templating appointment needs to be revisited because the cabinet delivery was delayed until August 25th, which impacts the previous timeline where cabinets were initially expected to be installed by July 12th.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant accurately cites the change in the underlying assumption (the delayed cabinet delivery date) that invalidated the previous countertop templating schedule, meeting the ground truth criteria.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant accurately cites the change in the underlying assumption (the delayed cabinet delivery date) that invalidated the previous countertop templating schedule, meeting the ground truth criteria.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/02/21 09:00:00] Assistant: Acknowledged. Recorded this allocation constraint and decision.\n\n---\n\n[2024/03/22 09:00:00] Assistant: Understood. That is a significant shift in timeline.\n\n---\n\n[2024/02/11 09:00:00] Assistant: Logged these two commitments based on your timeline.\n\n---\n\n[2024/02/11 0...",
+          "context_tokens": 1047,
+          "retrieval_latency_ms": 6.06
+        },
+        {
+          "question_id": "D_dev_02_q3",
+          "question_subkind": "stands",
+          "question_text": "Does the living room hardwood refinishing schedule still stand?",
+          "gold_answer": "Yes, it stands",
+          "hypothesis": "Yes, the living room hardwood refinishing is scheduled for June 20th.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/02/21 09:00:00] User: Regarding resource allocation: The living room hardwood floor contractor has availability in June. Because the flooring crew is free in June, we scheduled the living room hardwood refinishing for June 20th.\n\n---\n\n[2024/03/22 09:00:00] Assistant: Understood. That is a sign...",
+          "context_tokens": 860,
+          "retrieval_latency_ms": 5.22
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 0.3333333333333333,
+      "scenario_pass": false,
+      "correct_questions": 1,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 19.76,
+      "avg_context_tokens": 705.0,
+      "ingest_latency_ms": 9446.49,
+      "ingest_cost_usd": 0.0085,
+      "questions": [
+        {
+          "question_id": "D_dev_02_q1",
+          "question_subkind": "revisit_set",
+          "question_text": "Which scheduled contractor appointments need to be rescheduled or revisited?",
+          "gold_answer": [
+            "countertop templating measurement appointment",
+            "sink and dishwasher plumbing connection appointment"
+          ],
+          "hypothesis": "Based on the context, the kitchen cabinet delivery date was delayed until August 25, 2024. Consequently, the finish plumber (originally reserved for July 16, 2024, assuming cabinet delivery on July 10) and the countertop templating (originally planned for July 14, based on cabinets being installed by July 12) need to be rescheduled or revisited.",
+          "is_correct": false,
+          "scoring_type": "set_overlap",
+          "evaluation_details": {
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1": 0.6666666666666666,
+            "true_positives": 1,
+            "false_negatives": 1,
+            "false_positives": 0,
+            "detected_golds": [
+              "countertop templating measurement appointment"
+            ],
+            "detected_unaffected": [],
+            "is_correct": false,
+            "method": "programmatic_set_overlap"
+          },
+          "retrieved_context_preview": "User reserved a finish plumber for July 16, 2024, assuming cabinet delivery occurs on July 10, 2024\n\nUser planned countertop templating for July 14, 2024, based on kitchen cabinets being installed by July 12, 2024\n\nThe kitchen cabinet delivery date was delayed until August 25, 2024, as notified by t...",
+          "context_tokens": 705,
+          "retrieval_latency_ms": 15.96
+        },
+        {
+          "question_id": "D_dev_02_q2",
+          "question_subkind": "why",
+          "question_text": "Why does the countertop templating appointment need to be revisited?",
+          "gold_answer": "Countertop templating requires lower cabinets to already be installed in place.",
+          "hypothesis": "The countertop templating appointment needs to be revisited because the kitchen cabinet delivery date was delayed from July 10, 2024, to August 25, 2024.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identified and cited the underlying assumption change\u2014specifically, the delay in the kitchen cabinet delivery date from July 10, 2024, to August 25, 2024\u2014which invalidated the original countertop templating appointment.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified and cited the underlying assumption change\u2014specifically, the delay in the kitchen cabinet delivery date from July 10, 2024, to August 25, 2024\u2014which invalidated the original countertop templating appointment.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "User planned countertop templating for July 14, 2024, based on kitchen cabinets being installed by July 12, 2024\n\nUser reserved a finish plumber for July 16, 2024, assuming cabinet delivery occurs on July 10, 2024\n\nUser incorporates push-ups, squats, and lunges into their strength training routine\n\n...",
+          "context_tokens": 705,
+          "retrieval_latency_ms": 17.99
+        },
+        {
+          "question_id": "D_dev_02_q3",
+          "question_subkind": "stands",
+          "question_text": "Does the living room hardwood refinishing schedule still stand?",
+          "gold_answer": "Yes, it stands",
+          "hypothesis": "The provided context does not contain information about a living room hardwood refinishing schedule.",
+          "is_correct": false,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "User lives or works in downtown Los Angeles, specifically in the 90014 zip code area\n\nUser planned countertop templating for July 14, 2024, based on kitchen cabinets being installed by July 12, 2024\n\nUser reserved a finish plumber for July 16, 2024, assuming cabinet delivery occurs on July 10, 2024\n...",
+          "context_tokens": 705,
+          "retrieval_latency_ms": 25.34
+        }
+      ]
+    },
+    "full_context": {
+      "scenario_accuracy": 0.6666666666666666,
+      "scenario_pass": false,
+      "correct_questions": 2,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 0.03,
+      "avg_context_tokens": 1489.0,
+      "ingest_latency_ms": 0.0,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "D_dev_02_q1",
+          "question_subkind": "revisit_set",
+          "question_text": "Which scheduled contractor appointments need to be rescheduled or revisited?",
+          "gold_answer": [
+            "countertop templating measurement appointment",
+            "sink and dishwasher plumbing connection appointment"
+          ],
+          "hypothesis": "Based on the updated cabinet delivery date of August 25th, the countertop templating crew (previously scheduled for July 14th) and the finish plumber (previously reserved for July 16th) need to be rescheduled, as both of those appointments relied on the original July 10th cabinet delivery and July 12th installation timeline.",
+          "is_correct": false,
+          "scoring_type": "set_overlap",
+          "evaluation_details": {
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1": 0.6666666666666666,
+            "true_positives": 1,
+            "false_negatives": 1,
+            "false_positives": 0,
+            "detected_golds": [
+              "countertop templating measurement appointment"
+            ],
+            "detected_unaffected": [],
+            "is_correct": false,
+            "method": "programmatic_set_overlap"
+          },
+          "retrieved_context_preview": "[2024/02/01 09:00:00] User: Project update: The kitchen cabinet delivery date is confirmed for July 10th.\n\n[2024/02/01 09:00:00] Assistant: Noted. I will keep this milestone in mind for our project planning.\n\n[2024/02/03 09:00:00] Assistant: Archimedes was a Greek mathematician and inventor from the...",
+          "context_tokens": 1489,
+          "retrieval_latency_ms": 0.03
+        },
+        {
+          "question_id": "D_dev_02_q2",
+          "question_subkind": "why",
+          "question_text": "Why does the countertop templating appointment need to be revisited?",
+          "gold_answer": "Countertop templating requires lower cabinets to already be installed in place.",
+          "hypothesis": "The countertop templating appointment needs to be revisited because it was scheduled for July 14th (based on the cabinets being installed by July 12th), but the cabinet delivery has been delayed until August 25th.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant accurately cites the underlying assumption change\u2014the delay in cabinet delivery\u2014that invalidated the original countertop templating schedule.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant accurately cites the underlying assumption change\u2014the delay in cabinet delivery\u2014that invalidated the original countertop templating schedule.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/02/01 09:00:00] User: Project update: The kitchen cabinet delivery date is confirmed for July 10th.\n\n[2024/02/01 09:00:00] Assistant: Noted. I will keep this milestone in mind for our project planning.\n\n[2024/02/03 09:00:00] Assistant: Archimedes was a Greek mathematician and inventor from the...",
+          "context_tokens": 1489,
+          "retrieval_latency_ms": 0.03
+        },
+        {
+          "question_id": "D_dev_02_q3",
+          "question_subkind": "stands",
+          "question_text": "Does the living room hardwood refinishing schedule still stand?",
+          "gold_answer": "Yes, it stands",
+          "hypothesis": "The provided context does not contain enough information to answer whether the living room hardwood refinishing schedule still stands.",
+          "is_correct": true,
+          "scoring_type": "string_match",
+          "evaluation_details": {
+            "method": "programmatic_string_match"
+          },
+          "retrieved_context_preview": "[2024/02/01 09:00:00] User: Project update: The kitchen cabinet delivery date is confirmed for July 10th.\n\n[2024/02/01 09:00:00] Assistant: Noted. I will keep this milestone in mind for our project planning.\n\n[2024/02/03 09:00:00] Assistant: Archimedes was a Greek mathematician and inventor from the...",
+          "context_tokens": 1489,
+          "retrieval_latency_ms": 0.03
+        }
+      ]
+    }
+  }
+}

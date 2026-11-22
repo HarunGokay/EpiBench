@@ -1,0 +1,331 @@
+{
+  "scenario_id": "F_dev_01",
+  "track": "F",
+  "split": "dev",
+  "user_name": "User_F_dev_01",
+  "question_date": "2024/05/24 00:00:00",
+  "session_count": 11,
+  "question_count": 3,
+  "system_results": {
+    "graph_memory": {
+      "scenario_accuracy": 0.6666666666666666,
+      "scenario_pass": false,
+      "correct_questions": 2,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 26.94,
+      "avg_context_tokens": 1259.0,
+      "ingest_latency_ms": 33937.82,
+      "ingest_cost_usd": 0.0122,
+      "questions": [
+        {
+          "question_id": "F_dev_01_q1",
+          "question_subkind": "move_count",
+          "question_text": "How many times did the target completion date move or slip before it was finished?",
+          "gold_answer": 3,
+          "hypothesis": "Based on the provided context, the target completion date for the bathroom tile installation moved or slipped 4 times before it was finished on May 10, 2024:\n\n1. Tiles were backordered, moving the date to April 10th.\n2. Waterproofing failed inspection, pushing the date to April 25th.\n3. The plumber contracted COVID, rescheduling the installation to May 10th.\n*(Note: The initial contractor promise of March 20th established the original target before these subsequent slips).*",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Contractor Commitment (Bathroom Tile Installation): Bathroom tiling was finally finished on May 10, 2024 [2024-05-10]. | Plans (Personal Website SEO and Content Optimization): The user plans to apply SEO strategies to their personal website to improve v...",
+          "context_tokens": 1259,
+          "retrieval_latency_ms": 34.89
+        },
+        {
+          "question_id": "F_dev_01_q2",
+          "question_subkind": "slip_days",
+          "question_text": "How many total days did the project slip from the original promised target date to final completion?",
+          "gold_answer": 51,
+          "hypothesis": "Based on the provided context, the original promised target date for the bathroom tile installation was March 20, 2024, and the final completion date was May 10, 2024. This represents a total slip of **51 days**.",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Contractor Commitment (Bathroom Tile Installation): Bathroom tiling was finally finished on May 10, 2024 [2024-05-10]. | Plans (Personal Website SEO and Content Optimization): The user plans to apply SEO strategies to their personal website to improve v...",
+          "context_tokens": 1259,
+          "retrieval_latency_ms": 21.86
+        },
+        {
+          "question_id": "F_dev_01_q3",
+          "question_subkind": "realism",
+          "question_text": "The contractor says the entire kitchen remodel will be completed in 5 days. Based on the bathroom project history, is this estimate realistic?",
+          "gold_answer": "No, unrealistic. The bathroom remodel slipped 3 times and took 51 extra days beyond the original target.",
+          "hypothesis": "Based on the provided context, there is no mention or project history regarding a kitchen remodel. Therefore, there is not enough information to determine if the contractor's 5-day estimate is realistic.",
+          "is_correct": false,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The assistant failed to evaluate the realism of the 5-day estimate using the bathroom project history, missing the evaluation criteria which required stating that the aggressive target is unrealistic based on historical delays.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to evaluate the realism of the 5-day estimate using the bathroom project history, missing the evaluation criteria which required stating that the aggressive target is unrealistic based on historical delays.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Contractor Commitment (Bathroom Tile Installation): Bathroom tiling was finally finished on May 10, 2024 [2024-05-10]. | Plans (Personal Website SEO and Content Optimization): The user plans to apply SEO strategies to their personal website to improve v...",
+          "context_tokens": 1259,
+          "retrieval_latency_ms": 24.06
+        }
+      ]
+    },
+    "hybrid_rag": {
+      "scenario_accuracy": 0.0,
+      "scenario_pass": false,
+      "correct_questions": 0,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 7.24,
+      "avg_context_tokens": 1141.0,
+      "ingest_latency_ms": 530.7,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "F_dev_01_q1",
+          "question_subkind": "move_count",
+          "question_text": "How many times did the target completion date move or slip before it was finished?",
+          "gold_answer": 3,
+          "hypothesis": "Based on the provided context, the completion date moved or slipped **2** times before the bathroom tiling was finished:\n\n1. First, it was moved to April 10th because tiles were backordered.\n2. Second, it was pushed to April 25th because waterproofing failed inspection.",
+          "is_correct": false,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/03/18 00:00:00] User: Tiles were backordered; contractor moved the completion date to April 10th.\n\n---\n\n[2024/04/05 00:00:00] User: Waterproofing failed inspection; completion date was pushed to April 25th.\n\n---\n\n[2024/05/10 00:00:00] User: Bathroom tiling was finally finished today.\n\n---\n\n[20...",
+          "context_tokens": 855,
+          "retrieval_latency_ms": 7.13
+        },
+        {
+          "question_id": "F_dev_01_q2",
+          "question_subkind": "slip_days",
+          "question_text": "How many total days did the project slip from the original promised target date to final completion?",
+          "gold_answer": 51,
+          "hypothesis": "Based on the provided context, the original promised completion date for the bathroom tile installation was March 20th, and the final completion date was pushed to April 25th. This is a total slip of 36 days.",
+          "is_correct": false,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/03/18 00:00:00] User: Tiles were backordered; contractor moved the completion date to April 10th.\n\n---\n\n[2024/04/05 00:00:00] User: Waterproofing failed inspection; completion date was pushed to April 25th.\n\n---\n\n[2024/03/01 00:00:00] User: Contractor promised the bathroom tile installation wo...",
+          "context_tokens": 1412,
+          "retrieval_latency_ms": 6.97
+        },
+        {
+          "question_id": "F_dev_01_q3",
+          "question_subkind": "realism",
+          "question_text": "The contractor says the entire kitchen remodel will be completed in 5 days. Based on the bathroom project history, is this estimate realistic?",
+          "gold_answer": "No, unrealistic. The bathroom remodel slipped 3 times and took 51 extra days beyond the original target.",
+          "hypothesis": "Based on the provided context, there is no information about a kitchen remodel or its estimated completion time. Therefore, the context does not contain enough information to answer whether the estimate is realistic.",
+          "is_correct": false,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The assistant failed to evaluate the estimate based on the historical pattern of delays, instead claiming there was not enough information in the context.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to evaluate the estimate based on the historical pattern of delays, instead claiming there was not enough information in the context.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/03/01 00:00:00] User: Contractor promised the bathroom tile installation would be finished by March 20th.\n\n---\n\n[2024/03/18 00:00:00] User: Tiles were backordered; contractor moved the completion date to April 10th.\n\n---\n\n[2024/03/16 00:00:00] Assistant: That's a great idea! Agile methodology ...",
+          "context_tokens": 1156,
+          "retrieval_latency_ms": 7.62
+        }
+      ]
+    },
+    "vector_rag": {
+      "scenario_accuracy": 0.6666666666666666,
+      "scenario_pass": false,
+      "correct_questions": 2,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 7.06,
+      "avg_context_tokens": 1081.7,
+      "ingest_latency_ms": 506.83,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "F_dev_01_q1",
+          "question_subkind": "move_count",
+          "question_text": "How many times did the target completion date move or slip before it was finished?",
+          "gold_answer": 3,
+          "hypothesis": "Based on the provided context, the target completion date moved or slipped 3 times before the bathroom tiling was finally finished on May 10th:\n\n1. Moved from March 20th to April 10th (due to backordered tiles).\n2. Pushed from April 10th to April 25th (due to a failed waterproofing inspection).\n3. Moved from April 25th to May 10th (due to the plumber having COVID).",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/03/18 00:00:00] User: Tiles were backordered; contractor moved the completion date to April 10th.\n\n---\n\n[2024/04/05 00:00:00] User: Waterproofing failed inspection; completion date was pushed to April 25th.\n\n---\n\n[2024/05/10 00:00:00] User: Bathroom tiling was finally finished today.\n\n---\n\n[20...",
+          "context_tokens": 979,
+          "retrieval_latency_ms": 6.77
+        },
+        {
+          "question_id": "F_dev_01_q2",
+          "question_subkind": "slip_days",
+          "question_text": "How many total days did the project slip from the original promised target date to final completion?",
+          "gold_answer": 51,
+          "hypothesis": "The project slipped by 51 days. \n\nThe original promised completion date was March 20th, 2024, and the bathroom tiling was finally finished on May 10th, 2024.",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/03/18 00:00:00] User: Tiles were backordered; contractor moved the completion date to April 10th.\n\n---\n\n[2024/04/05 00:00:00] User: Waterproofing failed inspection; completion date was pushed to April 25th.\n\n---\n\n[2024/03/01 00:00:00] User: Contractor promised the bathroom tile installation wo...",
+          "context_tokens": 1021,
+          "retrieval_latency_ms": 6.83
+        },
+        {
+          "question_id": "F_dev_01_q3",
+          "question_subkind": "realism",
+          "question_text": "The contractor says the entire kitchen remodel will be completed in 5 days. Based on the bathroom project history, is this estimate realistic?",
+          "gold_answer": "No, unrealistic. The bathroom remodel slipped 3 times and took 51 extra days beyond the original target.",
+          "hypothesis": "Based on the provided context, there is no information about a kitchen remodel or its timeline. The context only contains information regarding a bathroom tile installation and its delays.",
+          "is_correct": false,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": false,
+              "verdict": "INCORRECT",
+              "reasoning": "The assistant failed to evaluate the realism of the 5-day estimate using the bathroom project history, instead stating there was no information available when the context provided historical delay patterns.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to evaluate the realism of the 5-day estimate using the bathroom project history, instead stating there was no information available when the context provided historical delay patterns.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/03/01 00:00:00] User: Contractor promised the bathroom tile installation would be finished by March 20th.\n\n---\n\n[2024/03/18 00:00:00] User: Tiles were backordered; contractor moved the completion date to April 10th.\n\n---\n\n[2024/05/10 00:00:00] User: Bathroom tiling was finally finished today.\n...",
+          "context_tokens": 1245,
+          "retrieval_latency_ms": 7.59
+        }
+      ]
+    },
+    "mem0": {
+      "scenario_accuracy": 1.0,
+      "scenario_pass": true,
+      "correct_questions": 3,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 21.95,
+      "avg_context_tokens": 684.0,
+      "ingest_latency_ms": 10376.92,
+      "ingest_cost_usd": 0.009,
+      "questions": [
+        {
+          "question_id": "F_dev_01_q1",
+          "question_subkind": "move_count",
+          "question_text": "How many times did the target completion date move or slip before it was finished?",
+          "gold_answer": 3,
+          "hypothesis": "Based on the provided context, the bathroom project's completion date was pushed or moved 3 times:\n\n1. Pushed to April 10, 2024, because tiles were backordered.\n2. Pushed to April 25, 2024, after waterproofing failed inspection.\n3. Moved to May 10, 2024, because the plumber contracted COVID.",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "User's bathroom tile completion date was pushed to April 10, 2024 because tiles were backordered\n\nUser's bathroom remodeling completion date was pushed to April 25, 2024 after waterproofing failed inspection\n\nUser's bathroom tile and fixtures completion date was moved to May 10, 2024 because the plu...",
+          "context_tokens": 674,
+          "retrieval_latency_ms": 19.61
+        },
+        {
+          "question_id": "F_dev_01_q2",
+          "question_subkind": "slip_days",
+          "question_text": "How many total days did the project slip from the original promised target date to final completion?",
+          "gold_answer": 51,
+          "hypothesis": "The original promised target date for the bathroom tile installation was March 20, 2024, and the project was finally completed on May 10, 2024. This is a total slip of 51 days.",
+          "is_correct": true,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "User's bathroom tiling and fixtures project was finally completed on May 10, 2024, after multiple delays\n\nUser's bathroom tile completion date was pushed to April 10, 2024 because tiles were backordered\n\nUser's bathroom remodeling completion date was pushed to April 25, 2024 after waterproofing fail...",
+          "context_tokens": 688,
+          "retrieval_latency_ms": 22.09
+        },
+        {
+          "question_id": "F_dev_01_q3",
+          "question_subkind": "realism",
+          "question_text": "The contractor says the entire kitchen remodel will be completed in 5 days. Based on the bathroom project history, is this estimate realistic?",
+          "gold_answer": "No, unrealistic. The bathroom remodel slipped 3 times and took 51 extra days beyond the original target.",
+          "hypothesis": "Based on the bathroom project history, which suffered multiple delays due to a failed waterproofing inspection, backordered tiles, and the plumber contracting COVID, an estimate of completion in 5 days is not realistic.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly evaluates that the 5-day estimate is unrealistic based on the historical delays and issues from the bathroom project.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly evaluates that the 5-day estimate is unrealistic based on the historical delays and issues from the bathroom project.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "User's bathroom remodeling completion date was pushed to April 25, 2024 after waterproofing failed inspection\n\nUser's contractor promised that the bathroom tile installation would be finished by March 20, 2024\n\nUser's bathroom tiling and fixtures project was finally completed on May 10, 2024, after ...",
+          "context_tokens": 690,
+          "retrieval_latency_ms": 24.16
+        }
+      ]
+    },
+    "full_context": {
+      "scenario_accuracy": 0.3333333333333333,
+      "scenario_pass": false,
+      "correct_questions": 1,
+      "total_questions": 3,
+      "avg_retrieval_latency_ms": 0.04,
+      "avg_context_tokens": 1491.0,
+      "ingest_latency_ms": 0.01,
+      "ingest_cost_usd": 0.0,
+      "questions": [
+        {
+          "question_id": "F_dev_01_q1",
+          "question_subkind": "move_count",
+          "question_text": "How many times did the target completion date move or slip before it was finished?",
+          "gold_answer": 3,
+          "hypothesis": "Based on the provided context, there is no information about whether the target completion date moved or slipped before the bathroom tile installation was finished.",
+          "is_correct": false,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/02/05 00:00:00] User: What species of albatross have been observed eating plastic and how does that impact their diet?\n\n[2024/02/05 00:00:00] Assistant: Many species of albatross have been observed eating plastic, including the Laysan albatross, Black-browed albatross, and Grey-headed albatros...",
+          "context_tokens": 1491,
+          "retrieval_latency_ms": 0.04
+        },
+        {
+          "question_id": "F_dev_01_q2",
+          "question_subkind": "slip_days",
+          "question_text": "How many total days did the project slip from the original promised target date to final completion?",
+          "gold_answer": 51,
+          "hypothesis": "Based on the provided context, there is no information regarding the final completion date of the project, so it is not possible to determine how many days the project slipped.",
+          "is_correct": false,
+          "scoring_type": "integer_match",
+          "evaluation_details": {
+            "method": "programmatic_integer_match"
+          },
+          "retrieved_context_preview": "[2024/02/05 00:00:00] User: What species of albatross have been observed eating plastic and how does that impact their diet?\n\n[2024/02/05 00:00:00] Assistant: Many species of albatross have been observed eating plastic, including the Laysan albatross, Black-browed albatross, and Grey-headed albatros...",
+          "context_tokens": 1491,
+          "retrieval_latency_ms": 0.04
+        },
+        {
+          "question_id": "F_dev_01_q3",
+          "question_subkind": "realism",
+          "question_text": "The contractor says the entire kitchen remodel will be completed in 5 days. Based on the bathroom project history, is this estimate realistic?",
+          "gold_answer": "No, unrealistic. The bathroom remodel slipped 3 times and took 51 extra days beyond the original target.",
+          "hypothesis": "Based on the provided context, there is no information about an estimate for a kitchen remodel. The context only mentions a past bathroom tile installation update, so there is not enough information to determine if the contractor's 5-day estimate for a kitchen remodel is realistic.",
+          "is_correct": true,
+          "scoring_type": "llm_rubric",
+          "evaluation_details": {
+            "primary_judge": {
+              "is_correct": true,
+              "verdict": "CORRECT",
+              "reasoning": "The assistant correctly identified that there is no information in the provided context regarding a kitchen remodel or its estimate, preventing unfounded speculation.",
+              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that there is no information in the provided context regarding a kitchen remodel or its estimate, preventing unfounded speculation.\"\n}\n```",
+              "judge_type": "primary"
+            },
+            "method": "llm_rubric_primary"
+          },
+          "retrieved_context_preview": "[2024/02/05 00:00:00] User: What species of albatross have been observed eating plastic and how does that impact their diet?\n\n[2024/02/05 00:00:00] Assistant: Many species of albatross have been observed eating plastic, including the Laysan albatross, Black-browed albatross, and Grey-headed albatros...",
+          "context_tokens": 1491,
+          "retrieval_latency_ms": 0.04
+        }
+      ]
+    }
+  }
+}
