@@ -1,8 +1,8 @@
-"""EpiBench Reader LLM.
+"""EpiBench Standardized Reader LLM.
 
-Standardized reader model (Gemini 3.5 Flash-Lite, temperature 0.0)
-receiving retrieved context from any memory architecture to generate
-final conversational answers. Metered under identical accounting controls.
+Receives retrieved context from any memory architecture and produces answers
+following a uniform, structured prompt protocol across all evaluated systems.
+Programmatic question types require a final line `FINAL ANSWER: <answer>`.
 """
 
 from __future__ import annotations
@@ -13,6 +13,76 @@ from typing import Any, Optional
 import httpx
 
 logger = logging.getLogger("epibench_reader")
+
+READER_PROMPT_VERSION = "2.0.0"
+
+
+def build_reader_prompt(
+    context: str,
+    question: str,
+    question_date: str = "",
+    scoring_type: str = "llm_rubric",
+) -> str:
+    """Build the standardized reader prompt identical across all memory systems."""
+    if scoring_type == "string_match":
+        format_rule = (
+            "FORMAT REQUIREMENT:\n"
+            "- You may briefly reason first if needed.\n"
+            "- End your response with a final line strictly in the format:\n"
+            "FINAL ANSWER: <exact value only>\n"
+            "- If the retrieved context does not contain enough information to answer, end with:\n"
+            "FINAL ANSWER: UNKNOWN"
+        )
+    elif scoring_type == "integer_match":
+        format_rule = (
+            "FORMAT REQUIREMENT:\n"
+            "- You may briefly reason first (for calendar day calculations, count exact calendar days including leap years).\n"
+            "- End your response with a final line strictly in the format:\n"
+            "FINAL ANSWER: <single integer only>\n"
+            "- If the retrieved context does not contain enough information to answer, end with:\n"
+            "FINAL ANSWER: UNKNOWN"
+        )
+    elif scoring_type == "yes_no":
+        format_rule = (
+            "FORMAT REQUIREMENT:\n"
+            "- You may briefly reason first if needed.\n"
+            "- End your response with a final line strictly in the format:\n"
+            "FINAL ANSWER: YES\n"
+            "or\n"
+            "FINAL ANSWER: NO\n"
+            "- If the retrieved context does not contain enough information to answer, end with:\n"
+            "FINAL ANSWER: UNKNOWN"
+        )
+    elif scoring_type == "set_overlap":
+        format_rule = (
+            "FORMAT REQUIREMENT:\n"
+            "- You may briefly reason first if needed.\n"
+            "- On the final line, list ONLY the exact names/labels of the affected decisions or commitments from the conversation, separated by semicolons, strictly in the format:\n"
+            "FINAL ANSWER: <item 1>; <item 2>\n"
+            "- Do NOT include unaffected decisions on the FINAL ANSWER line.\n"
+            "- If no decisions are affected, end with:\n"
+            "FINAL ANSWER: NONE\n"
+            "- If the retrieved context does not contain enough information to answer, end with:\n"
+            "FINAL ANSWER: UNKNOWN"
+        )
+    else:
+        format_rule = (
+            "FORMAT REQUIREMENT:\n"
+            "- Provide a direct, factual, concise answer citing the specific evidence from the retrieved conversation context.\n"
+            "- If the retrieved context does not contain enough information to answer, state clearly that the context does not contain enough information."
+        )
+
+    return (
+        "You are a helpful and accurate personal AI assistant. Answer the user's question "
+        "strictly based on the provided context retrieved from past conversations. "
+        "Do not guess or fabricate facts that are not supported by the retrieved context.\n\n"
+        f"TODAY'S REFERENCE DATE: {question_date}\n\n"
+        "RETRIEVED CONVERSATION CONTEXT:\n"
+        f"{context if context.strip() else '[No past context retrieved]'}\n\n"
+        "USER'S QUESTION:\n"
+        f"{question}\n\n"
+        f"{format_rule}"
+    )
 
 
 class ReaderLLM:
@@ -34,18 +104,14 @@ class ReaderLLM:
         context: str,
         question: str,
         question_date: str = "",
+        scoring_type: str = "llm_rubric",
     ) -> str:
-        prompt = f"""You are a helpful and accurate personal AI assistant. Answer the user's question directly, accurately, and concisely based strictly on the provided context retrieved from past conversations.
-
-TODAY'S REFERENCE DATE: {question_date}
-
-RETRIEVED CONVERSATION CONTEXT:
-{context if context.strip() else "[No past context retrieved]"}
-
-USER'S QUESTION:
-{question}
-
-Provide a direct, factual answer. If the context does not contain enough information to answer, state that clearly."""
+        prompt = build_reader_prompt(
+            context=context,
+            question=question,
+            question_date=question_date,
+            scoring_type=scoring_type,
+        )
 
         url = f"{self.base_url}/{self.model_name}:generateContent?key={self.api_key}"
         payload = {
@@ -59,7 +125,6 @@ Provide a direct, factual answer. If the context does not contain enough informa
                 raise RuntimeError(f"Reader LLM API error {resp.status_code}: {resp.text}")
             data = resp.json()
 
-        # Record usage
         usage = data.get("usageMetadata", {})
         in_tok = usage.get("promptTokenCount", 0)
         out_tok = usage.get("candidatesTokenCount", 0)
