@@ -15,7 +15,7 @@ import tempfile
 import time
 from typing import Any, Dict, List, Optional
 
-from EpiBench.adapters.base import BaseMemoryAdapter, IngestResult, RetrievalResult
+from epibench.adapters.base import BaseMemoryAdapter, IngestResult, RetrievalResult
 
 
 class Mem0Adapter(BaseMemoryAdapter):

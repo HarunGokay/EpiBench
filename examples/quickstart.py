@@ -7,18 +7,11 @@ Demonstrates how to:
 """
 
 import asyncio
-import os
-import sys
 from typing import Any, Dict, List, Optional
 
-# Ensure repository root is on Python path
-sys.path.insert(0, os.path.abspath("."))
-sys.path.insert(0, os.path.abspath(".."))
-sys.path.insert(0, os.path.abspath("../.."))
-
-from EpiBench.adapters.base import BaseMemoryAdapter, IngestResult, RetrievalResult
-from EpiBench.generator.scenario_generator import ScenarioGenerator
-from EpiBench.judging.programmatic import (
+from epibench.adapters.base import BaseMemoryAdapter, IngestResult, RetrievalResult
+from epibench.generator.scenario_generator import ScenarioGenerator
+from epibench.judging.programmatic import (
     check_integer_match,
     check_set_overlap,
     check_string_match,

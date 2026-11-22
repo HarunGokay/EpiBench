@@ -34,7 +34,7 @@ class RetrievalResult:
 
 
 class BaseMemoryAdapter(ABC):
-    """Abstract base adapter for any memory architecture evaluated on EpiBench."""
+    """Abstract base adapter for any memory architecture evaluated by epibench."""
 
     def __init__(self, system_name: str):
         self.system_name = system_name

@@ -23,8 +23,8 @@ import json
 import random
 from typing import Any, Dict, List, Optional
 
-from EpiBench.generator.distractor_pool import DistractorPool
-from EpiBench.generator.pools import (
+from epibench.generator.distractor_pool import DistractorPool
+from epibench.generator.pools import (
     CLARIFICATION_POOLS,
     DELETION_POOLS,
     DEPENDENCY_POOLS,

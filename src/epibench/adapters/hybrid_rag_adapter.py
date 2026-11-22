@@ -12,8 +12,8 @@ import re
 import time
 from typing import Any, Dict, List, Optional
 
-from app.sigkimeno.context_engine import EmbeddingService
-from EpiBench.adapters.base import BaseMemoryAdapter, IngestResult, RetrievalResult
+from epibench.adapters.base import BaseMemoryAdapter, IngestResult, RetrievalResult
+from epibench.embedding import EmbeddingService
 
 
 class BM25Index:

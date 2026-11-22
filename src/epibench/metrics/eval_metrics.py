@@ -41,7 +41,7 @@ class SystemEvaluationReport:
     dimension_breakdown: Dict[str, DimensionalScore] = field(default_factory=dict)
 
 
-# Default balanced weights for the composite world-model understanding score
+# Default equal weights for the composite world-model understanding score
 DEFAULT_DIMENSION_WEIGHTS: Dict[str, float] = {
     "factual_accuracy": 0.20,
     "temporal_consistency": 0.20,

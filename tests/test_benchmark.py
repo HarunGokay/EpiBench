@@ -1,19 +1,15 @@
-"""Offline Unit Tests for EpiBench.
-
-Tests scenario generation, distractor sampling, programmatic judging,
-and statistical metric computations without requiring LLM API keys.
-"""
+"""Offline Unit Tests for epibench: scenario generation, judging, and metrics."""
 
 import pytest
 
-from EpiBench.generator.scenario_generator import ScenarioGenerator
-from EpiBench.judging.programmatic import (
+from epibench.generator.scenario_generator import ScenarioGenerator
+from epibench.judging.programmatic import (
     check_integer_match,
     check_set_overlap,
     check_stale_answer,
     check_string_match,
 )
-from EpiBench.metrics.statistics import (
+from epibench.metrics.statistics import (
     exact_mcnemar_test,
     paired_scenario_bootstrap,
     wilson_ci,
@@ -108,7 +104,7 @@ def test_wilson_ci():
 
 def test_world_simulator_and_environment():
     """Verify procedural world simulation, events, and ground-truth probes."""
-    from EpiBench.environment.env import EpiBenchEnvironment
+    from epibench.environment.env import EpiBenchEnvironment
 
     env = EpiBenchEnvironment(seed=42)
     obs = env.reset(num_events=10)
@@ -131,7 +127,7 @@ def test_world_simulator_and_environment():
 
 def test_six_dimensional_scoring():
     """Verify that six independent dimensions compute correctly."""
-    from EpiBench.metrics.eval_metrics import compute_six_dimensional_report
+    from epibench.metrics.eval_metrics import compute_six_dimensional_report
 
     mock_evals = [
         {"track": "K", "question_subkind": "static_fact", "is_correct": True, "retrieval_latency_ms": 10.0, "context_tokens": 100},

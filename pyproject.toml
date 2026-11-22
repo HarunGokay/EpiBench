@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "epibench"
-version = "1.0.0"
+version = "2.0.0"
 description = "Epistemic long-term memory benchmark"
 readme = "README.md"
 license = { text = "MIT" }
@@ -21,12 +21,10 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 dependencies = [
-    "pydantic>=2.0.0",
     "numpy>=1.24.0",
-    "scipy>=1.10.0",
-    "google-genai>=0.1.0",
+    "httpx>=0.24.0",
     "fastembed>=0.3.0",
-    "rank-bm25>=0.2.2",
+    "jsonschema>=4.0.0",
 ]
 
 [project.optional-dependencies]
@@ -37,30 +35,22 @@ dev = [
 baselines = [
     "mem0ai>=0.1.0",
     "qdrant-client>=1.7.0",
+    "google-genai>=0.1.0",
 ]
 
-[tool.setuptools.package-dir]
-"epibench" = "."
-"epibench.adapters" = "adapters"
-"epibench.environment" = "environment"
-"epibench.generator" = "generator"
-"epibench.judging" = "judging"
-"epibench.metrics" = "metrics"
-"epibench.runners" = "runners"
+[project.scripts]
+epibench = "epibench.cli:main"
 
 [tool.setuptools]
-packages = [
-    "epibench",
-    "epibench.adapters",
-    "epibench.environment",
-    "epibench.generator",
-    "epibench.judging",
-    "epibench.metrics",
-    "epibench.runners",
-]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+epibench = ["data/*.json", "schemas/*.json"]
 
 [tool.pytest.ini_options]
-pythonpath = ["..", "."]
 testpaths = ["tests"]
-python_files = "test_*.py"
 asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"

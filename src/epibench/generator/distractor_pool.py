@@ -13,17 +13,16 @@ from pathlib import Path
 import random
 from typing import Any, Dict, List, Optional
 
-LONGMEMEVAL_PATH = Path("data/benchmarks/longmemeval_s.json")
 BUNDLED_PATH = Path(__file__).parent.parent / "data" / "sample_distractors.json"
 
 
 class DistractorPool:
-    """Pool of filler conversational sessions extracted from LongMemEval or bundled fallback."""
+    """Pool of filler conversational sessions loaded from the bundled dataset or an explicit path."""
 
     _instance: Optional["DistractorPool"] = None
 
-    def __init__(self, dataset_path: Path = LONGMEMEVAL_PATH):
-        self.dataset_path = dataset_path
+    def __init__(self, dataset_path: Optional[Path] = None):
+        self.dataset_path = dataset_path or BUNDLED_PATH
         self._pool: List[Dict[str, Any]] = []
         self._load_pool()
 
@@ -34,17 +33,16 @@ class DistractorPool:
         return cls._instance
 
     def _load_pool(self) -> None:
-        if self.dataset_path.exists():
-            with open(self.dataset_path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            self._load_longmemeval_data(data)
-        elif BUNDLED_PATH.exists():
-            with open(BUNDLED_PATH, "r", encoding="utf-8") as f:
-                self._pool = json.load(f)
-        else:
+        if not self.dataset_path.exists():
             raise FileNotFoundError(
-                f"Neither LongMemEval dataset ({self.dataset_path}) nor bundled fallback ({BUNDLED_PATH}) was found."
+                f"Distractor dataset not found at {self.dataset_path}."
             )
+        with open(self.dataset_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        if data and isinstance(data, list) and "haystack_sessions" in data[0]:
+            self._load_longmemeval_data(data)
+        else:
+            self._pool = data
 
     def _load_longmemeval_data(self, data: List[Dict[str, Any]]) -> None:
         seen_first_turns = set()

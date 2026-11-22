@@ -14,8 +14,8 @@ import json
 import logging
 from typing import Any, Dict, List, Optional
 
-from EpiBench.adapters.base import BaseMemoryAdapter, IngestResult, RetrievalResult
-from EpiBench.environment.world_simulator import WorldEvent, WorldSimulator
+from epibench.adapters.base import BaseMemoryAdapter, IngestResult, RetrievalResult
+from epibench.environment.world_simulator import WorldEvent, WorldSimulator
 
 logger = logging.getLogger("epibench_env")
 

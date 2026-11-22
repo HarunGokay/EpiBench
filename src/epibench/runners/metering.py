@@ -1,42 +1,39 @@
 """EpiBench Metering and Cost Accounting Wrapper.
 
-Tracks token consumption across all evaluated architectures (ingestion, retrieval,
-reader LLM, and judge LLM) and strictly enforces budget ceilings.
+Tracks token consumption across evaluated architectures (ingestion, retrieval,
+reader LLM, and judge LLM) and enforces caller-specified spend ceilings.
 """
 
 from __future__ import annotations
 
 from collections import defaultdict
-from dataclasses import dataclass, field
 from typing import Any, Dict
 
+# Default token pricing rates (USD per 1M tokens)
 RATE_INPUT_PER_M: float = 0.075
 RATE_OUTPUT_PER_M: float = 0.30
 RATE_CACHED_INPUT_PER_M: float = 0.01875
 
-# User budget constraints:
-# Hard cap = 85% of confirmed real balance (~$22.95 USD)
-# Target total spend <= $12.00 USD
-BUDGET_HARD_CAP_USD: float = 12.00
-BUDGET_STOP_PILOT_USD: float = 4.00
-
 
 class HardBudgetCapReached(Exception):
     """Raised immediately when cumulative spend reaches the safety ceiling."""
-    pass
 
 
 class SpendTracker:
-    """Thread-safe spend tracker enforcing real-time budget limits."""
+    """Spend tracker enforcing real-time budget limits."""
 
-    def __init__(self, hard_cap_usd: float = BUDGET_HARD_CAP_USD):
-        self.hard_cap_usd = hard_cap_usd
+    def __init__(self, hard_cap_usd: float):
+        if hard_cap_usd <= 0:
+            raise ValueError("hard_cap_usd must be a positive number.")
+        self.hard_cap_usd = float(hard_cap_usd)
         self.total_input_tokens = 0
         self.total_output_tokens = 0
         self.total_cached_tokens = 0
         self.total_spend_usd = 0.0
         self.spend_by_stage: Dict[str, float] = defaultdict(float)
-        self.tokens_by_stage: Dict[str, Dict[str, int]] = defaultdict(lambda: {"in": 0, "out": 0, "cached": 0})
+        self.tokens_by_stage: Dict[str, Dict[str, int]] = defaultdict(
+            lambda: {"in": 0, "out": 0, "cached": 0}
+        )
 
     def record(
         self,

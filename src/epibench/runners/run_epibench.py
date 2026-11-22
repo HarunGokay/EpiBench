@@ -20,26 +20,24 @@ import sys
 import time
 from typing import Any, Dict, List, Optional
 
-# Ensure repository root is in python path
-sys.path.insert(0, os.path.abspath("."))
-
-from EpiBench.adapters.base import BaseMemoryAdapter
-from EpiBench.adapters.full_context_adapter import FullContextAdapter
-from EpiBench.adapters.hybrid_rag_adapter import HybridRAGAdapter
-from EpiBench.adapters.mem0_adapter import Mem0Adapter
-from EpiBench.adapters.vector_rag_adapter import VectorRAGAdapter
-from EpiBench.generator.scenario_generator import Scenario, ScenarioGenerator
-from EpiBench.judging.programmatic import (
+from epibench.adapters.base import BaseMemoryAdapter
+from epibench.adapters.full_context_adapter import FullContextAdapter
+from epibench.adapters.hybrid_rag_adapter import HybridRAGAdapter
+from epibench.adapters.mem0_adapter import Mem0Adapter
+from epibench.adapters.vector_rag_adapter import VectorRAGAdapter
+from epibench.generator.scenario_generator import Scenario, ScenarioGenerator
+from epibench.judging.programmatic import (
     check_integer_match,
     check_set_overlap,
     check_stale_answer,
     check_string_match,
 )
-from EpiBench.judging.rubric_judge import RubricJudge
-from EpiBench.metrics.statistics import exact_mcnemar_test, paired_scenario_bootstrap, wilson_ci
-from EpiBench.metrics.eval_metrics import compute_six_dimensional_report
-from EpiBench.runners.metering import BUDGET_HARD_CAP_USD, SpendTracker
-from EpiBench.runners.reader import ReaderLLM
+from epibench.judging.rubric_judge import RubricJudge
+from epibench.metrics.statistics import exact_mcnemar_test, paired_scenario_bootstrap, wilson_ci
+from epibench.metrics.eval_metrics import compute_six_dimensional_report
+from epibench.runners.metering import SpendTracker
+from epibench.runners.reader import ReaderLLM
+from epibench.utils import get_git_commit_sha
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -303,7 +301,7 @@ class EpiBenchRunner:
         master_output = {
             "benchmark": "EpiBench Pilot Run",
             "date_utc": datetime.now(timezone.utc).isoformat(),
-            "git_commit_sha": "c92afdac8fbd3b3c657722ca67ccdb394d053ea8",
+            "git_commit_sha": get_git_commit_sha(),
             "tracks": tracks,
             "systems": systems,
             "total_scenarios": len(all_scenarios),
@@ -407,7 +405,8 @@ async def main():
     parser.add_argument("--tracks", type=str, default="R,D,X,F,I,P,K,E,Q")
     parser.add_argument("--systems", type=str, default="vector_rag,hybrid_rag,mem0,full_context")
     parser.add_argument("--token-budget", type=int, default=1500)
-    parser.add_argument("--output-dir", type=str, default="EpiBench/results/pilot")
+    parser.add_argument("--budget-usd", type=float, required=True, help="Hard spend ceiling in USD (required).")
+    parser.add_argument("--output-dir", type=str, default="results/pilot")
     parser.add_argument("--scenarios-per-track", type=int, default=3)
     parser.add_argument("--filler-count", type=int, default=6)
     parser.add_argument("--seed", type=int, default=20261122)
@@ -420,7 +419,7 @@ async def main():
     tracks = [t.strip().upper() for t in args.tracks.split(",") if t.strip()]
     systems = [s.strip().lower() for s in args.systems.split(",") if s.strip()]
 
-    spend_tracker = SpendTracker(hard_cap_usd=BUDGET_HARD_CAP_USD)
+    spend_tracker = SpendTracker(hard_cap_usd=args.budget_usd)
     runner = EpiBenchRunner(
         api_key=api_key,
         spend_tracker=spend_tracker,

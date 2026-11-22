@@ -24,15 +24,9 @@ from typing import Any, Dict, List, Optional
 import os
 import sys
 
-# Ensure repository root is on Python path
-sys.path.insert(0, os.path.abspath("EpiBench"))
-sys.path.insert(0, os.path.abspath("."))
-
 from epibench.adapters.full_context_adapter import FullContextAdapter
 from epibench.adapters.hybrid_rag_adapter import HybridRAGAdapter
 from epibench.adapters.vector_rag_adapter import VectorRAGAdapter
-from epibench.environment.world_simulator import WorldSimulator
-from epibench.metrics.eval_metrics import compute_six_dimensional_report
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("epibench_efficiency")
@@ -57,7 +51,7 @@ def generate_synthetic_history(turn_count: int, seed: int = 20261122) -> List[Di
         ]
         sessions.append({
             "session_id": f"scale_sess_{s_idx:05d}",
-            "date_str": f"2024-{(s_idx % 12) + 1:02d}-{(s_idx % 28) + 1:02d} 10:00:00",
+            "session_date": f"2024-{(s_idx % 12) + 1:02d}-{(s_idx % 28) + 1:02d} 10:00:00",
             "turns": session_turns,
             "is_evidence": False,
         })
@@ -102,7 +96,7 @@ def main():
     parser = argparse.ArgumentParser(description="EpiBench Memory Efficiency & Scale Benchmark")
     parser.add_argument("--scales", type=str, default="100,1000,5000", help="Comma-separated turn counts")
     parser.add_argument("--systems", type=str, default="vector_rag,hybrid_rag,full_context")
-    parser.add_argument("--output", type=str, default="EpiBench/results/efficiency_results.json")
+    parser.add_argument("--output", type=str, default="results/efficiency_results.json")
     args = parser.parse_args()
 
     scale_list = [int(s.strip()) for s in args.scales.split(",") if s.strip()]

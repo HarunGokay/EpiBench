@@ -23,12 +23,10 @@ import sys
 import time
 from typing import Any, Dict, List
 
-# Ensure repository root is in python path
-sys.path.insert(0, os.path.abspath("."))
-
-from EpiBench.generator.scenario_generator import ScenarioGenerator
-from EpiBench.runners.metering import BUDGET_HARD_CAP_USD, SpendTracker
-from EpiBench.runners.run_epibench import EpiBenchRunner
+from epibench.generator.scenario_generator import ScenarioGenerator
+from epibench.runners.metering import SpendTracker
+from epibench.runners.run_epibench import EpiBenchRunner
+from epibench.utils import get_git_commit_sha
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -38,20 +36,21 @@ logger = logging.getLogger("epibench_depth")
 
 async def run_depth_suite(
     api_key: str,
+    budget_usd: float,
     depths: List[int] = [6, 24, 60],
     tracks: List[str] = ["R", "D", "X"],
     systems: List[str] = ["vector_rag", "hybrid_rag", "mem0"],
     scenarios_per_track: int = 2,
     seed: int = 20261122,
-    output_dir: Path = Path("EpiBench/results/depth"),
+    output_dir: Path = Path("results/depth"),
 ) -> Dict[str, Any]:
     output_dir.mkdir(parents=True, exist_ok=True)
-    spend_tracker = SpendTracker(hard_cap_usd=BUDGET_HARD_CAP_USD)
+    spend_tracker = SpendTracker(hard_cap_usd=budget_usd)
 
     depth_master_results: Dict[str, Any] = {
         "benchmark": "EpiBench Depth Stress Test",
         "date_utc": datetime.now(timezone.utc).isoformat(),
-        "git_commit_sha": "3fcd4ef",
+        "git_commit_sha": get_git_commit_sha(),
         "depths": depths,
         "tracks": tracks,
         "systems": systems,
@@ -126,8 +125,9 @@ async def main():
     parser.add_argument("--tracks", type=str, default="R,D,X")
     parser.add_argument("--systems", type=str, default="vector_rag,hybrid_rag,mem0")
     parser.add_argument("--scenarios-per-track", type=int, default=2)
+    parser.add_argument("--budget-usd", type=float, required=True, help="Hard spend ceiling in USD (required).")
     parser.add_argument("--seed", type=int, default=20261122)
-    parser.add_argument("--output-dir", type=str, default="EpiBench/results/depth")
+    parser.add_argument("--output-dir", type=str, default="results/depth")
     args = parser.parse_args()
 
     api_key = os.getenv("GEMINI_API_KEY", "")
@@ -140,6 +140,7 @@ async def main():
 
     await run_depth_suite(
         api_key=api_key,
+        budget_usd=args.budget_usd,
         depths=depth_list,
         tracks=track_list,
         systems=system_list,
