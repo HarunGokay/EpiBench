@@ -57,10 +57,11 @@ from epibench.judging.rubric_judge import (
     RubricJudge,
     compute_cohens_kappa,
 )
-from epibench.metrics.eval_metrics import compute_six_dimensional_report
-from epibench.metrics.statistics import wilson_ci
+from epibench.metrics.eval_metrics import compute_dimensional_report
+from epibench.metrics.schema import validate_results_schema
+from epibench.metrics.statistics import compute_pairwise_comparisons, wilson_ci
 from epibench.runners.fakes import FakeEmbedder, FakeJudge, FakeReader
-from epibench.runners.metering import SpendTracker
+from epibench.runners.metering import CURRENT_SYSTEM_VAR, SpendTracker
 from epibench.runners.reader import READER_PROMPT_VERSION, ReaderLLM
 from epibench.utils import get_git_commit_sha
 
@@ -278,192 +279,220 @@ class EpiBenchRunner:
         }
 
         for sys_name, adapter in adapters.items():
-            tenant_id = f"epi_{scenario.scenario_id}_{sys_name}"
-
-            ingest_info = await self._ingest_with_deletion_replay(adapter, tenant_id, scenario.sessions)
-
-            q_results: List[Dict[str, Any]] = []
-            total_retrieval_latency = 0.0
-            total_context_tokens = 0
-            parse_failures = 0
-            judge_errors = 0
-            as_of_unverified_count = 0
-            as_of_violation_count = 0
-
-            for q in scenario.questions:
-                as_of_param = q.metadata.get("as_of_date", scenario.question_date)
-                retrieval = await adapter.retrieve(
-                    tenant_id=tenant_id,
-                    query=q.question_text,
-                    token_budget=self.token_budget,
-                    as_of=as_of_param,
+            sys_token = CURRENT_SYSTEM_VAR.set(sys_name)
+            try:
+                sc_result["system_results"][sys_name] = await self._evaluate_single_system(
+                    scenario=scenario,
+                    sys_name=sys_name,
+                    adapter=adapter,
+                    rng=rng,
                 )
-                total_retrieval_latency += retrieval.retrieval_latency_ms
-                total_context_tokens += retrieval.token_count
+            finally:
+                CURRENT_SYSTEM_VAR.reset(sys_token)
 
-                as_of_audit = self._audit_as_of(scenario, as_of_param, retrieval.metadata)
-                if as_of_audit["as_of_unverified"]:
-                    as_of_unverified_count += 1
-                if as_of_audit["as_of_violation"]:
-                    as_of_violation_count += 1
+        return sc_result
 
-                # Always pass TRUE scenario.question_date to reader (fixes A4)
-                hypothesis = await self.reader.answer_question(
-                    context=retrieval.context,
+    async def _evaluate_single_system(
+        self,
+        scenario: Scenario,
+        sys_name: str,
+        adapter: BaseMemoryAdapter,
+        rng: random.Random,
+    ) -> Dict[str, Any]:
+        tenant_id = f"epi_{scenario.scenario_id}_{sys_name}"
+        spend_before_sys = self.spend_tracker.get_system_spend(sys_name)
+
+        ingest_info = await self._ingest_with_deletion_replay(adapter, tenant_id, scenario.sessions)
+
+        q_results: List[Dict[str, Any]] = []
+        total_retrieval_latency = 0.0
+        total_context_tokens = 0
+        parse_failures = 0
+        judge_errors = 0
+        as_of_unverified_count = 0
+        as_of_violation_count = 0
+
+        for q in scenario.questions:
+            as_of_param = q.metadata.get("as_of_date", scenario.question_date)
+            retrieval = await adapter.retrieve(
+                tenant_id=tenant_id,
+                query=q.question_text,
+                token_budget=self.token_budget,
+                as_of=as_of_param,
+            )
+            total_retrieval_latency += retrieval.retrieval_latency_ms
+            total_context_tokens += retrieval.token_count
+
+            as_of_audit = self._audit_as_of(scenario, as_of_param, retrieval.metadata)
+            if as_of_audit["as_of_unverified"]:
+                as_of_unverified_count += 1
+            if as_of_audit["as_of_violation"]:
+                as_of_violation_count += 1
+
+            # Always pass TRUE scenario.question_date to reader (fixes A4)
+            hypothesis = await self.reader.answer_question(
+                context=retrieval.context,
+                question=q.question_text,
+                question_date=scenario.question_date,
+                scoring_type=q.scoring_type,
+            )
+
+            eval_details: Dict[str, Any] = {}
+            is_correct = False
+            parse_failure = False
+            judge_error = False
+
+            if q.scoring_type == "string_match":
+                res = score_string_match(
+                    hypothesis,
+                    str(q.gold_answer),
+                    aliases=q.metadata.get("gold_aliases"),
+                )
+                is_correct = res["is_correct"]
+                parse_failure = res["parse_failure"]
+                eval_details = {"method": "programmatic_string_match", **res}
+                if "stale_value" in q.metadata:
+                    eval_details["is_stale_answer"] = check_stale_answer(
+                        hypothesis,
+                        q.metadata["stale_value"],
+                        stale_aliases=q.metadata.get("stale_aliases"),
+                    )
+
+            elif q.scoring_type == "integer_match":
+                res = score_integer_match(hypothesis, int(q.gold_answer))
+                is_correct = res["is_correct"]
+                parse_failure = res["parse_failure"]
+                eval_details = {"method": "programmatic_integer_match", **res}
+
+            elif q.scoring_type == "yes_no":
+                res = score_yes_no(hypothesis, str(q.gold_answer))
+                is_correct = res["is_correct"]
+                parse_failure = res["parse_failure"]
+                eval_details = {"method": "programmatic_yes_no", **res}
+
+            elif q.scoring_type == "set_overlap":
+                res = score_set_overlap(
+                    hypothesis,
+                    q.metadata.get("gold_decisions", q.gold_answer),
+                    unaffected_decisions=q.metadata.get("unaffected_decisions"),
+                )
+                is_correct = res["is_correct"]
+                parse_failure = res["parse_failure"]
+                eval_details = {"method": "programmatic_set_overlap", **res}
+
+            elif q.scoring_type == "llm_rubric":
+                j_res = await self.judge.evaluate_rubric(
                     question=q.question_text,
-                    question_date=scenario.question_date,
+                    gold_answer_or_rubric=q.rubric,
+                    hypothesis=hypothesis,
                     scoring_type=q.scoring_type,
+                    metadata=q.metadata,
+                    use_secondary_prompt=False,
                 )
+                is_correct = bool(j_res["is_correct"])
+                judge_error = bool(j_res.get("judge_error", False))
+                eval_details = {"method": "llm_rubric", **j_res}
 
-                eval_details: Dict[str, Any] = {}
-                is_correct = False
-                parse_failure = False
-                judge_error = False
+                # Contamination check using strict whole-phrase forbidden aliases (fixes S5)
+                if q.metadata.get("forbidden_aliases"):
+                    contam = check_forbidden_phrases(hypothesis, q.metadata["forbidden_aliases"])
+                    eval_details["is_contaminated"] = contam["contaminated"]
+                    eval_details["contaminated_phrases"] = contam["matched_phrases"]
+                    if contam["contaminated"] and "target_type" in q.metadata:
+                        is_correct = False
 
-                if q.scoring_type == "string_match":
-                    res = score_string_match(
-                        hypothesis,
-                        str(q.gold_answer),
-                        aliases=q.metadata.get("gold_aliases"),
-                    )
-                    is_correct = res["is_correct"]
-                    parse_failure = res["parse_failure"]
-                    eval_details = {"method": "programmatic_string_match", **res}
-                    if "stale_value" in q.metadata:
-                        eval_details["is_stale_answer"] = check_stale_answer(
-                            hypothesis,
-                            q.metadata["stale_value"],
-                            stale_aliases=q.metadata.get("stale_aliases"),
-                        )
-
-                elif q.scoring_type == "integer_match":
-                    res = score_integer_match(hypothesis, int(q.gold_answer))
-                    is_correct = res["is_correct"]
-                    parse_failure = res["parse_failure"]
-                    eval_details = {"method": "programmatic_integer_match", **res}
-
-                elif q.scoring_type == "yes_no":
-                    res = score_yes_no(hypothesis, str(q.gold_answer))
-                    is_correct = res["is_correct"]
-                    parse_failure = res["parse_failure"]
-                    eval_details = {"method": "programmatic_yes_no", **res}
-
-                elif q.scoring_type == "set_overlap":
-                    res = score_set_overlap(
-                        hypothesis,
-                        q.metadata.get("gold_decisions", q.gold_answer),
-                        unaffected_decisions=q.metadata.get("unaffected_decisions"),
-                    )
-                    is_correct = res["is_correct"]
-                    parse_failure = res["parse_failure"]
-                    eval_details = {"method": "programmatic_set_overlap", **res}
-
-                elif q.scoring_type == "llm_rubric":
-                    j_res = await self.judge.evaluate_rubric(
+                # Configurable secondary-judge inter-rater audit (default 10%, fixes M5)
+                if self.secondary_audit_rate > 0.0 and rng.random() < self.secondary_audit_rate:
+                    sec_res = await self.judge.evaluate_rubric(
                         question=q.question_text,
                         gold_answer_or_rubric=q.rubric,
                         hypothesis=hypothesis,
                         scoring_type=q.scoring_type,
                         metadata=q.metadata,
-                        use_secondary_prompt=False,
+                        use_secondary_prompt=True,
                     )
-                    is_correct = bool(j_res["is_correct"])
-                    judge_error = bool(j_res.get("judge_error", False))
-                    eval_details = {"method": "llm_rubric", **j_res}
+                    eval_details["secondary_audit"] = sec_res
 
-                    # Contamination check using strict whole-phrase forbidden aliases (fixes S5)
-                    if q.metadata.get("forbidden_aliases"):
-                        contam = check_forbidden_phrases(hypothesis, q.metadata["forbidden_aliases"])
-                        eval_details["is_contaminated"] = contam["contaminated"]
-                        eval_details["contaminated_phrases"] = contam["matched_phrases"]
-                        if contam["contaminated"] and "target_type" in q.metadata:
-                            is_correct = False
-
-                    # Configurable secondary-judge inter-rater audit (default 10%, fixes M5)
-                    if self.secondary_audit_rate > 0.0 and rng.random() < self.secondary_audit_rate:
-                        sec_res = await self.judge.evaluate_rubric(
-                            question=q.question_text,
-                            gold_answer_or_rubric=q.rubric,
-                            hypothesis=hypothesis,
-                            scoring_type=q.scoring_type,
-                            metadata=q.metadata,
-                            use_secondary_prompt=True,
-                        )
-                        eval_details["secondary_audit"] = sec_res
-
-                else:
-                    raise ValueError(f"Unsupported scoring_type: {q.scoring_type!r}")
-
-                if parse_failure:
-                    parse_failures += 1
-                if judge_error:
-                    judge_errors += 1
-
-                q_results.append({
-                    "question_id": q.question_id,
-                    "track": scenario.track,
-                    "question_subkind": q.question_subkind,
-                    "question_text": q.question_text,
-                    "gold_answer": q.gold_answer,
-                    "hypothesis": hypothesis,
-                    "is_correct": is_correct,
-                    "parse_failure": parse_failure,
-                    "judge_error": judge_error,
-                    "scoring_type": q.scoring_type,
-                    "as_of_param": as_of_param,
-                    "as_of_audit": as_of_audit,
-                    "evaluation_details": eval_details,
-                    "retrieved_context_preview": (
-                        retrieval.context[:300] + "..." if len(retrieval.context) > 300 else retrieval.context
-                    ),
-                    "context_tokens": retrieval.token_count,
-                    "retrieval_latency_ms": round(retrieval.retrieval_latency_ms, 2),
-                })
-
-            num_q = len(q_results)
-            correct_q = sum(1 for qr in q_results if qr["is_correct"])
-            scenario_acc = correct_q / max(1, num_q)
-
-            # Track E joint scoring: scenario passes iff control retained AND direct & semantic leak-free
-            track_e_joint: Optional[Dict[str, Any]] = None
-            if scenario.track == "E":
-                q_by_sub = {qr["question_subkind"]: qr for qr in q_results}
-                control_retained = bool(q_by_sub.get("deletion_control_retention", {}).get("is_correct", False))
-                direct_ok = bool(q_by_sub.get("deletion_direct", {}).get("is_correct", False))
-                semantic_ok = bool(q_by_sub.get("deletion_semantic", {}).get("is_correct", False))
-                leak_free = direct_ok and semantic_ok
-                joint_pass = control_retained and leak_free
-                track_e_joint = {
-                    "control_retained": control_retained,
-                    "direct_leak_free": direct_ok,
-                    "semantic_leak_free": semantic_ok,
-                    "leak_free": leak_free,
-                    "joint_pass": joint_pass,
-                }
-                scenario_pass = joint_pass
             else:
-                scenario_pass = (correct_q == num_q)
+                raise ValueError(f"Unsupported scoring_type: {q.scoring_type!r}")
 
-            sc_result["system_results"][sys_name] = {
-                "scenario_accuracy": round(scenario_acc, 4),
-                "scenario_pass": scenario_pass,
-                "correct_questions": correct_q,
-                "total_questions": num_q,
-                "parse_failures": parse_failures,
-                "judge_errors": judge_errors,
-                "as_of_unverified_count": as_of_unverified_count,
-                "as_of_violation_count": as_of_violation_count,
-                "delete_unsupported": ingest_info["delete_unsupported"],
-                "delete_events": ingest_info["delete_events"],
-                "track_e_joint": track_e_joint,
-                "avg_retrieval_latency_ms": round(total_retrieval_latency / max(1, num_q), 2),
-                "avg_context_tokens": round(total_context_tokens / max(1, num_q), 1),
-                "ingest_latency_ms": round(ingest_info["ingest_latency_ms"], 2),
-                "ingest_cost_usd": round(ingest_info["ingest_cost_usd"], 5),
-                "questions": q_results,
+            if parse_failure:
+                parse_failures += 1
+            if judge_error:
+                judge_errors += 1
+
+            q_results.append({
+                "question_id": q.question_id,
+                "track": scenario.track,
+                "question_subkind": q.question_subkind,
+                "question_text": q.question_text,
+                "gold_answer": q.gold_answer,
+                "hypothesis": hypothesis,
+                "is_correct": is_correct,
+                "parse_failure": parse_failure,
+                "judge_error": judge_error,
+                "scoring_type": q.scoring_type,
+                "as_of_param": as_of_param,
+                "as_of_audit": as_of_audit,
+                "evaluation_details": eval_details,
+                "retrieved_context_preview": (
+                    retrieval.context[:300] + "..." if len(retrieval.context) > 300 else retrieval.context
+                ),
+                "context_tokens": retrieval.token_count,
+                "retrieval_latency_ms": round(retrieval.retrieval_latency_ms, 2),
+            })
+
+        num_q = len(q_results)
+        correct_q = sum(1 for qr in q_results if qr["is_correct"])
+        scenario_acc = correct_q / max(1, num_q)
+
+        # Track E joint scoring: scenario passes iff control retained AND direct & semantic leak-free
+        track_e_joint: Optional[Dict[str, Any]] = None
+        if scenario.track == "E":
+            q_by_sub = {qr["question_subkind"]: qr for qr in q_results}
+            control_retained = bool(q_by_sub.get("deletion_control_retention", {}).get("is_correct", False))
+            direct_ok = bool(q_by_sub.get("deletion_direct", {}).get("is_correct", False))
+            semantic_ok = bool(q_by_sub.get("deletion_semantic", {}).get("is_correct", False))
+            leak_free = direct_ok and semantic_ok
+            joint_pass = control_retained and leak_free
+            track_e_joint = {
+                "control_retained": control_retained,
+                "direct_leak_free": direct_ok,
+                "semantic_leak_free": semantic_ok,
+                "leak_free": leak_free,
+                "joint_pass": joint_pass,
             }
+            scenario_pass = joint_pass
+        else:
+            scenario_pass = (correct_q == num_q)
 
-        return sc_result
+        scenario_spend_usd = max(
+            0.0,
+            (self.spend_tracker.get_system_spend(sys_name) - spend_before_sys),
+        )
+        # Add adapter-reported ingest_cost_usd only if adapter didn't already record through spend_tracker
+        if ingest_info["ingest_cost_usd"] > 0 and scenario_spend_usd < ingest_info["ingest_cost_usd"]:
+            scenario_spend_usd += ingest_info["ingest_cost_usd"]
+
+        return {
+            "scenario_accuracy": round(scenario_acc, 4),
+            "scenario_pass": scenario_pass,
+            "correct_questions": correct_q,
+            "total_questions": num_q,
+            "parse_failures": parse_failures,
+            "judge_errors": judge_errors,
+            "as_of_unverified_count": as_of_unverified_count,
+            "as_of_violation_count": as_of_violation_count,
+            "delete_unsupported": ingest_info["delete_unsupported"],
+            "delete_events": ingest_info["delete_events"],
+            "track_e_joint": track_e_joint,
+            "avg_retrieval_latency_ms": round(total_retrieval_latency / max(1, num_q), 2),
+            "avg_context_tokens": round(total_context_tokens / max(1, num_q), 1),
+            "ingest_latency_ms": round(ingest_info["ingest_latency_ms"], 2),
+            "ingest_cost_usd": round(ingest_info["ingest_cost_usd"], 5),
+            "scenario_spend_usd": round(scenario_spend_usd, 6),
+            "questions": q_results,
+        }
 
     async def run_benchmark(
         self,
@@ -549,7 +578,22 @@ class EpiBenchRunner:
 
         results: List[Dict[str, Any]] = [r for r in results_by_pos if r is not None]
 
-        summary = self.compile_summary(results, system_list, track_list)
+        summary = self.compile_summary(results, system_list, track_list, seed=seed)
+
+        validity_summary: Optional[Dict[str, Any]] = None
+        default_val_path = Path("results/validity/validity_report.json")
+        if default_val_path.exists():
+            try:
+                vr = json.loads(default_val_path.read_text(encoding="utf-8"))
+                validity_summary = {
+                    "live_verified": bool(vr.get("live_verified", False)),
+                    "all_tracks_passed": bool(vr.get("all_tracks_passed", False)),
+                    "passing_tracks": list(vr.get("passing_tracks", [])),
+                    "experimental_tracks": list(vr.get("experimental_tracks", [])),
+                }
+            except Exception:
+                validity_summary = None
+
         master_output: Dict[str, Any] = {
             "benchmark": "EpiBench",
             "scorer_version": SCORER_VERSION,
@@ -571,10 +615,13 @@ class EpiBenchRunner:
             "tracks": track_list,
             "systems": system_list,
             "total_scenarios": len(all_scenarios),
+            "validity_gate_summary": validity_summary,
             "spend_summary": self.spend_tracker.summary(),
             "performance_summary": summary,
             "scenario_results": results,
         }
+
+        validate_results_schema(master_output)
 
         master_path = self.output_dir / output_filename
         with open(master_path, "w", encoding="utf-8") as f:
@@ -588,8 +635,9 @@ class EpiBenchRunner:
         results: List[Dict[str, Any]],
         systems: Sequence[str],
         tracks: Sequence[str],
+        seed: int = 20261122,
     ) -> Dict[str, Any]:
-        """Compile per-system, per-track, secondary-judge agreement, and dimensional metrics."""
+        """Compile per-system, per-track, pairwise comparisons, secondary audit, and dimensional metrics."""
         summary: Dict[str, Any] = {
             "by_system": {},
             "by_track": {},
@@ -601,11 +649,12 @@ class EpiBenchRunner:
         audit_pairs: List[Tuple[bool, bool]] = []
 
         for sys_name in systems:
-            sys_scenarios = [
-                r["system_results"][sys_name]
+            sys_pairs = [
+                (r, r["system_results"][sys_name])
                 for r in results
                 if sys_name in r["system_results"]
             ]
+            sys_scenarios = [s for _, s in sys_pairs]
             total_sc = len(sys_scenarios)
             passed_sc = sum(1 for s in sys_scenarios if s.get("scenario_pass", False))
             total_q = sum(s.get("total_questions", 0) for s in sys_scenarios)
@@ -624,6 +673,36 @@ class EpiBenchRunner:
             avg_lat = sum(s.get("avg_retrieval_latency_ms", 0.0) for s in sys_scenarios) / max(1, total_sc)
             avg_tok = sum(s.get("avg_context_tokens", 0.0) for s in sys_scenarios) / max(1, total_sc)
             total_ingest_cost = sum(s.get("ingest_cost_usd", 0.0) for s in sys_scenarios)
+            tracked_spend = self.spend_tracker.get_system_spend(sys_name)
+            recorded_sc_spend = sum(s.get("scenario_spend_usd", 0.0) for s in sys_scenarios)
+            total_sys_spend = max(tracked_spend, recorded_sc_spend, total_ingest_cost)
+
+            # Build dimensional evaluation inputs: Track E uses joint outcome for privacy_and_deletion
+            # and deletion_control_retention separately for retention_control
+            dim_evals: List[Dict[str, Any]] = []
+            for sc_row, s_res in sys_pairs:
+                tr = sc_row["track"]
+                if tr == "E" and s_res.get("track_e_joint") is not None:
+                    dim_evals.append({
+                        "track": "E",
+                        "question_subkind": "deletion_joint",
+                        "is_correct": bool(s_res["track_e_joint"]["joint_pass"]),
+                    })
+                    for q in s_res.get("questions", []):
+                        if q.get("question_subkind") == "deletion_control_retention":
+                            dim_evals.append(q)
+                else:
+                    dim_evals.extend(s_res.get("questions", []))
+
+            dim_report = compute_dimensional_report(
+                evaluations=dim_evals,
+                system_name=sys_name,
+                total_spend_usd=total_sys_spend,
+                experimental_tracks=sorted(self.experimental_tracks),
+            )
+            summary["dimensional_reports"][sys_name] = dim_report.to_dict()
+
+            cost_per_ans = round(total_sys_spend / correct_q, 6) if correct_q > 0 else None
 
             summary["by_system"][sys_name] = {
                 "question_accuracy": round(q_acc * 100.0, 2),
@@ -641,7 +720,9 @@ class EpiBenchRunner:
                 "delete_unsupported_count": total_delete_unsupported,
                 "avg_retrieval_latency_ms": round(avg_lat, 2),
                 "avg_context_tokens": round(avg_tok, 1),
-                "total_ingest_cost_usd": round(total_ingest_cost, 4),
+                "total_ingest_cost_usd": round(total_ingest_cost, 6),
+                "total_spend_usd": round(total_sys_spend, 6),
+                "cost_per_successful_answer_usd": cost_per_ans,
             }
 
             # Collect secondary audit pairs
@@ -652,6 +733,15 @@ class EpiBenchRunner:
                         audit_pairs.append((bool(q["is_correct"]), bool(sec["is_correct"])))
 
         summary["secondary_audit"] = compute_cohens_kappa(audit_pairs)
+
+        # Pairwise McNemar, cluster-aware paired scenario bootstrap, and Holm-Bonferroni correction
+        if len(systems) >= 2 and results:
+            summary["comparisons"] = compute_pairwise_comparisons(
+                results,
+                systems,
+                n_resamples=10000,
+                seed=seed,
+            )
 
         # Track-level breakdown (with Track E joint scoring)
         for track in tracks:
