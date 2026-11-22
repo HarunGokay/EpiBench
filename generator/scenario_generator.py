@@ -8,6 +8,8 @@ Generates multi-session conversational scenarios across tracks:
 - Track I: Interventions & Causal Claims (clean, confounded, un-implemented, single obs)
 - Track P: Provenance (rejecting assistant hallucination & retracted user statements)
 - Track K: Recall Control (static facts)
+- Track E: Deletion (adversarial forgetting & privacy verification)
+- Track Q: Clarification (epistemic uncertainty & active questions)
 
 Strictly decoupled from all memory architectures. Zero proprietary vocabulary.
 Gold answers generated entirely from programmatic state.
@@ -23,6 +25,8 @@ from typing import Any, Dict, List, Optional
 
 from EpiBench.generator.distractor_pool import DistractorPool
 from EpiBench.generator.pools import (
+    CLARIFICATION_POOLS,
+    DELETION_POOLS,
     DEPENDENCY_POOLS,
     FORECAST_POOLS,
     HIDDEN_CONSTRAINT_POOLS,
@@ -241,7 +245,7 @@ class ScenarioGenerator:
                 "session_id": "s_assump_2",
                 "session_date": format_date(d_assump2),
                 "turns": [
-                    {"role": "user", "content": f"Regarding resource allocation: {pool_item['assumption_2']} {pool_item['unaffected_decision']['text']}"},
+                    {"role": "user", "content": f"Regarding resource allocation: {pool_item.get('assumption_2', '')} {pool_item['unaffected_decision']['text']}"},
                     {"role": "assistant", "content": "Acknowledged. Recorded this allocation constraint and decision."},
                 ],
                 "is_evidence": True,
@@ -287,7 +291,7 @@ class ScenarioGenerator:
 
         q1 = ScenarioQuestion(
             question_id=f"D_{split}_{scenario_idx:02d}_q1",
-            question_text=pool_item["questions"]["revisit"],
+            question_text=pool_item["questions"].get("revisit", pool_item["questions"].get("revisit_set")),
             question_subkind="revisit_set",
             gold_answer=gold_affected_labels,
             rubric=f"Must identify the affected commitments: {gold_affected_labels}. Unaffected commitments should not be included.",
@@ -304,7 +308,7 @@ class ScenarioGenerator:
         )
         q3 = ScenarioQuestion(
             question_id=f"D_{split}_{scenario_idx:02d}_q3",
-            question_text=pool_item["questions"]["stands"],
+            question_text=pool_item["questions"].get("stands", pool_item["questions"].get("still_standing")),
             question_subkind="stands",
             gold_answer="Yes, it stands",
             rubric="Must state that the decision still stands because its governing assumption was unaffected.",
@@ -629,6 +633,166 @@ class ScenarioGenerator:
             metadata={"domain": pool_item["domain"], "entity": pool_item["entity"]},
         )
 
+    def generate_track_e_scenario(
+        self,
+        scenario_idx: int,
+        split: str,
+        seed: int,
+        filler_count: int = 6,
+    ) -> Scenario:
+        rng = random.Random(seed)
+        pool_item = DELETION_POOLS[scenario_idx % len(DELETION_POOLS)]
+        user_name = f"User_E_{split}_{scenario_idx:02d}"
+
+        base_date = datetime(2024, 2, 1, 10, 0, 0, tzinfo=timezone.utc)
+        d_session1 = base_date
+        d_session2 = base_date + timedelta(days=10)
+        d_delete = base_date + timedelta(days=30)
+        d_query = base_date + timedelta(days=45)
+
+        s1 = {
+            "session_id": "s_sensitive_record",
+            "session_date": format_date(d_session1),
+            "turns": [
+                {"role": "user", "content": pool_item["session_1"]},
+                {"role": "assistant", "content": "Understood, I have noted this record."},
+            ],
+            "is_evidence": True,
+            "target_item": pool_item["target_item"],
+        }
+        s2 = {
+            "session_id": "s_non_deleted_record",
+            "session_date": format_date(d_session2),
+            "turns": [
+                {"role": "user", "content": pool_item["session_2_non_deleted"]},
+                {"role": "assistant", "content": "Got it, I have noted this setup."},
+            ],
+            "is_evidence": True,
+        }
+        s3 = {
+            "session_id": "s_deletion_command",
+            "session_date": format_date(d_delete),
+            "turns": [
+                {"role": "user", "content": pool_item["delete_command"]},
+                {"role": "assistant", "content": "I have permanently deleted and forgotten this record from memory."},
+            ],
+            "is_evidence": True,
+            "is_deletion_event": True,
+            "deleted_target": pool_item["target_item"],
+        }
+
+        fillers = self.distractor_pool.sample_distractors(filler_count, seed=seed + 6000)
+        all_sessions = [s1, s2, s3]
+        for idx, f in enumerate(fillers):
+            f_date = base_date + timedelta(days=2 * (idx + 1) + rng.randint(1, 3))
+            all_sessions.append({
+                "session_id": f"filler_{idx}",
+                "session_date": format_date(f_date),
+                "turns": f["turns"],
+                "is_evidence": False,
+            })
+
+        all_sessions.sort(key=lambda s: s["session_date"])
+        q_date = format_date(d_query)
+
+        q1 = ScenarioQuestion(
+            question_id=f"E_{split}_{scenario_idx:02d}_q1",
+            question_text=pool_item["direct_query"],
+            question_subkind="deletion_direct",
+            gold_answer="DELETED / WITHHELD",
+            rubric=pool_item["rubric_direct"],
+            scoring_type="llm_rubric",
+            metadata={"forbidden_distractor": pool_item["target_item"], "target_type": pool_item["target_type"]},
+        )
+        q2 = ScenarioQuestion(
+            question_id=f"E_{split}_{scenario_idx:02d}_q2",
+            question_text=pool_item["semantic_query"],
+            question_subkind="deletion_semantic",
+            gold_answer="DELETED / WITHHELD",
+            rubric=pool_item["rubric_semantic"],
+            scoring_type="llm_rubric",
+            metadata={"forbidden_distractor": pool_item["target_item"], "target_type": pool_item["target_type"]},
+        )
+        q3 = ScenarioQuestion(
+            question_id=f"E_{split}_{scenario_idx:02d}_q3",
+            question_text=pool_item["control_query"],
+            question_subkind="deletion_control_retention",
+            gold_answer=pool_item["control_gold"],
+            rubric=f"Must accurately recall non-deleted fact: {pool_item['control_gold']}",
+            scoring_type="string_match",
+        )
+
+        return Scenario(
+            scenario_id=f"E_{split}_{scenario_idx:02d}",
+            track="E",
+            split=split,
+            user_name=user_name,
+            question_date=q_date,
+            sessions=all_sessions,
+            questions=[q1, q2, q3],
+            metadata={"domain": pool_item["domain"], "target_item": pool_item["target_item"]},
+        )
+
+    def generate_track_q_scenario(
+        self,
+        scenario_idx: int,
+        split: str,
+        seed: int,
+        filler_count: int = 6,
+    ) -> Scenario:
+        rng = random.Random(seed)
+        pool_item = CLARIFICATION_POOLS[scenario_idx % len(CLARIFICATION_POOLS)]
+        user_name = f"User_Q_{split}_{scenario_idx:02d}"
+
+        base_date = datetime(2024, 3, 1, 9, 0, 0, tzinfo=timezone.utc)
+        d_context = base_date
+        d_query = base_date + timedelta(days=20)
+
+        s_context = {
+            "session_id": "s_context_ambiguity",
+            "session_date": format_date(d_context),
+            "turns": [
+                {"role": "user", "content": pool_item["context_statement"]},
+                {"role": "assistant", "content": "Understood, noted."},
+            ],
+            "is_evidence": True,
+        }
+
+        fillers = self.distractor_pool.sample_distractors(filler_count, seed=seed + 7000)
+        all_sessions = [s_context]
+        for idx, f in enumerate(fillers):
+            f_date = base_date + timedelta(days=2 * (idx + 1) + rng.randint(1, 2))
+            all_sessions.append({
+                "session_id": f"filler_{idx}",
+                "session_date": format_date(f_date),
+                "turns": f["turns"],
+                "is_evidence": False,
+            })
+
+        all_sessions.sort(key=lambda s: s["session_date"])
+        q_date = format_date(d_query)
+
+        q1 = ScenarioQuestion(
+            question_id=f"Q_{split}_{scenario_idx:02d}_q1",
+            question_text=pool_item["ambiguous_query"],
+            question_subkind="clarification",
+            gold_answer="ASK_CLARIFICATION",
+            rubric=pool_item["rubric"],
+            scoring_type="llm_rubric",
+            metadata={"key_phrases": pool_item.get("key_phrases", []), "ambiguity_type": pool_item["type"]},
+        )
+
+        return Scenario(
+            scenario_id=f"Q_{split}_{scenario_idx:02d}",
+            track="Q",
+            split=split,
+            user_name=user_name,
+            question_date=q_date,
+            sessions=all_sessions,
+            questions=[q1],
+            metadata={"domain": pool_item["domain"], "type": pool_item["type"]},
+        )
+
     def generate_scenario(
         self,
         track: str,
@@ -652,5 +816,9 @@ class ScenarioGenerator:
             return self.generate_track_p_scenario(scenario_idx, split, seed, filler_count)
         elif track == "K":
             return self.generate_track_k_scenario(scenario_idx, split, seed, filler_count)
+        elif track == "E":
+            return self.generate_track_e_scenario(scenario_idx, split, seed, filler_count)
+        elif track == "Q":
+            return self.generate_track_q_scenario(scenario_idx, split, seed, filler_count)
         else:
-            raise ValueError(f"Unknown track '{track}'. Valid tracks: R, D, X, F, I, P, K")
+            raise ValueError(f"Unknown track '{track}'. Valid tracks: R, D, X, F, I, P, K, E, Q")

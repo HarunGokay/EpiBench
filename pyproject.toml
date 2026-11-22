@@ -42,6 +42,7 @@ baselines = [
 [tool.setuptools.package-dir]
 "epibench" = "."
 "epibench.adapters" = "adapters"
+"epibench.environment" = "environment"
 "epibench.generator" = "generator"
 "epibench.judging" = "judging"
 "epibench.metrics" = "metrics"
@@ -51,6 +52,7 @@ baselines = [
 packages = [
     "epibench",
     "epibench.adapters",
+    "epibench.environment",
     "epibench.generator",
     "epibench.judging",
     "epibench.metrics",

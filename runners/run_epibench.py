@@ -37,6 +37,7 @@ from EpiBench.judging.programmatic import (
 )
 from EpiBench.judging.rubric_judge import RubricJudge
 from EpiBench.metrics.statistics import exact_mcnemar_test, paired_scenario_bootstrap, wilson_ci
+from EpiBench.metrics.eval_metrics import compute_six_dimensional_report
 from EpiBench.runners.metering import BUDGET_HARD_CAP_USD, SpendTracker
 from EpiBench.runners.reader import ReaderLLM
 
@@ -373,13 +374,37 @@ class EpiBenchRunner:
                     "total": tot_q,
                 }
 
+        # Six-dimensional breakdown
+        summary["six_dimensional_reports"] = {}
+        for sys_name in systems:
+            all_qs = []
+            for r in results:
+                t = r.get("track", "")
+                sys_res = r["system_results"].get(sys_name, {})
+                for q in sys_res.get("questions", []):
+                    q_copy = dict(q)
+                    q_copy["track"] = t
+                    all_qs.append(q_copy)
+            rep = compute_six_dimensional_report(all_qs, sys_name)
+            summary["six_dimensional_reports"][sys_name] = {
+                "factual_accuracy": rep.factual_accuracy,
+                "temporal_consistency": rep.temporal_consistency,
+                "dependency_reasoning": rep.dependency_reasoning,
+                "provenance": rep.provenance,
+                "calibration": rep.calibration,
+                "privacy_and_deletion": rep.privacy_and_deletion,
+                "composite_score": rep.composite_score,
+                "avg_tokens_per_query": rep.avg_tokens_per_query,
+                "avg_retrieval_latency_ms": rep.avg_retrieval_latency_ms,
+            }
+
         return summary
 
 
 async def main():
     parser = argparse.ArgumentParser(description="Run EpiBench Evaluation Suite")
     parser.add_argument("--mode", choices=["pilot", "main"], default="pilot")
-    parser.add_argument("--tracks", type=str, default="R,D,X,F,I,P,K")
+    parser.add_argument("--tracks", type=str, default="R,D,X,F,I,P,K,E,Q")
     parser.add_argument("--systems", type=str, default="vector_rag,hybrid_rag,mem0,full_context")
     parser.add_argument("--token-budget", type=int, default=1500)
     parser.add_argument("--output-dir", type=str, default="EpiBench/results/pilot")

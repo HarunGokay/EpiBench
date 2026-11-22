@@ -38,9 +38,9 @@ def test_scenario_generator_determinism():
 
 
 def test_scenario_tracks_generation():
-    """Verify that all Tier 1 tracks generate valid scenarios and questions."""
+    """Verify that all 9 tracks generate valid scenarios and questions."""
     gen = ScenarioGenerator()
-    for track in ["R", "D", "X", "F", "I", "P", "K"]:
+    for track in ["R", "D", "X", "F", "I", "P", "K", "E", "Q"]:
         sc = gen.generate_scenario(track=track, scenario_idx=0, split="dev", seed=20261122, filler_count=1)
         assert sc.track == track
         assert len(sc.questions) >= 1
@@ -104,3 +104,51 @@ def test_wilson_ci():
     res = wilson_ci(10, 10, confidence=0.95)
     assert res["lower"] > 0.65
     assert res["upper"] == 1.0
+
+
+def test_world_simulator_and_environment():
+    """Verify procedural world simulation, events, and ground-truth probes."""
+    from EpiBench.environment.env import EpiBenchEnvironment
+
+    env = EpiBenchEnvironment(seed=42)
+    obs = env.reset(num_events=10)
+    assert obs.event_id
+    assert len(obs.turns) >= 1
+
+    steps_taken = 0
+    while not env.is_done and steps_taken < 20:
+        obs = env.step()
+        steps_taken += 1
+
+    assert steps_taken >= 9
+    probes = env.generate_probes()
+    assert len(probes) >= 4
+    for p in probes:
+        assert p.dimension in ("factual", "temporal", "dependency", "provenance", "calibration", "privacy")
+        assert p.question
+        assert p.gold_answer is not None
+
+
+def test_six_dimensional_scoring():
+    """Verify that six independent dimensions compute correctly."""
+    from EpiBench.metrics.eval_metrics import compute_six_dimensional_report
+
+    mock_evals = [
+        {"track": "K", "question_subkind": "static_fact", "is_correct": True, "retrieval_latency_ms": 10.0, "context_tokens": 100},
+        {"track": "R", "question_subkind": "as_of", "is_correct": True, "retrieval_latency_ms": 12.0, "context_tokens": 120},
+        {"track": "D", "question_subkind": "revisit_set", "is_correct": False, "retrieval_latency_ms": 15.0, "context_tokens": 150},
+        {"track": "P", "question_subkind": "provenance", "is_correct": True, "retrieval_latency_ms": 8.0, "context_tokens": 90},
+        {"track": "Q", "question_subkind": "clarification", "is_correct": True, "retrieval_latency_ms": 9.0, "context_tokens": 80},
+        {"track": "E", "question_subkind": "deletion_direct", "is_correct": True, "retrieval_latency_ms": 11.0, "context_tokens": 110},
+    ]
+
+    report = compute_six_dimensional_report(mock_evals, "test_system", total_spend_usd=0.05)
+    assert report.factual_accuracy == 100.0
+    assert report.temporal_consistency == 100.0
+    assert report.dependency_reasoning == 0.0
+    assert report.provenance == 100.0
+    assert report.calibration == 100.0
+    assert report.privacy_and_deletion == 100.0
+    assert report.composite_score > 70.0
+    assert report.avg_retrieval_latency_ms == pytest.approx(10.83, abs=0.1)
+
