@@ -7,33 +7,6 @@
   "session_count": 7,
   "question_count": 1,
   "system_results": {
-    "graph_memory": {
-      "scenario_accuracy": 1.0,
-      "scenario_pass": true,
-      "correct_questions": 1,
-      "total_questions": 1,
-      "avg_retrieval_latency_ms": 60.62,
-      "avg_context_tokens": 1490.0,
-      "ingest_latency_ms": 42313.12,
-      "ingest_cost_usd": 0.0132,
-      "questions": [
-        {
-          "question_id": "K_dev_01_q1",
-          "question_subkind": "static_fact",
-          "question_text": "What is the name of the user's dog?",
-          "gold_answer": "Barnaby",
-          "hypothesis": "Barnaby",
-          "is_correct": true,
-          "scoring_type": "string_match",
-          "evaluation_details": {
-            "method": "programmatic_string_match"
-          },
-          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Study Abroad Program: The user previously participated in a study abroad program at the University of Melbourne, Australia. | Profession and Jurisdiction: The user is a solicitor and construction lawyer with over 10 years of experience specialising in con...",
-          "context_tokens": 1490,
-          "retrieval_latency_ms": 60.62
-        }
-      ]
-    },
     "hybrid_rag": {
       "scenario_accuracy": 0.0,
       "scenario_pass": false,

@@ -7,41 +7,6 @@
   "session_count": 7,
   "question_count": 1,
   "system_results": {
-    "graph_memory": {
-      "scenario_accuracy": 1.0,
-      "scenario_pass": true,
-      "correct_questions": 1,
-      "total_questions": 1,
-      "avg_retrieval_latency_ms": 36.17,
-      "avg_context_tokens": 1480.0,
-      "ingest_latency_ms": 36601.94,
-      "ingest_cost_usd": 0.0126,
-      "questions": [
-        {
-          "question_id": "P_dev_01_q1",
-          "question_subkind": "provenance",
-          "question_text": "Where is the user currently planning to live?",
-          "gold_answer": "Chicago (the Seattle relocation was revoked/cancelled)",
-          "hypothesis": "The user is currently planning to stay and live in Chicago, having signed a new lease there.",
-          "is_correct": true,
-          "scoring_type": "llm_rubric",
-          "evaluation_details": {
-            "primary_judge": {
-              "is_correct": true,
-              "verdict": "CORRECT",
-              "reasoning": "The assistant correctly identified that the user is planning to live in Chicago and signed a new lease there, adhering to the ground truth while omitting the retracted Seattle relocation.",
-              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that the user is planning to live in Chicago and signed a new lease there, adhering to the ground truth while omitting the retracted Seattle relocation.\"\n}\n```",
-              "judge_type": "primary"
-            },
-            "method": "llm_rubric_primary",
-            "is_contaminated": false
-          },
-          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Industry and Role: The user works in the tech industry, specifically in software development.\nActive Goals & Projects: Article Sections (Article Writing Tasks): The user requested the writing of two specific sections ('Introduction' and '- Details of Dela...",
-          "context_tokens": 1480,
-          "retrieval_latency_ms": 36.17
-        }
-      ]
-    },
     "hybrid_rag": {
       "scenario_accuracy": 0.0,
       "scenario_pass": false,

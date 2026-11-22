@@ -3,7 +3,7 @@
 Measures memory architecture performance under increasing haystack depth:
 - Filler levels: 6, 24, and 60 conversational filler sessions
 - Tracks: R (Revision), D (Dependency), X (Hidden Constraints)
-- Systems: Relational Graph Memory, Mem0, Hybrid RAG, Naive Vector RAG
+- Systems: Mem0, Hybrid RAG, Naive Vector RAG
 - Unit of Analysis: Scenario
 
 Records accuracy, retrieval latency, and context token inflation across scale.
@@ -40,7 +40,7 @@ async def run_depth_suite(
     api_key: str,
     depths: List[int] = [6, 24, 60],
     tracks: List[str] = ["R", "D", "X"],
-    systems: List[str] = ["graph_memory", "mem0", "hybrid_rag", "vector_rag"],
+    systems: List[str] = ["vector_rag", "hybrid_rag", "mem0"],
     scenarios_per_track: int = 2,
     seed: int = 20261122,
     output_dir: Path = Path("EpiBench/results/depth"),
@@ -124,7 +124,7 @@ async def main():
     parser = argparse.ArgumentParser(description="Run EpiBench Depth Stress Test")
     parser.add_argument("--depths", type=str, default="6,24,60")
     parser.add_argument("--tracks", type=str, default="R,D,X")
-    parser.add_argument("--systems", type=str, default="graph_memory,mem0,hybrid_rag,vector_rag")
+    parser.add_argument("--systems", type=str, default="vector_rag,hybrid_rag,mem0")
     parser.add_argument("--scenarios-per-track", type=int, default=2)
     parser.add_argument("--seed", type=int, default=20261122)
     parser.add_argument("--output-dir", type=str, default="EpiBench/results/depth")

@@ -25,8 +25,6 @@ sys.path.insert(0, os.path.abspath("."))
 
 from EpiBench.adapters.base import BaseMemoryAdapter
 from EpiBench.adapters.full_context_adapter import FullContextAdapter
-from EpiBench.adapters.graph_ablation_adapter import GraphNoHistoryAdapter, GraphNoRelationsAdapter
-from EpiBench.adapters.graph_memory_adapter import RelationalGraphAdapter
 from EpiBench.adapters.hybrid_rag_adapter import HybridRAGAdapter
 from EpiBench.adapters.mem0_adapter import Mem0Adapter
 from EpiBench.adapters.vector_rag_adapter import VectorRAGAdapter
@@ -72,9 +70,7 @@ class EpiBenchRunner:
         adapters = {}
         for name in system_names:
             name_lower = name.lower()
-            if name_lower in ("graph_memory", "relational_graph"):
-                adapters["graph_memory"] = RelationalGraphAdapter(spend_tracker=self.spend_tracker)
-            elif name_lower == "hybrid_rag":
+            if name_lower == "hybrid_rag":
                 adapters["hybrid_rag"] = HybridRAGAdapter()
             elif name_lower == "vector_rag":
                 adapters["vector_rag"] = VectorRAGAdapter()
@@ -82,10 +78,6 @@ class EpiBenchRunner:
                 adapters["mem0"] = Mem0Adapter(api_key=self.api_key, spend_tracker=self.spend_tracker)
             elif name_lower == "full_context":
                 adapters["full_context"] = FullContextAdapter()
-            elif name_lower in ("graph_no_relations", "graph_no_graph"):
-                adapters["graph_no_relations"] = GraphNoRelationsAdapter(spend_tracker=self.spend_tracker)
-            elif name_lower == "graph_no_history":
-                adapters["graph_no_history"] = GraphNoHistoryAdapter(spend_tracker=self.spend_tracker)
             else:
                 logger.warning(f"Unrecognized system name: {name}")
         return adapters
@@ -179,13 +171,8 @@ class EpiBenchRunner:
         # Step 1: Ingest into each system
         for sys_name, adapter in adapters.items():
             tenant_id = f"epi_{scenario.scenario_id}_{sys_name}"
-            # Check if ablation reusing persisted graph memory
-            if sys_name.startswith("graph_no_"):
-                tenant_id = f"epi_{scenario.scenario_id}_graph_memory"
-                ingest_res = None
-            else:
-                logger.info(f"[{scenario.scenario_id}] Ingesting {len(scenario.sessions)} sessions into {sys_name}...")
-                ingest_res = await adapter.ingest(tenant_id, scenario.sessions)
+            logger.info(f"[{scenario.scenario_id}] Ingesting {len(scenario.sessions)} sessions into {sys_name}...")
+            ingest_res = await adapter.ingest(tenant_id, scenario.sessions)
 
             # Step 2: Retrieve, Answer, and Judge each question
             q_results = []
@@ -293,7 +280,7 @@ class EpiBenchRunner:
                 json.dump(sc_res, f, indent=2)
 
             # Log side-by-side verification preview for manual audit
-            primary_sys = "graph_memory" if "graph_memory" in sc_res["system_results"] else list(sc_res["system_results"].keys())[0]
+            primary_sys = list(sc_res["system_results"].keys())[0]
             for q in sc_res["system_results"].get(primary_sys, {}).get("questions", []):
                 hyp_ans = q["hypothesis"]
                 corr_ans = "PASS" if q["is_correct"] else "FAIL"
@@ -386,50 +373,6 @@ class EpiBenchRunner:
                     "total": tot_q,
                 }
 
-        # Primary comparison: Relational Graph Memory vs Hybrid RAG
-        graph_key = "graph_memory" if "graph_memory" in systems else None
-        if graph_key and "hybrid_rag" in systems:
-            b_wins = 0  # Graph Memory wins, Hybrid RAG loses
-            c_wins = 0  # Hybrid RAG wins, Graph Memory loses
-            both_wins = 0
-            both_losses = 0
-
-            graph_scores = []
-            hrag_scores = []
-
-            for r in results:
-                g_res = r["system_results"].get(graph_key, {})
-                h_res = r["system_results"].get("hybrid_rag", {})
-                g_pass = g_res.get("scenario_pass", False)
-                h_pass = h_res.get("scenario_pass", False)
-
-                graph_scores.append(g_res.get("scenario_accuracy", 0.0))
-                hrag_scores.append(h_res.get("scenario_accuracy", 0.0))
-
-                if g_pass and not h_pass:
-                    b_wins += 1
-                elif h_pass and not g_pass:
-                    c_wins += 1
-                elif g_pass and h_pass:
-                    both_wins += 1
-                else:
-                    both_losses += 1
-
-            mcnemar = exact_mcnemar_test(b_wins, c_wins)
-            boot = paired_scenario_bootstrap(graph_scores, hrag_scores, n_resamples=5000)
-
-            summary["comparisons"]["graph_memory_vs_hybrid_rag"] = {
-                "discordant_graph_memory_wins_b": b_wins,
-                "discordant_hybrid_rag_wins_c": c_wins,
-                "concordant_both_wins": both_wins,
-                "concordant_both_losses": both_losses,
-                "mcnemar_p_value": round(mcnemar["p_value"], 4),
-                "odds_ratio": round(mcnemar["odds_ratio"], 2) if mcnemar["odds_ratio"] != float("inf") else "inf",
-                "paired_bootstrap_mean_delta": round(boot["mean_diff"] * 100, 2),
-                "paired_bootstrap_95_ci": [round(boot["ci_lower"] * 100, 2), round(boot["ci_upper"] * 100, 2)],
-                "paired_bootstrap_p_value": round(boot["p_value"], 4),
-            }
-
         return summary
 
 
@@ -437,7 +380,7 @@ async def main():
     parser = argparse.ArgumentParser(description="Run EpiBench Evaluation Suite")
     parser.add_argument("--mode", choices=["pilot", "main"], default="pilot")
     parser.add_argument("--tracks", type=str, default="R,D,X,F,I,P,K")
-    parser.add_argument("--systems", type=str, default="graph_memory,hybrid_rag,vector_rag,mem0,full_context")
+    parser.add_argument("--systems", type=str, default="vector_rag,hybrid_rag,mem0,full_context")
     parser.add_argument("--token-budget", type=int, default=1500)
     parser.add_argument("--output-dir", type=str, default="EpiBench/results/pilot")
     parser.add_argument("--scenarios-per-track", type=int, default=3)

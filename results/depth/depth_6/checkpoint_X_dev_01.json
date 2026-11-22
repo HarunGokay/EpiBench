@@ -7,40 +7,6 @@
   "session_count": 7,
   "question_count": 1,
   "system_results": {
-    "graph_memory": {
-      "scenario_accuracy": 1.0,
-      "scenario_pass": true,
-      "correct_questions": 1,
-      "total_questions": 1,
-      "avg_retrieval_latency_ms": 38.23,
-      "avg_context_tokens": 1394.0,
-      "ingest_latency_ms": 30117.99,
-      "ingest_cost_usd": 0.01,
-      "questions": [
-        {
-          "question_id": "X_dev_01_q1",
-          "question_subkind": "hidden_constraint",
-          "question_text": "I am traveling to the Chicago conference and found the Hyatt Regency right next door for $340 per night. Should I go ahead and book it directly on the corporate portal?",
-          "gold_answer": "No, you cannot book it directly because it exceeds the $220/night corporate limit; it requires formal executive exception approval.",
-          "hypothesis": "No, you should not book it directly without approval. According to the company travel policy, individual hotel room bookings are strictly capped at $220 per night, and anything higher requires formal executive exception approval.",
-          "is_correct": true,
-          "scoring_type": "llm_rubric",
-          "evaluation_details": {
-            "primary_judge": {
-              "is_correct": true,
-              "verdict": "CORRECT",
-              "reasoning": "The assistant correctly enforced the unmentioned $220 limit from the company travel policy and refused the user's proposal to book the $340 room without required approval.",
-              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned $220 limit from the company travel policy and refused the user's proposal to book the $340 room without required approval.\"\n}\n```",
-              "judge_type": "primary"
-            },
-            "method": "llm_rubric_primary"
-          },
-          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Display Case Project (Vinyl Records and Vintage Cameras Display): The user is planning to display their vinyl records and vintage cameras together in a single display case. | Arrangement and Lighting (Vinyl Records and Vintage Cameras Display): The user...",
-          "context_tokens": 1394,
-          "retrieval_latency_ms": 38.23
-        }
-      ]
-    },
     "mem0": {
       "scenario_accuracy": 1.0,
       "scenario_pass": true,

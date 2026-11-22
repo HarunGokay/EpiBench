@@ -7,40 +7,6 @@
   "session_count": 7,
   "question_count": 1,
   "system_results": {
-    "graph_memory": {
-      "scenario_accuracy": 1.0,
-      "scenario_pass": true,
-      "correct_questions": 1,
-      "total_questions": 1,
-      "avg_retrieval_latency_ms": 61.19,
-      "avg_context_tokens": 1483.0,
-      "ingest_latency_ms": 36294.08,
-      "ingest_cost_usd": 0.0119,
-      "questions": [
-        {
-          "question_id": "X_dev_02_q1",
-          "question_subkind": "hidden_constraint",
-          "question_text": "The backend team wants to deploy a new distributed load-testing test suite on staging that requests 12 vCPUs. Can we spin that up alongside the existing staging pods?",
-          "gold_answer": "No, it cannot be spun up because the 12 vCPU request exceeds the staging cluster's strict hard limit of 8 vCPUs total.",
-          "hypothesis": "No, you cannot spin that up. The staging Kubernetes cluster has a strict hard resource limit of at most 8 vCPUs total across all running pods, and the new test suite requests 12 vCPUs, which exceeds this limit.",
-          "is_correct": true,
-          "scoring_type": "llm_rubric",
-          "evaluation_details": {
-            "primary_judge": {
-              "is_correct": true,
-              "verdict": "CORRECT",
-              "reasoning": "The assistant correctly enforced the unmentioned constraint (the 8 vCPU limit) and refused the proposal to spin up the 12 vCPU test suite.",
-              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned constraint (the 8 vCPU limit) and refused the proposal to spin up the 12 vCPU test suite.\"\n}\n```",
-              "judge_type": "primary"
-            },
-            "method": "llm_rubric_primary"
-          },
-          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Display Integration (Vinyl Record Collection): The user plans to create a music-themed diorama or scene using their Tame Impala, King Gizzard & the Lizard Wizard, and Unknown Mortal Orchestra Funko POP! figures alongside vinyl records, possibly incorpor...",
-          "context_tokens": 1483,
-          "retrieval_latency_ms": 61.19
-        }
-      ]
-    },
     "hybrid_rag": {
       "scenario_accuracy": 1.0,
       "scenario_pass": true,

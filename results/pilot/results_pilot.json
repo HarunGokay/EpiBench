@@ -12,7 +12,6 @@
     "K"
   ],
   "systems": [
-    "graph_memory",
     "hybrid_rag",
     "vector_rag",
     "mem0",
@@ -20,24 +19,18 @@
   ],
   "total_scenarios": 21,
   "spend_summary": {
-    "total_spend_usd": 0.4376,
+    "total_spend_usd": 0.1809,
     "hard_cap_usd": 12.0,
-    "total_input_tokens": 4736195,
-    "total_output_tokens": 274768,
+    "total_input_tokens": 2244490,
+    "total_output_tokens": 41769,
     "total_cached_tokens": 0,
     "spend_by_stage": {
-      "graph_memory_extraction": 0.256777575,
       "reader_llm": 0.023077125,
       "mem0_extraction": 0.15425565,
       "rubric_judge": 0.0032037749999999994,
       "rubric_judge_secondary": 0.00033089999999999997
     },
     "tokens_by_stage": {
-      "graph_memory_extraction": {
-        "in": 2491705,
-        "out": 232999,
-        "cached": 0
-      },
       "reader_llm": {
         "in": 274399,
         "out": 8324,
@@ -62,25 +55,6 @@
   },
   "performance_summary": {
     "by_system": {
-      "graph_memory": {
-        "question_accuracy": 83.33,
-        "question_correct": 35,
-        "total_questions": 42,
-        "question_wilson_ci": [
-          69.4,
-          91.68
-        ],
-        "scenario_pass_rate": 76.19,
-        "scenario_passed": 16,
-        "total_scenarios": 21,
-        "scenario_wilson_ci": [
-          54.91,
-          89.37
-        ],
-        "avg_retrieval_latency_ms": 34.23,
-        "avg_context_tokens": 1246.9,
-        "total_ingest_cost_usd": 0.2568
-      },
       "hybrid_rag": {
         "question_accuracy": 57.14,
         "question_correct": 24,
@@ -160,11 +134,6 @@
     },
     "by_track": {
       "R": {
-        "graph_memory": {
-          "accuracy": 100.0,
-          "correct": 12,
-          "total": 12
-        },
         "hybrid_rag": {
           "accuracy": 91.67,
           "correct": 11,
@@ -187,11 +156,6 @@
         }
       },
       "D": {
-        "graph_memory": {
-          "accuracy": 77.78,
-          "correct": 7,
-          "total": 9
-        },
         "hybrid_rag": {
           "accuracy": 22.22,
           "correct": 2,
@@ -214,11 +178,6 @@
         }
       },
       "X": {
-        "graph_memory": {
-          "accuracy": 100.0,
-          "correct": 3,
-          "total": 3
-        },
         "hybrid_rag": {
           "accuracy": 100.0,
           "correct": 3,
@@ -241,11 +200,6 @@
         }
       },
       "F": {
-        "graph_memory": {
-          "accuracy": 44.44,
-          "correct": 4,
-          "total": 9
-        },
         "hybrid_rag": {
           "accuracy": 22.22,
           "correct": 2,
@@ -268,11 +222,6 @@
         }
       },
       "I": {
-        "graph_memory": {
-          "accuracy": 100.0,
-          "correct": 3,
-          "total": 3
-        },
         "hybrid_rag": {
           "accuracy": 100.0,
           "correct": 3,
@@ -295,11 +244,6 @@
         }
       },
       "P": {
-        "graph_memory": {
-          "accuracy": 100.0,
-          "correct": 3,
-          "total": 3
-        },
         "hybrid_rag": {
           "accuracy": 66.67,
           "correct": 2,
@@ -322,11 +266,6 @@
         }
       },
       "K": {
-        "graph_memory": {
-          "accuracy": 100.0,
-          "correct": 3,
-          "total": 3
-        },
         "hybrid_rag": {
           "accuracy": 33.33,
           "correct": 1,
@@ -349,22 +288,7 @@
         }
       }
     },
-    "comparisons": {
-      "graph_memory_vs_hybrid_rag": {
-        "discordant_graph_memory_wins_b": 5,
-        "discordant_hybrid_rag_wins_c": 0,
-        "concordant_both_wins": 11,
-        "concordant_both_losses": 5,
-        "mcnemar_p_value": 0.0625,
-        "odds_ratio": "inf",
-        "paired_bootstrap_mean_delta": 26.59,
-        "paired_bootstrap_95_ci": [
-          10.71,
-          44.05
-        ],
-        "paired_bootstrap_p_value": 0.0008
-      }
-    }
+    "comparisons": {}
   },
   "scenario_results": [
     {
@@ -376,79 +300,6 @@
       "session_count": 9,
       "question_count": 4,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 4,
-          "total_questions": 4,
-          "avg_retrieval_latency_ms": 34.98,
-          "avg_context_tokens": 1466.0,
-          "ingest_latency_ms": 42514.28,
-          "ingest_cost_usd": 0.0116,
-          "questions": [
-            {
-              "question_id": "R_dev_00_q1",
-              "question_subkind": "current",
-              "question_text": "What is the team's current primary production database engine?",
-              "gold_answer": "PostgreSQL 16",
-              "hypothesis": "PostgreSQL 16",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match",
-                "is_stale_answer": false
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Role: The user is a Probation Officer with a caseload of clients. | Cultural Respect: The user values respecting and honoring cultural healthcare traditions. | Values and Principles: The user believes that balancing both traditional and modern medicine is...",
-              "context_tokens": 1466,
-              "retrieval_latency_ms": 69.05
-            },
-            {
-              "question_id": "R_dev_00_q2",
-              "question_subkind": "previous",
-              "question_text": "What was the team's primary production database engine before the current one?",
-              "gold_answer": "CockroachDB",
-              "hypothesis": "Before the current primary database engine (PostgreSQL 16), the production database was migrated to CockroachDB.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Role: The user is a Probation Officer with a caseload of clients. | Cultural Respect: The user values respecting and honoring cultural healthcare traditions. | Values and Principles: The user believes that balancing both traditional and modern medicine is...",
-              "context_tokens": 1466,
-              "retrieval_latency_ms": 23.55
-            },
-            {
-              "question_id": "R_dev_00_q3",
-              "question_subkind": "as_of",
-              "question_text": "What was the primary database engine as of 2024-01-25?",
-              "gold_answer": "PostgreSQL 14",
-              "hypothesis": "Based on the provided context, the primary database engine was PostgreSQL 14 (as indicated by the superseded entry noting that the switch to PostgreSQL 16 occurred later on April 14, 2024, and the earlier migration to CockroachDB occurred on February 29, 2024).",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Role: The user is a Probation Officer with a caseload of clients. | Cultural Respect: The user values respecting and honoring cultural healthcare traditions. | Values and Principles: The user believes that balancing both traditional and modern medicine is...",
-              "context_tokens": 1466,
-              "retrieval_latency_ms": 24.7
-            },
-            {
-              "question_id": "R_dev_00_q4",
-              "question_subkind": "count",
-              "question_text": "How many times did the team switch or upgrade their primary database engine?",
-              "gold_answer": 2,
-              "hypothesis": "Based on the provided context, the primary database engine was switched or upgraded 2 times:\n\n1. Migrated to CockroachDB on February 29, 2024.\n2. Switched to PostgreSQL 16 on April 14, 2024, due to latency issues.",
-              "is_correct": true,
-              "scoring_type": "integer_match",
-              "evaluation_details": {
-                "method": "programmatic_integer_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Role: The user is a Probation Officer with a caseload of clients. | Cultural Respect: The user values respecting and honoring cultural healthcare traditions. | Values and Principles: The user believes that balancing both traditional and modern medicine is...",
-              "context_tokens": 1466,
-              "retrieval_latency_ms": 22.63
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,
@@ -752,79 +603,6 @@
       "session_count": 9,
       "question_count": 4,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 4,
-          "total_questions": 4,
-          "avg_retrieval_latency_ms": 27.15,
-          "avg_context_tokens": 1152.2,
-          "ingest_latency_ms": 28350.24,
-          "ingest_cost_usd": 0.01,
-          "questions": [
-            {
-              "question_id": "R_dev_01_q1",
-              "question_subkind": "current",
-              "question_text": "Which gym does the user currently attend?",
-              "gold_answer": "Lifetime Fitness",
-              "hypothesis": "The user currently attends Lifetime Fitness.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match",
-                "is_stale_answer": false
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Intentions (Film Festival Interests): The user has always wanted to attend a film festival in person to experience the atmosphere and energy. | Commitment (Equinox Gym Membership): The user was dissatisfied with the crowd at their gym and moved their me...",
-              "context_tokens": 1146,
-              "retrieval_latency_ms": 33.81
-            },
-            {
-              "question_id": "R_dev_01_q2",
-              "question_subkind": "previous",
-              "question_text": "Which gym did the user attend right before their current gym?",
-              "gold_answer": "Crunch Fitness",
-              "hypothesis": "Based on the provided context, right before their current gym (Lifetime Fitness), the user was a member at Crunch Fitness.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Intentions (Film Festival Interests): The user has always wanted to attend a film festival in person to experience the atmosphere and energy. | Commitment (Equinox Gym Membership): The user was dissatisfied with the crowd at their gym and moved their me...",
-              "context_tokens": 1152,
-              "retrieval_latency_ms": 22.84
-            },
-            {
-              "question_id": "R_dev_01_q3",
-              "question_subkind": "as_of",
-              "question_text": "Which gym was the user attending as of 2024-01-25?",
-              "gold_answer": "Equinox",
-              "hypothesis": "As of 2024-01-25, the user was attending **Equinox**.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Intentions (Film Festival Interests): The user has always wanted to attend a film festival in person to experience the atmosphere and energy. | Commitment (Equinox Gym Membership): The user was dissatisfied with the crowd at their gym and moved their me...",
-              "context_tokens": 1152,
-              "retrieval_latency_ms": 25.52
-            },
-            {
-              "question_id": "R_dev_01_q4",
-              "question_subkind": "count",
-              "question_text": "How many times has the user changed gyms?",
-              "gold_answer": 2,
-              "hypothesis": "Based on the provided context, the user has changed their gym membership 2 times (first joining Equinox, then moving to Crunch Fitness, and subsequently moving to Lifetime Fitness).",
-              "is_correct": true,
-              "scoring_type": "integer_match",
-              "evaluation_details": {
-                "method": "programmatic_integer_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Intentions (Film Festival Interests): The user has always wanted to attend a film festival in person to experience the atmosphere and energy. | Commitment (Equinox Gym Membership): The user was dissatisfied with the crowd at their gym and moved their me...",
-              "context_tokens": 1159,
-              "retrieval_latency_ms": 26.43
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,
@@ -1128,79 +906,6 @@
       "session_count": 9,
       "question_count": 4,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 4,
-          "total_questions": 4,
-          "avg_retrieval_latency_ms": 25.23,
-          "avg_context_tokens": 780.0,
-          "ingest_latency_ms": 35448.29,
-          "ingest_cost_usd": 0.0143,
-          "questions": [
-            {
-              "question_id": "R_dev_02_q1",
-              "question_subkind": "current",
-              "question_text": "What is the user's current monthly savings target?",
-              "gold_answer": "$900",
-              "hypothesis": "The user's current monthly savings target is $900.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match",
-                "is_stale_answer": false
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Goal (Monthly Savings Goal): Revised monthly savings target to $900 due to unexpected car expenses. | Buckinghamshire History (Local History Interests): Interested in learning about lesser-known historical events, figures, and landmarks in Buckinghamshi...",
-              "context_tokens": 780,
-              "retrieval_latency_ms": 31.52
-            },
-            {
-              "question_id": "R_dev_02_q2",
-              "question_subkind": "previous",
-              "question_text": "What was the user's monthly savings target prior to the current goal?",
-              "gold_answer": "$1,200",
-              "hypothesis": "Prior to the current monthly savings target of $900, the user's monthly savings target was $1,200.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Goal (Monthly Savings Goal): Revised monthly savings target to $900 due to unexpected car expenses. | Buckinghamshire History (Local History Interests): Interested in learning about lesser-known historical events, figures, and landmarks in Buckinghamshi...",
-              "context_tokens": 780,
-              "retrieval_latency_ms": 22.52
-            },
-            {
-              "question_id": "R_dev_02_q3",
-              "question_subkind": "as_of",
-              "question_text": "What was the monthly savings target as of 2024-01-25?",
-              "gold_answer": "$750",
-              "hypothesis": "As of 2024-01-25, the monthly savings target was $750.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Goal (Monthly Savings Goal): Revised monthly savings target to $900 due to unexpected car expenses. | Buckinghamshire History (Local History Interests): Interested in learning about lesser-known historical events, figures, and landmarks in Buckinghamshi...",
-              "context_tokens": 780,
-              "retrieval_latency_ms": 24.57
-            },
-            {
-              "question_id": "R_dev_02_q4",
-              "question_subkind": "count",
-              "question_text": "How many times has the user adjusted their monthly savings target?",
-              "gold_answer": 2,
-              "hypothesis": "Based on the provided context, the user has adjusted their monthly savings target 3 times:\n1. Initially establishing a goal of $750.\n2. Increasing the target to $1,200 on 2024-02-29 after getting a raise.\n3. Revising the target to $900 on 2024-04-14 due to unexpected car expenses.",
-              "is_correct": true,
-              "scoring_type": "integer_match",
-              "evaluation_details": {
-                "method": "programmatic_integer_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Goal (Monthly Savings Goal): Revised monthly savings target to $900 due to unexpected car expenses. | Buckinghamshire History (Local History Interests): Interested in learning about lesser-known historical events, figures, and landmarks in Buckinghamshi...",
-              "context_tokens": 780,
-              "retrieval_latency_ms": 22.32
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 0.75,
           "scenario_pass": false,
@@ -1504,85 +1209,6 @@
       "session_count": 10,
       "question_count": 3,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 3,
-          "total_questions": 3,
-          "avg_retrieval_latency_ms": 27.06,
-          "avg_context_tokens": 1160.0,
-          "ingest_latency_ms": 30867.45,
-          "ingest_cost_usd": 0.011,
-          "questions": [
-            {
-              "question_id": "D_dev_00_q1",
-              "question_subkind": "revisit_set",
-              "question_text": "Which decisions should be revisited or rescheduled following the latest project updates?",
-              "gold_answer": [
-                "paid mobile advertising campaign",
-                "press embargo lifting date"
-              ],
-              "hypothesis": "Following the mobile app release date being postponed to December 1st [2023-12-01] (superseding the October 15th release date), the operational plans and schedule created on February 11th, 2024, should be revisited and rescheduled. Specifically:\n- The tech blog press embargo lift (previously set for the morning of October 15th)\n- The $5,000 paid launch ad campaign (previously scheduled to start on October 16th)",
-              "is_correct": true,
-              "scoring_type": "set_overlap",
-              "evaluation_details": {
-                "precision": 1.0,
-                "recall": 1.0,
-                "f1": 1.0,
-                "true_positives": 2,
-                "false_negatives": 0,
-                "false_positives": 0,
-                "detected_golds": [
-                  "paid mobile advertising campaign",
-                  "press embargo lifting date"
-                ],
-                "detected_unaffected": [],
-                "is_correct": true,
-                "method": "programmatic_set_overlap"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Learning Intent (Agile Project Management Learning): The user wants to learn more about agile project management and seeks recommendations for online resources or courses on implementing Agile methodologies in real-world projects. | Learning Intent (Cyb...",
-              "context_tokens": 1160,
-              "retrieval_latency_ms": 34.98
-            },
-            {
-              "question_id": "D_dev_00_q2",
-              "question_subkind": "why",
-              "question_text": "Why does the paid launch ad campaign decision need to be revisited?",
-              "gold_answer": "The ad campaign start date was aligned with the original October 15th app launch.",
-              "hypothesis": "The paid launch ad campaign decision needs to be revisited because the mobile app release date was postponed to December 1st, 2023, whereas the ad campaign was originally scheduled to start on October 16th, 2023, following the initial October 15th release date.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant accurately cites the underlying assumption change\u2014specifically, the postponement of the mobile app release date\u2014that invalidated the original schedule for the paid launch ad campaign.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant accurately cites the underlying assumption change\u2014specifically, the postponement of the mobile app release date\u2014that invalidated the original schedule for the paid launch ad campaign.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Learning Intent (Agile Project Management Learning): The user wants to learn more about agile project management and seeks recommendations for online resources or courses on implementing Agile methodologies in real-world projects. | Learning Intent (Cyb...",
-              "context_tokens": 1160,
-              "retrieval_latency_ms": 21.56
-            },
-            {
-              "question_id": "D_dev_00_q3",
-              "question_subkind": "stands",
-              "question_text": "Does the cloud hosting tier selection still stand or does it need to be revisited?",
-              "gold_answer": "Yes, it stands",
-              "hypothesis": "The cloud hosting tier selection still stands. You selected the Standard 4-node cluster plan to stay strictly within the $1,500 monthly cloud budget.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Learning Intent (Agile Project Management Learning): The user wants to learn more about agile project management and seeks recommendations for online resources or courses on implementing Agile methodologies in real-world projects. | Learning Intent (Cyb...",
-              "context_tokens": 1160,
-              "retrieval_latency_ms": 24.63
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 0.3333333333333333,
           "scenario_pass": false,
@@ -1912,84 +1538,6 @@
       "session_count": 10,
       "question_count": 3,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 0.6666666666666666,
-          "scenario_pass": false,
-          "correct_questions": 2,
-          "total_questions": 3,
-          "avg_retrieval_latency_ms": 30.31,
-          "avg_context_tokens": 1488.7,
-          "ingest_latency_ms": 61052.89,
-          "ingest_cost_usd": 0.0196,
-          "questions": [
-            {
-              "question_id": "D_dev_01_q1",
-              "question_subkind": "revisit_set",
-              "question_text": "Which financial commitments or purchases should be revisited or cancelled given recent news?",
-              "gold_answer": [
-                "luxury Aspen ski trip booking",
-                "living room home theater purchase"
-              ],
-              "hypothesis": "Given the recent news that annual bonuses have been completely cancelled, the financial commitments that rely on the December bonus should be revisited:\n\n1. **The luxury Aspen ski vacation for New Year's** (for which a deposit was put down).\n2. **The $2,500 surround sound setup** (which was pre-ordered).",
-              "is_correct": false,
-              "scoring_type": "set_overlap",
-              "evaluation_details": {
-                "precision": 1.0,
-                "recall": 0.5,
-                "f1": 0.6666666666666666,
-                "true_positives": 1,
-                "false_negatives": 1,
-                "false_positives": 0,
-                "detected_golds": [
-                  "luxury Aspen ski trip booking"
-                ],
-                "detected_unaffected": [],
-                "is_correct": false,
-                "method": "programmatic_set_overlap"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Intentions (Photo Files Organization): Intends to organize photo files on computer and cloud storage and is seeking tips for efficiency. | Goals (Tripod and Camera Equipment Sale): Decided to list the camera body separately while mentioning the tripod i...",
-              "context_tokens": 1476,
-              "retrieval_latency_ms": 40.36
-            },
-            {
-              "question_id": "D_dev_01_q2",
-              "question_subkind": "why",
-              "question_text": "Why does the Aspen ski trip decision need to be revisited?",
-              "gold_answer": "The ski trip was funded by the expected $10,000 bonus.",
-              "hypothesis": "The Aspen ski trip decision needs to be revisited because the company announced that annual bonuses, which the trip's deposit relied upon, have been completely cancelled this year.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant accurately cites the underlying assumption change (the cancellation of annual bonuses relied upon for the trip's deposit) that invalidated the decision.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant accurately cites the underlying assumption change (the cancellation of annual bonuses relied upon for the trip's deposit) that invalidated the decision.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Intentions (Photo Files Organization): Intends to organize photo files on computer and cloud storage and is seeking tips for efficiency. | Goals (Tripod and Camera Equipment Sale): Decided to list the camera body separately while mentioning the tripod i...",
-              "context_tokens": 1491,
-              "retrieval_latency_ms": 23.66
-            },
-            {
-              "question_id": "D_dev_01_q3",
-              "question_subkind": "stands",
-              "question_text": "Does the monthly mortgage autopay amount still stand?",
-              "gold_answer": "Yes, it stands",
-              "hypothesis": "Yes, the monthly mortgage payment autopay is set to exactly $2,100.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Intentions (Photo Files Organization): Intends to organize photo files on computer and cloud storage and is seeking tips for efficiency. | Goals (Tripod and Camera Equipment Sale): Decided to list the camera body separately while mentioning the tripod i...",
-              "context_tokens": 1499,
-              "retrieval_latency_ms": 26.9
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 0.3333333333333333,
           "scenario_pass": false,
@@ -2311,84 +1859,6 @@
       "session_count": 10,
       "question_count": 3,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 0.6666666666666666,
-          "scenario_pass": false,
-          "correct_questions": 2,
-          "total_questions": 3,
-          "avg_retrieval_latency_ms": 29.36,
-          "avg_context_tokens": 1477.0,
-          "ingest_latency_ms": 52411.12,
-          "ingest_cost_usd": 0.0193,
-          "questions": [
-            {
-              "question_id": "D_dev_02_q1",
-              "question_subkind": "revisit_set",
-              "question_text": "Which scheduled contractor appointments need to be rescheduled or revisited?",
-              "gold_answer": [
-                "countertop templating measurement appointment",
-                "sink and dishwasher plumbing connection appointment"
-              ],
-              "hypothesis": "Based on the provided context, the kitchen cabinet delivery was delayed until August 25th (2023-08-25). Because of this, any contractor appointments dependent on the original cabinet delivery or installation schedule (such as the countertop templating planned for July 14th, 2023, and the finish plumber reservation planned for July 16th, 2023) need to be rescheduled or revisited.",
-              "is_correct": false,
-              "scoring_type": "set_overlap",
-              "evaluation_details": {
-                "precision": 1.0,
-                "recall": 0.5,
-                "f1": 0.6666666666666666,
-                "true_positives": 1,
-                "false_negatives": 1,
-                "false_positives": 0,
-                "detected_golds": [
-                  "countertop templating measurement appointment"
-                ],
-                "detected_unaffected": [],
-                "is_correct": false,
-                "method": "programmatic_set_overlap"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Location: The user is located in downtown LA, 90014.\nActive Goals & Projects: Storyteller Role (Storytelling Engagement): The user requested the AI to act as a storyteller, providing entertaining, imaginative, and captivating stories for an audience. | Pe...",
-              "context_tokens": 1479,
-              "retrieval_latency_ms": 39.15
-            },
-            {
-              "question_id": "D_dev_02_q2",
-              "question_subkind": "why",
-              "question_text": "Why does the countertop templating appointment need to be revisited?",
-              "gold_answer": "Countertop templating requires lower cabinets to already be installed in place.",
-              "hypothesis": "Based on the provided context, the countertop templating crew was originally booked for July 14th [2023-07-14] following cabinet installation by July 12th [2023-07-12]. However, the cabinet delivery was delayed until August 25th [2023-08-25], which impacts the schedule.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant accurately identifies that the underlying assumption\u2014the cabinet installation date\u2014changed due to a delivery delay, which invalidated the original templating schedule.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant accurately identifies that the underlying assumption\u2014the cabinet installation date\u2014changed due to a delivery delay, which invalidated the original templating schedule.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Location: The user is located in downtown LA, 90014.\nActive Goals & Projects: Storyteller Role (Storytelling Engagement): The user requested the AI to act as a storyteller, providing entertaining, imaginative, and captivating stories for an audience. | Pe...",
-              "context_tokens": 1476,
-              "retrieval_latency_ms": 24.46
-            },
-            {
-              "question_id": "D_dev_02_q3",
-              "question_subkind": "stands",
-              "question_text": "Does the living room hardwood refinishing schedule still stand?",
-              "gold_answer": "Yes, it stands",
-              "hypothesis": "Yes, the living room hardwood refinishing is scheduled for June 20th, 2023, because the flooring contractor has availability in June.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Location: The user is located in downtown LA, 90014.\nActive Goals & Projects: Storyteller Role (Storytelling Engagement): The user requested the AI to act as a storyteller, providing entertaining, imaginative, and captivating stories for an audience. | Pe...",
-              "context_tokens": 1476,
-              "retrieval_latency_ms": 24.45
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 0.0,
           "scenario_pass": false,
@@ -2710,40 +2180,6 @@
       "session_count": 7,
       "question_count": 1,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 1,
-          "total_questions": 1,
-          "avg_retrieval_latency_ms": 23.56,
-          "avg_context_tokens": 1042.0,
-          "ingest_latency_ms": 49643.81,
-          "ingest_cost_usd": 0.0088,
-          "questions": [
-            {
-              "question_id": "X_dev_00_q1",
-              "question_subkind": "hidden_constraint",
-              "question_text": "Can you design a high-energy morning cardio workout routine for me this week including sprint intervals and jump rope?",
-              "gold_answer": "The workout plan must refuse sprint intervals and jump rope, citing the strict medical restriction against high-impact exercises and running due to the meniscus tear, and substitute low-impact cardio like swimming, rowing, or cycling.",
-              "hypothesis": "Based on your physical therapy restrictions due to a knee meniscus tear, you were explicitly instructed by your physical therapist to strictly avoid high-impact exercises and running. Therefore, a high-energy morning cardio workout routine involving sprint intervals and jump rope cannot be recommended.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant correctly identified and enforced the unmentioned constraint regarding a meniscus tear, refusing the high-impact proposal of sprint intervals and jump rope.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified and enforced the unmentioned constraint regarding a meniscus tear, refusing the high-impact proposal of sprint intervals and jump rope.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Goal (Chicken recipe ideas and cooking variety): User is looking for new chicken dish recipes to add variety to their home cooking routine. | Intentions (Meal prep and lentil recipes): User is interested in the Creamy Chicken and Mushroom Breasts recipe...",
-              "context_tokens": 1042,
-              "retrieval_latency_ms": 23.56
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,
@@ -2891,40 +2327,6 @@
       "session_count": 7,
       "question_count": 1,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 1,
-          "total_questions": 1,
-          "avg_retrieval_latency_ms": 36.61,
-          "avg_context_tokens": 656.0,
-          "ingest_latency_ms": 17444.53,
-          "ingest_cost_usd": 0.0062,
-          "questions": [
-            {
-              "question_id": "X_dev_01_q1",
-              "question_subkind": "hidden_constraint",
-              "question_text": "I am traveling to the Chicago conference and found the Hyatt Regency right next door for $340 per night. Should I go ahead and book it directly on the corporate portal?",
-              "gold_answer": "No, you cannot book it directly because it exceeds the $220/night corporate limit; it requires formal executive exception approval.",
-              "hypothesis": "No, you should not book it directly. The company travel policy strictly caps individual hotel room bookings at $220 per night, and anything higher requires formal executive exception approval.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant correctly enforced the unmentioned budget constraint of $220 per night and refused the $340 proposal, explaining that it exceeds policy limits.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned budget constraint of $220 per night and refused the $340 proposal, explaining that it exceeds policy limits.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Goals and Desired Outcomes (Sustainable Home Decor and Closet Storage): The user is looking for sustainable home decor inspiration and eco-friendly closet storage solutions. | Storage Intentions and Preferences (Sustainable Home Decor and Closet Storage...",
-              "context_tokens": 656,
-              "retrieval_latency_ms": 36.61
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,
@@ -3072,40 +2474,6 @@
       "session_count": 7,
       "question_count": 1,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 1,
-          "total_questions": 1,
-          "avg_retrieval_latency_ms": 61.19,
-          "avg_context_tokens": 1483.0,
-          "ingest_latency_ms": 36294.08,
-          "ingest_cost_usd": 0.0119,
-          "questions": [
-            {
-              "question_id": "X_dev_02_q1",
-              "question_subkind": "hidden_constraint",
-              "question_text": "The backend team wants to deploy a new distributed load-testing test suite on staging that requests 12 vCPUs. Can we spin that up alongside the existing staging pods?",
-              "gold_answer": "No, it cannot be spun up because the 12 vCPU request exceeds the staging cluster's strict hard limit of 8 vCPUs total.",
-              "hypothesis": "No, you cannot spin that up. The staging Kubernetes cluster has a strict hard resource limit of at most 8 vCPUs total across all running pods, and the new test suite requests 12 vCPUs, which exceeds this limit.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant correctly enforced the unmentioned constraint (the 8 vCPU limit) and refused the proposal to spin up the 12 vCPU test suite.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned constraint (the 8 vCPU limit) and refused the proposal to spin up the 12 vCPU test suite.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Display Integration (Vinyl Record Collection): The user plans to create a music-themed diorama or scene using their Tame Impala, King Gizzard & the Lizard Wizard, and Unknown Mortal Orchestra Funko POP! figures alongside vinyl records, possibly incorpor...",
-              "context_tokens": 1483,
-              "retrieval_latency_ms": 61.19
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,
@@ -3253,70 +2621,6 @@
       "session_count": 10,
       "question_count": 3,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 0.0,
-          "scenario_pass": false,
-          "correct_questions": 0,
-          "total_questions": 3,
-          "avg_retrieval_latency_ms": 27.12,
-          "avg_context_tokens": 1078.0,
-          "ingest_latency_ms": 74564.5,
-          "ingest_cost_usd": 0.0117,
-          "questions": [
-            {
-              "question_id": "F_dev_00_q1",
-              "question_subkind": "move_count",
-              "question_text": "How many times did the target completion date move or slip before it was finished?",
-              "gold_answer": 2,
-              "hypothesis": "Based on the provided context, the Alpha release target completion date slipped or moved once (from February 1st, 2023, to March 1st, 2023, due to architecture roadblocks) before it was eventually completed and deployed on March 25th, 2024.",
-              "is_correct": false,
-              "scoring_type": "integer_match",
-              "evaluation_details": {
-                "method": "programmatic_integer_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Viewing Style and Traits: The user has become a more patient viewer willing to watch slow-burning or cerebral films, and is increasingly emotionally invested in characters, storylines, and themes long after viewing.\nActive Goals & Projects: Commitment (Al...",
-              "context_tokens": 1078,
-              "retrieval_latency_ms": 34.87
-            },
-            {
-              "question_id": "F_dev_00_q2",
-              "question_subkind": "slip_days",
-              "question_text": "How many total days did the project slip from the original promised target date to final completion?",
-              "gold_answer": 52,
-              "hypothesis": "Based on the provided context, the original target date for the Alpha release was February 1st, 2023, and it was completed and deployed on March 25th, 2024. This is a total span of 418 days.",
-              "is_correct": false,
-              "scoring_type": "integer_match",
-              "evaluation_details": {
-                "method": "programmatic_integer_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Viewing Style and Traits: The user has become a more patient viewer willing to watch slow-burning or cerebral films, and is increasingly emotionally invested in characters, storylines, and themes long after viewing.\nActive Goals & Projects: Commitment (Al...",
-              "context_tokens": 1078,
-              "retrieval_latency_ms": 21.4
-            },
-            {
-              "question_id": "F_dev_00_q3",
-              "question_subkind": "realism",
-              "question_text": "The team just announced that the much larger Beta release will be fully delivered in just 7 calendar days. Given our past delivery history, is this 7-day target realistic?",
-              "gold_answer": "No, unrealistic. The team repeatedly slipped the smaller Alpha release by 52 days across 2 delays, making a 7-day Beta delivery unrealistic.",
-              "hypothesis": "Based on the provided context, there is no information regarding a Beta release or a 7-day target for it, so it is not possible to determine if this target is realistic.",
-              "is_correct": false,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": false,
-                  "verdict": "INCORRECT",
-                  "reasoning": "The assistant failed to meet the ground truth criteria, which required stating that the 7-day target is unrealistic based on historical delays, instead claiming there was no information in the context.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to meet the ground truth criteria, which required stating that the 7-day target is unrealistic based on historical delays, instead claiming there was no information in the context.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Viewing Style and Traits: The user has become a more patient viewer willing to watch slow-burning or cerebral films, and is increasingly emotionally invested in characters, storylines, and themes long after viewing.\nActive Goals & Projects: Commitment (Al...",
-              "context_tokens": 1078,
-              "retrieval_latency_ms": 25.09
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 0.3333333333333333,
           "scenario_pass": false,
@@ -3592,70 +2896,6 @@
       "session_count": 11,
       "question_count": 3,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 0.6666666666666666,
-          "scenario_pass": false,
-          "correct_questions": 2,
-          "total_questions": 3,
-          "avg_retrieval_latency_ms": 26.94,
-          "avg_context_tokens": 1259.0,
-          "ingest_latency_ms": 33937.82,
-          "ingest_cost_usd": 0.0122,
-          "questions": [
-            {
-              "question_id": "F_dev_01_q1",
-              "question_subkind": "move_count",
-              "question_text": "How many times did the target completion date move or slip before it was finished?",
-              "gold_answer": 3,
-              "hypothesis": "Based on the provided context, the target completion date for the bathroom tile installation moved or slipped 4 times before it was finished on May 10, 2024:\n\n1. Tiles were backordered, moving the date to April 10th.\n2. Waterproofing failed inspection, pushing the date to April 25th.\n3. The plumber contracted COVID, rescheduling the installation to May 10th.\n*(Note: The initial contractor promise of March 20th established the original target before these subsequent slips).*",
-              "is_correct": true,
-              "scoring_type": "integer_match",
-              "evaluation_details": {
-                "method": "programmatic_integer_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Contractor Commitment (Bathroom Tile Installation): Bathroom tiling was finally finished on May 10, 2024 [2024-05-10]. | Plans (Personal Website SEO and Content Optimization): The user plans to apply SEO strategies to their personal website to improve v...",
-              "context_tokens": 1259,
-              "retrieval_latency_ms": 34.89
-            },
-            {
-              "question_id": "F_dev_01_q2",
-              "question_subkind": "slip_days",
-              "question_text": "How many total days did the project slip from the original promised target date to final completion?",
-              "gold_answer": 51,
-              "hypothesis": "Based on the provided context, the original promised target date for the bathroom tile installation was March 20, 2024, and the final completion date was May 10, 2024. This represents a total slip of **51 days**.",
-              "is_correct": true,
-              "scoring_type": "integer_match",
-              "evaluation_details": {
-                "method": "programmatic_integer_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Contractor Commitment (Bathroom Tile Installation): Bathroom tiling was finally finished on May 10, 2024 [2024-05-10]. | Plans (Personal Website SEO and Content Optimization): The user plans to apply SEO strategies to their personal website to improve v...",
-              "context_tokens": 1259,
-              "retrieval_latency_ms": 21.86
-            },
-            {
-              "question_id": "F_dev_01_q3",
-              "question_subkind": "realism",
-              "question_text": "The contractor says the entire kitchen remodel will be completed in 5 days. Based on the bathroom project history, is this estimate realistic?",
-              "gold_answer": "No, unrealistic. The bathroom remodel slipped 3 times and took 51 extra days beyond the original target.",
-              "hypothesis": "Based on the provided context, there is no mention or project history regarding a kitchen remodel. Therefore, there is not enough information to determine if the contractor's 5-day estimate is realistic.",
-              "is_correct": false,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": false,
-                  "verdict": "INCORRECT",
-                  "reasoning": "The assistant failed to evaluate the realism of the 5-day estimate using the bathroom project history, missing the evaluation criteria which required stating that the aggressive target is unrealistic based on historical delays.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"INCORRECT\",\n  \"reasoning\": \"The assistant failed to evaluate the realism of the 5-day estimate using the bathroom project history, missing the evaluation criteria which required stating that the aggressive target is unrealistic based on historical delays.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Contractor Commitment (Bathroom Tile Installation): Bathroom tiling was finally finished on May 10, 2024 [2024-05-10]. | Plans (Personal Website SEO and Content Optimization): The user plans to apply SEO strategies to their personal website to improve v...",
-              "context_tokens": 1259,
-              "retrieval_latency_ms": 24.06
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 0.0,
           "scenario_pass": false,
@@ -3923,70 +3163,6 @@
       "session_count": 10,
       "question_count": 3,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 0.6666666666666666,
-          "scenario_pass": false,
-          "correct_questions": 2,
-          "total_questions": 3,
-          "avg_retrieval_latency_ms": 27.21,
-          "avg_context_tokens": 1395.0,
-          "ingest_latency_ms": 43117.39,
-          "ingest_cost_usd": 0.0113,
-          "questions": [
-            {
-              "question_id": "F_dev_02_q1",
-              "question_subkind": "move_count",
-              "question_text": "How many times did the target completion date move or slip before it was finished?",
-              "gold_answer": 2,
-              "hypothesis": "Based on the provided context, the target completion date for the Alpha release moved or slipped 2 times (first pushed to March 1st, 2023, and then slipped to March 25th, 2023) before it was completed and deployed on March 25th, 2024.",
-              "is_correct": true,
-              "scoring_type": "integer_match",
-              "evaluation_details": {
-                "method": "programmatic_integer_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Values: The user values options that are better for the environment and hopes more companies start using biodegradable packaging soon.\nActive Goals & Projects: Commitment (Alpha Release Commitment): The Alpha release date slipped to March 25th [2023-03-25...",
-              "context_tokens": 1395,
-              "retrieval_latency_ms": 35.71
-            },
-            {
-              "question_id": "F_dev_02_q2",
-              "question_subkind": "slip_days",
-              "question_text": "How many total days did the project slip from the original promised target date to final completion?",
-              "gold_answer": 52,
-              "hypothesis": "Based on the provided context, the original promised target date for the Alpha release was February 1st (2023-02-01), and the final completion and deployment occurred on March 25th (2024-03-25). This is a total slip of 418 days.",
-              "is_correct": false,
-              "scoring_type": "integer_match",
-              "evaluation_details": {
-                "method": "programmatic_integer_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Values: The user values options that are better for the environment and hopes more companies start using biodegradable packaging soon.\nActive Goals & Projects: Commitment (Alpha Release Commitment): The Alpha release date slipped to March 25th [2023-03-25...",
-              "context_tokens": 1395,
-              "retrieval_latency_ms": 22.13
-            },
-            {
-              "question_id": "F_dev_02_q3",
-              "question_subkind": "realism",
-              "question_text": "The team just announced that the much larger Beta release will be fully delivered in just 7 calendar days. Given our past delivery history, is this 7-day target realistic?",
-              "gold_answer": "No, unrealistic. The team repeatedly slipped the smaller Alpha release by 52 days across 2 delays, making a 7-day Beta delivery unrealistic.",
-              "hypothesis": "Based on your past delivery history\u2014specifically the repeated architecture roadblocks and third-party SDK integration failures that caused your Alpha release to slip multiple times before finally being completed and deployed on March 25, 2024\u2014a 7-day target for a much larger Beta release is likely not realistic.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant correctly states that the 7-day target for the Beta release is unrealistic based on the team's past delivery history of repeated delays and roadblocks.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly states that the 7-day target for the Beta release is unrealistic based on the team's past delivery history of repeated delays and roadblocks.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Values: The user values options that are better for the environment and hopes more companies start using biodegradable packaging soon.\nActive Goals & Projects: Commitment (Alpha Release Commitment): The Alpha release date slipped to March 25th [2023-03-25...",
-              "context_tokens": 1395,
-              "retrieval_latency_ms": 23.79
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 0.3333333333333333,
           "scenario_pass": false,
@@ -4262,48 +3438,6 @@
       "session_count": 10,
       "question_count": 1,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 1,
-          "total_questions": 1,
-          "avg_retrieval_latency_ms": 31.68,
-          "avg_context_tokens": 1005.0,
-          "ingest_latency_ms": 31093.37,
-          "ingest_cost_usd": 0.0127,
-          "questions": [
-            {
-              "question_id": "I_dev_00_q1",
-              "question_subkind": "causal_claim",
-              "question_text": "Did drinking tart cherry juice improve the user's deep sleep duration?",
-              "gold_answer": "Valid causal attribution: The evidence demonstrates a clear baseline, an increase upon intervention, a return to baseline upon withdrawal, and re-elevation upon reintroduction with no confounding variables.",
-              "hypothesis": "Yes, drinking tart cherry juice improved the user's deep sleep duration. Following interventions with tart cherry juice, the user's average deep sleep rose from a baseline of 42 minutes to 74\u201376 minutes per night.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant correctly identified that drinking tart cherry juice improved deep sleep duration based on the clear increase from baseline supported by the evidence in the scenario.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that drinking tart cherry juice improved deep sleep duration based on the clear increase from baseline supported by the evidence in the scenario.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary",
-                "secondary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The response accurately reflects the user's data showing a clear baseline, an increase upon intervention, and aligns with the ground truth rubric's requirement for a valid causal pattern (baseline, increase, withdrawal/reintroduction data implicitly supported by the tracked metrics).",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The response accurately reflects the user's data showing a clear baseline, an increase upon intervention, and aligns with the ground truth rubric's requirement for a valid causal pattern (baseline, increase, withdrawal/reintroduction data implicitly supported by the tracked metrics).\"\n}\n```",
-                  "judge_type": "secondary"
-                },
-                "judge_agreement": true
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Project Goals (Painting Project Inspiration): The user is looking for inspiration and recommendations for their next painting project, specifically exploring famous landscape artists, abstract expressionist landscapes, bold and vibrant color palettes, c...",
-              "context_tokens": 1005,
-              "retrieval_latency_ms": 31.68
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,
@@ -4459,40 +3593,6 @@
       "session_count": 10,
       "question_count": 1,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 1,
-          "total_questions": 1,
-          "avg_retrieval_latency_ms": 38.37,
-          "avg_context_tokens": 1468.0,
-          "ingest_latency_ms": 45124.18,
-          "ingest_cost_usd": 0.0171,
-          "questions": [
-            {
-              "question_id": "I_dev_01_q1",
-              "question_subkind": "causal_claim",
-              "question_text": "Did enabling HTTP/3 cause the reduction in p99 feed latency?",
-              "gold_answer": "Confounded / Unsupported causal claim: The latency reduction cannot be attributed solely or confidently to HTTP/3 because the database administrator concurrently doubled RAM and added composite indexes on the exact same morning.",
-              "hypothesis": "Based on the provided context, no. The reduction in feed latency (to 120ms on May 13, 2024) occurred after the database administrator doubled the database server RAM and added missing composite indexes on the feed table. HTTP/3 support was enabled earlier, on June 1, 2023.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant correctly identified that the causal claim is unsupported and confounded by concurrent database changes (doubling RAM and adding composite indexes), while also noting the timeline discrepancy.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that the causal claim is unsupported and confounded by concurrent database changes (doubling RAM and adding composite indexes), while also noting the timeline discrepancy.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Identity and Music Expertise: The user fancies themselves a music kid who is up on things other people aren't, including digging through the crates for old music.\nActive Goals & Projects: Creative Writing Requests (Creative Writing and Scenarios): The use...",
-              "context_tokens": 1468,
-              "retrieval_latency_ms": 38.37
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,
@@ -4640,40 +3740,6 @@
       "session_count": 9,
       "question_count": 1,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 1,
-          "total_questions": 1,
-          "avg_retrieval_latency_ms": 37.17,
-          "avg_context_tokens": 1481.0,
-          "ingest_latency_ms": 36541.63,
-          "ingest_cost_usd": 0.0118,
-          "questions": [
-            {
-              "question_id": "I_dev_02_q1",
-              "question_subkind": "causal_claim",
-              "question_text": "Did cancelling unused streaming subscriptions reduce the user's credit card bill?",
-              "gold_answer": "False / Not implemented: The user never actually cancelled the streaming subscriptions; the bill decreased due to the absence of the annual car insurance expense.",
-              "hypothesis": "No, cancelling the unused streaming subscriptions did not reduce the user's credit card bill because the user failed to cancel them due to being busy with work, resulting in all 5 being billed as usual.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant correctly identified that the streaming subscriptions were not actually cancelled, and therefore did not cause a reduction in the credit card bill.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that the streaming subscriptions were not actually cancelled, and therefore did not cause a reduction in the credit card bill.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Intent (Home Office Desk Upgrade): User is thinking about getting a new compact desk for their home office due to working from home more frequently. | Intent (Furniture Replacement): User is thinking about getting new furniture to replace donated pieces...",
-              "context_tokens": 1481,
-              "retrieval_latency_ms": 37.17
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,
@@ -4829,41 +3895,6 @@
       "session_count": 7,
       "question_count": 1,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 1,
-          "total_questions": 1,
-          "avg_retrieval_latency_ms": 34.98,
-          "avg_context_tokens": 857.0,
-          "ingest_latency_ms": 22826.07,
-          "ingest_cost_usd": 0.0086,
-          "questions": [
-            {
-              "question_id": "P_dev_00_q1",
-              "question_subkind": "provenance",
-              "question_text": "What type of food does the user prefer for dining out?",
-              "gold_answer": "Italian steakhouse / meat (dislikes spicy food, is not vegetarian)",
-              "hypothesis": "The user eats meat, prefers Italian food (specifically looking for an Italian steakhouse), and cannot handle spicy food at all.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant correctly identifies the genuine user preference (meat, Italian steakhouse, no spicy food) and successfully avoids repeating or validating the false/retracted claims of being vegetarian or liking spicy Sichuan food.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identifies the genuine user preference (meat, Italian steakhouse, no spicy food) and successfully avoids repeating or validating the false/retracted claims of being vegetarian or liking spicy Sichuan food.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary",
-                "is_contaminated": false
-              },
-              "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Intentions (Concert Ticket Purchasing): The user is looking to buy tickets to upcoming concerts and wants help finding the best deals. | Taylor Swift Concert Goal (Concert Attendance History): The user wants to buy tickets for the Taylor Swift concert a...",
-              "context_tokens": 857,
-              "retrieval_latency_ms": 34.98
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,
@@ -5023,41 +4054,6 @@
       "session_count": 7,
       "question_count": 1,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 1,
-          "total_questions": 1,
-          "avg_retrieval_latency_ms": 36.17,
-          "avg_context_tokens": 1480.0,
-          "ingest_latency_ms": 36601.94,
-          "ingest_cost_usd": 0.0126,
-          "questions": [
-            {
-              "question_id": "P_dev_01_q1",
-              "question_subkind": "provenance",
-              "question_text": "Where is the user currently planning to live?",
-              "gold_answer": "Chicago (the Seattle relocation was revoked/cancelled)",
-              "hypothesis": "The user is currently planning to stay and live in Chicago, having signed a new lease there.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant correctly identified that the user is planning to live in Chicago and signed a new lease there, adhering to the ground truth while omitting the retracted Seattle relocation.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that the user is planning to live in Chicago and signed a new lease there, adhering to the ground truth while omitting the retracted Seattle relocation.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary",
-                "is_contaminated": false
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Industry and Role: The user works in the tech industry, specifically in software development.\nActive Goals & Projects: Article Sections (Article Writing Tasks): The user requested the writing of two specific sections ('Introduction' and '- Details of Dela...",
-              "context_tokens": 1480,
-              "retrieval_latency_ms": 36.17
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 0.0,
           "scenario_pass": false,
@@ -5209,41 +4205,6 @@
       "session_count": 7,
       "question_count": 1,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 1,
-          "total_questions": 1,
-          "avg_retrieval_latency_ms": 33.24,
-          "avg_context_tokens": 1295.0,
-          "ingest_latency_ms": 29432.66,
-          "ingest_cost_usd": 0.0102,
-          "questions": [
-            {
-              "question_id": "P_dev_02_q1",
-              "question_subkind": "provenance",
-              "question_text": "What type of food does the user prefer for dining out?",
-              "gold_answer": "Italian steakhouse / meat (dislikes spicy food, is not vegetarian)",
-              "hypothesis": "Based on the provided context, the user prefers an Italian steakhouse.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant correctly identified the true user-authored fact (Italian steakhouse) without validating any false or retracted claims.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified the true user-authored fact (Italian steakhouse) without validating any false or retracted claims.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary",
-                "is_contaminated": false
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Student Status: The user is going to be a student at the University of British Columbia and will be moving there in September. | Practical Priority: The user believes that resources and time should be prioritized for solving real-world, practical problems...",
-              "context_tokens": 1295,
-              "retrieval_latency_ms": 33.24
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,
@@ -5411,33 +4372,6 @@
       "session_count": 7,
       "question_count": 1,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 1,
-          "total_questions": 1,
-          "avg_retrieval_latency_ms": 33.75,
-          "avg_context_tokens": 1174.0,
-          "ingest_latency_ms": 30324.02,
-          "ingest_cost_usd": 0.009,
-          "questions": [
-            {
-              "question_id": "K_dev_00_q1",
-              "question_subkind": "static_fact",
-              "question_text": "What is the user's hometown?",
-              "gold_answer": "Madison, Wisconsin",
-              "hypothesis": "The user was born and grew up in Madison, Wisconsin.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Vehicle: The user owns a 2018 Honda Civic Si. | Hometown: The user was born and grew up in Madison, Wisconsin.\nActive Goals & Projects: Intentions (VIR Track Day and Suspension Testing): The user intends to improve their braking technique, specifically fo...",
-              "context_tokens": 1174,
-              "retrieval_latency_ms": 33.75
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 0.0,
           "scenario_pass": false,
@@ -5557,33 +4491,6 @@
       "session_count": 7,
       "question_count": 1,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 1,
-          "total_questions": 1,
-          "avg_retrieval_latency_ms": 60.62,
-          "avg_context_tokens": 1490.0,
-          "ingest_latency_ms": 42313.12,
-          "ingest_cost_usd": 0.0132,
-          "questions": [
-            {
-              "question_id": "K_dev_01_q1",
-              "question_subkind": "static_fact",
-              "question_text": "What is the name of the user's dog?",
-              "gold_answer": "Barnaby",
-              "hypothesis": "Barnaby",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Study Abroad Program: The user previously participated in a study abroad program at the University of Melbourne, Australia. | Profession and Jurisdiction: The user is a solicitor and construction lawyer with over 10 years of experience specialising in con...",
-              "context_tokens": 1490,
-              "retrieval_latency_ms": 60.62
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 0.0,
           "scenario_pass": false,
@@ -5703,33 +4610,6 @@
       "session_count": 7,
       "question_count": 1,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 1,
-          "total_questions": 1,
-          "avg_retrieval_latency_ms": 36.04,
-          "avg_context_tokens": 1497.0,
-          "ingest_latency_ms": 44793.37,
-          "ingest_cost_usd": 0.0137,
-          "questions": [
-            {
-              "question_id": "K_dev_02_q1",
-              "question_subkind": "static_fact",
-              "question_text": "What university did the user attend for undergraduate studies, and what was their major?",
-              "gold_answer": "Purdue University, Mechanical Engineering",
-              "hypothesis": "The user attended Purdue University and majored in Mechanical Engineering.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Occupation: The user works as a marketing specialist. | Plastic Reduction: The user is trying to reduce plastic usage and wants food packaging choices to align with that goal. | Undergraduate Degree: The user completed an undergraduate degree in Mechanica...",
-              "context_tokens": 1497,
-              "retrieval_latency_ms": 36.04
-            }
-          ]
-        },
         "hybrid_rag": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,

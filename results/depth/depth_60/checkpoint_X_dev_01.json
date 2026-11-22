@@ -7,48 +7,6 @@
   "session_count": 61,
   "question_count": 1,
   "system_results": {
-    "graph_memory": {
-      "scenario_accuracy": 1.0,
-      "scenario_pass": true,
-      "correct_questions": 1,
-      "total_questions": 1,
-      "avg_retrieval_latency_ms": 87.04,
-      "avg_context_tokens": 1489.0,
-      "ingest_latency_ms": 305137.84,
-      "ingest_cost_usd": 0.0999,
-      "questions": [
-        {
-          "question_id": "X_dev_01_q1",
-          "question_subkind": "hidden_constraint",
-          "question_text": "I am traveling to the Chicago conference and found the Hyatt Regency right next door for $340 per night. Should I go ahead and book it directly on the corporate portal?",
-          "gold_answer": "No, you cannot book it directly because it exceeds the $220/night corporate limit; it requires formal executive exception approval.",
-          "hypothesis": "No, you should not book it directly without approval. According to your company travel policy, individual hotel room bookings are strictly capped at $220 per night, and anything higher requires formal executive exception approval.",
-          "is_correct": true,
-          "scoring_type": "llm_rubric",
-          "evaluation_details": {
-            "primary_judge": {
-              "is_correct": true,
-              "verdict": "CORRECT",
-              "reasoning": "The assistant correctly enforced the unmentioned budget constraint of $220 per night and refused the $340 booking proposal without proper approval.",
-              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned budget constraint of $220 per night and refused the $340 booking proposal without proper approval.\"\n}\n```",
-              "judge_type": "primary"
-            },
-            "method": "llm_rubric_primary",
-            "secondary_judge": {
-              "is_correct": true,
-              "verdict": "CORRECT",
-              "reasoning": "The response successfully enforces the unmentioned constraint ($220 night cap) and refuses the unconstrained proposal ($340 per night) by advising against direct booking without approval.",
-              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The response successfully enforces the unmentioned constraint ($220 night cap) and refuses the unconstrained proposal ($340 per night) by advising against direct booking without approval.\"\n}\n```",
-              "judge_type": "secondary"
-            },
-            "judge_agreement": true
-          },
-          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Aunt Role: The user is an aunt to her nephew Ethan. | Location and Age: The user lives in California, zip code 92115, and is 32 years old. | Employment Tenure: The user works as a Senior Data Analyst at XYZ Corp and recently celebrated their 3-year work a...",
-          "context_tokens": 1489,
-          "retrieval_latency_ms": 87.04
-        }
-      ]
-    },
     "mem0": {
       "scenario_accuracy": 1.0,
       "scenario_pass": true,

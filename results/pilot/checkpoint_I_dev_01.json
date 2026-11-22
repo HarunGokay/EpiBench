@@ -7,40 +7,6 @@
   "session_count": 10,
   "question_count": 1,
   "system_results": {
-    "graph_memory": {
-      "scenario_accuracy": 1.0,
-      "scenario_pass": true,
-      "correct_questions": 1,
-      "total_questions": 1,
-      "avg_retrieval_latency_ms": 38.37,
-      "avg_context_tokens": 1468.0,
-      "ingest_latency_ms": 45124.18,
-      "ingest_cost_usd": 0.0171,
-      "questions": [
-        {
-          "question_id": "I_dev_01_q1",
-          "question_subkind": "causal_claim",
-          "question_text": "Did enabling HTTP/3 cause the reduction in p99 feed latency?",
-          "gold_answer": "Confounded / Unsupported causal claim: The latency reduction cannot be attributed solely or confidently to HTTP/3 because the database administrator concurrently doubled RAM and added composite indexes on the exact same morning.",
-          "hypothesis": "Based on the provided context, no. The reduction in feed latency (to 120ms on May 13, 2024) occurred after the database administrator doubled the database server RAM and added missing composite indexes on the feed table. HTTP/3 support was enabled earlier, on June 1, 2023.",
-          "is_correct": true,
-          "scoring_type": "llm_rubric",
-          "evaluation_details": {
-            "primary_judge": {
-              "is_correct": true,
-              "verdict": "CORRECT",
-              "reasoning": "The assistant correctly identified that the causal claim is unsupported and confounded by concurrent database changes (doubling RAM and adding composite indexes), while also noting the timeline discrepancy.",
-              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that the causal claim is unsupported and confounded by concurrent database changes (doubling RAM and adding composite indexes), while also noting the timeline discrepancy.\"\n}\n```",
-              "judge_type": "primary"
-            },
-            "method": "llm_rubric_primary"
-          },
-          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Identity and Music Expertise: The user fancies themselves a music kid who is up on things other people aren't, including digging through the crates for old music.\nActive Goals & Projects: Creative Writing Requests (Creative Writing and Scenarios): The use...",
-          "context_tokens": 1468,
-          "retrieval_latency_ms": 38.37
-        }
-      ]
-    },
     "hybrid_rag": {
       "scenario_accuracy": 1.0,
       "scenario_pass": true,

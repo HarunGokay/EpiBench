@@ -7,48 +7,6 @@
   "session_count": 10,
   "question_count": 1,
   "system_results": {
-    "graph_memory": {
-      "scenario_accuracy": 1.0,
-      "scenario_pass": true,
-      "correct_questions": 1,
-      "total_questions": 1,
-      "avg_retrieval_latency_ms": 31.68,
-      "avg_context_tokens": 1005.0,
-      "ingest_latency_ms": 31093.37,
-      "ingest_cost_usd": 0.0127,
-      "questions": [
-        {
-          "question_id": "I_dev_00_q1",
-          "question_subkind": "causal_claim",
-          "question_text": "Did drinking tart cherry juice improve the user's deep sleep duration?",
-          "gold_answer": "Valid causal attribution: The evidence demonstrates a clear baseline, an increase upon intervention, a return to baseline upon withdrawal, and re-elevation upon reintroduction with no confounding variables.",
-          "hypothesis": "Yes, drinking tart cherry juice improved the user's deep sleep duration. Following interventions with tart cherry juice, the user's average deep sleep rose from a baseline of 42 minutes to 74\u201376 minutes per night.",
-          "is_correct": true,
-          "scoring_type": "llm_rubric",
-          "evaluation_details": {
-            "primary_judge": {
-              "is_correct": true,
-              "verdict": "CORRECT",
-              "reasoning": "The assistant correctly identified that drinking tart cherry juice improved deep sleep duration based on the clear increase from baseline supported by the evidence in the scenario.",
-              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that drinking tart cherry juice improved deep sleep duration based on the clear increase from baseline supported by the evidence in the scenario.\"\n}\n```",
-              "judge_type": "primary"
-            },
-            "method": "llm_rubric_primary",
-            "secondary_judge": {
-              "is_correct": true,
-              "verdict": "CORRECT",
-              "reasoning": "The response accurately reflects the user's data showing a clear baseline, an increase upon intervention, and aligns with the ground truth rubric's requirement for a valid causal pattern (baseline, increase, withdrawal/reintroduction data implicitly supported by the tracked metrics).",
-              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The response accurately reflects the user's data showing a clear baseline, an increase upon intervention, and aligns with the ground truth rubric's requirement for a valid causal pattern (baseline, increase, withdrawal/reintroduction data implicitly supported by the tracked metrics).\"\n}\n```",
-              "judge_type": "secondary"
-            },
-            "judge_agreement": true
-          },
-          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Project Goals (Painting Project Inspiration): The user is looking for inspiration and recommendations for their next painting project, specifically exploring famous landscape artists, abstract expressionist landscapes, bold and vibrant color palettes, c...",
-          "context_tokens": 1005,
-          "retrieval_latency_ms": 31.68
-        }
-      ]
-    },
     "hybrid_rag": {
       "scenario_accuracy": 1.0,
       "scenario_pass": true,

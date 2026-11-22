@@ -13,7 +13,6 @@
     "X"
   ],
   "systems": [
-    "graph_memory",
     "mem0",
     "hybrid_rag",
     "vector_rag"
@@ -23,25 +22,6 @@
     "6": {
       "performance_summary": {
         "by_system": {
-          "graph_memory": {
-            "question_accuracy": 100.0,
-            "question_correct": 16,
-            "total_questions": 16,
-            "question_wilson_ci": [
-              80.64,
-              100.0
-            ],
-            "scenario_pass_rate": 100.0,
-            "scenario_passed": 6,
-            "total_scenarios": 6,
-            "scenario_wilson_ci": [
-              60.97,
-              100.0
-            ],
-            "avg_retrieval_latency_ms": 33.02,
-            "avg_context_tokens": 1265.5,
-            "total_ingest_cost_usd": 0.0671
-          },
           "mem0": {
             "question_accuracy": 93.75,
             "question_correct": 15,
@@ -102,11 +82,6 @@
         },
         "by_track": {
           "R": {
-            "graph_memory": {
-              "accuracy": 100.0,
-              "correct": 8,
-              "total": 8
-            },
             "mem0": {
               "accuracy": 100.0,
               "correct": 8,
@@ -124,11 +99,6 @@
             }
           },
           "D": {
-            "graph_memory": {
-              "accuracy": 100.0,
-              "correct": 6,
-              "total": 6
-            },
             "mem0": {
               "accuracy": 83.33,
               "correct": 5,
@@ -146,11 +116,6 @@
             }
           },
           "X": {
-            "graph_memory": {
-              "accuracy": 100.0,
-              "correct": 2,
-              "total": 2
-            },
             "mem0": {
               "accuracy": 100.0,
               "correct": 2,
@@ -168,42 +133,21 @@
             }
           }
         },
-        "comparisons": {
-          "graph_memory_vs_hybrid_rag": {
-            "discordant_graph_memory_wins_b": 3,
-            "discordant_hybrid_rag_wins_c": 0,
-            "concordant_both_wins": 3,
-            "concordant_both_losses": 0,
-            "mcnemar_p_value": 0.25,
-            "odds_ratio": "inf",
-            "paired_bootstrap_mean_delta": 26.39,
-            "paired_bootstrap_95_ci": [
-              4.17,
-              48.61
-            ],
-            "paired_bootstrap_p_value": 0.0328
-          }
-        }
+        "comparisons": {}
       },
       "spend_summary": {
-        "total_spend_usd": 0.1189,
+        "total_spend_usd": 0.0517,
         "hard_cap_usd": 12.0,
         "total_input_tokens": 1285935,
         "total_output_tokens": 74874,
         "total_cached_tokens": 0,
         "spend_by_stage": {
-          "graph_memory_extraction": 0.067195875,
           "reader_llm": 0.006603000000000002,
           "mem0_extraction": 0.04434015,
           "rubric_judge": 0.0006654749999999999,
           "rubric_judge_secondary": 0.00010282499999999999
         },
         "tokens_by_stage": {
-          "graph_memory_extraction": {
-            "in": 640573,
-            "out": 63843,
-            "cached": 0
-          },
           "reader_llm": {
             "in": 77552,
             "out": 2622,
@@ -230,25 +174,6 @@
     "24": {
       "performance_summary": {
         "by_system": {
-          "graph_memory": {
-            "question_accuracy": 100.0,
-            "question_correct": 16,
-            "total_questions": 16,
-            "question_wilson_ci": [
-              80.64,
-              100.0
-            ],
-            "scenario_pass_rate": 100.0,
-            "scenario_passed": 6,
-            "total_scenarios": 6,
-            "scenario_wilson_ci": [
-              60.97,
-              100.0
-            ],
-            "avg_retrieval_latency_ms": 41.93,
-            "avg_context_tokens": 1486.8,
-            "total_ingest_cost_usd": 0.2723
-          },
           "mem0": {
             "question_accuracy": 87.5,
             "question_correct": 14,
@@ -309,11 +234,6 @@
         },
         "by_track": {
           "R": {
-            "graph_memory": {
-              "accuracy": 100.0,
-              "correct": 8,
-              "total": 8
-            },
             "mem0": {
               "accuracy": 100.0,
               "correct": 8,
@@ -331,11 +251,6 @@
             }
           },
           "D": {
-            "graph_memory": {
-              "accuracy": 100.0,
-              "correct": 6,
-              "total": 6
-            },
             "mem0": {
               "accuracy": 66.67,
               "correct": 4,
@@ -353,11 +268,6 @@
             }
           },
           "X": {
-            "graph_memory": {
-              "accuracy": 100.0,
-              "correct": 2,
-              "total": 2
-            },
             "mem0": {
               "accuracy": 100.0,
               "correct": 2,
@@ -375,42 +285,21 @@
             }
           }
         },
-        "comparisons": {
-          "graph_memory_vs_hybrid_rag": {
-            "discordant_graph_memory_wins_b": 4,
-            "discordant_hybrid_rag_wins_c": 0,
-            "concordant_both_wins": 2,
-            "concordant_both_losses": 0,
-            "mcnemar_p_value": 0.125,
-            "odds_ratio": "inf",
-            "paired_bootstrap_mean_delta": 36.11,
-            "paired_bootstrap_95_ci": [
-              11.11,
-              63.89
-            ],
-            "paired_bootstrap_p_value": 0.0008
-          }
-        }
+        "comparisons": {}
       },
       "spend_summary": {
-        "total_spend_usd": 0.5443,
+        "total_spend_usd": 0.2049,
         "hard_cap_usd": 12.0,
         "total_input_tokens": 5769154,
         "total_output_tokens": 371989,
         "total_cached_tokens": 0,
         "spend_by_stage": {
-          "graph_memory_extraction": 0.33936915000000006,
           "reader_llm": 0.013497450000000005,
           "mem0_extraction": 0.18995130000000002,
           "rubric_judge": 0.0013322249999999996,
           "rubric_judge_secondary": 0.000133125
         },
         "tokens_by_stage": {
-          "graph_memory_extraction": {
-            "in": 3207938,
-            "out": 329246,
-            "cached": 0
-          },
           "reader_llm": {
             "in": 159450,
             "out": 5129,
@@ -437,25 +326,6 @@
     "60": {
       "performance_summary": {
         "by_system": {
-          "graph_memory": {
-            "question_accuracy": 87.5,
-            "question_correct": 14,
-            "total_questions": 16,
-            "question_wilson_ci": [
-              63.98,
-              96.5
-            ],
-            "scenario_pass_rate": 66.67,
-            "scenario_passed": 4,
-            "total_scenarios": 6,
-            "scenario_wilson_ci": [
-              30.0,
-              90.32
-            ],
-            "avg_retrieval_latency_ms": 62.93,
-            "avg_context_tokens": 1482.4,
-            "total_ingest_cost_usd": 0.5978
-          },
           "mem0": {
             "question_accuracy": 81.25,
             "question_correct": 13,
@@ -516,11 +386,6 @@
         },
         "by_track": {
           "R": {
-            "graph_memory": {
-              "accuracy": 100.0,
-              "correct": 8,
-              "total": 8
-            },
             "mem0": {
               "accuracy": 100.0,
               "correct": 8,
@@ -538,11 +403,6 @@
             }
           },
           "D": {
-            "graph_memory": {
-              "accuracy": 66.67,
-              "correct": 4,
-              "total": 6
-            },
             "mem0": {
               "accuracy": 50.0,
               "correct": 3,
@@ -560,11 +420,6 @@
             }
           },
           "X": {
-            "graph_memory": {
-              "accuracy": 100.0,
-              "correct": 2,
-              "total": 2
-            },
             "mem0": {
               "accuracy": 100.0,
               "correct": 2,
@@ -582,42 +437,21 @@
             }
           }
         },
-        "comparisons": {
-          "graph_memory_vs_hybrid_rag": {
-            "discordant_graph_memory_wins_b": 1,
-            "discordant_hybrid_rag_wins_c": 0,
-            "concordant_both_wins": 3,
-            "concordant_both_losses": 2,
-            "mcnemar_p_value": 1.0,
-            "odds_ratio": "inf",
-            "paired_bootstrap_mean_delta": 13.89,
-            "paired_bootstrap_95_ci": [
-              0.0,
-              30.56
-            ],
-            "paired_bootstrap_p_value": 0.1668
-          }
-        }
+        "comparisons": {}
       },
       "spend_summary": {
-        "total_spend_usd": 1.495,
+        "total_spend_usd": 0.5579,
         "hard_cap_usd": 12.0,
         "total_input_tokens": 16054749,
         "total_output_tokens": 969734,
         "total_cached_tokens": 0,
         "spend_by_stage": {
-          "graph_memory_extraction": 0.9371589,
           "reader_llm": 0.020432250000000013,
           "mem0_extraction": 0.5351771249999994,
           "rubric_judge": 0.0020120999999999993,
           "rubric_judge_secondary": 0.00024599999999999996
         },
         "tokens_by_stage": {
-          "graph_memory_extraction": {
-            "in": 9082756,
-            "out": 853174,
-            "cached": 0
-          },
           "reader_llm": {
             "in": 241778,
             "out": 7663,
@@ -643,28 +477,6 @@
     }
   },
   "comparison_matrix": {
-    "graph_memory": {
-      "question_accuracy_by_depth": {
-        "6": 100.0,
-        "24": 100.0,
-        "60": 87.5
-      },
-      "scenario_pass_rate_by_depth": {
-        "6": 100.0,
-        "24": 100.0,
-        "60": 66.67
-      },
-      "avg_latency_by_depth": {
-        "6": 33.02,
-        "24": 41.93,
-        "60": 62.93
-      },
-      "avg_tokens_by_depth": {
-        "6": 1265.5,
-        "24": 1486.8,
-        "60": 1482.4
-      }
-    },
     "mem0": {
       "question_accuracy_by_depth": {
         "6": 93.75,
@@ -739,18 +551,12 @@
     "total_output_tokens": 969734,
     "total_cached_tokens": 0,
     "spend_by_stage": {
-      "graph_memory_extraction": 0.9371589,
       "reader_llm": 0.020432250000000013,
       "mem0_extraction": 0.5351771249999994,
       "rubric_judge": 0.0020120999999999993,
       "rubric_judge_secondary": 0.00024599999999999996
     },
     "tokens_by_stage": {
-      "graph_memory_extraction": {
-        "in": 9082756,
-        "out": 853174,
-        "cached": 0
-      },
       "reader_llm": {
         "in": 241778,
         "out": 7663,

@@ -1,6 +1,6 @@
 # EpiBench
 
-EpiBench is a benchmark for evaluating long-term conversational memory systems. While LongMemEval covers static recall and knowledge updates, EpiBench adds dependency invalidation, unprompted constraints, provenance, forecasting slips, and causal calibration.
+EpiBench is a benchmark for evaluating long-term conversational memory systems. While LongMemEval covers static recall and knowledge updates, EpiBench tests state revision, dependency invalidation, unprompted constraints, forecasting slips, causal calibration, and provenance.
 
 ## Status
 
@@ -67,38 +67,36 @@ Subclass `BaseMemoryAdapter`, implement `ingest` and `retrieve`, and pass your a
 
 ## Systems Included
 
-The repository includes adapters in `adapters/`:
+The repository includes four baseline adapters in `adapters/`:
 - `vector_rag`: dense embedding similarity search using FastEmbed and in-memory cosine ranking.
 - `hybrid_rag`: BM25 keyword matching combined with dense vector retrieval.
 - `mem0`: memory extraction and recall via the Mem0 library.
 - `full_context`: baseline returning raw conversation turns within the token budget.
-- `graph_memory`: Relational graph memory is my own system, written by the benchmark author. Treat its results with that in mind. It extracts entities and relationships from chat chunks, stores them in PostgreSQL with timestamps, maintains temporal ledgers of state changes, and reconstructs point-in-time graph states.
 
 ## Pilot Results
 
-Raw results are saved in [results/pilot/](results/pilot/). The pilot includes 21 scenarios and 42 questions per system across five systems.
+Raw results are saved in [results/pilot/](results/pilot/). The pilot is a smoke test across 21 scenarios and 42 questions per system using a single reader model (`gemini-3.5-flash-lite`, temperature 0). It confirms that the evaluation harness runs end to end and indicates that tracks D, X, F, and P present challenges for standard retrieval baselines.
 
-### Total Questions Passed (out of 42)
+### Questions Passed by Track
 
-| System | Questions Passed | Scenarios Passed (out of 21) |
+| Track | Questions | mem0 | vector_rag | hybrid_rag | full_context |
+| --- | --- | --- | --- | --- | --- |
+| R: Revision | 12 | 12/12 | 11/12 | 11/12 | 5/12 |
+| D: Dependency | 9 | 6/9 | 6/9 | 2/9 | 6/9 |
+| X: Constraints | 3 | 3/3 | 3/3 | 3/3 | 3/3 |
+| F: Forecast | 9 | 6/9 | 4/9 | 2/9 | 2/9 |
+| I: Causality | 3 | 2/3 | 3/3 | 3/3 | 1/3 |
+| P: Provenance | 3 | 2/3 | 3/3 | 2/3 | 3/3 |
+| K: Recall | 3 | 3/3 | 3/3 | 1/3 | 3/3 |
+
+### Overall Totals
+
+| System | Questions Passed | Scenarios Passed |
 | --- | --- | --- |
-| graph_memory | 35/42 | 16/21 |
 | mem0 | 34/42 | 15/21 |
 | vector_rag | 33/42 | 14/21 |
 | hybrid_rag | 24/42 | 11/21 |
 | full_context | 23/42 | 10/21 |
-
-### Questions Passed by Track
-
-| Track | Questions | graph_memory | mem0 | vector_rag | hybrid_rag | full_context |
-| --- | --- | --- | --- | --- | --- | --- |
-| R: Revision | 12 | 12/12 | 12/12 | 11/12 | 11/12 | 5/12 |
-| D: Dependency | 9 | 7/9 | 6/9 | 6/9 | 2/9 | 6/9 |
-| X: Constraints | 3 | 3/3 | 3/3 | 3/3 | 3/3 | 3/3 |
-| F: Forecast | 9 | 4/9 | 6/9 | 4/9 | 2/9 | 2/9 |
-| I: Causality | 3 | 3/3 | 2/3 | 3/3 | 3/3 | 1/3 |
-| P: Provenance | 3 | 3/3 | 2/3 | 3/3 | 2/3 | 3/3 |
-| K: Recall | 3 | 3/3 | 3/3 | 3/3 | 1/3 | 3/3 |
 
 ## Not Implemented
 

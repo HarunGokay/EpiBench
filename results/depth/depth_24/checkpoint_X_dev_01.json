@@ -7,40 +7,6 @@
   "session_count": 25,
   "question_count": 1,
   "system_results": {
-    "graph_memory": {
-      "scenario_accuracy": 1.0,
-      "scenario_pass": true,
-      "correct_questions": 1,
-      "total_questions": 1,
-      "avg_retrieval_latency_ms": 64.12,
-      "avg_context_tokens": 1480.0,
-      "ingest_latency_ms": 134431.88,
-      "ingest_cost_usd": 0.0456,
-      "questions": [
-        {
-          "question_id": "X_dev_01_q1",
-          "question_subkind": "hidden_constraint",
-          "question_text": "I am traveling to the Chicago conference and found the Hyatt Regency right next door for $340 per night. Should I go ahead and book it directly on the corporate portal?",
-          "gold_answer": "No, you cannot book it directly because it exceeds the $220/night corporate limit; it requires formal executive exception approval.",
-          "hypothesis": "No, you should not book it directly without approval. According to your company travel policy, hotel room bookings are capped at $220 per night without executive exception approval, and the Hyatt Regency is $340 per night.",
-          "is_correct": true,
-          "scoring_type": "llm_rubric",
-          "evaluation_details": {
-            "primary_judge": {
-              "is_correct": true,
-              "verdict": "CORRECT",
-              "reasoning": "The assistant correctly enforced the unmentioned budget constraint of $220 per night, refused the unconstrained $340 booking proposal, and cited the policy limit.",
-              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned budget constraint of $220 per night, refused the unconstrained $340 booking proposal, and cited the policy limit.\"\n}\n```",
-              "judge_type": "primary"
-            },
-            "method": "llm_rubric_primary"
-          },
-          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Demographics and Physical Specs: The individual is 45 years old, stands 6' 4\", is right-handed, and plays golf. | World of Warcraft History: The user played World of Warcraft in the past but hasn't had time to keep up with it lately. | Seat and Flight Inf...",
-          "context_tokens": 1480,
-          "retrieval_latency_ms": 64.12
-        }
-      ]
-    },
     "mem0": {
       "scenario_accuracy": 1.0,
       "scenario_pass": true,

@@ -7,33 +7,6 @@
   "session_count": 7,
   "question_count": 1,
   "system_results": {
-    "graph_memory": {
-      "scenario_accuracy": 1.0,
-      "scenario_pass": true,
-      "correct_questions": 1,
-      "total_questions": 1,
-      "avg_retrieval_latency_ms": 33.75,
-      "avg_context_tokens": 1174.0,
-      "ingest_latency_ms": 30324.02,
-      "ingest_cost_usd": 0.009,
-      "questions": [
-        {
-          "question_id": "K_dev_00_q1",
-          "question_subkind": "static_fact",
-          "question_text": "What is the user's hometown?",
-          "gold_answer": "Madison, Wisconsin",
-          "hypothesis": "The user was born and grew up in Madison, Wisconsin.",
-          "is_correct": true,
-          "scoring_type": "string_match",
-          "evaluation_details": {
-            "method": "programmatic_string_match"
-          },
-          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Vehicle: The user owns a 2018 Honda Civic Si. | Hometown: The user was born and grew up in Madison, Wisconsin.\nActive Goals & Projects: Intentions (VIR Track Day and Suspension Testing): The user intends to improve their braking technique, specifically fo...",
-          "context_tokens": 1174,
-          "retrieval_latency_ms": 33.75
-        }
-      ]
-    },
     "hybrid_rag": {
       "scenario_accuracy": 0.0,
       "scenario_pass": false,

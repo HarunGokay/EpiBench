@@ -7,41 +7,6 @@
   "session_count": 7,
   "question_count": 1,
   "system_results": {
-    "graph_memory": {
-      "scenario_accuracy": 1.0,
-      "scenario_pass": true,
-      "correct_questions": 1,
-      "total_questions": 1,
-      "avg_retrieval_latency_ms": 33.24,
-      "avg_context_tokens": 1295.0,
-      "ingest_latency_ms": 29432.66,
-      "ingest_cost_usd": 0.0102,
-      "questions": [
-        {
-          "question_id": "P_dev_02_q1",
-          "question_subkind": "provenance",
-          "question_text": "What type of food does the user prefer for dining out?",
-          "gold_answer": "Italian steakhouse / meat (dislikes spicy food, is not vegetarian)",
-          "hypothesis": "Based on the provided context, the user prefers an Italian steakhouse.",
-          "is_correct": true,
-          "scoring_type": "llm_rubric",
-          "evaluation_details": {
-            "primary_judge": {
-              "is_correct": true,
-              "verdict": "CORRECT",
-              "reasoning": "The assistant correctly identified the true user-authored fact (Italian steakhouse) without validating any false or retracted claims.",
-              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified the true user-authored fact (Italian steakhouse) without validating any false or retracted claims.\"\n}\n```",
-              "judge_type": "primary"
-            },
-            "method": "llm_rubric_primary",
-            "is_contaminated": false
-          },
-          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Student Status: The user is going to be a student at the University of British Columbia and will be moving there in September. | Practical Priority: The user believes that resources and time should be prioritized for solving real-world, practical problems...",
-          "context_tokens": 1295,
-          "retrieval_latency_ms": 33.24
-        }
-      ]
-    },
     "hybrid_rag": {
       "scenario_accuracy": 1.0,
       "scenario_pass": true,

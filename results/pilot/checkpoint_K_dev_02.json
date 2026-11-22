@@ -7,33 +7,6 @@
   "session_count": 7,
   "question_count": 1,
   "system_results": {
-    "graph_memory": {
-      "scenario_accuracy": 1.0,
-      "scenario_pass": true,
-      "correct_questions": 1,
-      "total_questions": 1,
-      "avg_retrieval_latency_ms": 36.04,
-      "avg_context_tokens": 1497.0,
-      "ingest_latency_ms": 44793.37,
-      "ingest_cost_usd": 0.0137,
-      "questions": [
-        {
-          "question_id": "K_dev_02_q1",
-          "question_subkind": "static_fact",
-          "question_text": "What university did the user attend for undergraduate studies, and what was their major?",
-          "gold_answer": "Purdue University, Mechanical Engineering",
-          "hypothesis": "The user attended Purdue University and majored in Mechanical Engineering.",
-          "is_correct": true,
-          "scoring_type": "string_match",
-          "evaluation_details": {
-            "method": "programmatic_string_match"
-          },
-          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Occupation: The user works as a marketing specialist. | Plastic Reduction: The user is trying to reduce plastic usage and wants food packaging choices to align with that goal. | Undergraduate Degree: The user completed an undergraduate degree in Mechanica...",
-          "context_tokens": 1497,
-          "retrieval_latency_ms": 36.04
-        }
-      ]
-    },
     "hybrid_rag": {
       "scenario_accuracy": 1.0,
       "scenario_pass": true,

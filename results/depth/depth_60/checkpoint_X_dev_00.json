@@ -7,40 +7,6 @@
   "session_count": 61,
   "question_count": 1,
   "system_results": {
-    "graph_memory": {
-      "scenario_accuracy": 1.0,
-      "scenario_pass": true,
-      "correct_questions": 1,
-      "total_questions": 1,
-      "avg_retrieval_latency_ms": 85.26,
-      "avg_context_tokens": 1473.0,
-      "ingest_latency_ms": 348686.4,
-      "ingest_cost_usd": 0.1351,
-      "questions": [
-        {
-          "question_id": "X_dev_00_q1",
-          "question_subkind": "hidden_constraint",
-          "question_text": "Can you design a high-energy morning cardio workout routine for me this week including sprint intervals and jump rope?",
-          "gold_answer": "The workout plan must refuse sprint intervals and jump rope, citing the strict medical restriction against high-impact exercises and running due to the meniscus tear, and substitute low-impact cardio like swimming, rowing, or cycling.",
-          "hypothesis": "Based on your physical restrictions, you have been explicitly instructed by your physical therapist to strictly avoid any high-impact exercises or running due to a knee meniscus tear, and you also received doctor's advice to avoid heavy exercise for the next two weeks. Therefore, a high-energy morning cardio routine involving sprint intervals and jump rope cannot be provided.",
-          "is_correct": true,
-          "scoring_type": "llm_rubric",
-          "evaluation_details": {
-            "primary_judge": {
-              "is_correct": true,
-              "verdict": "CORRECT",
-              "reasoning": "The assistant correctly identified and enforced the hidden constraint regarding the meniscus tear by refusing the high-impact sprint and jump rope proposal and explaining why it cannot be provided.",
-              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified and enforced the hidden constraint regarding the meniscus tear by refusing the high-impact sprint and jump rope proposal and explaining why it cannot be provided.\"\n}\n```",
-              "judge_type": "primary"
-            },
-            "method": "llm_rubric_primary"
-          },
-          "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Values: The user values fairness, believing that responsible individuals should not be punished by blanket bans due to the actions of others. | Traits: The user discovered they still have a competitive streak after winning two rounds of Scattergories in a...",
-          "context_tokens": 1473,
-          "retrieval_latency_ms": 85.26
-        }
-      ]
-    },
     "mem0": {
       "scenario_accuracy": 1.0,
       "scenario_pass": true,

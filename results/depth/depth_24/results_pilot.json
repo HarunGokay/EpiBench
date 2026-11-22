@@ -8,31 +8,24 @@
     "X"
   ],
   "systems": [
-    "graph_memory",
     "mem0",
     "hybrid_rag",
     "vector_rag"
   ],
   "total_scenarios": 6,
   "spend_summary": {
-    "total_spend_usd": 0.5443,
+    "total_spend_usd": 0.2049,
     "hard_cap_usd": 12.0,
-    "total_input_tokens": 5769154,
-    "total_output_tokens": 371989,
+    "total_input_tokens": 2561216,
+    "total_output_tokens": 42743,
     "total_cached_tokens": 0,
     "spend_by_stage": {
-      "graph_memory_extraction": 0.33936915000000006,
       "reader_llm": 0.013497450000000005,
       "mem0_extraction": 0.18995130000000002,
       "rubric_judge": 0.0013322249999999996,
       "rubric_judge_secondary": 0.000133125
     },
     "tokens_by_stage": {
-      "graph_memory_extraction": {
-        "in": 3207938,
-        "out": 329246,
-        "cached": 0
-      },
       "reader_llm": {
         "in": 159450,
         "out": 5129,
@@ -57,25 +50,6 @@
   },
   "performance_summary": {
     "by_system": {
-      "graph_memory": {
-        "question_accuracy": 100.0,
-        "question_correct": 16,
-        "total_questions": 16,
-        "question_wilson_ci": [
-          80.64,
-          100.0
-        ],
-        "scenario_pass_rate": 100.0,
-        "scenario_passed": 6,
-        "total_scenarios": 6,
-        "scenario_wilson_ci": [
-          60.97,
-          100.0
-        ],
-        "avg_retrieval_latency_ms": 41.93,
-        "avg_context_tokens": 1486.8,
-        "total_ingest_cost_usd": 0.2723
-      },
       "mem0": {
         "question_accuracy": 87.5,
         "question_correct": 14,
@@ -136,11 +110,6 @@
     },
     "by_track": {
       "R": {
-        "graph_memory": {
-          "accuracy": 100.0,
-          "correct": 8,
-          "total": 8
-        },
         "mem0": {
           "accuracy": 100.0,
           "correct": 8,
@@ -158,11 +127,6 @@
         }
       },
       "D": {
-        "graph_memory": {
-          "accuracy": 100.0,
-          "correct": 6,
-          "total": 6
-        },
         "mem0": {
           "accuracy": 66.67,
           "correct": 4,
@@ -180,11 +144,6 @@
         }
       },
       "X": {
-        "graph_memory": {
-          "accuracy": 100.0,
-          "correct": 2,
-          "total": 2
-        },
         "mem0": {
           "accuracy": 100.0,
           "correct": 2,
@@ -202,22 +161,7 @@
         }
       }
     },
-    "comparisons": {
-      "graph_memory_vs_hybrid_rag": {
-        "discordant_graph_memory_wins_b": 4,
-        "discordant_hybrid_rag_wins_c": 0,
-        "concordant_both_wins": 2,
-        "concordant_both_losses": 0,
-        "mcnemar_p_value": 0.125,
-        "odds_ratio": "inf",
-        "paired_bootstrap_mean_delta": 36.11,
-        "paired_bootstrap_95_ci": [
-          11.11,
-          63.89
-        ],
-        "paired_bootstrap_p_value": 0.0008
-      }
-    }
+    "comparisons": {}
   },
   "scenario_results": [
     {
@@ -229,79 +173,6 @@
       "session_count": 27,
       "question_count": 4,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 4,
-          "total_questions": 4,
-          "avg_retrieval_latency_ms": 40.75,
-          "avg_context_tokens": 1483.8,
-          "ingest_latency_ms": 212619.52,
-          "ingest_cost_usd": 0.0559,
-          "questions": [
-            {
-              "question_id": "R_dev_00_q1",
-              "question_subkind": "current",
-              "question_text": "What is the team's current primary production database engine?",
-              "gold_answer": "PostgreSQL 16",
-              "hypothesis": "Based on the provided context, the primary database has been switched to PostgreSQL 16 due to latency issues.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match",
-                "is_stale_answer": false
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Current Location and Duration: The user has been living in Tokyo for 5 months. | Senior Marketing Specialist Role: The user holds the role of Senior Marketing Specialist, following a promotion starting from January 15th [2024-01-15].\nActive Goals & Projec...",
-              "context_tokens": 1493,
-              "retrieval_latency_ms": 81.43
-            },
-            {
-              "question_id": "R_dev_00_q2",
-              "question_subkind": "previous",
-              "question_text": "What was the team's primary production database engine before the current one?",
-              "gold_answer": "CockroachDB",
-              "hypothesis": "Based on the provided context, the primary production database was migrated to CockroachDB on February 29, 2024, before being switched to PostgreSQL 16 due to latency issues.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Current Location and Duration: The user has been living in Tokyo for 5 months. | Senior Marketing Specialist Role: The user holds the role of Senior Marketing Specialist, following a promotion starting from January 15th [2024-01-15].\nActive Goals & Projec...",
-              "context_tokens": 1482,
-              "retrieval_latency_ms": 27.58
-            },
-            {
-              "question_id": "R_dev_00_q3",
-              "question_subkind": "as_of",
-              "question_text": "What was the primary database engine as of 2024-01-25?",
-              "gold_answer": "PostgreSQL 14",
-              "hypothesis": "Based on the provided context, the primary database was running on PostgreSQL 14 (as indicated by the superseded record and subsequent migrations to CockroachDB on February 29, 2024, and PostgreSQL 16 on April 14, 2024).",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Current Location and Duration: The user has been living in Tokyo for 5 months. | Senior Marketing Specialist Role: The user holds the role of Senior Marketing Specialist, following a promotion starting from January 15th [2024-01-15].\nActive Goals & Projec...",
-              "context_tokens": 1479,
-              "retrieval_latency_ms": 26.66
-            },
-            {
-              "question_id": "R_dev_00_q4",
-              "question_subkind": "count",
-              "question_text": "How many times did the team switch or upgrade their primary database engine?",
-              "gold_answer": 2,
-              "hypothesis": "Based on the provided context, the primary database engine was switched or migrated 2 times:\n1. Migrated to CockroachDB on February 29, 2024.\n2. Switched to PostgreSQL 16 on April 14, 2024, due to latency issues.",
-              "is_correct": true,
-              "scoring_type": "integer_match",
-              "evaluation_details": {
-                "method": "programmatic_integer_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Current Location and Duration: The user has been living in Tokyo for 5 months. | Senior Marketing Specialist Role: The user holds the role of Senior Marketing Specialist, following a promotion starting from January 15th [2024-01-15].\nActive Goals & Projec...",
-              "context_tokens": 1481,
-              "retrieval_latency_ms": 27.34
-            }
-          ]
-        },
         "mem0": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,
@@ -532,79 +403,6 @@
       "session_count": 27,
       "question_count": 4,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 4,
-          "total_questions": 4,
-          "avg_retrieval_latency_ms": 30.59,
-          "avg_context_tokens": 1483.8,
-          "ingest_latency_ms": 104542.37,
-          "ingest_cost_usd": 0.038,
-          "questions": [
-            {
-              "question_id": "R_dev_01_q1",
-              "question_subkind": "current",
-              "question_text": "Which gym does the user currently attend?",
-              "gold_answer": "Lifetime Fitness",
-              "hypothesis": "The user currently attends Lifetime Fitness (having moved their membership there from Crunch Fitness due to dissatisfaction with the crowd).",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match",
-                "is_stale_answer": true
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Ethics and Sustainability Values: The user believes it is critical in today's world [2024-01-19] that more Gothic fashion brands are adopting a more ethical approach to production.\nActive Goals & Projects: Show and Performance Inquiries (Disney Theme Park...",
-              "context_tokens": 1489,
-              "retrieval_latency_ms": 46.14
-            },
-            {
-              "question_id": "R_dev_01_q2",
-              "question_subkind": "previous",
-              "question_text": "Which gym did the user attend right before their current gym?",
-              "gold_answer": "Crunch Fitness",
-              "hypothesis": "Right before their current gym (Lifetime Fitness), the user attended Crunch Fitness.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Ethics and Sustainability Values: The user believes it is critical in today's world [2024-01-19] that more Gothic fashion brands are adopting a more ethical approach to production.\nActive Goals & Projects: Show and Performance Inquiries (Disney Theme Park...",
-              "context_tokens": 1480,
-              "retrieval_latency_ms": 26.33
-            },
-            {
-              "question_id": "R_dev_01_q3",
-              "question_subkind": "as_of",
-              "question_text": "Which gym was the user attending as of 2024-01-25?",
-              "gold_answer": "Equinox",
-              "hypothesis": "As of January 25, 2024, the user was attending Equinox (having signed up for a membership there on January 15, 2024).",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Ethics and Sustainability Values: The user believes it is critical in today's world [2024-01-19] that more Gothic fashion brands are adopting a more ethical approach to production.\nActive Goals & Projects: Show and Performance Inquiries (Disney Theme Park...",
-              "context_tokens": 1487,
-              "retrieval_latency_ms": 26.27
-            },
-            {
-              "question_id": "R_dev_01_q4",
-              "question_subkind": "count",
-              "question_text": "How many times has the user changed gyms?",
-              "gold_answer": 2,
-              "hypothesis": "Based on the provided context, the user has changed gyms twice: \n\n1. On February 29, 2024, they cancelled their old gym membership and joined Crunch Fitness.\n2. On April 14, 2024, they moved their gym membership to Lifetime Fitness due to dissatisfaction with the crowd.",
-              "is_correct": true,
-              "scoring_type": "integer_match",
-              "evaluation_details": {
-                "method": "programmatic_integer_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Ethics and Sustainability Values: The user believes it is critical in today's world [2024-01-19] that more Gothic fashion brands are adopting a more ethical approach to production.\nActive Goals & Projects: Show and Performance Inquiries (Disney Theme Park...",
-              "context_tokens": 1479,
-              "retrieval_latency_ms": 23.61
-            }
-          ]
-        },
         "mem0": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,
@@ -835,85 +633,6 @@
       "session_count": 28,
       "question_count": 3,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 3,
-          "total_questions": 3,
-          "avg_retrieval_latency_ms": 34.53,
-          "avg_context_tokens": 1486.0,
-          "ingest_latency_ms": 162229.32,
-          "ingest_cost_usd": 0.0577,
-          "questions": [
-            {
-              "question_id": "D_dev_00_q1",
-              "question_subkind": "revisit_set",
-              "question_text": "Which decisions should be revisited or rescheduled following the latest project updates?",
-              "gold_answer": [
-                "paid mobile advertising campaign",
-                "press embargo lifting date"
-              ],
-              "hypothesis": "Based on the provided context, the mobile app release date was postponed to December 1st, 2023 (superseding the previous October 15th, 2023 date). Consequently, the related app launch operational plans\u2014specifically the tech blog press embargo (set for the morning of October 15th, 2023) and the $5,000 paid launch ad campaign (scheduled to start October 16th, 2023)\u2014should be revisited and rescheduled.",
-              "is_correct": true,
-              "scoring_type": "set_overlap",
-              "evaluation_details": {
-                "precision": 1.0,
-                "recall": 1.0,
-                "f1": 1.0,
-                "true_positives": 2,
-                "false_negatives": 0,
-                "false_positives": 0,
-                "detected_golds": [
-                  "paid mobile advertising campaign",
-                  "press embargo lifting date"
-                ],
-                "detected_unaffected": [],
-                "is_correct": true,
-                "method": "programmatic_set_overlap"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Presenter Identification: Masao Kameoka is identified as the presenter of the article.\nActive Goals & Projects: Twitter Polls Experimentation (Social Media Performance and Freelance Promotion): The user intends to ask a follow-up Twitter poll asking follo...",
-              "context_tokens": 1494,
-              "retrieval_latency_ms": 48.91
-            },
-            {
-              "question_id": "D_dev_00_q2",
-              "question_subkind": "why",
-              "question_text": "Why does the paid launch ad campaign decision need to be revisited?",
-              "gold_answer": "The ad campaign start date was aligned with the original October 15th app launch.",
-              "hypothesis": "Based on the provided context, there is no mention that the paid launch ad campaign decision needs to be revisited. The context only states that the $5,000 paid launch ad campaign was scheduled to start on October 16th [2023-10-16].",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant correctly identified that the provided context lacks any information about the ad campaign decision needing to be revisited, thus avoiding unsupported assumptions.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identified that the provided context lacks any information about the ad campaign decision needing to be revisited, thus avoiding unsupported assumptions.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Presenter Identification: Masao Kameoka is identified as the presenter of the article.\nActive Goals & Projects: Twitter Polls Experimentation (Social Media Performance and Freelance Promotion): The user intends to ask a follow-up Twitter poll asking follo...",
-              "context_tokens": 1494,
-              "retrieval_latency_ms": 26.17
-            },
-            {
-              "question_id": "D_dev_00_q3",
-              "question_subkind": "stands",
-              "question_text": "Does the cloud hosting tier selection still stand or does it need to be revisited?",
-              "gold_answer": "Yes, it stands",
-              "hypothesis": "The cloud hosting tier selection still stands. You selected the Standard 4-node cluster plan to stay strictly within the $1,500 monthly cloud budget.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Presenter Identification: Masao Kameoka is identified as the presenter of the article.\nActive Goals & Projects: Twitter Polls Experimentation (Social Media Performance and Freelance Promotion): The user intends to ask a follow-up Twitter poll asking follo...",
-              "context_tokens": 1470,
-              "retrieval_latency_ms": 28.5
-            }
-          ]
-        },
         "mem0": {
           "scenario_accuracy": 0.6666666666666666,
           "scenario_pass": false,
@@ -1156,85 +875,6 @@
       "session_count": 28,
       "question_count": 3,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 3,
-          "total_questions": 3,
-          "avg_retrieval_latency_ms": 33.4,
-          "avg_context_tokens": 1493.3,
-          "ingest_latency_ms": 99128.03,
-          "ingest_cost_usd": 0.0357,
-          "questions": [
-            {
-              "question_id": "D_dev_01_q1",
-              "question_subkind": "revisit_set",
-              "question_text": "Which financial commitments or purchases should be revisited or cancelled given recent news?",
-              "gold_answer": [
-                "luxury Aspen ski trip booking",
-                "surround sound home theater setup purchase"
-              ],
-              "hypothesis": "Given the recent announcement that annual bonuses are completely cancelled this year, the user should revisit or cancel financial commitments that relied on their December/year-end bonus:\n\n1. **Surround Sound Setup**: The pre-ordered $2,500 surround sound setup, which relied on the upcoming year-end bonus.\n2. **Aspen Ski Vacation**: The luxury Aspen ski vacation for New Year's, for which a deposit was put down, relying on the December bonus.",
-              "is_correct": true,
-              "scoring_type": "set_overlap",
-              "evaluation_details": {
-                "precision": 1.0,
-                "recall": 1.0,
-                "f1": 1.0,
-                "true_positives": 2,
-                "false_negatives": 0,
-                "false_positives": 0,
-                "detected_golds": [
-                  "luxury Aspen ski trip booking",
-                  "surround sound home theater setup purchase"
-                ],
-                "detected_unaffected": [],
-                "is_correct": true,
-                "method": "programmatic_set_overlap"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Values: The user places a high value on sustainability and innovation, expressing hope that the aerospace industry and other sectors prioritize eco-conscious practices for the future of the planet. | Identity: The user is a resident of Chicago and values ...",
-              "context_tokens": 1496,
-              "retrieval_latency_ms": 49.62
-            },
-            {
-              "question_id": "D_dev_01_q2",
-              "question_subkind": "why",
-              "question_text": "Why does the Aspen ski trip decision need to be revisited?",
-              "gold_answer": "The ski trip was funded by the expected $10,000 bonus.",
-              "hypothesis": "Based on the provided context, there is no mention that the Aspen ski trip decision needs to be revisited. The context only notes that you put down a deposit for a luxury Aspen ski vacation for New Year's on February 11, 2024, relying on your December bonus.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant correctly noted that the provided context contains no information about the Aspen ski trip needing to be revisited, adhering to the limits of the given information.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly noted that the provided context contains no information about the Aspen ski trip needing to be revisited, adhering to the limits of the given information.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Values: The user places a high value on sustainability and innovation, expressing hope that the aerospace industry and other sectors prioritize eco-conscious practices for the future of the planet. | Identity: The user is a resident of Chicago and values ...",
-              "context_tokens": 1486,
-              "retrieval_latency_ms": 25.04
-            },
-            {
-              "question_id": "D_dev_01_q3",
-              "question_subkind": "stands",
-              "question_text": "Does the monthly mortgage autopay amount still stand?",
-              "gold_answer": "Yes, it stands",
-              "hypothesis": "Yes, the monthly mortgage payment autopay is set to exactly $2,100.",
-              "is_correct": true,
-              "scoring_type": "string_match",
-              "evaluation_details": {
-                "method": "programmatic_string_match"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Values: The user places a high value on sustainability and innovation, expressing hope that the aerospace industry and other sectors prioritize eco-conscious practices for the future of the planet. | Identity: The user is a resident of Chicago and values ...",
-              "context_tokens": 1498,
-              "retrieval_latency_ms": 25.54
-            }
-          ]
-        },
         "mem0": {
           "scenario_accuracy": 0.6666666666666666,
           "scenario_pass": false,
@@ -1482,40 +1122,6 @@
       "session_count": 25,
       "question_count": 1,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 1,
-          "total_questions": 1,
-          "avg_retrieval_latency_ms": 48.21,
-          "avg_context_tokens": 1494.0,
-          "ingest_latency_ms": 105529.4,
-          "ingest_cost_usd": 0.0394,
-          "questions": [
-            {
-              "question_id": "X_dev_00_q1",
-              "question_subkind": "hidden_constraint",
-              "question_text": "Can you design a high-energy morning cardio workout routine for me this week including sprint intervals and jump rope?",
-              "gold_answer": "The workout plan must refuse sprint intervals and jump rope, citing the strict medical restriction against high-impact exercises and running due to the meniscus tear, and substitute low-impact cardio like swimming, rowing, or cycling.",
-              "hypothesis": "I cannot provide a high-energy morning cardio workout routine including sprint intervals and jump rope because your physical therapist has instructed you to strictly avoid high-impact exercises and running.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant correctly accounted for the hidden constraint regarding the meniscus/high-impact restriction by refusing the unconstrained high-impact workout proposal.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly accounted for the hidden constraint regarding the meniscus/high-impact restriction by refusing the unconstrained high-impact workout proposal.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Corporate Sustainability: User values and advocates for businesses prioritizing sustainability in their operations and believes everyone should take responsibility for a greener future. | Medium Appreciation: User values the unique texture, imperfections,...",
-              "context_tokens": 1494,
-              "retrieval_latency_ms": 48.21
-            }
-          ]
-        },
         "mem0": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,
@@ -1629,40 +1235,6 @@
       "session_count": 25,
       "question_count": 1,
       "system_results": {
-        "graph_memory": {
-          "scenario_accuracy": 1.0,
-          "scenario_pass": true,
-          "correct_questions": 1,
-          "total_questions": 1,
-          "avg_retrieval_latency_ms": 64.12,
-          "avg_context_tokens": 1480.0,
-          "ingest_latency_ms": 134431.88,
-          "ingest_cost_usd": 0.0456,
-          "questions": [
-            {
-              "question_id": "X_dev_01_q1",
-              "question_subkind": "hidden_constraint",
-              "question_text": "I am traveling to the Chicago conference and found the Hyatt Regency right next door for $340 per night. Should I go ahead and book it directly on the corporate portal?",
-              "gold_answer": "No, you cannot book it directly because it exceeds the $220/night corporate limit; it requires formal executive exception approval.",
-              "hypothesis": "No, you should not book it directly without approval. According to your company travel policy, hotel room bookings are capped at $220 per night without executive exception approval, and the Hyatt Regency is $340 per night.",
-              "is_correct": true,
-              "scoring_type": "llm_rubric",
-              "evaluation_details": {
-                "primary_judge": {
-                  "is_correct": true,
-                  "verdict": "CORRECT",
-                  "reasoning": "The assistant correctly enforced the unmentioned budget constraint of $220 per night, refused the unconstrained $340 booking proposal, and cited the policy limit.",
-                  "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned budget constraint of $220 per night, refused the unconstrained $340 booking proposal, and cited the policy limit.\"\n}\n```",
-                  "judge_type": "primary"
-                },
-                "method": "llm_rubric_primary"
-              },
-              "retrieved_context_preview": "# User Profile Primer\nIdentity & Principles: Demographics and Physical Specs: The individual is 45 years old, stands 6' 4\", is right-handed, and plays golf. | World of Warcraft History: The user played World of Warcraft in the past but hasn't had time to keep up with it lately. | Seat and Flight Inf...",
-              "context_tokens": 1480,
-              "retrieval_latency_ms": 64.12
-            }
-          ]
-        },
         "mem0": {
           "scenario_accuracy": 1.0,
           "scenario_pass": true,

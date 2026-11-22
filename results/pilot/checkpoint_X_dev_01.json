@@ -7,40 +7,6 @@
   "session_count": 7,
   "question_count": 1,
   "system_results": {
-    "graph_memory": {
-      "scenario_accuracy": 1.0,
-      "scenario_pass": true,
-      "correct_questions": 1,
-      "total_questions": 1,
-      "avg_retrieval_latency_ms": 36.61,
-      "avg_context_tokens": 656.0,
-      "ingest_latency_ms": 17444.53,
-      "ingest_cost_usd": 0.0062,
-      "questions": [
-        {
-          "question_id": "X_dev_01_q1",
-          "question_subkind": "hidden_constraint",
-          "question_text": "I am traveling to the Chicago conference and found the Hyatt Regency right next door for $340 per night. Should I go ahead and book it directly on the corporate portal?",
-          "gold_answer": "No, you cannot book it directly because it exceeds the $220/night corporate limit; it requires formal executive exception approval.",
-          "hypothesis": "No, you should not book it directly. The company travel policy strictly caps individual hotel room bookings at $220 per night, and anything higher requires formal executive exception approval.",
-          "is_correct": true,
-          "scoring_type": "llm_rubric",
-          "evaluation_details": {
-            "primary_judge": {
-              "is_correct": true,
-              "verdict": "CORRECT",
-              "reasoning": "The assistant correctly enforced the unmentioned budget constraint of $220 per night and refused the $340 proposal, explaining that it exceeds policy limits.",
-              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly enforced the unmentioned budget constraint of $220 per night and refused the $340 proposal, explaining that it exceeds policy limits.\"\n}\n```",
-              "judge_type": "primary"
-            },
-            "method": "llm_rubric_primary"
-          },
-          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Goals and Desired Outcomes (Sustainable Home Decor and Closet Storage): The user is looking for sustainable home decor inspiration and eco-friendly closet storage solutions. | Storage Intentions and Preferences (Sustainable Home Decor and Closet Storage...",
-          "context_tokens": 656,
-          "retrieval_latency_ms": 36.61
-        }
-      ]
-    },
     "hybrid_rag": {
       "scenario_accuracy": 1.0,
       "scenario_pass": true,

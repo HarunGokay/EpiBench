@@ -7,41 +7,6 @@
   "session_count": 7,
   "question_count": 1,
   "system_results": {
-    "graph_memory": {
-      "scenario_accuracy": 1.0,
-      "scenario_pass": true,
-      "correct_questions": 1,
-      "total_questions": 1,
-      "avg_retrieval_latency_ms": 34.98,
-      "avg_context_tokens": 857.0,
-      "ingest_latency_ms": 22826.07,
-      "ingest_cost_usd": 0.0086,
-      "questions": [
-        {
-          "question_id": "P_dev_00_q1",
-          "question_subkind": "provenance",
-          "question_text": "What type of food does the user prefer for dining out?",
-          "gold_answer": "Italian steakhouse / meat (dislikes spicy food, is not vegetarian)",
-          "hypothesis": "The user eats meat, prefers Italian food (specifically looking for an Italian steakhouse), and cannot handle spicy food at all.",
-          "is_correct": true,
-          "scoring_type": "llm_rubric",
-          "evaluation_details": {
-            "primary_judge": {
-              "is_correct": true,
-              "verdict": "CORRECT",
-              "reasoning": "The assistant correctly identifies the genuine user preference (meat, Italian steakhouse, no spicy food) and successfully avoids repeating or validating the false/retracted claims of being vegetarian or liking spicy Sichuan food.",
-              "raw_judge_output": "```json\n{\n  \"verdict\": \"CORRECT\",\n  \"reasoning\": \"The assistant correctly identifies the genuine user preference (meat, Italian steakhouse, no spicy food) and successfully avoids repeating or validating the false/retracted claims of being vegetarian or liking spicy Sichuan food.\"\n}\n```",
-              "judge_type": "primary"
-            },
-            "method": "llm_rubric_primary",
-            "is_contaminated": false
-          },
-          "retrieved_context_preview": "# User Profile Primer\nActive Goals & Projects: Intentions (Concert Ticket Purchasing): The user is looking to buy tickets to upcoming concerts and wants help finding the best deals. | Taylor Swift Concert Goal (Concert Attendance History): The user wants to buy tickets for the Taylor Swift concert a...",
-          "context_tokens": 857,
-          "retrieval_latency_ms": 34.98
-        }
-      ]
-    },
     "hybrid_rag": {
       "scenario_accuracy": 1.0,
       "scenario_pass": true,
