@@ -18,7 +18,7 @@
     "Q"
   ],
   "total_scenarios": 108,
-  "manifest_sha256": "ca0706e5ba5ee74909f2808408b609003f905a584fa460adcf3167bc4830fb34",
+  "manifest_sha256": "e6aa145b3c46d0d0328d61efd75db3b1ae54139b7d5ba32b74457b935f8a54d7",
   "scenarios": [
     {
       "scenario_id": "R_dev_00",
@@ -386,7 +386,7 @@
       "template_id": "f_09_docs_portal_ontime",
       "session_count": 8,
       "question_count": 3,
-      "sha256": "0ee643a031d42aab28b19cb590f9b4908d521505ae42c46bff267772916a40af"
+      "sha256": "34c1c41955069822a53940cdc10c73f7ddfae22f75b8e2e226f54ed61a39aa12"
     },
     {
       "scenario_id": "F_dev_10",
@@ -394,7 +394,7 @@
       "template_id": "f_10_paint_living_room_ontime",
       "session_count": 8,
       "question_count": 3,
-      "sha256": "80ce82fe2921030664bbb5f2d1ce91daf45be49a8153f6aabc2f1b93b63ace08"
+      "sha256": "53ead42ee607e2d0660aa8c092caef5b76025ecb3f4b54bb58f4c65049eb9c65"
     },
     {
       "scenario_id": "F_dev_11",
@@ -402,7 +402,7 @@
       "template_id": "f_11_quarterly_tax_ontime",
       "session_count": 8,
       "question_count": 3,
-      "sha256": "1a7c724c3b048d530e3198c4152919896cbebe7660bd96b0de027bdf31b75fc6"
+      "sha256": "e1f66f1ab73c464aaaa0ffaa10c8bac3b43483ef22848aee7b1f0dbab8bf0dce"
     },
     {
       "scenario_id": "I_dev_00",
