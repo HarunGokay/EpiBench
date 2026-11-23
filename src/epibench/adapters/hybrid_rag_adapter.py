@@ -178,20 +178,19 @@ class HybridRAGAdapter(BaseMemoryAdapter):
         selected_texts: List[str] = []
         source_session_ids: List[str] = []
         seen_sids = set()
-        tot_tok = 0
+        sep = "\n\n---\n\n"
         for _, item in rrf_scored:
             text = item["text"]
-            c_tok = count_tokens(text)
-            if tot_tok + c_tok > token_budget:
+            candidate_context = sep.join((*selected_texts, text))
+            if count_tokens(candidate_context) > token_budget:
                 break
             selected_texts.append(text)
-            tot_tok += c_tok
             sid = item.get("session_id", "")
             if sid and sid not in seen_sids:
                 seen_sids.add(sid)
                 source_session_ids.append(sid)
 
-        context = "\n\n---\n\n".join(selected_texts)
+        context = sep.join(selected_texts)
         latency = (time.perf_counter() - t0) * 1000.0
         return RetrievalResult(
             context=context,

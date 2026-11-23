@@ -60,6 +60,8 @@ async def run_depth_suite(
     use_fakes: bool = False,
     custom_adapters: Optional[Dict[str, BaseMemoryAdapter]] = None,
     concurrency: int = 1,
+    distractor_mode: str = "neutral",
+    distractor_file: Optional[Path] = None,
 ) -> Dict[str, Any]:
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -77,6 +79,7 @@ async def run_depth_suite(
         "date_utc": datetime.now(timezone.utc).isoformat(),
         "git_commit_sha": get_git_commit_sha(),
         "use_fakes": use_fakes,
+        "distractor_mode": "custom" if distractor_file is not None else distractor_mode,
         "seed": seed,
         "token_budget": token_budget,
         "depths": depth_list,
@@ -90,7 +93,7 @@ async def run_depth_suite(
     t0_suite = time.perf_counter()
 
     for depth in depth_list:
-        logger.info("STARTING DEPTH STRESS TEST: FILLER COUNT = %d", depth)
+        logger.info("STARTING DEPTH STRESS TEST: FILLER COUNT = %d (mode=%s)", depth, distractor_mode)
         depth_dir = output_dir / f"depth_{depth}"
         depth_dir.mkdir(parents=True, exist_ok=True)
 
@@ -103,6 +106,8 @@ async def run_depth_suite(
             judge_model=judge_model,
             use_fakes=use_fakes,
             custom_adapters=custom_adapters,
+            distractor_mode=distractor_mode,
+            distractor_file=distractor_file,
         )
 
         res = await runner.run_benchmark(
@@ -166,6 +171,8 @@ async def main() -> None:
     parser.add_argument("--budget-usd", type=float, required=True, help="Hard spend ceiling in USD (required).")
     parser.add_argument("--seed", type=int, default=20261122)
     parser.add_argument("--output-dir", type=str, default="results/depth")
+    parser.add_argument("--distractor-mode", choices=["neutral", "same_domain", "mixed"], default="neutral")
+    parser.add_argument("--distractor-file", type=str, default=None)
     parser.add_argument("--offline", action="store_true", help="Use deterministic offline fakes.")
     parser.add_argument("--concurrency", type=int, default=1)
     args = parser.parse_args()
@@ -190,6 +197,8 @@ async def main() -> None:
         output_dir=Path(args.output_dir),
         use_fakes=args.offline,
         concurrency=args.concurrency,
+        distractor_mode=args.distractor_mode,
+        distractor_file=Path(args.distractor_file) if args.distractor_file else None,
     )
 
 

@@ -18,17 +18,62 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timedelta, timezone
 import hashlib
+from pathlib import Path
 import random
 from typing import Any, Dict, List, Optional
 
-from epibench.generator.distractor_pool import DistractorPool
+from epibench.generator.distractor_pool import DistractorPool, VALID_DISTRACTOR_MODES
 from epibench.generator.pools import (
     ALL_POOLS,
     compute_forecast_gold,
 )
 
-GENERATOR_VERSION = "2.0.0"
+GENERATOR_VERSION = "2.1.0"
 VALID_TRACKS = ("R", "D", "X", "F", "I", "P", "K", "E", "Q")
+
+BENCHMARK_PROFILES: Dict[str, Dict[str, Any]] = {
+    "dev": {
+        "filler_count": 6,
+        "distractor_mode": "neutral",
+        "token_budget": 1500,
+        "description": "Fast smoke/regression profile (6 neutral fillers; fits inside 1,500-token budget).",
+    },
+    "hard": {
+        "filler_count": 120,
+        "distractor_mode": "mixed",
+        "token_budget": 1500,
+        "description": (
+            "True budget-overflow & semantic-interference profile (120 mixed same-domain + neutral fillers; "
+            "~13,800 history tokens vs 1,500 token budget, so only ~10.8% fits in budget)."
+        ),
+    },
+}
+
+
+def resolve_profile(
+    profile: Optional[str] = None,
+    filler_count: Optional[int] = None,
+    distractor_mode: Optional[str] = None,
+    token_budget: Optional[int] = None,
+) -> Dict[str, Any]:
+    """Resolve benchmark profile defaults with explicit CLI/API overrides."""
+    prof_key = (profile or "dev").strip().lower()
+    if prof_key not in BENCHMARK_PROFILES:
+        raise ValueError(
+            f"Unknown benchmark profile {profile!r}; expected one of {tuple(BENCHMARK_PROFILES.keys())}."
+        )
+    base = dict(BENCHMARK_PROFILES[prof_key])
+    resolved_mode = (distractor_mode or base["distractor_mode"]).strip().lower()
+    if resolved_mode not in VALID_DISTRACTOR_MODES:
+        raise ValueError(
+            f"Invalid distractor_mode {distractor_mode!r}; expected one of {VALID_DISTRACTOR_MODES}."
+        )
+    return {
+        "profile": prof_key,
+        "filler_count": base["filler_count"] if filler_count is None else int(filler_count),
+        "distractor_mode": resolved_mode,
+        "token_budget": base["token_budget"] if token_budget is None else int(token_budget),
+    }
 
 
 @dataclass
@@ -155,8 +200,18 @@ class ScenarioGenerator:
         self,
         distractor_pool: Optional[DistractorPool] = None,
         custom_pools: Optional[Dict[str, List[Dict[str, Any]]]] = None,
+        distractor_mode: str = "neutral",
+        distractor_file: Optional[Path] = None,
     ):
-        self.distractor_pool = distractor_pool or DistractorPool.get_instance()
+        if distractor_pool is not None:
+            self.distractor_pool = distractor_pool
+            self.distractor_mode = getattr(distractor_pool, "mode", distractor_mode)
+        else:
+            self.distractor_pool = DistractorPool.get_instance(
+                mode=distractor_mode,
+                dataset_path=distractor_file,
+            )
+            self.distractor_mode = "custom" if distractor_file is not None else self.distractor_pool.mode
         self._pools = custom_pools if custom_pools is not None else ALL_POOLS
         self._has_custom_pools = custom_pools is not None
 
@@ -938,21 +993,24 @@ class ScenarioGenerator:
     ) -> Scenario:
         track = track.upper()
         if track == "R":
-            return self.generate_track_r_scenario(scenario_idx, split, seed, filler_count)
-        if track == "D":
-            return self.generate_track_d_scenario(scenario_idx, split, seed, filler_count)
-        if track == "X":
-            return self.generate_track_x_scenario(scenario_idx, split, seed, filler_count)
-        if track == "F":
-            return self.generate_track_f_scenario(scenario_idx, split, seed, filler_count)
-        if track == "I":
-            return self.generate_track_i_scenario(scenario_idx, split, seed, filler_count)
-        if track == "P":
-            return self.generate_track_p_scenario(scenario_idx, split, seed, filler_count)
-        if track == "K":
-            return self.generate_track_k_scenario(scenario_idx, split, seed, filler_count)
-        if track == "E":
-            return self.generate_track_e_scenario(scenario_idx, split, seed, filler_count)
-        if track == "Q":
-            return self.generate_track_q_scenario(scenario_idx, split, seed, filler_count)
-        raise ValueError(f"Unknown track '{track}'. Valid tracks: {', '.join(VALID_TRACKS)}")
+            sc = self.generate_track_r_scenario(scenario_idx, split, seed, filler_count)
+        elif track == "D":
+            sc = self.generate_track_d_scenario(scenario_idx, split, seed, filler_count)
+        elif track == "X":
+            sc = self.generate_track_x_scenario(scenario_idx, split, seed, filler_count)
+        elif track == "F":
+            sc = self.generate_track_f_scenario(scenario_idx, split, seed, filler_count)
+        elif track == "I":
+            sc = self.generate_track_i_scenario(scenario_idx, split, seed, filler_count)
+        elif track == "P":
+            sc = self.generate_track_p_scenario(scenario_idx, split, seed, filler_count)
+        elif track == "K":
+            sc = self.generate_track_k_scenario(scenario_idx, split, seed, filler_count)
+        elif track == "E":
+            sc = self.generate_track_e_scenario(scenario_idx, split, seed, filler_count)
+        elif track == "Q":
+            sc = self.generate_track_q_scenario(scenario_idx, split, seed, filler_count)
+        else:
+            raise ValueError(f"Unknown track '{track}'. Valid tracks: {', '.join(VALID_TRACKS)}")
+        sc.metadata.setdefault("distractor_mode", self.distractor_mode)
+        return sc

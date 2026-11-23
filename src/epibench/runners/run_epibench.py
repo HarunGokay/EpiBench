@@ -35,12 +35,14 @@ from epibench.adapters.reference_adapters import NullMemoryAdapter, OracleAdapte
 from epibench.adapters.vector_rag_adapter import VectorRAGAdapter
 from epibench.generator.manifest import canonical_json_bytes, scenario_sha256
 from epibench.generator.scenario_generator import (
+    BENCHMARK_PROFILES,
     GENERATOR_VERSION,
     VALID_TRACKS,
     Scenario,
     ScenarioGenerator,
     derive_seed,
     parse_session_date,
+    resolve_profile,
 )
 from epibench.judging.programmatic import (
     SCORER_VERSION,
@@ -118,6 +120,9 @@ class EpiBenchRunner:
         strict_as_of_audit: bool = False,
         custom_adapters: Optional[Dict[str, BaseMemoryAdapter]] = None,
         experimental_tracks: Optional[Sequence[str]] = None,
+        distractor_mode: str = "neutral",
+        distractor_file: Optional[Path] = None,
+        profile: str = "dev",
     ):
         if spend_tracker is None:
             raise ValueError("spend_tracker with an explicit hard_cap_usd is required.")
@@ -131,6 +136,9 @@ class EpiBenchRunner:
         self.custom_adapters: Dict[str, BaseMemoryAdapter] = dict(custom_adapters or {})
         self.experimental_tracks: Set[str] = {t.upper() for t in (experimental_tracks or [])}
         self.use_fakes = use_fakes
+        self.profile = profile
+        self.distractor_mode = "custom" if distractor_file is not None else distractor_mode
+        self.distractor_file = Path(distractor_file) if distractor_file is not None else None
 
         if use_fakes:
             self.reader = reader or FakeReader()
@@ -152,7 +160,10 @@ class EpiBenchRunner:
 
         self.reader_model = getattr(self.reader, "model_name", reader_model)
         self.judge_model = getattr(self.judge, "model_name", judge_model)
-        self.generator = ScenarioGenerator()
+        self.generator = ScenarioGenerator(
+            distractor_mode=distractor_mode,
+            distractor_file=self.distractor_file,
+        )
 
     def build_adapters(self, systems: Sequence[str]) -> Dict[str, BaseMemoryAdapter]:
         adapters: Dict[str, BaseMemoryAdapter] = {}
@@ -615,6 +626,8 @@ class EpiBenchRunner:
             "git_commit_sha": get_git_commit_sha(),
             "manifest_sha256": manifest_sha256,
             "split": split,
+            "profile": self.profile,
+            "distractor_mode": self.distractor_mode,
             "seed": seed,
             "filler_count": filler_count,
             "token_budget": self.token_budget,
@@ -794,13 +807,16 @@ class EpiBenchRunner:
 async def main() -> None:
     parser = argparse.ArgumentParser(description="Run EpiBench Evaluation Suite")
     parser.add_argument("--split", choices=["dev", "held_out"], default="dev")
+    parser.add_argument("--profile", choices=list(BENCHMARK_PROFILES.keys()), default="dev")
     parser.add_argument("--tracks", type=str, default=",".join(VALID_TRACKS))
     parser.add_argument("--systems", type=str, default="null_memory,oracle,vector_rag,hybrid_rag,recent_context")
-    parser.add_argument("--token-budget", type=int, default=1500)
+    parser.add_argument("--token-budget", type=int, default=None)
     parser.add_argument("--budget-usd", type=float, required=True, help="Hard spend ceiling in USD (required).")
     parser.add_argument("--output-dir", type=str, default="results/run")
     parser.add_argument("--scenarios-per-track", type=int, default=12)
-    parser.add_argument("--filler-count", type=int, default=6)
+    parser.add_argument("--filler-count", type=int, default=None)
+    parser.add_argument("--distractor-mode", choices=["neutral", "same_domain", "mixed"], default=None)
+    parser.add_argument("--distractor-file", type=str, default=None, help="Optional path to custom distractor JSON.")
     parser.add_argument("--seed", type=int, default=20261122)
     parser.add_argument("--reader-model", type=str, default="gemini-3.5-flash-lite")
     parser.add_argument("--judge-model", type=str, default=DEFAULT_JUDGE_MODEL)
@@ -809,6 +825,14 @@ async def main() -> None:
     parser.add_argument("--no-resume", action="store_true", help="Ignore existing checkpoints.")
     parser.add_argument("--concurrency", type=int, default=1, help="Number of scenarios to run concurrently.")
     args = parser.parse_args()
+
+    resolved = resolve_profile(
+        profile=args.profile,
+        filler_count=args.filler_count,
+        distractor_mode=args.distractor_mode,
+        token_budget=args.token_budget,
+    )
+    distractor_file = Path(args.distractor_file) if args.distractor_file else None
 
     api_key = os.getenv("GEMINI_API_KEY", "")
     if not args.offline and not api_key:
@@ -821,12 +845,15 @@ async def main() -> None:
     runner = EpiBenchRunner(
         api_key=api_key,
         spend_tracker=spend_tracker,
-        token_budget=args.token_budget,
+        token_budget=resolved["token_budget"],
         output_dir=Path(args.output_dir),
         reader_model=args.reader_model,
         judge_model=args.judge_model,
         secondary_audit_rate=args.secondary_audit_rate,
         use_fakes=args.offline,
+        distractor_mode=resolved["distractor_mode"],
+        distractor_file=distractor_file,
+        profile=resolved["profile"],
     )
 
     t_start = time.perf_counter()
@@ -836,7 +863,7 @@ async def main() -> None:
         scenarios_per_track=args.scenarios_per_track,
         split=args.split,
         seed=args.seed,
-        filler_count=args.filler_count,
+        filler_count=resolved["filler_count"],
         resume=not args.no_resume,
         concurrency=args.concurrency,
     )

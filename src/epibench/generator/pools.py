@@ -81,16 +81,27 @@ def _whole_phrase_present(phrase: str, haystack: str) -> bool:
 def validate_pools(distractor_pool: Optional[DistractorPool] = None) -> Dict[str, int]:
     """Validate all curated track pools for structural, arithmetic, alias, and filler integrity.
 
+    When ``distractor_pool`` is omitted, checks BOTH the bundled neutral pool
+    and the bundled same-domain pool for entity-gold contamination.
     Raises AssertionError or ValueError on any violation.
     Returns a summary mapping track -> template count.
     """
-    dp = distractor_pool or DistractorPool.get_instance()
-    filler_texts: List[str] = []
-    for f_sess in dp._pool:
-        joined = " ".join(
-            (t.get("content") or t.get("text") or "") for t in f_sess.get("turns", [])
-        )
-        filler_texts.append(joined)
+    pools_to_check: List[DistractorPool] = (
+        [distractor_pool]
+        if distractor_pool is not None
+        else [
+            DistractorPool.get_instance(mode="neutral"),
+            DistractorPool.get_instance(mode="same_domain"),
+        ]
+    )
+    filler_texts: List[tuple[str, str]] = []
+    for dp in pools_to_check:
+        for f_idx, f_sess in enumerate(dp._pool):
+            joined = " ".join(
+                (t.get("content") or t.get("text") or "") for t in f_sess.get("turns", [])
+            )
+            sid = str(f_sess.get("session_id", f"{dp.mode}_{f_idx}"))
+            filler_texts.append((sid, joined))
 
     counts: Dict[str, int] = {}
     all_ids: Set[str] = set()
@@ -287,10 +298,10 @@ def validate_pools(distractor_pool: Optional[DistractorPool] = None) -> Dict[str
 
     # 10. Filler contamination check: no entity gold may appear in any filler session
     for tid, gold_str in entity_golds_to_check_against_fillers:
-        for f_idx, f_text in enumerate(filler_texts):
+        for sid, f_text in filler_texts:
             if _whole_phrase_present(gold_str, f_text):
                 raise AssertionError(
-                    f"Filler leak detected: gold {gold_str!r} (from {tid}) appears in filler {f_idx}"
+                    f"Filler leak detected: gold {gold_str!r} (from {tid}) appears in filler {sid}"
                 )
 
     return counts

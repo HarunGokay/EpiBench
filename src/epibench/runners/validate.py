@@ -21,7 +21,11 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence
 
 from epibench.generator.pools import validate_pools
-from epibench.generator.scenario_generator import GENERATOR_VERSION, VALID_TRACKS
+from epibench.generator.scenario_generator import (
+    GENERATOR_VERSION,
+    VALID_TRACKS,
+    resolve_profile,
+)
 from epibench.judging.programmatic import SCORER_VERSION
 from epibench.judging.rubric_judge import DEFAULT_JUDGE_MODEL
 from epibench.runners.metering import SpendTracker
@@ -36,7 +40,7 @@ NULL_MAX_THRESHOLD_PCT = 15.0
 async def run_validity_gate(
     tracks: Optional[Sequence[str]] = None,
     scenarios_per_track: int = 12,
-    filler_count: int = 6,
+    filler_count: Optional[int] = None,
     seed: int = 20261122,
     budget_usd: float = 2.0,
     api_key: str = "",
@@ -44,9 +48,21 @@ async def run_validity_gate(
     output_dir: Path = Path("results/validity"),
     reader_model: str = "gemini-3.5-flash-lite",
     judge_model: str = DEFAULT_JUDGE_MODEL,
+    profile: str = "dev",
+    distractor_mode: Optional[str] = None,
+    distractor_file: Optional[Path] = None,
+    report_filename: Optional[str] = None,
+    concurrency: Optional[int] = None,
 ) -> Dict[str, Any]:
     """Execute the mandatory null_memory vs oracle validity gate across all tracks."""
     validate_pools()
+    resolved = resolve_profile(
+        profile=profile,
+        filler_count=filler_count,
+        distractor_mode=distractor_mode,
+    )
+    eff_fillers = resolved["filler_count"]
+    eff_mode = "custom" if distractor_file is not None else resolved["distractor_mode"]
     track_list = [t.upper() for t in (tracks or VALID_TRACKS)]
 
     if not offline and not api_key:
@@ -56,26 +72,34 @@ async def run_validity_gate(
     runner = EpiBenchRunner(
         api_key=api_key,
         spend_tracker=spend_tracker,
-        token_budget=1500,
+        token_budget=resolved["token_budget"],
         output_dir=output_dir,
         reader_model=reader_model,
         judge_model=judge_model,
         secondary_audit_rate=0.0,
         use_fakes=offline,
         strict_as_of_audit=True,
+        distractor_mode=resolved["distractor_mode"],
+        distractor_file=distractor_file,
+        profile=resolved["profile"],
     )
 
+    raw_name = (
+        f"validity_{resolved['profile']}_raw.json"
+        if resolved["profile"] != "dev"
+        else "validity_raw.json"
+    )
     run_res = await runner.run_benchmark(
         tracks=track_list,
         systems=["null_memory", "oracle"],
         scenarios_per_track=scenarios_per_track,
         split="dev",
         seed=seed,
-        filler_count=filler_count,
+        filler_count=eff_fillers,
         resume=not offline,
         save_checkpoints=not offline,
-        output_filename="validity_raw.json",
-        concurrency=1 if offline else 4,
+        output_filename=raw_name,
+        concurrency=(1 if offline else 6) if concurrency is None else concurrency,
     )
 
     by_track = run_res["performance_summary"]["by_track"]
@@ -125,8 +149,11 @@ async def run_validity_gate(
         "reader_model": runner.reader_model,
         "judge_model": runner.judge_model,
         "seed": seed,
+        "profile": resolved["profile"],
+        "distractor_mode": eff_mode,
+        "manifest_sha256": run_res["manifest_sha256"],
         "scenarios_per_track": scenarios_per_track,
-        "filler_count": filler_count,
+        "filler_count": eff_fillers,
         "thresholds": {
             "oracle_min_pct": ORACLE_MIN_THRESHOLD_PCT,
             "null_memory_max_pct": NULL_MAX_THRESHOLD_PCT,
@@ -138,7 +165,12 @@ async def run_validity_gate(
         "spend_summary": spend_tracker.summary(),
     }
 
-    report_path = output_dir / "validity_report.json"
+    out_name = report_filename or (
+        f"validity_{resolved['profile']}_report.json"
+        if resolved["profile"] != "dev"
+        else "validity_report.json"
+    )
+    report_path = output_dir / out_name
     output_dir.mkdir(parents=True, exist_ok=True)
     with open(report_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2)

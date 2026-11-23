@@ -15,16 +15,29 @@ def _cmd_manifest(args: argparse.Namespace) -> int:
 
     validate_pools()
     tracks = [t.strip().upper() for t in args.tracks.split(",") if t.strip()]
+    distractor_file = Path(args.distractor_file) if args.distractor_file else None
     manifest = generate_manifest(
         split=args.split,
         seed=args.seed,
         scenarios_per_track=args.scenarios_per_track,
         filler_count=args.filler_count,
         tracks=tracks,
+        profile=args.profile,
+        distractor_mode=args.distractor_mode,
+        distractor_file=distractor_file,
     )
-    out = Path(args.output)
+    default_out = (
+        f"manifests/{args.profile}_manifest.json"
+        if args.output is None
+        else args.output
+    )
+    out = Path(default_out)
     write_manifest(manifest, out)
-    print(f"Manifest written to {out} ({manifest['total_scenarios']} scenarios, sha256={manifest['manifest_sha256']})")
+    print(
+        f"Manifest written to {out} ({manifest['total_scenarios']} scenarios, "
+        f"profile={manifest['profile']}, mode={manifest['distractor_mode']}, "
+        f"fillers={manifest['filler_count']}, sha256={manifest['manifest_sha256']})"
+    )
     return 0
 
 
@@ -38,6 +51,7 @@ def _cmd_validate(args: argparse.Namespace) -> int:
         print("GEMINI_API_KEY not set; falling back to --offline (validity unverified live).")
         offline = True
 
+    distractor_file = Path(args.distractor_file) if args.distractor_file else None
     report = asyncio.run(
         run_validity_gate(
             tracks=tracks,
@@ -50,6 +64,10 @@ def _cmd_validate(args: argparse.Namespace) -> int:
             output_dir=Path(args.output_dir),
             reader_model=args.reader_model,
             judge_model=args.judge_model,
+            profile=args.profile,
+            distractor_mode=args.distractor_mode,
+            distractor_file=distractor_file,
+            concurrency=args.concurrency,
         )
     )
     print(format_validity_table(report))
@@ -67,21 +85,28 @@ def main(argv: list[str] | None = None) -> int:
 
     p_manifest = subparsers.add_parser("manifest", help="Generate deterministic SHA-256 scenario manifest")
     p_manifest.add_argument("--split", type=str, default="dev")
+    p_manifest.add_argument("--profile", choices=["dev", "hard"], default="dev")
     p_manifest.add_argument("--seed", type=int, default=20261122)
     p_manifest.add_argument("--scenarios-per-track", type=int, default=12)
-    p_manifest.add_argument("--filler-count", type=int, default=6)
+    p_manifest.add_argument("--filler-count", type=int, default=None)
+    p_manifest.add_argument("--distractor-mode", choices=["neutral", "same_domain", "mixed"], default=None)
+    p_manifest.add_argument("--distractor-file", type=str, default=None)
     p_manifest.add_argument("--tracks", type=str, default="R,D,X,F,I,P,K,E,Q")
-    p_manifest.add_argument("--output", type=str, default="manifests/dev_manifest.json")
+    p_manifest.add_argument("--output", type=str, default=None)
 
     p_val = subparsers.add_parser("validate", help="Run null_memory vs oracle track validity gate")
+    p_val.add_argument("--profile", choices=["dev", "hard"], default="dev")
     p_val.add_argument("--tracks", type=str, default="R,D,X,F,I,P,K,E,Q")
     p_val.add_argument("--scenarios-per-track", type=int, default=12)
-    p_val.add_argument("--filler-count", type=int, default=6)
+    p_val.add_argument("--filler-count", type=int, default=None)
+    p_val.add_argument("--distractor-mode", choices=["neutral", "same_domain", "mixed"], default=None)
+    p_val.add_argument("--distractor-file", type=str, default=None)
     p_val.add_argument("--seed", type=int, default=20261122)
     p_val.add_argument("--budget-usd", type=float, default=2.0)
     p_val.add_argument("--output-dir", type=str, default="results/validity")
     p_val.add_argument("--reader-model", type=str, default="gemini-3.5-flash-lite")
     p_val.add_argument("--judge-model", type=str, default="gemini-3.5-flash")
+    p_val.add_argument("--concurrency", type=int, default=None)
     p_val.add_argument("--offline", action="store_true", help="Use deterministic offline fakes instead of LLM API")
 
     args = parser.parse_args(argv)

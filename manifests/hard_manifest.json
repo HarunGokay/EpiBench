@@ -1,0 +1,888 @@
+{
+  "generator_version": "2.1.0",
+  "profile": "hard",
+  "distractor_mode": "mixed",
+  "split": "dev",
+  "seed": 20261122,
+  "scenarios_per_track": 12,
+  "filler_count": 120,
+  "tracks": [
+    "R",
+    "D",
+    "X",
+    "F",
+    "I",
+    "P",
+    "K",
+    "E",
+    "Q"
+  ],
+  "total_scenarios": 108,
+  "manifest_sha256": "18032a672cb715e647cb7585b6d514ef0ae22bf6fa7b0f7195561deb5a41362d",
+  "scenarios": [
+    {
+      "scenario_id": "R_dev_00",
+      "track": "R",
+      "template_id": "r_00_prod_db",
+      "session_count": 123,
+      "question_count": 4,
+      "sha256": "020b3e6dbd60cc2fc32b31698c7a4139d2e36fef04fb62d7e6d5c7d3dd93a5bb"
+    },
+    {
+      "scenario_id": "R_dev_01",
+      "track": "R",
+      "template_id": "r_01_gym_membership",
+      "session_count": 123,
+      "question_count": 4,
+      "sha256": "d53ee6be0f5259305ef352f5b5ce2775826ce303b3a4982c2574369c819340e4"
+    },
+    {
+      "scenario_id": "R_dev_02",
+      "track": "R",
+      "template_id": "r_02_savings_target",
+      "session_count": 123,
+      "question_count": 4,
+      "sha256": "d5731c3d436337380524e83cf5f8c7b314ce4a2109a83d5bd26b232190b9afc3"
+    },
+    {
+      "scenario_id": "R_dev_03",
+      "track": "R",
+      "template_id": "r_03_frontend_framework",
+      "session_count": 123,
+      "question_count": 4,
+      "sha256": "cd3b4cb930d8eed6962044ced0050b30a044ad27b2e201fcdacf7b715a02427a"
+    },
+    {
+      "scenario_id": "R_dev_04",
+      "track": "R",
+      "template_id": "r_04_airline_loyalty",
+      "session_count": 123,
+      "question_count": 4,
+      "sha256": "603ed2f9f53fddbc487fe7baffcfdd303ad1d6b017d6f42148768f9690940f57"
+    },
+    {
+      "scenario_id": "R_dev_05",
+      "track": "R",
+      "template_id": "r_05_countertop_material",
+      "session_count": 123,
+      "question_count": 4,
+      "sha256": "b477fb3b4e93eb5484fdb297671d28a3533ea6c3bf373cc0624c22548e21c5c2"
+    },
+    {
+      "scenario_id": "R_dev_06",
+      "track": "R",
+      "template_id": "r_06_project_deadline",
+      "session_count": 123,
+      "question_count": 4,
+      "sha256": "7d261a415b8eff3c07d9b1f0a663e7736a18a95ee27229654b3bc1817bb25df4"
+    },
+    {
+      "scenario_id": "R_dev_07",
+      "track": "R",
+      "template_id": "r_07_ci_platform",
+      "session_count": 124,
+      "question_count": 4,
+      "sha256": "6ddabc2a5e6f2b7f690f8d8de3c8872502bbef867a3f5755443de9fab444dbd8"
+    },
+    {
+      "scenario_id": "R_dev_08",
+      "track": "R",
+      "template_id": "r_08_brokerage_account",
+      "session_count": 124,
+      "question_count": 4,
+      "sha256": "f27a5c8991874859d916ce85c3c18c0a379920301e401b48948e5d8c7cf09e01"
+    },
+    {
+      "scenario_id": "R_dev_09",
+      "track": "R",
+      "template_id": "r_09_office_city",
+      "session_count": 123,
+      "question_count": 4,
+      "sha256": "caf81247b6cd8a71a6ed08decc1826294f2232069ebe4180bcf52a22fee68f37"
+    },
+    {
+      "scenario_id": "R_dev_10",
+      "track": "R",
+      "template_id": "r_10_messaging_queue",
+      "session_count": 124,
+      "question_count": 4,
+      "sha256": "57c92a7906cdf462488bd3bd4d902bd1756071325f5eb3a986fa41876f669072"
+    },
+    {
+      "scenario_id": "R_dev_11",
+      "track": "R",
+      "template_id": "r_11_heating_fuel",
+      "session_count": 123,
+      "question_count": 4,
+      "sha256": "975588936a94fe246c908706da85e15885ec68a73e13ddec9aa6c1972f6128b4"
+    },
+    {
+      "scenario_id": "D_dev_00",
+      "track": "D",
+      "template_id": "d_00_mobile_app_launch",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "76de75684d2b24dcf9a859146b2411ac576ccb08eb4654805b4dab12e8dc2faf"
+    },
+    {
+      "scenario_id": "D_dev_01",
+      "track": "D",
+      "template_id": "d_01_db_migration_delay",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "1ff92d41d2c8e3c06f1ca0ea0628430125b971d3e68aa5a4bdec4e1ab418caaa"
+    },
+    {
+      "scenario_id": "D_dev_02",
+      "track": "D",
+      "template_id": "d_02_kitchen_island_resize",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "948aaf2a7dcae6bec02e778e182a0b6fe353913c5d9a580fe48a5e8dcb4feb44"
+    },
+    {
+      "scenario_id": "D_dev_03",
+      "track": "D",
+      "template_id": "d_03_aspen_to_maui",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "352025d95dcacc8dd7b90fe01db65bd08d0c10c16d3ad84a98483d35e4c7bae6"
+    },
+    {
+      "scenario_id": "D_dev_04",
+      "track": "D",
+      "template_id": "d_04_outdoor_wedding_venue",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "a582d2771ec0781ad417482192c6262cec0121cd37c647d9e4a081983cba2b55"
+    },
+    {
+      "scenario_id": "D_dev_05",
+      "track": "D",
+      "template_id": "d_05_eu_data_residency",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "27baca0068a78080f04735ee15e7a8305dc4eeb495a9e2847cdc5103536b62d5"
+    },
+    {
+      "scenario_id": "D_dev_06",
+      "track": "D",
+      "template_id": "d_06_remote_office_closure",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "a22dc0c720eb6fd0216d530af02c8a7634cd3e6886824e288c0290ead05d5104"
+    },
+    {
+      "scenario_id": "D_dev_07",
+      "track": "D",
+      "template_id": "d_07_marathon_injury_switch",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "16378e0f77bae9ead44c9c51bedaea66ed7240a5e2440c7739e11c8948079439"
+    },
+    {
+      "scenario_id": "D_dev_08",
+      "track": "D",
+      "template_id": "d_08_ev_fleet_transition",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "cba173455f0f862dacc56476e637c04eb21dff09a7fac52289ae642f810a7982"
+    },
+    {
+      "scenario_id": "D_dev_09",
+      "track": "D",
+      "template_id": "d_09_gpu_to_cpu_inference",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "1ba1cbb0ae8ed41f825935cbe8cd2cd8427ccc181f646e3b81807abc952fb489"
+    },
+    {
+      "scenario_id": "D_dev_10",
+      "track": "D",
+      "template_id": "d_10_house_purchase_cancelled",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "9cbfdbab8648e1b7c5acf334e38efcd9ade6fc7ce955fd43eafb5b34cf75f4e8"
+    },
+    {
+      "scenario_id": "D_dev_11",
+      "track": "D",
+      "template_id": "d_11_conference_goes_virtual",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "33e38ca13118bd3ce696ca42a031c198f3ca8f2704d9b3d763957df9a6c58c35"
+    },
+    {
+      "scenario_id": "X_dev_00",
+      "track": "X",
+      "template_id": "x_00_knee_meniscus",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "5486390e05c2572c83bfa13b41f11b0fbfc532182cb611f9c9a329f7a57712f1"
+    },
+    {
+      "scenario_id": "X_dev_01",
+      "track": "X",
+      "template_id": "x_01_hotel_cap",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "966d04a3406748ac5ebcd0c1c8b3a2e828f322dac71864ca6360ef84ae4c61c8"
+    },
+    {
+      "scenario_id": "X_dev_02",
+      "track": "X",
+      "template_id": "x_02_staging_vcpu",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "b7ccd6bf5ad13b04eb148fb7f6ee4b90a2b4c992ee6ea97e5b858afb83b672e1"
+    },
+    {
+      "scenario_id": "X_dev_03",
+      "track": "X",
+      "template_id": "x_03_shellfish_allergy",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "dfad6a68bc3c886d70ed3b1ec008b2f4d4d17e9746b548051ef512305b7a7de6"
+    },
+    {
+      "scenario_id": "X_dev_04",
+      "track": "X",
+      "template_id": "x_04_hoa_fence_height",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "8f443e7f02f89a5ccb067edc10c30870615fb17ef87bbc4500f0da64df0717b6"
+    },
+    {
+      "scenario_id": "X_dev_05",
+      "track": "X",
+      "template_id": "x_05_hipaa_baa",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "ffdc353a5c0f20594acee5e9df3d496ed627750da920a8ba9c1de98235cb3281"
+    },
+    {
+      "scenario_id": "X_dev_06",
+      "track": "X",
+      "template_id": "x_06_roof_rack_load",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "633e6c181c129dce4562807c17906ea239c889ff888d07ef8c747595d45bd14b"
+    },
+    {
+      "scenario_id": "X_dev_07",
+      "track": "X",
+      "template_id": "x_07_freeze_window",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "c9e431440e0ec00957353850f12d32a57ec2bcbd6c92177745f4e9fae4e182d5"
+    },
+    {
+      "scenario_id": "X_dev_08",
+      "track": "X",
+      "template_id": "x_08_dog_grapes",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "a12f8a0c4cbb224475292c7ae7990cba964f475b473c7210c6045ca3f0d9d163"
+    },
+    {
+      "scenario_id": "X_dev_09",
+      "track": "X",
+      "template_id": "x_09_gpl_license_ban",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "03044aa9f026db2a73aec83125748879a1688f3177e51d69fe7de3b6ad2fcf50"
+    },
+    {
+      "scenario_id": "X_dev_10",
+      "track": "X",
+      "template_id": "x_10_wash_sale_rule",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "c0a48b7d3dfbb47cc507358a694eb4f93a5c8bfe3ca3b181fda3b96c29204714"
+    },
+    {
+      "scenario_id": "X_dev_11",
+      "track": "X",
+      "template_id": "x_11_school_nut_free",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "4c7c753d519591bdbf7a9aa810c337fc1eadbdc784016075acbeea3b3a84f2c3"
+    },
+    {
+      "scenario_id": "F_dev_00",
+      "track": "F",
+      "template_id": "f_00_titan_alpha",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "81d5a1348909f57da0344dccb05c509b67d84f9cb62ac6375aa7c36d5f8548e5"
+    },
+    {
+      "scenario_id": "F_dev_01",
+      "track": "F",
+      "template_id": "f_01_bathroom_remodel",
+      "session_count": 125,
+      "question_count": 3,
+      "sha256": "4960b20fd19fc91cdb5a3c80841d51a017dabc3a67684e8103d0f73a2ee52af6"
+    },
+    {
+      "scenario_id": "F_dev_02",
+      "track": "F",
+      "template_id": "f_02_billing_v2",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "39233dfe3996893c450e28c70d94d827bee4befef4107058bc94f64753ada0a2"
+    },
+    {
+      "scenario_id": "F_dev_03",
+      "track": "F",
+      "template_id": "f_03_soc2_audit_ready",
+      "session_count": 125,
+      "question_count": 3,
+      "sha256": "37b6bcc2d63df707c6b9e2b04d136ddbc2bd9524e7b3a2b51acd663b2b21e635"
+    },
+    {
+      "scenario_id": "F_dev_04",
+      "track": "F",
+      "template_id": "f_04_warehouse_erp",
+      "session_count": 123,
+      "question_count": 3,
+      "sha256": "a886bf14881e9879818cb3dd53022995b1da8a7372647a99eb534e77edd0b589"
+    },
+    {
+      "scenario_id": "F_dev_05",
+      "track": "F",
+      "template_id": "f_05_deck_construction",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "2bd46e8f0a90d63ef52be995772a37e63343057b788719c84637845c8b9450d6"
+    },
+    {
+      "scenario_id": "F_dev_06",
+      "track": "F",
+      "template_id": "f_06_data_warehouse_etl",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "b2cfdb1a538dc0872d7f9979950eee3cf0617bd5977f9562d62c71f7e8613fda"
+    },
+    {
+      "scenario_id": "F_dev_07",
+      "track": "F",
+      "template_id": "f_07_clinic_emr_cutover",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "423494142a803ada9ff8b2ea9f29cd373f0588fef070d7efc772d498f3aebf7e"
+    },
+    {
+      "scenario_id": "F_dev_08",
+      "track": "F",
+      "template_id": "f_08_textbook_manuscript",
+      "session_count": 124,
+      "question_count": 3,
+      "sha256": "e65c74ab456f3ecbdb18c1ee8b45b6fe386267e8ecea478dc9059ec4d06001da"
+    },
+    {
+      "scenario_id": "F_dev_09",
+      "track": "F",
+      "template_id": "f_09_docs_portal_ontime",
+      "session_count": 122,
+      "question_count": 3,
+      "sha256": "fb05a45e753fa8f7219b48a175e4b59478ac58f9c616f737b4cd51b46d34c8dc"
+    },
+    {
+      "scenario_id": "F_dev_10",
+      "track": "F",
+      "template_id": "f_10_paint_living_room_ontime",
+      "session_count": 122,
+      "question_count": 3,
+      "sha256": "988a43ce7e86f3323c841b642c9097bd7af2823835a05bd5e4462f48cec2e46c"
+    },
+    {
+      "scenario_id": "F_dev_11",
+      "track": "F",
+      "template_id": "f_11_quarterly_tax_ontime",
+      "session_count": 122,
+      "question_count": 3,
+      "sha256": "3149dd03eef3998eb3fedd55b52b56db01addb00738f78414cc3b44892c27501"
+    },
+    {
+      "scenario_id": "I_dev_00",
+      "track": "I",
+      "template_id": "i_00_clean_creatine",
+      "session_count": 124,
+      "question_count": 1,
+      "sha256": "8eee4135e4256f07c1022932fd696532f04b5cce02f0071d3ca2673c97caea3c"
+    },
+    {
+      "scenario_id": "I_dev_01",
+      "track": "I",
+      "template_id": "i_01_clean_index_btree",
+      "session_count": 124,
+      "question_count": 1,
+      "sha256": "ad3f6c71619c5e0aba609d7295d6459d867e58a61059bc32ff4d3b6d573b1d32"
+    },
+    {
+      "scenario_id": "I_dev_02",
+      "track": "I",
+      "template_id": "i_02_clean_blue_light_glasses",
+      "session_count": 124,
+      "question_count": 1,
+      "sha256": "56fa7182947f0483617bb56cb1cab1822fe49232306d44ea7f51d54457ca728a"
+    },
+    {
+      "scenario_id": "I_dev_03",
+      "track": "I",
+      "template_id": "i_03_confounded_query_cache",
+      "session_count": 124,
+      "question_count": 1,
+      "sha256": "b6fbcb5209182d856be2c2b93ac7a47b3e5f7f448c861cf750eabcc5afd402fe"
+    },
+    {
+      "scenario_id": "I_dev_04",
+      "track": "I",
+      "template_id": "i_04_confounded_standing_desk",
+      "session_count": 124,
+      "question_count": 1,
+      "sha256": "502acbeb354b73be500b3aad85708ada871bdabd2777363f327137e648d3b6b9"
+    },
+    {
+      "scenario_id": "I_dev_05",
+      "track": "I",
+      "template_id": "i_05_confounded_landing_copy",
+      "session_count": 124,
+      "question_count": 1,
+      "sha256": "90ff740fa6eb9fda4a36fdd89c6248d816636599dfd8684e1724ea447e091e48"
+    },
+    {
+      "scenario_id": "I_dev_06",
+      "track": "I",
+      "template_id": "i_06_not_impl_cashback_card",
+      "session_count": 123,
+      "question_count": 1,
+      "sha256": "454c883c8700827c82b8595ad88a31b67145b3e96df0b01b73a57de593f7a518"
+    },
+    {
+      "scenario_id": "I_dev_07",
+      "track": "I",
+      "template_id": "i_07_not_impl_cdn_migration",
+      "session_count": 123,
+      "question_count": 1,
+      "sha256": "133834dd545f489051444367f68921db62f4f20a085461d3a23ecd569e3704ec"
+    },
+    {
+      "scenario_id": "I_dev_08",
+      "track": "I",
+      "template_id": "i_08_not_impl_attic_insulation",
+      "session_count": 123,
+      "question_count": 1,
+      "sha256": "a5626b681c915006667b136bc7ba29d5e868d5ae354a0c49d943c02148ba16dd"
+    },
+    {
+      "scenario_id": "I_dev_09",
+      "track": "I",
+      "template_id": "i_09_single_cold_shower",
+      "session_count": 122,
+      "question_count": 1,
+      "sha256": "e4d5a737b29e339a79bbc472d38dffd5483dc6326c5ca7146d4f0546027ea844"
+    },
+    {
+      "scenario_id": "I_dev_10",
+      "track": "I",
+      "template_id": "i_10_single_tuesday_newsletter",
+      "session_count": 122,
+      "question_count": 1,
+      "sha256": "ccf09701b40e37ebeb7b5cf8a5db6614ca2391cb5a6792280cb5e762c2c79ede"
+    },
+    {
+      "scenario_id": "I_dev_11",
+      "track": "I",
+      "template_id": "i_11_single_classical_study",
+      "session_count": 122,
+      "question_count": 1,
+      "sha256": "2686469849011e83c49dcbb6087642d3153fd8b44c55aab3cee6263bb27d0abb"
+    },
+    {
+      "scenario_id": "P_dev_00",
+      "track": "P",
+      "template_id": "p_00_dining_preference",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "e41c56b2e3ff7436d1c3b23abc98a3a2481c1c37260d2d522b449a0dea4e97ef"
+    },
+    {
+      "scenario_id": "P_dev_01",
+      "track": "P",
+      "template_id": "p_01_pet_species",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "ee0a559d601e1a1ec49225de935fb8a8bc473fd0815fc409904d31340d099aed"
+    },
+    {
+      "scenario_id": "P_dev_02",
+      "track": "P",
+      "template_id": "p_02_programming_lang",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "7dbf23f293276a3854ea54ee8f0cba40ec28d6cae8042f6b5d99407dfcc53734"
+    },
+    {
+      "scenario_id": "P_dev_03",
+      "track": "P",
+      "template_id": "p_03_commute_mode",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "692e188fefaa31099ec9dd28f697cde8facc752db31978721b4e7c4759fed948"
+    },
+    {
+      "scenario_id": "P_dev_04",
+      "track": "P",
+      "template_id": "p_04_relocation_retraction",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "f88fdd9e5464a4fb69881b326606a7e1b18accbc1db9a080bb5afd054ade4601"
+    },
+    {
+      "scenario_id": "P_dev_05",
+      "track": "P",
+      "template_id": "p_05_car_purchase_retraction",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "77fe03c63867fda6a3da8b5fc3558769efa529c10c8710107b47bb0f8be4add4"
+    },
+    {
+      "scenario_id": "P_dev_06",
+      "track": "P",
+      "template_id": "p_06_conference_retraction",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "8e87ce9d99294b36d1e3953dbbedbca0c594ec8c9860c3ab43fcd74bd25f0a39"
+    },
+    {
+      "scenario_id": "P_dev_07",
+      "track": "P",
+      "template_id": "p_07_contractor_retraction",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "23ccde272cca79d305763cb4f24b5567af3bed80b38b5c0f3fb2601c27f42412"
+    },
+    {
+      "scenario_id": "P_dev_08",
+      "track": "P",
+      "template_id": "p_08_cloud_false_summary",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "29c3cd0a9e5c2b4bf6969e6bd040bf7d8a07bcde10fe0a8ae08f61f178253f2c"
+    },
+    {
+      "scenario_id": "P_dev_09",
+      "track": "P",
+      "template_id": "p_09_budget_false_summary",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "9544fbffaf3246ee7a6fae146b6d68e1e80520b9dd261ed62b9caa64bf29ea3a"
+    },
+    {
+      "scenario_id": "P_dev_10",
+      "track": "P",
+      "template_id": "p_10_release_cadence_summary",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "8764f6aadebe6d78721e790ba8ca0905416663229956451319117b3a21542c0d"
+    },
+    {
+      "scenario_id": "P_dev_11",
+      "track": "P",
+      "template_id": "p_11_license_false_summary",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "6f60ccb2b5042cf9a00d844b089c415433987f0064a472a378d4f447430733fb"
+    },
+    {
+      "scenario_id": "K_dev_00",
+      "track": "K",
+      "template_id": "k_00_hometown",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "5b9bd2fd8551af54c32150464d6455477f844cb38d8fec5cfa36ffd742f236b8"
+    },
+    {
+      "scenario_id": "K_dev_01",
+      "track": "K",
+      "template_id": "k_01_dog_name",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "6c19f326e8181c156df7fb8122082fc031301ab7dcf3544d73a12a0db635d456"
+    },
+    {
+      "scenario_id": "K_dev_02",
+      "track": "K",
+      "template_id": "k_02_university",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "1d5be3714bb782e18beb81a9a5c72372f0a3498f851698c814da4eb09c485092"
+    },
+    {
+      "scenario_id": "K_dev_03",
+      "track": "K",
+      "template_id": "k_03_blood_type",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "4fdc55a5525e2813afa6437602015759f7a6333e3c4113f48be745eb630b85f9"
+    },
+    {
+      "scenario_id": "K_dev_04",
+      "track": "K",
+      "template_id": "k_04_first_car",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "ed960fdf984f0459336609299034d175548639d0fabd640f322e90587158f84d"
+    },
+    {
+      "scenario_id": "K_dev_05",
+      "track": "K",
+      "template_id": "k_05_office_zip",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "cdc08f86745c884b048430cd40dea92409f8d9ca3317cac5570573718bf4c3d0"
+    },
+    {
+      "scenario_id": "K_dev_06",
+      "track": "K",
+      "template_id": "k_06_instrument",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "7f03dedba28d24a246ad6e09824df6d9d82be988f41552323c754de0d4607bcc"
+    },
+    {
+      "scenario_id": "K_dev_07",
+      "track": "K",
+      "template_id": "k_07_home_airport",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "0414655fec9a549c7a193b91e82c6194630538e544e49535a156afb29fdc97e7"
+    },
+    {
+      "scenario_id": "K_dev_08",
+      "track": "K",
+      "template_id": "k_08_accounting_software",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "c1a02c2d2988efa6a2e59a4ad8ce92d1a4bee4ac381f114387f5f4f9216c55ca"
+    },
+    {
+      "scenario_id": "K_dev_09",
+      "track": "K",
+      "template_id": "k_09_sister_city",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "828860ce92bf4c2d7fdff7ef4350a578e2874ff1e96c3e081bd5bc79c746edca"
+    },
+    {
+      "scenario_id": "K_dev_10",
+      "track": "K",
+      "template_id": "k_10_house_year",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "dbe022f056e2bfe67c17bbbe7227a05ae733da9e0904373076b9a8c8b49f7029"
+    },
+    {
+      "scenario_id": "K_dev_11",
+      "track": "K",
+      "template_id": "k_11_domain_registrar",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "008743bbc86388d010e525ad644d333240c5e90d9eb086ee90860dde019fc419"
+    },
+    {
+      "scenario_id": "E_dev_00",
+      "track": "E",
+      "template_id": "e_00_api_key",
+      "session_count": 123,
+      "question_count": 3,
+      "sha256": "ef4ce76145d3c3f7688a5312d01e3a2f3c687157ba1eee1a4b63e1598bcf8e77"
+    },
+    {
+      "scenario_id": "E_dev_01",
+      "track": "E",
+      "template_id": "e_01_glucose_lab",
+      "session_count": 123,
+      "question_count": 3,
+      "sha256": "7c693a3fda77d5574b74aaf9122611869028b841d0d5466acdaed75f439fe0dd"
+    },
+    {
+      "scenario_id": "E_dev_02",
+      "track": "E",
+      "template_id": "e_02_exec_salary",
+      "session_count": 123,
+      "question_count": 3,
+      "sha256": "159c8493d1e1638e5c836b5c86d781d38c05af6ec5898637cea98b32e7ed893d"
+    },
+    {
+      "scenario_id": "E_dev_03",
+      "track": "E",
+      "template_id": "e_03_door_pin",
+      "session_count": 123,
+      "question_count": 3,
+      "sha256": "036a916d7c07c6cd9574e929fe5d0298eee92c866577f1ab3aa41835db04594e"
+    },
+    {
+      "scenario_id": "E_dev_04",
+      "track": "E",
+      "template_id": "e_04_passport_number",
+      "session_count": 123,
+      "question_count": 3,
+      "sha256": "9ece08d4634efe585ef3e2f23469a08b63fa2f4b0f713f362d064b28f68f93e5"
+    },
+    {
+      "scenario_id": "E_dev_05",
+      "track": "E",
+      "template_id": "e_05_bank_routing",
+      "session_count": 123,
+      "question_count": 3,
+      "sha256": "49471699300f51410a685c38f2dbf30c23e6719dc7800983f41dbeeb6d18e1bd"
+    },
+    {
+      "scenario_id": "E_dev_06",
+      "track": "E",
+      "template_id": "e_06_prescription_med",
+      "session_count": 123,
+      "question_count": 3,
+      "sha256": "5bf852af160fe2a228009f1ae2d6a5b3eaa397150c0861824699d643877ef2d6"
+    },
+    {
+      "scenario_id": "E_dev_07",
+      "track": "E",
+      "template_id": "e_07_db_password",
+      "session_count": 123,
+      "question_count": 3,
+      "sha256": "311b1279b1a5a244050dd2057a9ff817ec3cdeb54fcf0bed8327525324e265fd"
+    },
+    {
+      "scenario_id": "E_dev_08",
+      "track": "E",
+      "template_id": "e_08_merger_codename",
+      "session_count": 123,
+      "question_count": 3,
+      "sha256": "7ad50f7f2f54bbaa83743262a8de8200d362307ff20d84a6f18945a0339ce745"
+    },
+    {
+      "scenario_id": "E_dev_09",
+      "track": "E",
+      "template_id": "e_09_ssh_recovery_code",
+      "session_count": 123,
+      "question_count": 3,
+      "sha256": "124055c249c95437af7a2e1e07d8364489fb03b511c475dbe58566ebd090538f"
+    },
+    {
+      "scenario_id": "E_dev_10",
+      "track": "E",
+      "template_id": "e_10_tax_id",
+      "session_count": 123,
+      "question_count": 3,
+      "sha256": "5760c20c9ad736ed0286235c1c0182f85ab687bee8a4935dece0d35365db0a97"
+    },
+    {
+      "scenario_id": "E_dev_11",
+      "track": "E",
+      "template_id": "e_11_biometric_pin",
+      "session_count": 123,
+      "question_count": 3,
+      "sha256": "87f8c87a6a15613d01b61a99ea787c7c23ad217f8b97bc55ece9376bbe1cc9cd"
+    },
+    {
+      "scenario_id": "Q_dev_00",
+      "track": "Q",
+      "template_id": "q_00_two_alexes",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "a9dd6a633a41ccc11ab7a2ebd724af9a412692cde702dca86e17223576f334e0"
+    },
+    {
+      "scenario_id": "Q_dev_01",
+      "track": "Q",
+      "template_id": "q_01_two_priyas",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "1f9626a42e70a7d6fc2a9389bc2b0c0ba7a1e56c21c79b968dc4ce8e84b95977"
+    },
+    {
+      "scenario_id": "Q_dev_02",
+      "track": "Q",
+      "template_id": "q_02_two_dashboards",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "31c38e6f734b39afedf8762d4037f47f28750f63dc891c73fad35fdbcf32ce58"
+    },
+    {
+      "scenario_id": "Q_dev_03",
+      "track": "Q",
+      "template_id": "q_03_two_cabins",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "b04f10707e6cb3bfd9a6b802f7a01744c755b360ebfdcf041a8a65ad427bc383"
+    },
+    {
+      "scenario_id": "Q_dev_04",
+      "track": "Q",
+      "template_id": "q_04_two_tuesdays",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "83b95cac3416b7c2612d8b2003f69753e390a1daafd92ed905e788d3b222ea2a"
+    },
+    {
+      "scenario_id": "Q_dev_05",
+      "track": "Q",
+      "template_id": "q_05_two_dentist_slots",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "9078cd0b79300ca949cd772fa0649312ae4ded340e1c314c26324bab3e6fcb15"
+    },
+    {
+      "scenario_id": "Q_dev_06",
+      "track": "Q",
+      "template_id": "q_06_two_flights",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "4f082f4f448bd6c50933ea75fae73decb6168d026da66b084cdc76bee0c999dd"
+    },
+    {
+      "scenario_id": "Q_dev_07",
+      "track": "Q",
+      "template_id": "q_07_two_maintenance_windows",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "a61e02d1d3cac2f1fdcc022758010404d420c40801ebf26115445f7aca93b9f6"
+    },
+    {
+      "scenario_id": "Q_dev_08",
+      "track": "Q",
+      "template_id": "q_08_conflicting_vendor_budget",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "840263387b6092b7c65ebfde5c5fcfc8a088d23d8540b4ce9783fa6da9ff6809"
+    },
+    {
+      "scenario_id": "Q_dev_09",
+      "track": "Q",
+      "template_id": "q_09_conflicting_headcount",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "63045f6159e9ae3777e09d73dd04a735db354530613d9e6343a7e31255bbd85b"
+    },
+    {
+      "scenario_id": "Q_dev_10",
+      "track": "Q",
+      "template_id": "q_10_conflicting_tile_sqft",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "93795dff00a29ac05a33bc144c65880586b42e0b2db05e8ec3d83cc1d178b9a0"
+    },
+    {
+      "scenario_id": "Q_dev_11",
+      "track": "Q",
+      "template_id": "q_11_conflicting_sla_tier",
+      "session_count": 121,
+      "question_count": 1,
+      "sha256": "bea0afd7bf24180489bd31cf3aa998c76ada3cf63d95582a7f151ad11287827c"
+    }
+  ]
+}

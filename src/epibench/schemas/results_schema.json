@@ -39,6 +39,8 @@
     "git_commit_sha": { "type": "string", "minLength": 1 },
     "manifest_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "split": { "type": "string" },
+    "profile": { "type": "string" },
+    "distractor_mode": { "type": "string" },
     "seed": { "type": "integer" },
     "filler_count": { "type": "integer", "minimum": 0 },
     "token_budget": { "type": "integer", "minimum": 1 },
