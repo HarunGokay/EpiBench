@@ -1,0 +1,163 @@
+{
+  "gate": "epibench_validity_gate",
+  "scorer_version": "2.0.0",
+  "generator_version": "2.1.0",
+  "reader_prompt_version": "2.0.0",
+  "git_commit_sha": "a646b5e",
+  "date_utc": "2026-11-23T17:12:47.471670+00:00",
+  "live_verified": true,
+  "status_note": "live verified with LLM API",
+  "reader_model": "gemini-3.5-flash-lite",
+  "judge_model": "gemini-3.5-flash",
+  "seed": 20261122,
+  "profile": "hard",
+  "distractor_mode": "mixed",
+  "manifest_sha256": "58ed8c9d755dac4e5bdea8394f99f52a344b492bae3545444257f90c197543ba",
+  "scenarios_per_track": 12,
+  "filler_count": 120,
+  "thresholds": {
+    "oracle_min_pct": 95.0,
+    "null_memory_max_pct": 15.0
+  },
+  "all_tracks_passed": true,
+  "passing_tracks": [
+    "R",
+    "D",
+    "X",
+    "F",
+    "I",
+    "P",
+    "K",
+    "E",
+    "Q"
+  ],
+  "experimental_tracks": [],
+  "tracks": {
+    "R": {
+      "status": "PASS",
+      "oracle_score_pct": 100.0,
+      "null_memory_score_pct": 0.0,
+      "oracle_question_accuracy_pct": 100.0,
+      "null_question_accuracy_pct": 0.0,
+      "oracle_scenario_pass_pct": 100.0,
+      "null_scenario_pass_pct": 0.0,
+      "scoring_metric": "question_accuracy",
+      "reasons": []
+    },
+    "D": {
+      "status": "PASS",
+      "oracle_score_pct": 97.22,
+      "null_memory_score_pct": 0.0,
+      "oracle_question_accuracy_pct": 97.22,
+      "null_question_accuracy_pct": 0.0,
+      "oracle_scenario_pass_pct": 91.67,
+      "null_scenario_pass_pct": 0.0,
+      "scoring_metric": "question_accuracy",
+      "reasons": []
+    },
+    "X": {
+      "status": "PASS",
+      "oracle_score_pct": 100.0,
+      "null_memory_score_pct": 0.0,
+      "oracle_question_accuracy_pct": 100.0,
+      "null_question_accuracy_pct": 0.0,
+      "oracle_scenario_pass_pct": 100.0,
+      "null_scenario_pass_pct": 0.0,
+      "scoring_metric": "question_accuracy",
+      "reasons": []
+    },
+    "F": {
+      "status": "PASS",
+      "oracle_score_pct": 97.22,
+      "null_memory_score_pct": 0.0,
+      "oracle_question_accuracy_pct": 97.22,
+      "null_question_accuracy_pct": 0.0,
+      "oracle_scenario_pass_pct": 91.67,
+      "null_scenario_pass_pct": 0.0,
+      "scoring_metric": "question_accuracy",
+      "reasons": []
+    },
+    "I": {
+      "status": "PASS",
+      "oracle_score_pct": 100.0,
+      "null_memory_score_pct": 0.0,
+      "oracle_question_accuracy_pct": 100.0,
+      "null_question_accuracy_pct": 0.0,
+      "oracle_scenario_pass_pct": 100.0,
+      "null_scenario_pass_pct": 0.0,
+      "scoring_metric": "question_accuracy",
+      "reasons": []
+    },
+    "P": {
+      "status": "PASS",
+      "oracle_score_pct": 100.0,
+      "null_memory_score_pct": 0.0,
+      "oracle_question_accuracy_pct": 100.0,
+      "null_question_accuracy_pct": 0.0,
+      "oracle_scenario_pass_pct": 100.0,
+      "null_scenario_pass_pct": 0.0,
+      "scoring_metric": "question_accuracy",
+      "reasons": []
+    },
+    "K": {
+      "status": "PASS",
+      "oracle_score_pct": 100.0,
+      "null_memory_score_pct": 0.0,
+      "oracle_question_accuracy_pct": 100.0,
+      "null_question_accuracy_pct": 0.0,
+      "oracle_scenario_pass_pct": 100.0,
+      "null_scenario_pass_pct": 0.0,
+      "scoring_metric": "question_accuracy",
+      "reasons": []
+    },
+    "E": {
+      "status": "PASS",
+      "oracle_score_pct": 100.0,
+      "null_memory_score_pct": 0.0,
+      "oracle_question_accuracy_pct": 100.0,
+      "null_question_accuracy_pct": 66.67,
+      "oracle_scenario_pass_pct": 100.0,
+      "null_scenario_pass_pct": 0.0,
+      "scoring_metric": "joint_scenario_pass_rate",
+      "reasons": []
+    },
+    "Q": {
+      "status": "PASS",
+      "oracle_score_pct": 100.0,
+      "null_memory_score_pct": 0.0,
+      "oracle_question_accuracy_pct": 100.0,
+      "null_question_accuracy_pct": 0.0,
+      "oracle_scenario_pass_pct": 100.0,
+      "null_scenario_pass_pct": 0.0,
+      "scoring_metric": "question_accuracy",
+      "reasons": []
+    }
+  },
+  "spend_summary": {
+    "total_spend_usd": 0.027129,
+    "hard_cap_usd": 0.3,
+    "total_input_tokens": 228105,
+    "total_output_tokens": 33403,
+    "total_cached_tokens": 0,
+    "spend_by_stage": {
+      "reader_llm": 0.01696,
+      "rubric_judge": 0.010168
+    },
+    "spend_by_system": {
+      "null_memory": 0.010206,
+      "oracle": 0.016923
+    },
+    "tokens_by_stage": {
+      "reader_llm": {
+        "in": 130293,
+        "out": 23961,
+        "cached": 0
+      },
+      "rubric_judge": {
+        "in": 97812,
+        "out": 9442,
+        "cached": 0
+      }
+    }
+  }
+}
