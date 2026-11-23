@@ -1,19 +1,15 @@
-"""Offline Unit Tests for EpiBench.
-
-Tests scenario generation, distractor sampling, programmatic judging,
-and statistical metric computations without requiring LLM API keys.
-"""
+"""Offline Unit Tests for epibench: scenario generation, judging, and metrics."""
 
 import pytest
 
-from EpiBench.generator.scenario_generator import ScenarioGenerator
-from EpiBench.judging.programmatic import (
+from epibench.generator.scenario_generator import ScenarioGenerator
+from epibench.judging.programmatic import (
     check_integer_match,
     check_set_overlap,
     check_stale_answer,
     check_string_match,
 )
-from EpiBench.metrics.statistics import (
+from epibench.metrics.statistics import (
     exact_mcnemar_test,
     paired_scenario_bootstrap,
     wilson_ci,
@@ -50,21 +46,23 @@ def test_scenario_tracks_generation():
 
 
 def test_programmatic_string_matcher():
-    """Test string matching with normalization."""
+    """Test strict structured string matching with normalization."""
     gold = "Kubernetes"
-    hyp_pass = "The cluster was deployed on Kubernetes successfully."
-    hyp_fail = "The cluster was deployed on Nomad."
+    hyp_pass = "The cluster was deployed on Kubernetes.\nFINAL ANSWER: Kubernetes"
+    hyp_fail = "The cluster was deployed on Nomad.\nFINAL ANSWER: Nomad"
+    hyp_no_marker = "The cluster was deployed on Kubernetes."
 
     assert check_string_match(hyp_pass, gold) is True
     assert check_string_match(hyp_fail, gold) is False
+    assert check_string_match(hyp_no_marker, gold) is False
 
 
 def test_programmatic_integer_matcher():
-    """Test integer matching in text."""
+    """Test strict structured integer matching."""
     gold = 3
-    hyp_pass = "The launch date slipped 3 times."
-    hyp_word_pass = "The launch date slipped three times."
-    hyp_fail = "The launch date slipped 5 times."
+    hyp_pass = "The launch date slipped 3 times.\nFINAL ANSWER: 3"
+    hyp_word_pass = "The launch date slipped three times.\nFINAL ANSWER: three"
+    hyp_fail = "The launch date slipped 5 times.\nFINAL ANSWER: 5"
 
     assert check_integer_match(hyp_pass, gold) is True
     assert check_integer_match(hyp_word_pass, gold) is True
@@ -72,20 +70,23 @@ def test_programmatic_integer_matcher():
 
 
 def test_programmatic_set_overlap():
-    """Test set precision, recall, and F1 calculation."""
+    """Test strict semicolon-separated set precision, recall, and F1 calculation."""
     expected = ["microservice architecture", "marketing campaign"]
-    hyp_both = "We need to revisit the microservice architecture and the marketing campaign."
-    hyp_one = "Only the microservice architecture is affected."
-    hyp_none = "Everything looks fine, no decisions affected."
+    hyp_both = "Revisit both.\nFINAL ANSWER: microservice architecture; marketing campaign"
+    hyp_one = "Only one affected.\nFINAL ANSWER: microservice architecture"
+    hyp_none = "Nothing affected.\nFINAL ANSWER: NONE"
 
     res_both = check_set_overlap(hyp_both, expected)
     assert res_both["f1"] == 1.0
+    assert res_both["is_correct"] is True
 
     res_one = check_set_overlap(hyp_one, expected)
     assert res_one["recall"] == 0.5
+    assert res_one["is_correct"] is False
 
     res_none = check_set_overlap(hyp_none, expected)
     assert res_none["recall"] == 0.0
+    assert res_none["is_correct"] is False
 
 
 def test_statistical_mcnemar():
@@ -108,7 +109,7 @@ def test_wilson_ci():
 
 def test_world_simulator_and_environment():
     """Verify procedural world simulation, events, and ground-truth probes."""
-    from EpiBench.environment.env import EpiBenchEnvironment
+    from epibench.environment.env import EpiBenchEnvironment
 
     env = EpiBenchEnvironment(seed=42)
     obs = env.reset(num_events=10)
@@ -131,7 +132,7 @@ def test_world_simulator_and_environment():
 
 def test_six_dimensional_scoring():
     """Verify that six independent dimensions compute correctly."""
-    from EpiBench.metrics.eval_metrics import compute_six_dimensional_report
+    from epibench.metrics.eval_metrics import compute_six_dimensional_report
 
     mock_evals = [
         {"track": "K", "question_subkind": "static_fact", "is_correct": True, "retrieval_latency_ms": 10.0, "context_tokens": 100},

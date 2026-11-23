@@ -7,18 +7,11 @@ Demonstrates how to:
 """
 
 import asyncio
-import os
-import sys
 from typing import Any, Dict, List, Optional
 
-# Ensure repository root is on Python path
-sys.path.insert(0, os.path.abspath("."))
-sys.path.insert(0, os.path.abspath(".."))
-sys.path.insert(0, os.path.abspath("../.."))
-
-from EpiBench.adapters.base import BaseMemoryAdapter, IngestResult, RetrievalResult
-from EpiBench.generator.scenario_generator import ScenarioGenerator
-from EpiBench.judging.programmatic import (
+from epibench.adapters.base import BaseMemoryAdapter, IngestResult, RetrievalResult
+from epibench.generator.scenario_generator import ScenarioGenerator
+from epibench.judging.programmatic import (
     check_integer_match,
     check_set_overlap,
     check_string_match,
@@ -76,19 +69,24 @@ async def main():
     ingest_res = await adapter.ingest(tenant_id, scenario.sessions)
     print(f"Ingested {ingest_res.session_count} sessions in {ingest_res.latency_ms:.2f}ms")
 
-    # 3. Retrieval & Programmatic Verification
+    # 3. Retrieval & Programmatic Verification (structured FINAL ANSWER protocol)
     for idx, q in enumerate(scenario.questions):
         ret_res = await adapter.retrieve(tenant_id, q.question_text)
         print(f"\n[Q{idx+1}] {q.question_text}")
         print(f"Expected Gold: {q.gold_answer}")
-        
-        # Test evaluation checker
+
+        # Simulate a structured reader response echoing the gold value
+        simulated_response = f"Based on retrieved context ({ret_res.token_count} tokens).\nFINAL ANSWER: {q.gold_answer}"
         if q.scoring_type == "string_match":
-            passed = check_string_match(ret_res.context, str(q.gold_answer))
-            print(f"Found in retrieved context: {passed}")
+            passed = check_string_match(
+                simulated_response,
+                str(q.gold_answer),
+                aliases=q.metadata.get("gold_aliases"),
+            )
+            print(f"Strict string_match result: {passed}")
         elif q.scoring_type == "integer_match":
-            passed = check_integer_match(ret_res.context, int(q.gold_answer))
-            print(f"Integer match in context: {passed}")
+            passed = check_integer_match(simulated_response, int(q.gold_answer))
+            print(f"Strict integer_match result: {passed}")
 
     print("\nQuickstart finished successfully.")
 

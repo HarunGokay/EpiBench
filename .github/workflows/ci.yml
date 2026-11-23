@@ -1,0 +1,62 @@
+name: EpiBench CI
+
+on:
+  push:
+    branches: [main, "fix/**"]
+  pull_request:
+
+jobs:
+  test-and-validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install package in clean virtualenv
+        run: |
+          python -m venv .ci_venv
+          .ci_venv/bin/pip install --upgrade pip
+          .ci_venv/bin/pip install -e ".[dev]"
+
+      - name: Verify import and CLI
+        run: |
+          .ci_venv/bin/python -c "import epibench; print(epibench.__version__)"
+          .ci_venv/bin/epibench version
+
+      - name: Run offline pytest suite (no network, no API key)
+        env:
+          GEMINI_API_KEY: ""
+        run: |
+          .ci_venv/bin/pytest -v
+
+      - name: Run quickstart example
+        run: |
+          .ci_venv/bin/python examples/quickstart.py
+
+      - name: Run offline validity gate
+        env:
+          GEMINI_API_KEY: ""
+        run: |
+          .ci_venv/bin/epibench validate --offline --scenarios-per-track 12 --output-dir /tmp/epibench_ci_val
+
+      - name: Verify README claims against committed artifacts
+        run: |
+          .ci_venv/bin/python scripts/check_readme_claims.py
+
+  forbidden-strings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check repository for forbidden private or legacy strings
+        run: python scripts/check_forbidden_strings.py
