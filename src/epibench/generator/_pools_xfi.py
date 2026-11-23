@@ -322,9 +322,9 @@ FORECAST_POOLS: List[Dict[str, Any]] = [
         "project": "Developer docs portal launch",
         "events": [
             {"date": "2024-04-01", "event_kind": "commitment", "target_date": "2024-04-20",
-             "text": "Starting April 1, 2024, our docs team committed to a 19-day schedule to launch the Developer docs portal by April 20, 2024."},
+             "text": "Our docs team committed to a 19-day schedule to launch the Developer docs portal by April 20, 2024."},
             {"date": "2024-04-20", "event_kind": "completion", "target_date": "2024-04-20",
-             "text": "The Developer docs portal launched right on schedule on April 20, 2024 after 19 days with zero slips."},
+             "text": "The Developer docs portal launched right on schedule on April 20, 2024 in 19 days with zero slips."},
         ],
         "is_realistic": True,
         "new_target_query": "The same docs team proposed 25 days to launch a similar-sized API changelog portal. Based strictly on the recorded Developer docs portal delivery history, is this 25-day target realistic?",
@@ -335,7 +335,7 @@ FORECAST_POOLS: List[Dict[str, Any]] = [
         "project": "Living room interior painting",
         "events": [
             {"date": "2024-05-01", "event_kind": "commitment", "target_date": "2024-05-06",
-             "text": "Starting May 1, 2024, our painter committed to a 5-day schedule to finish the living room interior painting by May 6, 2024."},
+             "text": "Our painter committed to a 5-day schedule to finish the living room interior painting by May 6, 2024."},
             {"date": "2024-05-06", "event_kind": "completion", "target_date": "2024-05-06",
              "text": "The painter completed the living room interior painting cleanly on time on May 6, 2024 in 5 days with zero delays."},
         ],
@@ -348,7 +348,7 @@ FORECAST_POOLS: List[Dict[str, Any]] = [
         "project": "Q2 business tax filing",
         "events": [
             {"date": "2024-06-01", "event_kind": "commitment", "target_date": "2024-06-14",
-             "text": "Starting June 1, 2024, our CPA committed to a 13-day schedule to complete our Q2 business tax filing by June 14, 2024."},
+             "text": "Our CPA committed to a 13-day schedule to complete our Q2 business tax filing by June 14, 2024."},
             {"date": "2024-06-14", "event_kind": "completion", "target_date": "2024-06-14",
              "text": "Our CPA submitted the Q2 business tax filing on time on June 14, 2024 in 13 days with zero schedule moves."},
         ],
