@@ -11,6 +11,23 @@
 
 ---
 
+## 2.1.0 (Hard-Regime Profile & Same-Domain Distractors)
+
+Version `2.1.0` upgrades scenario generation (`GENERATOR_VERSION = "2.1.0"`) while keeping `SCORER_VERSION = "2.0.0"`, `READER_PROMPT_VERSION = "2.0.0"`, and `ADAPTER_CONTRACT_VERSION = "2.0.0"` frozen.
+
+### Highlights
+- **66 Curated Same-Domain Confuser Distractors**: Added `src/epibench/data/same_domain_distractors.json` covering software engineering, operations, travel/logistics, personal finance, health/fitness, home renovation, legal/compliance, and education/career, validated inside `validate_pools()` for zero entity-gold contamination.
+- **Distractor Modes & Custom Haystacks**: Added `--distractor-mode neutral|same_domain|mixed` and `--distractor-file <path>` across `DistractorPool`, `ScenarioGenerator`, `generate_manifest`, `epibench manifest`, `epibench validate`, `run_epibench.py`, and `run_depth_benchmark.py`.
+- **`--profile hard` Budget-Overflow Preset**: Added `BENCHMARK_PROFILES` (`dev` and `hard`). `--profile hard` uses `filler_count = 120` with `distractor_mode = "mixed"` (60 same-domain + 60 neutral fillers, ~`13,552` average history tokens vs `token_budget = 1500` so only ~`11%` of history fits inside budget).
+- **Hardened Track X & Track F Clarity**: Reduced mean content-word lexical overlap on Track X (`HIDDEN_CONSTRAINT_POOLS`) to `0.42` tokens per template (8/12 templates at zero overlap) and added explicit schedule durations (`19-day`, `5-day`, `13-day`) to Track F's three on-time control templates (`f_09`–`f_11`) caught during the mandatory pre-freeze live validity gate.
+- **Strict Separator-Aware RAG Token Budgeting**: Updated `VectorRAGAdapter` and `HybridRAGAdapter` to account for `"\n\n---\n\n"` joiner tokens so retrieved contexts strictly never exceed `token_budget`.
+- **Committed Frozen `v2.1.0` Artifacts**:
+  - Archived `manifests/dev_manifest_v2_0.json` for historical `dev_v2` provenance and committed `v2.1.0` `manifests/dev_manifest.json` and `manifests/hard_manifest.json`.
+  - Passed live `epibench validate --profile hard` across all 9/9 tracks (`results/validity/validity_hard_report.json`, Oracle `97.22%`–`100.00%`, Null `0.00%`).
+  - Committed full live 9-track hard-regime baseline evaluation (`results/hard_v2_1/results.json`, `N = 108` scenarios / `216` questions per system across 6 built-in architectures; `recent_context` collapses to `17.13%` accuracy, `vector_rag` drops to `75.00%` on Track D Dependency Reasoning, `hybrid_rag` drops to `83.33%` on Track D).
+
+---
+
 ## 2.0.0 (Integrity Freeze & Complete Overhaul)
 
 Version `2.0.0` introduces an audited, standalone, deterministic evaluation suite

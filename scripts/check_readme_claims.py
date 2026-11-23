@@ -17,7 +17,6 @@ def _parse_markdown_tables(text: str) -> list[list[list[str]]]:
         s = line.strip()
         if s.startswith("|") and s.endswith("|"):
             cells = [c.strip() for c in s.strip("|").split("|")]
-            # Skip separator rows like | --- | ---: |
             if all(re.fullmatch(r":?-{3,}:?", c) for c in cells):
                 continue
             cur.append(cells)
@@ -28,6 +27,68 @@ def _parse_markdown_tables(text: str) -> list[list[list[str]]]:
     if cur:
         tables.append(cur)
     return tables
+
+
+def _verify_validity_table(label: str, table: list[list[str]], validity: dict, errors: list[str]) -> None:
+    for row in table[1:]:
+        track = row[0].strip("* ")
+        metric = row[1].strip("` ")
+        o_val = float(row[2])
+        n_val = float(row[3])
+        status = row[4]
+        actual = validity["tracks"][track]
+        if metric != actual["scoring_metric"]:
+            errors.append(f"{label} {track} metric mismatch: {metric} != {actual['scoring_metric']}")
+        if abs(o_val - actual["oracle_score_pct"]) > 1e-2:
+            errors.append(f"{label} {track} oracle mismatch: {o_val} != {actual['oracle_score_pct']}")
+        if abs(n_val - actual["null_memory_score_pct"]) > 1e-2:
+            errors.append(f"{label} {track} null mismatch: {n_val} != {actual['null_memory_score_pct']}")
+        if status != actual["status"]:
+            errors.append(f"{label} {track} status mismatch: {status} != {actual['status']}")
+
+
+def _verify_leaderboard_table(label: str, table: list[list[str]], res: dict, errors: list[str]) -> None:
+    ps = res["performance_summary"]
+    for row in table[1:]:
+        sys_name = row[0].strip("` ")
+        bs = ps["by_system"][sys_name]
+        dr = ps["dimensional_reports"][sys_name]
+        checks = [
+            ("composite", float(row[1]), dr["composite_score"]),
+            ("question_accuracy", float(row[2]), bs["question_accuracy"]),
+            ("scenario_pass_rate", float(row[4]), bs["scenario_pass_rate"]),
+            ("avg_context_tokens", float(row[5]), bs["avg_context_tokens"]),
+            ("avg_retrieval_latency_ms", float(row[6]), bs["avg_retrieval_latency_ms"]),
+            ("total_spend_usd", float(row[7]), bs["total_spend_usd"]),
+        ]
+        for col, claimed, actual in checks:
+            if abs(claimed - actual) > 1e-4:
+                errors.append(f"{label} {sys_name}.{col} mismatch: README={claimed}, json={actual}")
+        expected_ci = f"[{bs['question_ci_95'][0]:.2f}, {bs['question_ci_95'][1]:.2f}]"
+        if row[3] != expected_ci:
+            errors.append(f"{label} {sys_name}.CI mismatch: README={row[3]}, json={expected_ci}")
+
+
+def _verify_dim_table(label: str, table: list[list[str]], res: dict, errors: list[str]) -> None:
+    dim_keys = [
+        "factual_accuracy",
+        "temporal_consistency",
+        "dependency_reasoning",
+        "constraint_compliance",
+        "provenance",
+        "calibration",
+        "privacy_and_deletion",
+        "retention_control",
+    ]
+    ps = res["performance_summary"]
+    for row in table[1:]:
+        sys_name = row[0].strip("` ")
+        dr = ps["dimensional_reports"][sys_name]
+        for idx, dk in enumerate(dim_keys, start=1):
+            claimed = float(row[idx])
+            actual = float(dr[dk])
+            if abs(claimed - actual) > 1e-2:
+                errors.append(f"{label} {sys_name}.{dk} mismatch: README={claimed}, json={actual}")
 
 
 def verify_readme(root: Path = REPO_ROOT) -> list[str]:
@@ -46,24 +107,47 @@ def verify_readme(root: Path = REPO_ROOT) -> list[str]:
             errors.append(f"Broken relative link in README.md: {target}")
 
     # 2. Load committed artifacts
-    manifest = json.loads((root / "manifests/dev_manifest.json").read_text(encoding="utf-8"))
-    validity = json.loads((root / "results/validity/validity_report.json").read_text(encoding="utf-8"))
+    dev_manifest_v2_0 = json.loads((root / "manifests/dev_manifest_v2_0.json").read_text(encoding="utf-8"))
+    dev_manifest = json.loads((root / "manifests/dev_manifest.json").read_text(encoding="utf-8"))
+    hard_manifest = json.loads((root / "manifests/hard_manifest.json").read_text(encoding="utf-8"))
+    validity_hard = json.loads((root / "results/validity/validity_hard_report.json").read_text(encoding="utf-8"))
+    validity_dev = json.loads((root / "results/validity/validity_report.json").read_text(encoding="utf-8"))
+    hard_res = json.loads((root / "results/hard_v2_1/results.json").read_text(encoding="utf-8"))
     dev_res = json.loads((root / "results/dev_v2/results.json").read_text(encoding="utf-8"))
     depth_res = json.loads((root / "results/depth_v2/results_depth.json").read_text(encoding="utf-8"))
     eff_res = json.loads((root / "results/efficiency_v2.json").read_text(encoding="utf-8"))
 
-    # Verify manifest SHA256 appears accurately
-    sha = manifest["manifest_sha256"]
-    if sha not in text:
-        errors.append(f"Manifest SHA-256 {sha} missing from README.md")
-    if dev_res["manifest_sha256"] != sha:
-        errors.append(f"dev_v2 manifest_sha256 mismatch: {dev_res['manifest_sha256']} != {sha}")
+    # Verify manifest SHA256 values appear accurately and match artifacts
+    for name, m in (
+        ("hard_manifest.json", hard_manifest),
+        ("dev_manifest.json", dev_manifest),
+        ("dev_manifest_v2_0.json", dev_manifest_v2_0),
+    ):
+        sha = m["manifest_sha256"]
+        if sha not in text:
+            errors.append(f"Manifest SHA-256 for {name} ({sha}) missing from README.md")
+
+    if hard_res["manifest_sha256"] != hard_manifest["manifest_sha256"]:
+        errors.append(
+            f"hard_v2_1 manifest_sha256 mismatch: {hard_res['manifest_sha256']} != {hard_manifest['manifest_sha256']}"
+        )
+    if validity_hard["manifest_sha256"] != hard_manifest["manifest_sha256"]:
+        errors.append(
+            f"validity_hard manifest_sha256 mismatch: {validity_hard['manifest_sha256']} != {hard_manifest['manifest_sha256']}"
+        )
+    if dev_res["manifest_sha256"] != dev_manifest_v2_0["manifest_sha256"]:
+        errors.append(
+            f"dev_v2 manifest_sha256 mismatch: {dev_res['manifest_sha256']} != {dev_manifest_v2_0['manifest_sha256']}"
+        )
 
     # Verify headline numbers in prose
-    sec = dev_res["performance_summary"]["secondary_audit"]
+    sec_hard = hard_res["performance_summary"]["secondary_audit"]
+    sec_dev = dev_res["performance_summary"]["secondary_audit"]
     expected_snippets = [
-        f"agreement = `{sec['agreement_rate']:.2f}%`",
-        f"Cohen's kappa = `{sec['cohens_kappa']:.4f}`",
+        f"agreement = `{sec_hard['agreement_rate']:.2f}%`",
+        f"Cohen's kappa = `{sec_hard['cohens_kappa']:.4f}`",
+        f"Cohen's kappa = `{sec_dev['cohens_kappa']:.4f}`",
+        f"`${hard_res['spend_summary']['total_spend_usd']:.6f} USD`",
         f"`${dev_res['spend_summary']['total_spend_usd']:.6f} USD`",
         f"`${depth_res['total_spend_summary']['total_spend_usd']:.6f} USD`",
     ]
@@ -80,8 +164,8 @@ def verify_readme(root: Path = REPO_ROOT) -> list[str]:
     from epibench.generator.pools import ALL_POOLS
 
     tables = _parse_markdown_tables(text)
-    if len(tables) != 6:
-        errors.append(f"Expected 6 markdown tables in README.md, found {len(tables)}")
+    if len(tables) != 9:
+        errors.append(f"Expected 9 markdown tables in README.md, found {len(tables)}")
         return errors
 
     # Table 0: Track template counts
@@ -92,67 +176,23 @@ def verify_readme(root: Path = REPO_ROOT) -> list[str]:
         if claimed_n != actual_n:
             errors.append(f"Table 0 track {track} count mismatch: README={claimed_n}, actual={actual_n}")
 
-    # Table 1: Validity gate table
-    for row in tables[1][1:]:
-        track = row[0].strip("* ")
-        metric = row[1].strip("` ")
-        o_val = float(row[2])
-        n_val = float(row[3])
-        status = row[4]
-        actual = validity["tracks"][track]
-        if metric != actual["scoring_metric"]:
-            errors.append(f"Validity {track} metric mismatch: {metric} != {actual['scoring_metric']}")
-        if abs(o_val - actual["oracle_score_pct"]) > 1e-2:
-            errors.append(f"Validity {track} oracle mismatch: {o_val} != {actual['oracle_score_pct']}")
-        if abs(n_val - actual["null_memory_score_pct"]) > 1e-2:
-            errors.append(f"Validity {track} null mismatch: {n_val} != {actual['null_memory_score_pct']}")
-        if status != actual["status"]:
-            errors.append(f"Validity {track} status mismatch: {status} != {actual['status']}")
+    # Table 1: Hard validity gate
+    _verify_validity_table("ValidityHard", tables[1], validity_hard, errors)
 
-    # Table 2: Dev_v2 main leaderboard
-    ps = dev_res["performance_summary"]
-    for row in tables[2][1:]:
-        sys_name = row[0].strip("` ")
-        bs = ps["by_system"][sys_name]
-        dr = ps["dimensional_reports"][sys_name]
-        checks = [
-            ("composite", float(row[1]), dr["composite_score"]),
-            ("question_accuracy", float(row[2]), bs["question_accuracy"]),
-            ("scenario_pass_rate", float(row[4]), bs["scenario_pass_rate"]),
-            ("avg_context_tokens", float(row[5]), bs["avg_context_tokens"]),
-            ("avg_retrieval_latency_ms", float(row[6]), bs["avg_retrieval_latency_ms"]),
-            ("total_spend_usd", float(row[7]), bs["total_spend_usd"]),
-        ]
-        for label, claimed, actual in checks:
-            if abs(claimed - actual) > 1e-4:
-                errors.append(f"Dev table {sys_name}.{label} mismatch: README={claimed}, json={actual}")
-        expected_ci = f"[{bs['question_ci_95'][0]:.2f}, {bs['question_ci_95'][1]:.2f}]"
-        if row[3] != expected_ci:
-            errors.append(f"Dev table {sys_name}.CI mismatch: README={row[3]}, json={expected_ci}")
+    # Table 2: Dev validity gate
+    _verify_validity_table("ValidityDev", tables[2], validity_dev, errors)
 
-    # Table 3: Dev_v2 dimensional breakdown
-    dim_keys = [
-        "factual_accuracy",
-        "temporal_consistency",
-        "dependency_reasoning",
-        "constraint_compliance",
-        "provenance",
-        "calibration",
-        "privacy_and_deletion",
-        "retention_control",
-    ]
-    for row in tables[3][1:]:
-        sys_name = row[0].strip("` ")
-        dr = ps["dimensional_reports"][sys_name]
-        for idx, dk in enumerate(dim_keys, start=1):
-            claimed = float(row[idx])
-            actual = float(dr[dk])
-            if abs(claimed - actual) > 1e-2:
-                errors.append(f"Dim table {sys_name}.{dk} mismatch: README={claimed}, json={actual}")
+    # Table 3 & 4: Hard_v2_1 main leaderboard & dimensional breakdown
+    _verify_leaderboard_table("HardTable", tables[3], hard_res, errors)
+    _verify_dim_table("HardDimTable", tables[4], hard_res, errors)
 
-    # Table 4: Depth stress comparison
+    # Table 5 & 6: Dev_v2 main leaderboard & dimensional breakdown
+    _verify_leaderboard_table("DevTable", tables[5], dev_res, errors)
+    _verify_dim_table("DevDimTable", tables[6], dev_res, errors)
+
+    # Table 7: Depth stress comparison
     cm = depth_res["comparison_matrix"]
-    for row in tables[4][1:]:
+    for row in tables[7][1:]:
         sys_name = row[0].strip("` ")
         entry = cm[sys_name]
         checks = [
@@ -172,8 +212,8 @@ def verify_readme(root: Path = REPO_ROOT) -> list[str]:
         if row[5] != f"[{d40_ci[0]:.2f}, {d40_ci[1]:.2f}]":
             errors.append(f"Depth table {sys_name}.d40_ci mismatch: {row[5]}")
 
-    # Table 5: Efficiency & planted-fact recall
-    for row in tables[5][1:]:
+    # Table 8: Efficiency & planted-fact recall
+    for row in tables[8][1:]:
         scale = row[0].strip()
         sys_name = row[1].strip("` ")
         entry = eff_res["by_scale"][scale][sys_name]
@@ -197,7 +237,7 @@ def main() -> int:
         for err in errors:
             print(f"  - {err}")
         return 1
-    print("README claim verification passed: all 6 tables, links, manifest SHA-256, and headline metrics match committed artifacts.")
+    print("README claim verification passed: all 9 tables, links, manifest SHA-256s, and headline metrics match committed artifacts.")
     return 0
 
 

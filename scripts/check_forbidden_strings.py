@@ -23,8 +23,12 @@ CASE_INSENSITIVE_PATTERNS = [
     "sig" + "kimeno",
     "ko" + "ra",
     r"from " + r"app\.",
-    "bal" + "ance",
     "Context-" + "MVP",
+]
+# Generic English term checked across all code, tests, docs, configs, and scripts
+# (excluded only in raw LLM-generated results/*.json transcripts such as finance Track E).
+CODE_AND_DOC_ONLY_PATTERNS = [
+    "bal" + "ance",
 ]
 CASE_SENSITIVE_PATTERNS = [
     "Epi" + r"Bench\.",
@@ -33,6 +37,7 @@ CASE_SENSITIVE_PATTERNS = [
 
 def scan_repo(root: Path = REPO_ROOT) -> list[str]:
     ci_re = re.compile("|".join(CASE_INSENSITIVE_PATTERNS), re.IGNORECASE)
+    doc_re = re.compile("|".join(CODE_AND_DOC_ONLY_PATTERNS), re.IGNORECASE)
     cs_re = re.compile("|".join(CASE_SENSITIVE_PATTERNS))
     hits: list[str] = []
 
@@ -44,13 +49,14 @@ def scan_repo(root: Path = REPO_ROOT) -> list[str]:
             continue
         if rel.name in EXCLUDED_FILES:
             continue
+        is_raw_result_json = rel.parts[0] == "results" and rel.suffix == ".json"
         try:
             text = path.read_text(encoding="utf-8")
         except (UnicodeDecodeError, OSError):
             continue
 
         for lineno, line in enumerate(text.splitlines(), start=1):
-            if ci_re.search(line) or cs_re.search(line):
+            if ci_re.search(line) or cs_re.search(line) or (not is_raw_result_json and doc_re.search(line)):
                 hits.append(f"{rel.as_posix()}:{lineno}: {line.strip()}")
 
     return hits
