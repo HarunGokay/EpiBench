@@ -78,7 +78,7 @@ def test_v2_1_mixed_sampling_ratio_and_custom_file(tmp_path: Path):
 
 def test_v2_1_hard_profile_true_budget_overflow_and_dates():
     """Hard profile generates 120 mixed fillers with >10,000 history tokens vs 1,500 budget and valid dates."""
-    assert GENERATOR_VERSION == "2.1.0"
+    assert GENERATOR_VERSION == "2.2.0"
     prof = resolve_profile(profile="hard")
     assert prof["filler_count"] == 120
     assert prof["distractor_mode"] == "mixed"
@@ -169,7 +169,7 @@ async def test_v2_1_hard_profile_offline_runner_schema_valid(tmp_path: Path):
         resume=False,
         save_checkpoints=False,
     )
-    assert res["generator_version"] == "2.1.0"
+    assert res["generator_version"] == "2.2.0"
     assert res["profile"] == "hard"
     assert res["distractor_mode"] == "mixed"
     assert res["filler_count"] == 120

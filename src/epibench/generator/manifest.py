@@ -48,6 +48,7 @@ def generate_manifest(
     gen = generator or ScenarioGenerator(
         distractor_mode=resolved["distractor_mode"],
         distractor_file=distractor_file,
+        epistemic_stress=resolved["epistemic_stress"],
     )
     track_list: List[str] = [t.upper() for t in (tracks or VALID_TRACKS)]
 

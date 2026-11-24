@@ -11,6 +11,21 @@
 
 ---
 
+## 2.2.0 (Epistemic-Stress Profile & Zero-Cost Offline Evaluation Suite)
+
+Version `2.2.0` upgrades scenario generation (`GENERATOR_VERSION = "2.2.0"`) with the `--profile stress` (alias `epistemic_stress`) regime and a zero-cost (`$0.00`) offline epistemic-hygiene runner while keeping `SCORER_VERSION = "2.0.0"`, `READER_PROMPT_VERSION = "2.0.0"`, and `ADAPTER_CONTRACT_VERSION = "2.0.0"` frozen.
+
+### Highlights
+- **`--profile stress` (alias `epistemic_stress`)**: Adds a 240-filler mixed distractor regime (`~28k+` history tokens vs `1,500`-token budget) with four epistemic upgrades engineered to expose the structural limits of flat chunk-based RAG:
+  1. **Evidence-Exceeds-Budget Revision & Forecast Chains (Tracks R & F)**: Expands Track R to 28 scattered timestamped revisions (`~2,600+` tokens of pure evidence on a single entity) and Track F to 24 dated schedule commitments/slips/checkpoints (`~2,300+` tokens) so raw evidence physically overflows a `1,500`-token budget.
+  2. **3-Hop Transitive Dependency Cascades (Track D)**: Adds 12 curated 5-session 3-hop dependency chains (`s_hop1_premise -> s_hop2_bridge -> s_hop3_terminal` + `s_unaffected` + `s_hop4_trigger`) with verified zero content-word overlap between the breaking trigger and terminal affected initiatives.
+  3. **Zero-Overlap Cross-Domain Constraints (Track X)**: Adds 12 curated cross-domain safety, legal, medical, and physical constraints verified by `validate_pools()` to share `0` content words with the neutral user action query.
+  4. **16-Session Longitudinal Portfolio Aggregation (Track I)**: Adds 12 curated 16-session longitudinal portfolios (`~1,900+` tokens of relevant experiment records) spanning clean, confounded, unimplemented, and single-observation interventions.
+- **Zero-Cost (`$0.00`) Offline Epistemic-Hygiene Suite (`epibench eval-offline`)**: Added `src/epibench/runners/offline_eval.py` measuring gold-session recall, current-state supersession precision (`1 - stale_leak_rate`), multi-hop bridge/terminal recall, zero-overlap constraint recall at both 1,500 and 600-token budgets, overflow-chain coverage, signal-to-noise density, selective deletion hygiene, and strict `as_of` / token-budget compliance with zero LLM API spend.
+- **Manifests & Documentation**: Archived `manifests/hard_manifest_v2_1.json`, committed `v2.2.0` `manifests/dev_manifest.json`, `manifests/hard_manifest.json`, and `manifests/stress_manifest.json`, and streamlined `README.md` to focus strictly on what EpiBench is, why it exists, and how to use it (removing embedded performance tables).
+
+---
+
 ## 2.1.0 (Hard-Regime Profile & Same-Domain Distractors)
 
 Version `2.1.0` upgrades scenario generation (`GENERATOR_VERSION = "2.1.0"`) while keeping `SCORER_VERSION = "2.0.0"`, `READER_PROMPT_VERSION = "2.0.0"`, and `ADAPTER_CONTRACT_VERSION = "2.0.0"` frozen.

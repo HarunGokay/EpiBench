@@ -22,29 +22,55 @@ from pathlib import Path
 import random
 from typing import Any, Dict, List, Optional
 
+from epibench.generator._pools_stress import (
+    STRESS_MULTIHOP_DEPENDENCY_POOLS,
+    STRESS_PORTFOLIO_INTERVENTION_POOLS,
+    STRESS_ZERO_OVERLAP_CONSTRAINT_POOLS,
+    build_stress_forecast_events,
+    build_stress_portfolio_sessions,
+    build_stress_revision_chain,
+)
 from epibench.generator.distractor_pool import DistractorPool, VALID_DISTRACTOR_MODES
 from epibench.generator.pools import (
     ALL_POOLS,
     compute_forecast_gold,
 )
 
-GENERATOR_VERSION = "2.1.0"
+GENERATOR_VERSION = "2.2.0"
 VALID_TRACKS = ("R", "D", "X", "F", "I", "P", "K", "E", "Q")
+
+PROFILE_ALIASES: Dict[str, str] = {
+    "epistemic_stress": "stress",
+}
 
 BENCHMARK_PROFILES: Dict[str, Dict[str, Any]] = {
     "dev": {
         "filler_count": 6,
         "distractor_mode": "neutral",
         "token_budget": 1500,
+        "epistemic_stress": False,
         "description": "Fast smoke/regression profile (6 neutral fillers; fits inside 1,500-token budget).",
     },
     "hard": {
         "filler_count": 120,
         "distractor_mode": "mixed",
         "token_budget": 1500,
+        "epistemic_stress": False,
         "description": (
             "True budget-overflow & semantic-interference profile (120 mixed same-domain + neutral fillers; "
             "~13,800 history tokens vs 1,500 token budget, so only ~10.8% fits in budget)."
+        ),
+    },
+    "stress": {
+        "filler_count": 240,
+        "distractor_mode": "mixed",
+        "token_budget": 1500,
+        "epistemic_stress": True,
+        "description": (
+            "Epistemic-stress profile (v2.2.0): 240 mixed distractors (~28k+ history tokens) plus "
+            "28-step overflow revision chains (R), 24-step overflow forecast chains (F), 3-hop zero-overlap "
+            "transitive dependency cascades (D), strictly 0-word-overlap cross-domain constraints (X), "
+            "and 16-session longitudinal portfolio aggregation (I)."
         ),
     },
 }
@@ -57,7 +83,8 @@ def resolve_profile(
     token_budget: Optional[int] = None,
 ) -> Dict[str, Any]:
     """Resolve benchmark profile defaults with explicit CLI/API overrides."""
-    prof_key = (profile or "dev").strip().lower()
+    raw_key = (profile or "dev").strip().lower()
+    prof_key = PROFILE_ALIASES.get(raw_key, raw_key)
     if prof_key not in BENCHMARK_PROFILES:
         raise ValueError(
             f"Unknown benchmark profile {profile!r}; expected one of {tuple(BENCHMARK_PROFILES.keys())}."
@@ -73,6 +100,7 @@ def resolve_profile(
         "filler_count": base["filler_count"] if filler_count is None else int(filler_count),
         "distractor_mode": resolved_mode,
         "token_budget": base["token_budget"] if token_budget is None else int(token_budget),
+        "epistemic_stress": bool(base.get("epistemic_stress", False)),
     }
 
 
@@ -202,6 +230,7 @@ class ScenarioGenerator:
         custom_pools: Optional[Dict[str, List[Dict[str, Any]]]] = None,
         distractor_mode: str = "neutral",
         distractor_file: Optional[Path] = None,
+        epistemic_stress: bool = False,
     ):
         if distractor_pool is not None:
             self.distractor_pool = distractor_pool
@@ -214,6 +243,7 @@ class ScenarioGenerator:
             self.distractor_mode = "custom" if distractor_file is not None else self.distractor_pool.mode
         self._pools = custom_pools if custom_pools is not None else ALL_POOLS
         self._has_custom_pools = custom_pools is not None
+        self.epistemic_stress = bool(epistemic_stress)
 
     def _get_pool(self, track: str, split: str) -> List[Dict[str, Any]]:
         if split == "held_out" and not self._has_custom_pools:
@@ -267,15 +297,23 @@ class ScenarioGenerator:
         pool_item = pool[scenario_idx % len(pool)]
         user_name = f"User_R_{split}_{scenario_idx:02d}"
 
-        base_date = datetime(2024, 1, 15, 10, 0, 0, tzinfo=timezone.utc)
-        values = pool_item["values"]
-        val_aliases = pool_item["value_aliases"]
-        step_days = 45 if len(values) == 3 else 30
+        base_date = datetime(2023, 1, 15, 10, 0, 0, tzinfo=timezone.utc) if self.epistemic_stress else datetime(2024, 1, 15, 10, 0, 0, tzinfo=timezone.utc)
+        if self.epistemic_stress:
+            chain = build_stress_revision_chain(pool_item)
+            values = chain["values"]
+            val_aliases = chain["value_aliases"]
+            user_phrasings = chain["user_phrasings"]
+            step_days = 24  # 28 steps across ~648 days (~21 months)
+        else:
+            values = pool_item["values"]
+            val_aliases = pool_item["value_aliases"]
+            user_phrasings = [pool_item["user_phrasings"][i].format(val=val) for i, val in enumerate(values)]
+            step_days = 45 if len(values) == 3 else 30
         dates = [base_date + timedelta(days=step_days * i) for i in range(len(values))]
 
         evidence_sessions = []
         for i, val in enumerate(values):
-            phrase = pool_item["user_phrasings"][i].format(val=val)
+            phrase = user_phrasings[i]
             turns = [
                 {"role": "user", "content": phrase},
                 {"role": "assistant", "content": f"Understood, I have updated my notes regarding {pool_item['entity_phrase']}."},
@@ -344,6 +382,19 @@ class ScenarioGenerator:
             metadata={"wrong_values": [len(values), 0]},
         )
 
+        sc_meta: Dict[str, Any] = {
+            "template_id": pool_item["id"],
+            "pool_entity": pool_item["entity"],
+            "domain": pool_item["domain"],
+        }
+        if self.epistemic_stress:
+            sc_meta["epistemic_stress"] = True
+            sc_meta["revision_chain_length"] = len(values)
+            sc_meta["overflow_evidence_sessions"] = [s["session_id"] for s in evidence_sessions]
+            sc_meta["all_stale_values"] = list(values[:-1])
+            sc_meta["all_stale_aliases"] = [a for v in values[:-1] for a in val_aliases[v]]
+            q1.metadata["all_stale_aliases"] = list(sc_meta["all_stale_aliases"])
+
         return Scenario(
             scenario_id=f"R_{split}_{scenario_idx:02d}",
             track="R",
@@ -352,11 +403,7 @@ class ScenarioGenerator:
             question_date=format_date(q_date_dt),
             sessions=all_sessions,
             questions=[q1, q2, q3, q4],
-            metadata={
-                "template_id": pool_item["id"],
-                "pool_entity": pool_item["entity"],
-                "domain": pool_item["domain"],
-            },
+            metadata=sc_meta,
         )
 
     def generate_track_d_scenario(
@@ -366,6 +413,139 @@ class ScenarioGenerator:
         seed: int,
         filler_count: int = 6,
     ) -> Scenario:
+        if self.epistemic_stress and not self._has_custom_pools:
+            pool_item = STRESS_MULTIHOP_DEPENDENCY_POOLS[scenario_idx % len(STRESS_MULTIHOP_DEPENDENCY_POOLS)]
+            user_name = f"User_D_{split}_{scenario_idx:02d}"
+            base_date = datetime(2024, 1, 10, 9, 0, 0, tzinfo=timezone.utc)
+            d_hop1 = base_date
+            d_hop2 = base_date + timedelta(days=14)
+            d_hop3 = base_date + timedelta(days=28)
+            d_unaff = base_date + timedelta(days=40)
+            d_hop4 = base_date + timedelta(days=90)
+            q_date_dt = d_hop4 + timedelta(days=10)
+
+            evidence_sessions = [
+                {
+                    "session_id": "s_hop1_premise",
+                    "session_date": format_date(d_hop1),
+                    "turns": [
+                        {"role": "user", "content": f"Upstream operational premise: {pool_item['hop1_premise']}"},
+                        {"role": "assistant", "content": "Noted. Logged this upstream operational premise."},
+                    ],
+                    "is_evidence": True,
+                },
+                {
+                    "session_id": "s_hop2_bridge",
+                    "session_date": format_date(d_hop2),
+                    "turns": [
+                        {"role": "user", "content": f"Mid-level policy dependency: {pool_item['hop2_bridge']}"},
+                        {"role": "assistant", "content": "Recorded this intermediate operational dependency."},
+                    ],
+                    "is_evidence": True,
+                },
+                {
+                    "session_id": "s_hop3_terminal",
+                    "session_date": format_date(d_hop3),
+                    "turns": [
+                        {"role": "user", "content": f"Downstream commitments locked in: {pool_item['hop3_terminal']}"},
+                        {"role": "assistant", "content": "Logged these downstream commitments."},
+                    ],
+                    "is_evidence": True,
+                },
+                {
+                    "session_id": "s_unaffected",
+                    "session_date": format_date(d_unaff),
+                    "turns": [
+                        {"role": "user", "content": f"Independent operational note: {pool_item['unaffected_premise']} {pool_item['unaffected_decision']['text']}"},
+                        {"role": "assistant", "content": "Acknowledged. Logged this separate independent commitment."},
+                    ],
+                    "is_evidence": True,
+                },
+                {
+                    "session_id": "s_hop4_trigger",
+                    "session_date": format_date(d_hop4),
+                    "turns": [
+                        {"role": "user", "content": pool_item["hop4_trigger"]},
+                        {"role": "assistant", "content": "Understood. That upstream change has broad implications."},
+                    ],
+                    "is_evidence": True,
+                },
+            ]
+
+            all_sessions = self._interleave_fillers(
+                evidence_sessions, q_date_dt, "D", scenario_idx, seed, filler_count
+            )
+
+            gold_decisions = [
+                {"id": d["id"], "label": d["label"], "aliases": list(d["aliases"])}
+                for d in pool_item["affected_decisions"]
+            ]
+            unaffected = pool_item["unaffected_decision"]
+            unaffected_decisions = [
+                {"id": unaffected["id"], "label": unaffected["label"], "aliases": list(unaffected["aliases"])}
+            ]
+            gold_affected_labels = [d["label"] for d in pool_item["affected_decisions"]]
+
+            q1 = ScenarioQuestion(
+                question_id=f"D_{split}_{scenario_idx:02d}_q1",
+                question_text=pool_item["questions"]["revisit_set"],
+                question_subkind="revisit_set",
+                gold_answer=gold_affected_labels,
+                rubric=f"Must identify the exact affected downstream commitments ({gold_affected_labels}) across the 3-hop chain and exclude unaffected commitments ({unaffected['label']}).",
+                scoring_type="set_overlap",
+                metadata={
+                    "gold_decisions": gold_decisions,
+                    "unaffected_decisions": unaffected_decisions,
+                    "gold_ids": [d["id"] for d in gold_decisions],
+                    "unaffected": unaffected["label"],
+                    "bridge_sessions": ["s_hop2_bridge"],
+                    "terminal_sessions": ["s_hop3_terminal"],
+                    "hop_sessions": ["s_hop1_premise", "s_hop2_bridge", "s_hop3_terminal", "s_hop4_trigger"],
+                },
+            )
+            q2 = ScenarioQuestion(
+                question_id=f"D_{split}_{scenario_idx:02d}_q2",
+                question_text=pool_item["questions"]["why"],
+                question_subkind="why",
+                gold_answer=pool_item["affected_decisions"][0]["reason"],
+                rubric=f"Must accurately trace the full 3-hop dependency chain: {pool_item['affected_decisions'][0]['reason']}",
+                scoring_type="llm_rubric",
+                metadata={
+                    "bridge_sessions": ["s_hop2_bridge"],
+                    "terminal_sessions": ["s_hop3_terminal"],
+                    "hop_sessions": ["s_hop1_premise", "s_hop2_bridge", "s_hop3_terminal", "s_hop4_trigger"],
+                },
+            )
+            stands_gold = pool_item["still_standing_gold"]
+            q3 = ScenarioQuestion(
+                question_id=f"D_{split}_{scenario_idx:02d}_q3",
+                question_text=pool_item["questions"]["still_standing"],
+                question_subkind="stands",
+                gold_answer=stands_gold,
+                rubric="Must answer YES because this commitment rests on a separate independent premise.",
+                scoring_type="yes_no",
+                metadata={"still_standing_target": pool_item["still_standing_target"]},
+            )
+            return Scenario(
+                scenario_id=f"D_{split}_{scenario_idx:02d}",
+                track="D",
+                split=split,
+                user_name=user_name,
+                question_date=format_date(q_date_dt),
+                sessions=all_sessions,
+                questions=[q1, q2, q3],
+                metadata={
+                    "template_id": pool_item["id"],
+                    "domain": pool_item["domain"],
+                    "epistemic_stress": True,
+                    "hop_count": 3,
+                    "hop_sessions": ["s_hop1_premise", "s_hop2_bridge", "s_hop3_terminal", "s_hop4_trigger"],
+                    "bridge_sessions": ["s_hop2_bridge"],
+                    "terminal_sessions": ["s_hop3_terminal"],
+                    "trigger_session": "s_hop4_trigger",
+                },
+            )
+
         pool = self._get_pool("D", split)
         pool_item = pool[scenario_idx % len(pool)]
         user_name = f"User_D_{split}_{scenario_idx:02d}"
@@ -487,8 +667,11 @@ class ScenarioGenerator:
         seed: int,
         filler_count: int = 6,
     ) -> Scenario:
-        pool = self._get_pool("X", split)
-        pool_item = pool[scenario_idx % len(pool)]
+        if self.epistemic_stress and not self._has_custom_pools:
+            pool_item = STRESS_ZERO_OVERLAP_CONSTRAINT_POOLS[scenario_idx % len(STRESS_ZERO_OVERLAP_CONSTRAINT_POOLS)]
+        else:
+            pool = self._get_pool("X", split)
+            pool_item = pool[scenario_idx % len(pool)]
         user_name = f"User_X_{split}_{scenario_idx:02d}"
 
         base_date = datetime(2024, 3, 1, 14, 0, 0, tzinfo=timezone.utc)
@@ -524,6 +707,10 @@ class ScenarioGenerator:
             },
         )
 
+        x_meta: Dict[str, Any] = {"template_id": pool_item["id"], "domain": pool_item["domain"]}
+        if self.epistemic_stress:
+            x_meta["epistemic_stress"] = True
+            x_meta["zero_lexical_overlap"] = True
         return Scenario(
             scenario_id=f"X_{split}_{scenario_idx:02d}",
             track="X",
@@ -532,7 +719,7 @@ class ScenarioGenerator:
             question_date=format_date(q_date_dt),
             sessions=all_sessions,
             questions=[q1],
-            metadata={"template_id": pool_item["id"], "domain": pool_item["domain"]},
+            metadata=x_meta,
         )
 
     def generate_track_f_scenario(
@@ -546,13 +733,14 @@ class ScenarioGenerator:
         pool_item = pool[scenario_idx % len(pool)]
         user_name = f"User_F_{split}_{scenario_idx:02d}"
 
-        computed = compute_forecast_gold(pool_item["events"])
+        events = build_stress_forecast_events(pool_item) if self.epistemic_stress else pool_item["events"]
+        computed = compute_forecast_gold(events)
         move_count = computed["move_count"]
         slip_days = computed["total_slip_days"]
         is_realistic = pool_item["is_realistic"]
 
         evidence_sessions = []
-        for idx, ev in enumerate(pool_item["events"]):
+        for idx, ev in enumerate(events):
             dt = datetime.strptime(ev["date"], "%Y-%m-%d").replace(hour=10, tzinfo=timezone.utc)
             evidence_sessions.append({
                 "session_id": f"s_event_{idx + 1}",
@@ -628,6 +816,15 @@ class ScenarioGenerator:
             },
         )
 
+        f_meta: Dict[str, Any] = {
+            "template_id": pool_item["id"],
+            "domain": pool_item["domain"],
+            "project": pool_item["project"],
+            "computed_gold": computed,
+        }
+        if self.epistemic_stress:
+            f_meta["epistemic_stress"] = True
+            f_meta["overflow_evidence_sessions"] = [s["session_id"] for s in evidence_sessions]
         return Scenario(
             scenario_id=f"F_{split}_{scenario_idx:02d}",
             track="F",
@@ -636,12 +833,7 @@ class ScenarioGenerator:
             question_date=format_date(q_date_dt),
             sessions=all_sessions,
             questions=[q1, q2, q3],
-            metadata={
-                "template_id": pool_item["id"],
-                "domain": pool_item["domain"],
-                "project": pool_item["project"],
-                "computed_gold": computed,
-            },
+            metadata=f_meta,
         )
 
     def generate_track_i_scenario(
@@ -651,6 +843,63 @@ class ScenarioGenerator:
         seed: int,
         filler_count: int = 6,
     ) -> Scenario:
+        if self.epistemic_stress and not self._has_custom_pools:
+            pool_item = STRESS_PORTFOLIO_INTERVENTION_POOLS[scenario_idx % len(STRESS_PORTFOLIO_INTERVENTION_POOLS)]
+            user_name = f"User_I_{split}_{scenario_idx:02d}"
+            base_date = datetime(2024, 1, 5, 10, 0, 0, tzinfo=timezone.utc)
+            evidence_sessions = build_stress_portfolio_sessions(pool_item, base_date)
+            last_ev_dt = parse_session_date(evidence_sessions[-1]["session_date"])
+            q_date_dt = last_ev_dt + timedelta(days=14)
+            all_sessions = self._interleave_fillers(
+                evidence_sessions, q_date_dt, "I", scenario_idx, seed, filler_count
+            )
+            gold_rubric = (
+                f"Must identify '{pool_item['clean_name']}' as the ONLY intervention with clean, unconfounded "
+                f"longitudinal evidence across 3 post-change readings, AND explain why '{pool_item['confounded_name']}' "
+                f"is confounded ({pool_item['confounder_note']}), '{pool_item['unimplemented_name']}' was never "
+                f"implemented, and '{pool_item['anecdotal_name']}' has only a single anecdotal observation."
+            )
+            q1 = ScenarioQuestion(
+                question_id=f"I_{split}_{scenario_idx:02d}_q1",
+                question_text=(
+                    f"Across all 16 recorded experiment logs for {pool_item['subject']}, which single intervention "
+                    f"has clean unconfounded longitudinal evidence of working, and why must the other three candidates "
+                    f"not be credited with causal efficacy?"
+                ),
+                question_subkind="causal_claim",
+                gold_answer=gold_rubric,
+                rubric=gold_rubric,
+                scoring_type="llm_rubric",
+                metadata={
+                    "variant": "portfolio_aggregation",
+                    "gold_strength": "strong_clean_vs_confounded_unimplemented_anecdotal",
+                    "clean_intervention": pool_item["clean_name"],
+                    "confounded_intervention": pool_item["confounded_name"],
+                    "required_evidence_phrases": [
+                        pool_item["clean_name"],
+                        pool_item["confounded_name"],
+                        pool_item["unimplemented_name"],
+                        pool_item["anecdotal_name"],
+                    ],
+                },
+            )
+            return Scenario(
+                scenario_id=f"I_{split}_{scenario_idx:02d}",
+                track="I",
+                split=split,
+                user_name=user_name,
+                question_date=format_date(q_date_dt),
+                sessions=all_sessions,
+                questions=[q1],
+                metadata={
+                    "template_id": pool_item["id"],
+                    "variant": "portfolio_aggregation",
+                    "domain": pool_item["domain"],
+                    "epistemic_stress": True,
+                    "overflow_evidence_sessions": [s["session_id"] for s in evidence_sessions],
+                },
+            )
+
         pool = self._get_pool("I", split)
         pool_item = pool[scenario_idx % len(pool)]
         user_name = f"User_I_{split}_{scenario_idx:02d}"
@@ -1013,4 +1262,6 @@ class ScenarioGenerator:
         else:
             raise ValueError(f"Unknown track '{track}'. Valid tracks: {', '.join(VALID_TRACKS)}")
         sc.metadata.setdefault("distractor_mode", self.distractor_mode)
+        if self.epistemic_stress:
+            sc.metadata.setdefault("epistemic_stress", True)
         return sc

@@ -1,5 +1,5 @@
 {
-  "generator_version": "2.1.0",
+  "generator_version": "2.2.0",
   "profile": "dev",
   "distractor_mode": "neutral",
   "split": "dev",
@@ -18,7 +18,7 @@
     "Q"
   ],
   "total_scenarios": 108,
-  "manifest_sha256": "be9fc0c37b630673cbb04852b39ed36b9764c661748fe3268fb974b2b902306a",
+  "manifest_sha256": "5fd9e91ff612bc41c9e6b928c2dd107594d3a91e8f6e214e5988b9d91e562574",
   "scenarios": [
     {
       "scenario_id": "R_dev_00",
@@ -26,7 +26,7 @@
       "template_id": "r_00_prod_db",
       "session_count": 9,
       "question_count": 4,
-      "sha256": "6e17edbb714f937f68a661d54340405b1bfb008471cd1fad320aeaec47b716d9"
+      "sha256": "135f5841291d2c4e521deb28f58863247d28c65a4d33ba8782146e1eb9de74a7"
     },
     {
       "scenario_id": "R_dev_01",
@@ -34,7 +34,7 @@
       "template_id": "r_01_gym_membership",
       "session_count": 9,
       "question_count": 4,
-      "sha256": "e21038ad29885676db4aeb101ae3125fe3869afd2be5ecdf0c0eb4310d757a87"
+      "sha256": "373da30ed7a30a159c305c2c5447f95325cb4a2e30008b8626d7aa1c35ab14e2"
     },
     {
       "scenario_id": "R_dev_02",
@@ -42,7 +42,7 @@
       "template_id": "r_02_savings_target",
       "session_count": 9,
       "question_count": 4,
-      "sha256": "c1f31f8fd44fb4496601ad526f3705c60873835f9449a7c6c0e767b727844431"
+      "sha256": "88e4877458967a13086c10cb6bd6271ccb12f9de1cf3583d2a02e086f4e6badf"
     },
     {
       "scenario_id": "R_dev_03",
@@ -50,7 +50,7 @@
       "template_id": "r_03_frontend_framework",
       "session_count": 9,
       "question_count": 4,
-      "sha256": "c8e77560a0b38c9f633819403e1885051fa34db22dedae98a256657a98fa4eb5"
+      "sha256": "64332438095915d7f11036c16b03b837d3fbc0b463f6fd7bedc9e03c581b05a9"
     },
     {
       "scenario_id": "R_dev_04",
@@ -58,7 +58,7 @@
       "template_id": "r_04_airline_loyalty",
       "session_count": 9,
       "question_count": 4,
-      "sha256": "9d95e4f01d92acea7ff37fe9261097c93b4abae99df2c5bb1c6b7c2bb6c3a3a8"
+      "sha256": "f1ef4b95e7695249127d50600495814e1a9de5d8c85bb6c450a6e30568112d22"
     },
     {
       "scenario_id": "R_dev_05",
@@ -66,7 +66,7 @@
       "template_id": "r_05_countertop_material",
       "session_count": 9,
       "question_count": 4,
-      "sha256": "a06175d3e520889778ee91f9fd76f98c38109218902cec56c9397042fb5be6ac"
+      "sha256": "cc725b352659703b8c7ff9e8e7c26869a3f8b7770f488c84740ad046a911d81d"
     },
     {
       "scenario_id": "R_dev_06",
@@ -74,7 +74,7 @@
       "template_id": "r_06_project_deadline",
       "session_count": 9,
       "question_count": 4,
-      "sha256": "dba39642123f9e56ffcab43f928f59071b907ce26396dcf011379664ff9395f8"
+      "sha256": "9ec13d891d92c15f13f81cf8f0ce62342848e4a02d48ea1805a0a81844924eda"
     },
     {
       "scenario_id": "R_dev_07",
@@ -82,7 +82,7 @@
       "template_id": "r_07_ci_platform",
       "session_count": 10,
       "question_count": 4,
-      "sha256": "b075adec9c485eccfaa534b82d9ca94afcf7e841af1454bc1ce5b7bf8e6fc0d2"
+      "sha256": "8fdd3b27c4480d6607126ef786d3663617dcde40dc7f1b7412e947985ac171c8"
     },
     {
       "scenario_id": "R_dev_08",
@@ -90,7 +90,7 @@
       "template_id": "r_08_brokerage_account",
       "session_count": 10,
       "question_count": 4,
-      "sha256": "22e1aa658b56107fbfc4742bb989131ade3a48341a73b938b3a856f35d690353"
+      "sha256": "e60ba11dd91b0e95fb669499bcb5d5f3c62356de5842eecf9621dee29f8287ff"
     },
     {
       "scenario_id": "R_dev_09",
@@ -98,7 +98,7 @@
       "template_id": "r_09_office_city",
       "session_count": 9,
       "question_count": 4,
-      "sha256": "3a0f88f0205cbf3259d54f5f42fa79963f507c6e6773d1ba50d24b6ceeeca80f"
+      "sha256": "cfd031bb61aa11955d72f03efa4263f173cf66e5390667203042c0324368ddd1"
     },
     {
       "scenario_id": "R_dev_10",
@@ -106,7 +106,7 @@
       "template_id": "r_10_messaging_queue",
       "session_count": 10,
       "question_count": 4,
-      "sha256": "bed5d4fd416a3105b8bb21b07fc3bf0c020ad126b2fb42f70f3dff7d68492842"
+      "sha256": "f299737111495689a94445653abd28cc8ae78eb96320a7849389310e6eec8392"
     },
     {
       "scenario_id": "R_dev_11",
@@ -114,7 +114,7 @@
       "template_id": "r_11_heating_fuel",
       "session_count": 9,
       "question_count": 4,
-      "sha256": "8bdb7ec4c692c0d0d876371732cae041cd1c8f8943c520e34f5acf0c5d326ed1"
+      "sha256": "14698bc4db5dc308644aa3fbd81a8326a685d60e114ebc049193cfcdadd1d8cf"
     },
     {
       "scenario_id": "D_dev_00",
@@ -122,7 +122,7 @@
       "template_id": "d_00_mobile_app_launch",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "49d99cb5ec7b675ca210577c1ce12f4066eec85e99a851628d1a73e929055386"
+      "sha256": "37ee2cec95f497bd28e74048dde1ec70f0778b3aef007fefa3f682c7ac01d679"
     },
     {
       "scenario_id": "D_dev_01",
@@ -130,7 +130,7 @@
       "template_id": "d_01_db_migration_delay",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "0b71e6a0154f8534622be4b52828093817513042a62e52f8f794bbee1cea025d"
+      "sha256": "f80d19af8b3b9ce2cf8dc05741224bdd08950453971166fc09de37a44c95cdab"
     },
     {
       "scenario_id": "D_dev_02",
@@ -138,7 +138,7 @@
       "template_id": "d_02_kitchen_island_resize",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "e21748ce40600f1e722963c59db43326f804df55cbcb66cd4b7bfe51a949951c"
+      "sha256": "be906a7e4d4658539dc347a994d6ae367c7dec567f75f3b7f784922e7e653069"
     },
     {
       "scenario_id": "D_dev_03",
@@ -146,7 +146,7 @@
       "template_id": "d_03_aspen_to_maui",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "c98d0708e67889e9ad0a95beaed2dfa1c6b2b554490853edeed9976ae7cd0adc"
+      "sha256": "ae32839c69b551d78b2a816e4ab16b37e6ee37eecff15685bda701d49a22d19b"
     },
     {
       "scenario_id": "D_dev_04",
@@ -154,7 +154,7 @@
       "template_id": "d_04_outdoor_wedding_venue",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "798cb8252bca711dbcc8b35e4542b45c3a6ea1ee4c8bd4f54ad4e9954c03c0be"
+      "sha256": "6d3b5d8202fd661b72b059e0cdc93ca5274e9b27f6239dc9a245e40e576812d5"
     },
     {
       "scenario_id": "D_dev_05",
@@ -162,7 +162,7 @@
       "template_id": "d_05_eu_data_residency",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "44bdb7cdec9f593806230d77d91c40eaf73f8b1c58938f685eb51792826a35d2"
+      "sha256": "14becab06e1e3c562440a90d7579a4a3b85afd6531a37c1e7841014bcad632cc"
     },
     {
       "scenario_id": "D_dev_06",
@@ -170,7 +170,7 @@
       "template_id": "d_06_remote_office_closure",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "c69fb21769013e45e70713324dcc107e8a8b18625bf6cb934c9d66bce80b919e"
+      "sha256": "e0f963b8f2037dd7d72425aee4a143b08ee5005337d6b5bddd4f66658fa14208"
     },
     {
       "scenario_id": "D_dev_07",
@@ -178,7 +178,7 @@
       "template_id": "d_07_marathon_injury_switch",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "c523a0c00d34d96109d3b469a6b214f0932911400e63315c2a5c2518047f8247"
+      "sha256": "2d00764aa78e8c6da1d9705f93c823508ecd286d8585a2730b253296461470c3"
     },
     {
       "scenario_id": "D_dev_08",
@@ -186,7 +186,7 @@
       "template_id": "d_08_ev_fleet_transition",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "5f503bcb106b742376a51cc54b4b12e534c4371623f4bb6209eb950016e73751"
+      "sha256": "fe6240a171c8e8574f5c670568070043ce4094ee0d870d0bd10a5e5210030a5c"
     },
     {
       "scenario_id": "D_dev_09",
@@ -194,7 +194,7 @@
       "template_id": "d_09_gpu_to_cpu_inference",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "270f20239ab2af6d9ff9ef4f07519341a973173a00aae8fe95b136d692cf42ba"
+      "sha256": "7ff0c009bf85350b8981d00705e4e8e6ca214404ae7c69355077990d6231e1af"
     },
     {
       "scenario_id": "D_dev_10",
@@ -202,7 +202,7 @@
       "template_id": "d_10_house_purchase_cancelled",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "9c71d341332210426c2c3c09ce6f05feed4e5e6c9ac80981aef5af73647b4849"
+      "sha256": "e2c6e77232343ad74cc4998b88a458d98259f69a07061f9f4a89153e8fa5589f"
     },
     {
       "scenario_id": "D_dev_11",
@@ -210,7 +210,7 @@
       "template_id": "d_11_conference_goes_virtual",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "d5725c55770d87600262e60e7b5ccb5d2a5ccf5b19956a071cd48ed99c5c5bb2"
+      "sha256": "c74063e5259beb1e8e8ecee6fecbda439a6a8c337db6e508b43878eb95d421fd"
     },
     {
       "scenario_id": "X_dev_00",
@@ -218,7 +218,7 @@
       "template_id": "x_00_knee_meniscus",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "205daa6e1d52d16d9a0cf761e78545c00e54aaad94b4e9817c670fac177fe52d"
+      "sha256": "7b52583029dd2aff8c2abbbf2263000d91040c176069f08150b32d604123c362"
     },
     {
       "scenario_id": "X_dev_01",
@@ -226,7 +226,7 @@
       "template_id": "x_01_hotel_cap",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "7c43d62fbbd5d7f3060885c7bb9513f6e2c9a43b46bb46b6b4f9b3983cb7e8fa"
+      "sha256": "4da0815b7944988599044fec2b397b5d3dc7088a833efe3a400b5651063ef3b0"
     },
     {
       "scenario_id": "X_dev_02",
@@ -234,7 +234,7 @@
       "template_id": "x_02_staging_vcpu",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "3e461337e4b1cb4e456b88a5ceba905a8f289b079bfba0a31f96f3e60bde8f5f"
+      "sha256": "684617445cefe289f872a15bf36b7f78c3677d90da300b7009c6611289928555"
     },
     {
       "scenario_id": "X_dev_03",
@@ -242,7 +242,7 @@
       "template_id": "x_03_shellfish_allergy",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "80cc35a637cc1f0ff4dba64597588be0ffc01e2bb54f63958e8afb2c8ecc5fdf"
+      "sha256": "dc6594df0a6b02bae6cdb151117b53140cf872649416977e1a862a87fa5199fb"
     },
     {
       "scenario_id": "X_dev_04",
@@ -250,7 +250,7 @@
       "template_id": "x_04_hoa_fence_height",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "cece5833f84a7ac3abab5d5a11ad644a8cf619a702199acba34a44151e6bc84b"
+      "sha256": "47cdaf4addc995267f686b10c7796bdf5abaa9268c159eff20b51e6e0794801a"
     },
     {
       "scenario_id": "X_dev_05",
@@ -258,7 +258,7 @@
       "template_id": "x_05_hipaa_baa",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "4b864362a2d8026e2e974c2f27b9e0e39e2aedd0dfebcdeac0246bf1560e8c59"
+      "sha256": "637afafb811d88b8904fef3546968e0757a3f681833a70f1deaf5cf7f88e76a7"
     },
     {
       "scenario_id": "X_dev_06",
@@ -266,7 +266,7 @@
       "template_id": "x_06_roof_rack_load",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "6b4f8a8a3c22412a32ae50b89d16892fdfacea874606da108fe7121ea258b080"
+      "sha256": "85e19fde0afcf42c7ee0920a214a159b46024ff00d83c48890239f39c6dc02d6"
     },
     {
       "scenario_id": "X_dev_07",
@@ -274,7 +274,7 @@
       "template_id": "x_07_freeze_window",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "af809f72c1a8dff2b32bc4bad4ce12c2960cda2961cd26e0c01ccf08f412815a"
+      "sha256": "ed3066ba8bad88e84aa8f56195ad80f302d0dea7eca34a69b383b6b1f23a84eb"
     },
     {
       "scenario_id": "X_dev_08",
@@ -282,7 +282,7 @@
       "template_id": "x_08_dog_grapes",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "6badbc487078621567ef559149f1f47fc86e59b05951d7f5cffd33081c9b98a9"
+      "sha256": "d35b43b6a75d78a2f62f0e1a2d14ff4b4becd4404c730d8172d64a306bd01986"
     },
     {
       "scenario_id": "X_dev_09",
@@ -290,7 +290,7 @@
       "template_id": "x_09_gpl_license_ban",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "e7e65e046e4760f4936cf9d627313189a542bc9414e273b6fb8d79b8c8997a03"
+      "sha256": "6bf26fb8b06792ccbc86b631ed5bacf5fa1517355d43111c7b1e462f061e97bd"
     },
     {
       "scenario_id": "X_dev_10",
@@ -298,7 +298,7 @@
       "template_id": "x_10_wash_sale_rule",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "2a9c328bd9f51ac1fa2149ab6a89cb295eb411e27b5e80227aca6ba43006f4cd"
+      "sha256": "78db4bde7a2a530fa4a10c694cf1e5816f4965d53ee8b220548fec420f5fa4ee"
     },
     {
       "scenario_id": "X_dev_11",
@@ -306,7 +306,7 @@
       "template_id": "x_11_school_nut_free",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "33971d9d2edcab7ab97c36a318c6c4a0a91c11f91b42840ae53213c4e6d347df"
+      "sha256": "24579cf1bd32d75637c379e0ecd72e765babc9a9cef6ee50fb83d9b71eb4c8d3"
     },
     {
       "scenario_id": "F_dev_00",
@@ -314,7 +314,7 @@
       "template_id": "f_00_titan_alpha",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "0d02f7905615ab7aaa5a56e75a07c00f84a92ae64470afda7a5a28e519521d34"
+      "sha256": "698de02b6cc35c64c8f2f7444f172145f83749da39975db1a117a53c5d8cb584"
     },
     {
       "scenario_id": "F_dev_01",
@@ -322,7 +322,7 @@
       "template_id": "f_01_bathroom_remodel",
       "session_count": 11,
       "question_count": 3,
-      "sha256": "da19f25463be3b6c8ce9978f33b617c0535fc200e65b28359321b176bd0c39ec"
+      "sha256": "95b274de27a2bc66d2b105a8775dc98f3657e9b1f3bbcf4985beca524e4d1f7d"
     },
     {
       "scenario_id": "F_dev_02",
@@ -330,7 +330,7 @@
       "template_id": "f_02_billing_v2",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "5a33853de5290d2e5876ae1330e2d40c6dca9005d01ef3b3b2baa97612a2b406"
+      "sha256": "261681c727c8e22ff6de731a87eab44b002f08b12e94723c3bf05d8a93cf1d5d"
     },
     {
       "scenario_id": "F_dev_03",
@@ -338,7 +338,7 @@
       "template_id": "f_03_soc2_audit_ready",
       "session_count": 11,
       "question_count": 3,
-      "sha256": "8ece3cbd2476eb879228f551aa06d9cf9860ff6230b56ac9cc93b5f7d2405803"
+      "sha256": "d09579930f320ef404b01ffc7ea40d5f90dd4dcba32b91976437f4e83de053bc"
     },
     {
       "scenario_id": "F_dev_04",
@@ -346,7 +346,7 @@
       "template_id": "f_04_warehouse_erp",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "63f873bc7ad800684a1f401c1811faa31f4a3613f4f459f9aba24906029a07e6"
+      "sha256": "73f4430e0b3aebf4e192005d309889785f9f2f53505b9c1b23bca325899c0d7e"
     },
     {
       "scenario_id": "F_dev_05",
@@ -354,7 +354,7 @@
       "template_id": "f_05_deck_construction",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "6a828fe9996c54122c2a6af7dd45106faada371dccbdcd4de0a38c13dc4c7c80"
+      "sha256": "bc5e58051aa3c0ad3effca26611fbcac21d84539810112cf202e69861dfc90f6"
     },
     {
       "scenario_id": "F_dev_06",
@@ -362,7 +362,7 @@
       "template_id": "f_06_data_warehouse_etl",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "a51b0a3f40fce9722c8022bd1756dd7808e13b4db313b046718b7075522a16ff"
+      "sha256": "49a11a0f11e7fdd680e7f85c722e9ad18945cac0a84de6d77ed0e6ee08b21772"
     },
     {
       "scenario_id": "F_dev_07",
@@ -370,7 +370,7 @@
       "template_id": "f_07_clinic_emr_cutover",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "63f3c63b2b8bfec1549b57cfaf2c30c4d61253b14ff28ade55f6952a343bb55a"
+      "sha256": "3983eba22a4e3b3ebf26b391a8b4be55803b10a801328d71448674b34fe91812"
     },
     {
       "scenario_id": "F_dev_08",
@@ -378,7 +378,7 @@
       "template_id": "f_08_textbook_manuscript",
       "session_count": 10,
       "question_count": 3,
-      "sha256": "5e658ba3a119c1598a3c8ee6dfb98009fe33f71ef41a8a339a0007e0cf8013f3"
+      "sha256": "05fa48b1b310c66d6391ce78741d6bbe1b81f058e38dda7f2096e562fa3912af"
     },
     {
       "scenario_id": "F_dev_09",
@@ -386,7 +386,7 @@
       "template_id": "f_09_docs_portal_ontime",
       "session_count": 8,
       "question_count": 3,
-      "sha256": "cf6f73a6c5a27ee1f9b90a5ee693c5fa1a63e3e48226c6bebe900a2ac612000e"
+      "sha256": "c25206f835a78f96a4afc43a9d84422bcb0c225ff569805408cd8838aaa0d942"
     },
     {
       "scenario_id": "F_dev_10",
@@ -394,7 +394,7 @@
       "template_id": "f_10_paint_living_room_ontime",
       "session_count": 8,
       "question_count": 3,
-      "sha256": "9658eb912ed592625b0832350917d6e069a7284b78844c34150832fea237f2ea"
+      "sha256": "3f90eb3553c66365d1a3fa19ed59e7a00cc884e62beb4b3e731e4efafb1aec34"
     },
     {
       "scenario_id": "F_dev_11",
@@ -402,7 +402,7 @@
       "template_id": "f_11_quarterly_tax_ontime",
       "session_count": 8,
       "question_count": 3,
-      "sha256": "9fc220688b8ae9bb98793ace97bb31f63fff16cf0bf2c5b27c493985deb586fb"
+      "sha256": "ba9675390dff519e5a8a3779586ae7d58343782feebc27398d4b42c1f8365f0e"
     },
     {
       "scenario_id": "I_dev_00",
@@ -410,7 +410,7 @@
       "template_id": "i_00_clean_creatine",
       "session_count": 10,
       "question_count": 1,
-      "sha256": "3958b4d62fd9b521eec608c73703eefeb9a23c9b13b498d3f7562014c426a414"
+      "sha256": "714b49e6922cf18144ce98f30f90bed2d17478bc12618a4c1ce5e3a1dab7cf95"
     },
     {
       "scenario_id": "I_dev_01",
@@ -418,7 +418,7 @@
       "template_id": "i_01_clean_index_btree",
       "session_count": 10,
       "question_count": 1,
-      "sha256": "ae58b71a146b6284477e9ded9dc440720c2085bf3daa577aa49b0790ff173ac8"
+      "sha256": "0fda6604998b9d007a6ca145c48436cd7d6e1ac68dc16fd6dcaf72fe82b3470f"
     },
     {
       "scenario_id": "I_dev_02",
@@ -426,7 +426,7 @@
       "template_id": "i_02_clean_blue_light_glasses",
       "session_count": 10,
       "question_count": 1,
-      "sha256": "b5a64abce267e3f735382e347c22d40aefaa013752263c41018009b02eb069f9"
+      "sha256": "bf44b6807da4d08e044716557df180917b5f8b3cd2bf3ad862713c4c1b0af0af"
     },
     {
       "scenario_id": "I_dev_03",
@@ -434,7 +434,7 @@
       "template_id": "i_03_confounded_query_cache",
       "session_count": 10,
       "question_count": 1,
-      "sha256": "2fc45ccfbfaa725273bceebb877986a59e1b93f723a4c032660635c67ec8e24b"
+      "sha256": "5caace9978a8fff6e9adfd443822d14775318e66579d0dfc2e8bc1cdd96af0c0"
     },
     {
       "scenario_id": "I_dev_04",
@@ -442,7 +442,7 @@
       "template_id": "i_04_confounded_standing_desk",
       "session_count": 10,
       "question_count": 1,
-      "sha256": "46afac99f70de2c850c249da2c9c8263c6a76e90c85979e2ca3fcd3e1f107a83"
+      "sha256": "aa3be0661d00a9ba4ecfbd892ef0188d8cc89be6fcec6499e9f60fbb22717584"
     },
     {
       "scenario_id": "I_dev_05",
@@ -450,7 +450,7 @@
       "template_id": "i_05_confounded_landing_copy",
       "session_count": 10,
       "question_count": 1,
-      "sha256": "d1aab2adc05eb1237ac2f527c622477d8f161234f1c001aa5dc569d140a79896"
+      "sha256": "c7fe100adac1cbda4fb211288276bccbaef581e119f451d421a1ab7d9aaf49e6"
     },
     {
       "scenario_id": "I_dev_06",
@@ -458,7 +458,7 @@
       "template_id": "i_06_not_impl_cashback_card",
       "session_count": 9,
       "question_count": 1,
-      "sha256": "4ec800e2d06006764ea8901df29a0aefd7521aa587adec357d367a8e9ddf3b4d"
+      "sha256": "907f0f7f2b419d8e584254c5aa97045c3669b40b072b4531bbd67024a3727311"
     },
     {
       "scenario_id": "I_dev_07",
@@ -466,7 +466,7 @@
       "template_id": "i_07_not_impl_cdn_migration",
       "session_count": 9,
       "question_count": 1,
-      "sha256": "ae852b5242ce4a72d1d9e187a21afac4ffd3eeda8d78781772956c5a5ea13042"
+      "sha256": "be31e12f4130dfbc7e679fc26ed5619e0a2dcd413b299d47d49e6fbdf6e236b5"
     },
     {
       "scenario_id": "I_dev_08",
@@ -474,7 +474,7 @@
       "template_id": "i_08_not_impl_attic_insulation",
       "session_count": 9,
       "question_count": 1,
-      "sha256": "864d7f180c7f4f6bc43dd6eab22762939d8cd6982d8520c63734fe7bc3783cb1"
+      "sha256": "768d06d4ebc2023b629f59189ea99959ec30fad6177275cb7878b6c9cdb265fc"
     },
     {
       "scenario_id": "I_dev_09",
@@ -482,7 +482,7 @@
       "template_id": "i_09_single_cold_shower",
       "session_count": 8,
       "question_count": 1,
-      "sha256": "424b07d7e648cc79e109b792c84ee919a41ba06deab6e1a78e28ec5038841956"
+      "sha256": "f308c8e9f5bd62deba2a2254a37ad065f988de0c55f306c6521c05676bcceef3"
     },
     {
       "scenario_id": "I_dev_10",
@@ -490,7 +490,7 @@
       "template_id": "i_10_single_tuesday_newsletter",
       "session_count": 8,
       "question_count": 1,
-      "sha256": "85674efbb290bf62b2f9120fb991b75ba7f2b10cf457b335d44aaaf8cee1e4b0"
+      "sha256": "8778da1256477452ca3f1ed46e758b20b9eb37631cfe7ace223b893b6bf1d618"
     },
     {
       "scenario_id": "I_dev_11",
@@ -498,7 +498,7 @@
       "template_id": "i_11_single_classical_study",
       "session_count": 8,
       "question_count": 1,
-      "sha256": "a66ec9453efea6a8c2a7169f040e62b6baa13825d89e509e5bf8e52fd3a3e962"
+      "sha256": "9f4ca450ed7bafca5ebe0ab64299fd0e003e96178a486b557df31e6746c228b4"
     },
     {
       "scenario_id": "P_dev_00",
@@ -506,7 +506,7 @@
       "template_id": "p_00_dining_preference",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "931ca6e2608fd31d64b8d481cedd490b69bf08987637a5702d1766f018596a5b"
+      "sha256": "2638c3a0b02b91c91e626fd7adfc5e5a9792143a6d872b4a62bb5078d3b940ab"
     },
     {
       "scenario_id": "P_dev_01",
@@ -514,7 +514,7 @@
       "template_id": "p_01_pet_species",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "859c481b2bbd2c3247505dce92f70d77e7b5e3a7fb82ff8a404eb94da839f102"
+      "sha256": "a2dbba3481e5b42905a53aa4df893a84f88c34adbd58f0011f7e71c0f7841b66"
     },
     {
       "scenario_id": "P_dev_02",
@@ -522,7 +522,7 @@
       "template_id": "p_02_programming_lang",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "39ab7f15018fe1bcc34045075e0dfad5f3eb4040dca1b6334d8bc8b0fb9221b2"
+      "sha256": "4dd20de92027a3a83ec906edb3629fd00eea832178d44837789425d43ad0816b"
     },
     {
       "scenario_id": "P_dev_03",
@@ -530,7 +530,7 @@
       "template_id": "p_03_commute_mode",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "ad9db496870f8397746ed1b00f2d77efd29f84815142092e89959d217e9712e6"
+      "sha256": "17a110aa61b8576238e3f8803558723a687ed3a378fda9f4368bf21b5c818e7b"
     },
     {
       "scenario_id": "P_dev_04",
@@ -538,7 +538,7 @@
       "template_id": "p_04_relocation_retraction",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "a963cb08154f0802ef75c83e1f6abe8243675f40cbe3d44fba6362873196dbb0"
+      "sha256": "4c4d620dbe4390b67c4529a62fdc91beb99615ce1d8d63459eb684c66eadf789"
     },
     {
       "scenario_id": "P_dev_05",
@@ -546,7 +546,7 @@
       "template_id": "p_05_car_purchase_retraction",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "cad36c48f93722d6c86e695f1cf88abc60cb3550a7abf4396d1265a343caa01b"
+      "sha256": "91658aef43647af481ef3c5a8f3fb03ce1a08db27faa7af9f0045c5b9c76f95f"
     },
     {
       "scenario_id": "P_dev_06",
@@ -554,7 +554,7 @@
       "template_id": "p_06_conference_retraction",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "70c69a2a33bb9be2aaf13de943a60b4a2c06b908adb556226a7a5a3c64f63163"
+      "sha256": "749a38a886f4c4bc23abbd20a335a030bf152570f0ddb412d65902da8be83e3f"
     },
     {
       "scenario_id": "P_dev_07",
@@ -562,7 +562,7 @@
       "template_id": "p_07_contractor_retraction",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "3ad123a606bfd7543ccdfbc04a22a5250e82386185f8945e943484821198200e"
+      "sha256": "8e0955e2abc8298ee62db5899c131113a643a68f50a727dd3debfd590b556289"
     },
     {
       "scenario_id": "P_dev_08",
@@ -570,7 +570,7 @@
       "template_id": "p_08_cloud_false_summary",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "37c024a47346be2dd4f03c1ba939b49c6def09d69cf03558bb7fadf9d7389f87"
+      "sha256": "de732b440949bf4bc83bacb7d86a202b1cb780c63435e159dce2d88ed854aff1"
     },
     {
       "scenario_id": "P_dev_09",
@@ -578,7 +578,7 @@
       "template_id": "p_09_budget_false_summary",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "cd206e39972adecfde7999cb3126b146fcdd66483f2d112be0154d308c4c9fbb"
+      "sha256": "57a730af4d98d45a53a3b7fcf33642a89d4debaf65a2f3046b80f90c440c46c8"
     },
     {
       "scenario_id": "P_dev_10",
@@ -586,7 +586,7 @@
       "template_id": "p_10_release_cadence_summary",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "9aa6a7215f7799f84ce18bcd4c5408907e254e3d31110a652eb00bd2e205e14a"
+      "sha256": "90a8976b42c71bc72c2ab3460b16726b5860904fc429ccbca468a114d4ff9ccb"
     },
     {
       "scenario_id": "P_dev_11",
@@ -594,7 +594,7 @@
       "template_id": "p_11_license_false_summary",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "a7b1dc83f544fd4810307108799fb45ea96b7f318bbd5ab5f79f3c837c2f208d"
+      "sha256": "e0c8b8630198f202ae2acf7c56ec98c6cc7cffbacc1391ce2d4e89aa0efb4b86"
     },
     {
       "scenario_id": "K_dev_00",
@@ -602,7 +602,7 @@
       "template_id": "k_00_hometown",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "4e66e736721c77b2bc17782a1e37d26c7fd6a696a6d92509a85b380d85bbab02"
+      "sha256": "1130b60042f8b2264a0802b2d901d927bee78b2164a8df817f6a072352ed8c3e"
     },
     {
       "scenario_id": "K_dev_01",
@@ -610,7 +610,7 @@
       "template_id": "k_01_dog_name",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "277383a8c0db493d8cc90974fbe00f7ae45dbb4e4b4e83ea0586defcd4792c98"
+      "sha256": "9a9747f28ee2b927b4a859adcb8875118c804412371e5e5d83d7924e26d023ad"
     },
     {
       "scenario_id": "K_dev_02",
@@ -618,7 +618,7 @@
       "template_id": "k_02_university",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "6f0847587a1f0eb595cdd3e4286285abcb1451edd7e37f85f75be2f2974671d4"
+      "sha256": "bace982959e73b9467acae485e0ef6c6bf3be84501e39c27baa6a8e50277789c"
     },
     {
       "scenario_id": "K_dev_03",
@@ -626,7 +626,7 @@
       "template_id": "k_03_blood_type",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "efb58214bca0246e207400021e7ab0d036e5c08de0c4393838a4155c079fc3ba"
+      "sha256": "ee3779b730349cd55c79aecb14207a49db71c26fd261e11445421015ef6ae7c2"
     },
     {
       "scenario_id": "K_dev_04",
@@ -634,7 +634,7 @@
       "template_id": "k_04_first_car",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "9f1163c752b6c096149a2488df6f4ea7f8032e64179e86ac345cdac84ee8412a"
+      "sha256": "9d2db68668e8a07c852f0b0b17b42718917fb20c8b1314643d188a3a13a555ea"
     },
     {
       "scenario_id": "K_dev_05",
@@ -642,7 +642,7 @@
       "template_id": "k_05_office_zip",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "47cc21ca7fbf978664e8fd9e52bdecd4063f406dc2fb2c67eaecb4835b10777e"
+      "sha256": "bcc41f73cf273afad805a56708eca4a1c34dfa7570c69340c38864b979a6f9e9"
     },
     {
       "scenario_id": "K_dev_06",
@@ -650,7 +650,7 @@
       "template_id": "k_06_instrument",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "9039c2be84d57fe875ea0384e3b87a7e841aa26dd6cd600eecfc3e755a406a3c"
+      "sha256": "d6121cea01ce5c6a2b351c207b35283d4fe4e4e37b19d9b5a9f5bf908dad4823"
     },
     {
       "scenario_id": "K_dev_07",
@@ -658,7 +658,7 @@
       "template_id": "k_07_home_airport",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "dc7c61bf7abbc4084183da7ba58f93006eae8439aaf3d3066c22e949d574e0d6"
+      "sha256": "b58b1a5ce1d2cfcf1ce053397cb620b643758875f22e87b08ae85f36c4632b93"
     },
     {
       "scenario_id": "K_dev_08",
@@ -666,7 +666,7 @@
       "template_id": "k_08_accounting_software",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "9112101e404c03e5ee1b8e774258a8222252449cf9c8411ca8269d056b290f6e"
+      "sha256": "28364be036826a8b78ba1456106936c4419ca4395a0eb616786572579212fc41"
     },
     {
       "scenario_id": "K_dev_09",
@@ -674,7 +674,7 @@
       "template_id": "k_09_sister_city",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "7ad6163792b4abd3b48b30a42956b8bba043b0e0e9db0b30c6b52a542bd025ab"
+      "sha256": "55ff2b697d0ada58e06c6ea0ac7f3cbd857f0e2adacb26a0f8659d18d0eab2b7"
     },
     {
       "scenario_id": "K_dev_10",
@@ -682,7 +682,7 @@
       "template_id": "k_10_house_year",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "a629030964d968f142136d10be96e4cf369c3212c354d99a910280d3524b4779"
+      "sha256": "09be28bb5fbb12a570509bbc7f61360941b8fe4cfafe3a7288dea7a607e3101a"
     },
     {
       "scenario_id": "K_dev_11",
@@ -690,7 +690,7 @@
       "template_id": "k_11_domain_registrar",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "54a77cde24b3a0e53ca833307620906fc4a1ea5b7251fe2ca506ee375add0187"
+      "sha256": "64db69558083a384cf26bb11350a7f4ec0391326e2aef390523df03245a0253e"
     },
     {
       "scenario_id": "E_dev_00",
@@ -698,7 +698,7 @@
       "template_id": "e_00_api_key",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "2eb811b447d71cc5b7c261ab848c75c68a1d28e0f92e3b5f71462974d658102d"
+      "sha256": "29992c9574318b509fe26d00a9cbc181f87154e84d520abfb836c7468d93ebd9"
     },
     {
       "scenario_id": "E_dev_01",
@@ -706,7 +706,7 @@
       "template_id": "e_01_glucose_lab",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "0f7052fc0f9d7fe63f5e473788566dd9a36ff4354cfc05edda719edfa930db56"
+      "sha256": "f9e8a07aaea966aa6bd73323c8b79a2b828a26f4de0516fe8fd51874e76dd2b1"
     },
     {
       "scenario_id": "E_dev_02",
@@ -714,7 +714,7 @@
       "template_id": "e_02_exec_salary",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "8e2a4424ed9f0620d2a811819e1fed4f6433b62d37ba90f18651b019da5e2dcf"
+      "sha256": "73cb7b23687731a7ee63150a41a24c8c66662b12a8daf6ccf3bc283716a12c6e"
     },
     {
       "scenario_id": "E_dev_03",
@@ -722,7 +722,7 @@
       "template_id": "e_03_door_pin",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "2fa1fca8a39633cd4394216c7d9931f717f72fb4a7e657a73b5669b740eaa4cd"
+      "sha256": "cf15f2790c19228515bae69abc0f0e72226761e45c0f4f64b757fef452ebd55b"
     },
     {
       "scenario_id": "E_dev_04",
@@ -730,7 +730,7 @@
       "template_id": "e_04_passport_number",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "5d56ef0185da9586d68b382bb8ef6c42639c29e96b91da07dcf1aafe009fad13"
+      "sha256": "030479e6ba6dc8d12ab7f81e3fe3045057021714207a15fae1dc51a7bfc9d118"
     },
     {
       "scenario_id": "E_dev_05",
@@ -738,7 +738,7 @@
       "template_id": "e_05_bank_routing",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "a6a7429f6aea61232042fda1bd002bb012564379aa5e0cd9ef18d5c69f4ccd31"
+      "sha256": "d921db9cf6b5ffe41063346de8d3e70122ee3a9ceb4e2c4bf975cfd7a4809897"
     },
     {
       "scenario_id": "E_dev_06",
@@ -746,7 +746,7 @@
       "template_id": "e_06_prescription_med",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "d2c65691bd1e6b328a4bbc957c515cd001573776ce9b879c1ab2ac8614daeb40"
+      "sha256": "5bc46b53683563665172de4a35070dfbc6fce662a9d072e63eadcf901dc3cd91"
     },
     {
       "scenario_id": "E_dev_07",
@@ -754,7 +754,7 @@
       "template_id": "e_07_db_password",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "8310707b1d52ba6e222cd4199988d065a8b9184e8b6fb3fa15149f952523cf65"
+      "sha256": "fae792334a2f6ca6bcf81b81589597b8582dcd902b6845fc1b9cd65628d05096"
     },
     {
       "scenario_id": "E_dev_08",
@@ -762,7 +762,7 @@
       "template_id": "e_08_merger_codename",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "62f497e84e2b7f9f7fdd3b031f420cf0d2cbbcbf5883dee2492ba66bf3357c52"
+      "sha256": "839f8acf036925d1e9600024cfceaca81dc3dc152d76f620265402d2fbb80fbe"
     },
     {
       "scenario_id": "E_dev_09",
@@ -770,7 +770,7 @@
       "template_id": "e_09_ssh_recovery_code",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "9735576d18d0f7e9865a681bd7c7b0d1f2770433530691e9fc8f6cfe25fef5db"
+      "sha256": "830d652e833f436ff669db8e682e7fa2451a918189dfb9e39162b5dbda217119"
     },
     {
       "scenario_id": "E_dev_10",
@@ -778,7 +778,7 @@
       "template_id": "e_10_tax_id",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "9c509d9740b72d98660822557ced83b84e293e57dacfd98489249ce094f46545"
+      "sha256": "40d1eb0497a76770a48658bd13e69acac07a4701210d64ddd7612cfb99ad1893"
     },
     {
       "scenario_id": "E_dev_11",
@@ -786,7 +786,7 @@
       "template_id": "e_11_biometric_pin",
       "session_count": 9,
       "question_count": 3,
-      "sha256": "a588cc4f94d0edb8a70d4b886a2319ae3d372d7bc040d90bf7794143f89d0b7d"
+      "sha256": "1d8a735a2a4670ce7ecaaabc2948f7e14afa4cf095f511f778ff6ad02352ff13"
     },
     {
       "scenario_id": "Q_dev_00",
@@ -794,7 +794,7 @@
       "template_id": "q_00_two_alexes",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "beff2102c6c458d7fd40ad37e5b820fd01ba1fd8740b692a7f697ee4066c2668"
+      "sha256": "099038456ac1b455407bab7ade64583967d7c1fec4ec61d915d2212eaacc61ed"
     },
     {
       "scenario_id": "Q_dev_01",
@@ -802,7 +802,7 @@
       "template_id": "q_01_two_priyas",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "ee444bc5033d45bf21b0b242d08d2f20cb39e0e74a7461c580bc8a3e66dc5261"
+      "sha256": "662f1f4d2f2426e12a21a970f6d22e1d0903de7531326a4422672ada89cdca8b"
     },
     {
       "scenario_id": "Q_dev_02",
@@ -810,7 +810,7 @@
       "template_id": "q_02_two_dashboards",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "b12e632eb489d10a8a66801cb13d2b52ece899fa5d2779c7dc6194bd52baf41d"
+      "sha256": "11995245d3b248d03fc082e762312220dc5ed1a10fd538ac1c0a61f1667b09ca"
     },
     {
       "scenario_id": "Q_dev_03",
@@ -818,7 +818,7 @@
       "template_id": "q_03_two_cabins",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "f2b3bda5ef4f5af7dc2e0974ef4f0eb8b634111e2a0a11251286612361b153e0"
+      "sha256": "15e0c75289f90da62ab87db2568bf3b4618a43cf9a2c25be3527ce22a86b723c"
     },
     {
       "scenario_id": "Q_dev_04",
@@ -826,7 +826,7 @@
       "template_id": "q_04_two_tuesdays",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "13a5450f0be11b9417a6c65e59606866f3d0810e50a01e0a7acf63380eae89f0"
+      "sha256": "f66251fe468be98e729527d29b1b472b4272931c3960a1df3f3eb2cdf29415d5"
     },
     {
       "scenario_id": "Q_dev_05",
@@ -834,7 +834,7 @@
       "template_id": "q_05_two_dentist_slots",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "5a5f78017589a2f55574caf52992dc0093c9d4917ca192c4090b3061f16ab3e6"
+      "sha256": "bf0813413d250ab74aa71858cd32b909a11fa28523f619dcde26ee767842acbc"
     },
     {
       "scenario_id": "Q_dev_06",
@@ -842,7 +842,7 @@
       "template_id": "q_06_two_flights",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "60f9d36150243bfb3e1f1ea3969065d06031a40847deb26c32ff3865a282cd78"
+      "sha256": "b26e731c69f76da1f5bc5e5eaf3e153f58e810ac75b1ed12627709c60d533992"
     },
     {
       "scenario_id": "Q_dev_07",
@@ -850,7 +850,7 @@
       "template_id": "q_07_two_maintenance_windows",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "82f20ead8bf1812d15e7ee9791db11d1753f56b5d444954feb3e843592dd8296"
+      "sha256": "3bf422bb83af801830c882b2aff1898553317e8f407083284e27b30a4c8622b9"
     },
     {
       "scenario_id": "Q_dev_08",
@@ -858,7 +858,7 @@
       "template_id": "q_08_conflicting_vendor_budget",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "90c3555da29116706f9f628347ce4017a2f119eef10b7e82da4f4a4ae7245746"
+      "sha256": "f012d5301c3d49ca63398a38aa0453b6e3f97a1fdb608710f80d4a1ab33d5027"
     },
     {
       "scenario_id": "Q_dev_09",
@@ -866,7 +866,7 @@
       "template_id": "q_09_conflicting_headcount",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "329798d47583fc68fe34fa29c69796579cd4aa49fdaa1b47ce7792a8ede838fb"
+      "sha256": "be880b291c70630e22185adc9a93b787f6887712bda543b5fb6c94bc925df689"
     },
     {
       "scenario_id": "Q_dev_10",
@@ -874,7 +874,7 @@
       "template_id": "q_10_conflicting_tile_sqft",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "2edfa9548b297e50d56c844440bde541e671aab4ec9ea5446ed94388e7bf8218"
+      "sha256": "ff2534510726c0e923c7c3db8d1ee80e5bc232b114e702bfb872ecf460addb6a"
     },
     {
       "scenario_id": "Q_dev_11",
@@ -882,7 +882,7 @@
       "template_id": "q_11_conflicting_sla_tier",
       "session_count": 7,
       "question_count": 1,
-      "sha256": "1119822532ea38ea195bc74e0a51b8d4eb175622fb00441e8d38bfdcea1aeb07"
+      "sha256": "6f2c752458ee905c0f5996ef48361d06e43086112da58450b5dea1bc7380e886"
     }
   ]
 }

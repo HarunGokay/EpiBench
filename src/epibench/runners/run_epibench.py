@@ -163,6 +163,7 @@ class EpiBenchRunner:
         self.generator = ScenarioGenerator(
             distractor_mode=distractor_mode,
             distractor_file=self.distractor_file,
+            epistemic_stress=resolve_profile(profile=profile)["epistemic_stress"],
         )
 
     def build_adapters(self, systems: Sequence[str]) -> Dict[str, BaseMemoryAdapter]:
@@ -807,7 +808,7 @@ class EpiBenchRunner:
 async def main() -> None:
     parser = argparse.ArgumentParser(description="Run EpiBench Evaluation Suite")
     parser.add_argument("--split", choices=["dev", "held_out"], default="dev")
-    parser.add_argument("--profile", choices=list(BENCHMARK_PROFILES.keys()), default="dev")
+    parser.add_argument("--profile", choices=list(BENCHMARK_PROFILES.keys()) + ["epistemic_stress"], default="dev")
     parser.add_argument("--tracks", type=str, default=",".join(VALID_TRACKS))
     parser.add_argument("--systems", type=str, default="null_memory,oracle,vector_rag,hybrid_rag,recent_context")
     parser.add_argument("--token-budget", type=int, default=None)

@@ -25,6 +25,15 @@ from epibench.generator._pools_pkeq import (
     RECALL_CONTROL_POOLS,
 )
 from epibench.generator._pools_rd import DEPENDENCY_POOLS, REVISION_POOLS
+from epibench.generator._pools_stress import (
+    STRESS_FORECAST_EVENT_COUNT,
+    STRESS_MULTIHOP_DEPENDENCY_POOLS,
+    STRESS_PORTFOLIO_INTERVENTION_POOLS,
+    STRESS_REVISION_COUNT,
+    STRESS_ZERO_OVERLAP_CONSTRAINT_POOLS,
+    build_stress_forecast_events,
+    build_stress_revision_chain,
+)
 from epibench.generator._pools_xfi import (
     FORECAST_POOLS,
     HIDDEN_CONSTRAINT_POOLS,
@@ -296,7 +305,67 @@ def validate_pools(distractor_pool: Optional[DistractorPool] = None) -> Dict[str
         if in_query_count >= len(cands):
             raise AssertionError(f"{tid}: all candidate options already revealed in ambiguous_query")
 
-    # 10. Filler contamination check: no entity gold may appear in any filler session
+    # 10. Stress-profile pools validation (v2.2.0)
+    stress_stop = {
+        "the", "a", "an", "and", "or", "to", "of", "in", "on", "for", "is", "are",
+        "was", "were", "be", "my", "our", "we", "i", "me", "you", "it", "that",
+        "this", "with", "at", "by", "from", "as", "not", "no", "any", "all",
+        "can", "should", "want", "wants", "have", "has", "had", "do", "does",
+        "so", "if", "but", "into", "up", "out", "about", "per", "just", "now",
+        "us", "her", "his", "their", "them", "would", "could", "will", "go",
+        "ahead", "using", "because", "than", "before", "after", "which", "what",
+        "who", "how", "when", "where", "why", "its", "him", "she", "he", "they",
+    }
+
+    def _content_toks(s: str) -> Set[str]:
+        return {w for w in re.findall(r"[a-z0-9]+", s.lower()) if w not in stress_stop and len(w) > 2}
+
+    if len(STRESS_MULTIHOP_DEPENDENCY_POOLS) < MIN_TEMPLATES_PER_TRACK:
+        raise AssertionError("Stress Track D requires at least 12 3-hop templates")
+    for item in STRESS_MULTIHOP_DEPENDENCY_POOLS:
+        tid = item["id"]
+        if tid in all_ids:
+            raise AssertionError(f"Duplicate stress template id {tid!r}")
+        all_ids.add(tid)
+        if _content_toks(item["hop4_trigger"]) & _content_toks(item["hop3_terminal"]):
+            raise AssertionError(f"{tid}: hop4_trigger must have 0 content-word overlap with hop3_terminal")
+        for dec in item["affected_decisions"]:
+            if not any(_whole_phrase_present(a, item["hop3_terminal"]) for a in [dec["label"], *dec["aliases"]]):
+                raise AssertionError(f"{tid}: affected decision {dec['label']!r} missing from hop3_terminal")
+
+    if len(STRESS_ZERO_OVERLAP_CONSTRAINT_POOLS) < MIN_TEMPLATES_PER_TRACK:
+        raise AssertionError("Stress Track X requires at least 12 zero-overlap templates")
+    for item in STRESS_ZERO_OVERLAP_CONSTRAINT_POOLS:
+        tid = item["id"]
+        if tid in all_ids:
+            raise AssertionError(f"Duplicate stress template id {tid!r}")
+        all_ids.add(tid)
+        ov = _content_toks(item["constraint_statement"]) & _content_toks(item["query"])
+        if ov:
+            raise AssertionError(f"{tid}: stress Track X requires 0 content-word overlap, found {ov}")
+        if not any(_whole_phrase_present(a, item["constraint_statement"]) for a in [item["constraint_keyword"], *item["constraint_aliases"]]):
+            raise AssertionError(f"{tid}: constraint_keyword missing from constraint_statement")
+
+    if len(STRESS_PORTFOLIO_INTERVENTION_POOLS) < MIN_TEMPLATES_PER_TRACK:
+        raise AssertionError("Stress Track I requires at least 12 portfolio templates")
+    for item in STRESS_PORTFOLIO_INTERVENTION_POOLS:
+        tid = item["id"]
+        if tid in all_ids:
+            raise AssertionError(f"Duplicate stress template id {tid!r}")
+        all_ids.add(tid)
+
+    for item in REVISION_POOLS[:12]:
+        chain = build_stress_revision_chain(item)
+        if len(chain["values"]) != STRESS_REVISION_COUNT:
+            raise AssertionError(f"{item['id']}: stress revision chain must have {STRESS_REVISION_COUNT} entries")
+
+    for item in FORECAST_POOLS[:12]:
+        evs = build_stress_forecast_events(item)
+        if len(evs) != STRESS_FORECAST_EVENT_COUNT:
+            raise AssertionError(f"{item['id']}: stress forecast chain must have {STRESS_FORECAST_EVENT_COUNT} events")
+        compute_forecast_gold(evs)
+
+    # 11. Filler contamination check: no entity gold may appear in any filler session
     for tid, gold_str in entity_golds_to_check_against_fillers:
         for sid, f_text in filler_texts:
             if _whole_phrase_present(gold_str, f_text):

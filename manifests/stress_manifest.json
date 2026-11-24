@@ -1,0 +1,888 @@
+{
+  "generator_version": "2.2.0",
+  "profile": "stress",
+  "distractor_mode": "mixed",
+  "split": "dev",
+  "seed": 20261122,
+  "scenarios_per_track": 12,
+  "filler_count": 240,
+  "tracks": [
+    "R",
+    "D",
+    "X",
+    "F",
+    "I",
+    "P",
+    "K",
+    "E",
+    "Q"
+  ],
+  "total_scenarios": 108,
+  "manifest_sha256": "dc3cc6c6088c9a8b04a1e37434f2db0f20749cb60e8092c86e02b30c32fa660f",
+  "scenarios": [
+    {
+      "scenario_id": "R_dev_00",
+      "track": "R",
+      "template_id": "r_00_prod_db",
+      "session_count": 268,
+      "question_count": 4,
+      "sha256": "532e2e87c29c84d237ff4b2b3f747665c7fa834d1603b0fd335ea2159e040ede"
+    },
+    {
+      "scenario_id": "R_dev_01",
+      "track": "R",
+      "template_id": "r_01_gym_membership",
+      "session_count": 268,
+      "question_count": 4,
+      "sha256": "378e4d244207ebd8670fdadc9a7e8e9f3ee4c1dfb826765475ce4af10720391d"
+    },
+    {
+      "scenario_id": "R_dev_02",
+      "track": "R",
+      "template_id": "r_02_savings_target",
+      "session_count": 268,
+      "question_count": 4,
+      "sha256": "60af47cfe7c13f40016eefe96eeb4b3c897e4eefb92fd989b80f505fd17463d4"
+    },
+    {
+      "scenario_id": "R_dev_03",
+      "track": "R",
+      "template_id": "r_03_frontend_framework",
+      "session_count": 268,
+      "question_count": 4,
+      "sha256": "691ad778e4cc3ce68b5146476d658b85fe3359e698edd9b89f4b9d1335eec12f"
+    },
+    {
+      "scenario_id": "R_dev_04",
+      "track": "R",
+      "template_id": "r_04_airline_loyalty",
+      "session_count": 268,
+      "question_count": 4,
+      "sha256": "0a4278c3ab36a54e636b99d7ac7ae37088f5b07537c4fb816ea5366deddc8f2c"
+    },
+    {
+      "scenario_id": "R_dev_05",
+      "track": "R",
+      "template_id": "r_05_countertop_material",
+      "session_count": 268,
+      "question_count": 4,
+      "sha256": "a3712d1c09b46425f9e9528f34da783e607e26321a3c9f58a95a1d33e3263b61"
+    },
+    {
+      "scenario_id": "R_dev_06",
+      "track": "R",
+      "template_id": "r_06_project_deadline",
+      "session_count": 268,
+      "question_count": 4,
+      "sha256": "5343a16dc3e3b37bea2157042edf134b6c70bfbd63e50ee93759b3ad586ca897"
+    },
+    {
+      "scenario_id": "R_dev_07",
+      "track": "R",
+      "template_id": "r_07_ci_platform",
+      "session_count": 268,
+      "question_count": 4,
+      "sha256": "4b0ee5986a8ddadf2c297ca56e61467872ec5337eff3dc061bc04afffb47b3fd"
+    },
+    {
+      "scenario_id": "R_dev_08",
+      "track": "R",
+      "template_id": "r_08_brokerage_account",
+      "session_count": 268,
+      "question_count": 4,
+      "sha256": "d3adbcf2f0bb402c7fd66ce7fd3ce21331a8b6c5c8690f691499b93a6229090f"
+    },
+    {
+      "scenario_id": "R_dev_09",
+      "track": "R",
+      "template_id": "r_09_office_city",
+      "session_count": 268,
+      "question_count": 4,
+      "sha256": "400a779d942af8882d165f74da9c3f863d9fb220fef74371711da511f8632c9c"
+    },
+    {
+      "scenario_id": "R_dev_10",
+      "track": "R",
+      "template_id": "r_10_messaging_queue",
+      "session_count": 268,
+      "question_count": 4,
+      "sha256": "06622f39e5701d80a09b789c49b8faa79395890effb3b694f9ab162b95941f6a"
+    },
+    {
+      "scenario_id": "R_dev_11",
+      "track": "R",
+      "template_id": "r_11_heating_fuel",
+      "session_count": 268,
+      "question_count": 4,
+      "sha256": "af091c6722367981757bc99b65ed098f99176a78a7de14a4d2246273be89360c"
+    },
+    {
+      "scenario_id": "D_dev_00",
+      "track": "D",
+      "template_id": "d_stress_00_egress_campus",
+      "session_count": 245,
+      "question_count": 3,
+      "sha256": "ee7af3e0014a6e6db377b7a78b35d2527ca84cfaecb995a908ca0e82877bb38d"
+    },
+    {
+      "scenario_id": "D_dev_01",
+      "track": "D",
+      "template_id": "d_stress_01_substation_bakery",
+      "session_count": 245,
+      "question_count": 3,
+      "sha256": "a705c83240e571d01a96103f578506903680d24a25effb04dedfb68d76832268"
+    },
+    {
+      "scenario_id": "D_dev_02",
+      "track": "D",
+      "template_id": "d_stress_02_lithium_fleet",
+      "session_count": 245,
+      "question_count": 3,
+      "sha256": "987e38ae390675a4c76a81b303d4aba6d25f1426b85fe5fd6e72d5d7f8aceef7"
+    },
+    {
+      "scenario_id": "D_dev_03",
+      "track": "D",
+      "template_id": "d_stress_03_visa_berlin",
+      "session_count": 245,
+      "question_count": 3,
+      "sha256": "5ecebc7f6cf8cfa0204bbc5760335fc8de710ecc99f65fc0ebe3c5e4066487ac"
+    },
+    {
+      "scenario_id": "D_dev_04",
+      "track": "D",
+      "template_id": "d_stress_04_grant_clinic",
+      "session_count": 245,
+      "question_count": 3,
+      "sha256": "1631c4b0010ec1e77586ff20048830519ef386fa01441454f503f2a767c4044b"
+    },
+    {
+      "scenario_id": "D_dev_05",
+      "track": "D",
+      "template_id": "d_stress_05_zoning_duplex",
+      "session_count": 245,
+      "question_count": 3,
+      "sha256": "a110aead1cacdeb33b1f8fc184b73869b238c49a01000cb54f925099e45f69c6"
+    },
+    {
+      "scenario_id": "D_dev_06",
+      "track": "D",
+      "template_id": "d_stress_06_chip_foundry",
+      "session_count": 245,
+      "question_count": 3,
+      "sha256": "25233020658669fad312c877108faa06a92f46dd9f0ad430efc087481ff4705f"
+    },
+    {
+      "scenario_id": "D_dev_07",
+      "track": "D",
+      "template_id": "d_stress_07_soc2_enterprise",
+      "session_count": 245,
+      "question_count": 3,
+      "sha256": "598b2a06871e534b48e0245d2c5e608785d205b1a4e652201e895d2383cf0abc"
+    },
+    {
+      "scenario_id": "D_dev_08",
+      "track": "D",
+      "template_id": "d_stress_08_interest_refi",
+      "session_count": 245,
+      "question_count": 3,
+      "sha256": "4bca7263c95697f5c8732cf1e840e9a4ed2ca129d83926a154c09b3eab906162"
+    },
+    {
+      "scenario_id": "D_dev_09",
+      "track": "D",
+      "template_id": "d_stress_09_fiber_broadcast",
+      "session_count": 245,
+      "question_count": 3,
+      "sha256": "607552e5177e268220b2eb299cd2c0baaf5e6c7a7c99eeadc1b946ed618361f3"
+    },
+    {
+      "scenario_id": "D_dev_10",
+      "track": "D",
+      "template_id": "d_stress_10_coldchain_vaccine",
+      "session_count": 245,
+      "question_count": 3,
+      "sha256": "22217cb0b632a6aef4a5773abed6422c80edd4d56501995ed1b8057af477962c"
+    },
+    {
+      "scenario_id": "D_dev_11",
+      "track": "D",
+      "template_id": "d_stress_11_accreditation_fellowship",
+      "session_count": 245,
+      "question_count": 3,
+      "sha256": "4676dba1866634181ea2c82c4e334db73637cc0b576f15498bce20ab1b44caef"
+    },
+    {
+      "scenario_id": "X_dev_00",
+      "track": "X",
+      "template_id": "x_stress_00_warfarin_vitk",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "9c794d80865b28592be4c302be96f3631fecc1d7989d4b869186964704a8a240"
+    },
+    {
+      "scenario_id": "X_dev_01",
+      "track": "X",
+      "template_id": "x_stress_01_noncompete_checkout",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "079c91e531a1ce97f40db0ae6cb4562d0a2d18cff4847f848f531f863cb35dae"
+    },
+    {
+      "scenario_id": "X_dev_02",
+      "track": "X",
+      "template_id": "x_stress_02_breaker_amperage",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "ba5d0fc4eda744b97504f9bc982026af1549783d04112c33d4fbfb9f525e06ee"
+    },
+    {
+      "scenario_id": "X_dev_03",
+      "track": "X",
+      "template_id": "x_stress_03_statin_grapefruit",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "e6a3d0b50e49e5c93284216b51ed002207bbeaceae31c5c8ea15cc7c9b965c1f"
+    },
+    {
+      "scenario_id": "X_dev_04",
+      "track": "X",
+      "template_id": "x_stress_04_arachis_maafe",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "b2d068b2ee60238422bc4e39d23dc37bccc15f69f9c153f7a85f2f5e769b9e0f"
+    },
+    {
+      "scenario_id": "X_dev_05",
+      "track": "X",
+      "template_id": "x_stress_05_itar_zurich",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "883e1234f20064f4e5b01f3913c253b284e54dc7184407fc9435761efd991d07"
+    },
+    {
+      "scenario_id": "X_dev_06",
+      "track": "X",
+      "template_id": "x_stress_06_scuba_flight",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "923b6ff413dda97876a1e64dfea16c97b897ff2dab7b46f0440849af6944470e"
+    },
+    {
+      "scenario_id": "X_dev_07",
+      "track": "X",
+      "template_id": "x_stress_07_galvanic_aluminum",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "ce80cb479e3db92cc93b1916380e8908908841cddd0620dd2f9084ddd340be43"
+    },
+    {
+      "scenario_id": "X_dev_08",
+      "track": "X",
+      "template_id": "x_stress_08_celiac_guinness",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "1c0c2d0fd2502f98ada1214672b2826c77b7b97013b971483cdafe5bae7c2120"
+    },
+    {
+      "scenario_id": "X_dev_09",
+      "track": "X",
+      "template_id": "x_stress_09_sec_blackout",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "83045be916b3e662733e9f3b91cc2a442c857b5dc16e9ba1f8c02032b143ba07"
+    },
+    {
+      "scenario_id": "X_dev_10",
+      "track": "X",
+      "template_id": "x_stress_10_latex_workshop",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "fba3eef94f78bef30afc387eb750480bc753db72c7354d746ff938fc45472573"
+    },
+    {
+      "scenario_id": "X_dev_11",
+      "track": "X",
+      "template_id": "x_stress_11_lithium_cargo",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "943b664af276620ef385236fe31a4e737d6fdf873a443fe6187485ee88ac8e81"
+    },
+    {
+      "scenario_id": "F_dev_00",
+      "track": "F",
+      "template_id": "f_00_titan_alpha",
+      "session_count": 264,
+      "question_count": 3,
+      "sha256": "cf19e09bfc8cc5791f5645eab8664761cc95d843bdc6cf99f741de8176211690"
+    },
+    {
+      "scenario_id": "F_dev_01",
+      "track": "F",
+      "template_id": "f_01_bathroom_remodel",
+      "session_count": 264,
+      "question_count": 3,
+      "sha256": "020a569d262680198ca8cab3d78a15b36dd030934babfeee1b5696a40bc94943"
+    },
+    {
+      "scenario_id": "F_dev_02",
+      "track": "F",
+      "template_id": "f_02_billing_v2",
+      "session_count": 264,
+      "question_count": 3,
+      "sha256": "a6c06f2daad2c69c3590a1d7266e0753bd48d5132eb6b5b6cfe615c0253c3e34"
+    },
+    {
+      "scenario_id": "F_dev_03",
+      "track": "F",
+      "template_id": "f_03_soc2_audit_ready",
+      "session_count": 264,
+      "question_count": 3,
+      "sha256": "ea2910ffd41346c44d0b991488b445f5fb345a1b4440daed72cb2a11a77bb33d"
+    },
+    {
+      "scenario_id": "F_dev_04",
+      "track": "F",
+      "template_id": "f_04_warehouse_erp",
+      "session_count": 264,
+      "question_count": 3,
+      "sha256": "bac71e25a22bc3aa1f42905290c8760831e1675cd43a0171b66c657a862a8f6b"
+    },
+    {
+      "scenario_id": "F_dev_05",
+      "track": "F",
+      "template_id": "f_05_deck_construction",
+      "session_count": 264,
+      "question_count": 3,
+      "sha256": "838e289d281469d09e92e3ab0bd40cbe27c991400cfea5f15df6a460ce1f35a3"
+    },
+    {
+      "scenario_id": "F_dev_06",
+      "track": "F",
+      "template_id": "f_06_data_warehouse_etl",
+      "session_count": 264,
+      "question_count": 3,
+      "sha256": "2b07806367956e8bd004ee848fa7da7baa48a8b31d9b613ee4835866154ab578"
+    },
+    {
+      "scenario_id": "F_dev_07",
+      "track": "F",
+      "template_id": "f_07_clinic_emr_cutover",
+      "session_count": 264,
+      "question_count": 3,
+      "sha256": "515ad6a86f593375b3420c9754f721d546a5e7c7c2c564ca7911954f03401126"
+    },
+    {
+      "scenario_id": "F_dev_08",
+      "track": "F",
+      "template_id": "f_08_textbook_manuscript",
+      "session_count": 264,
+      "question_count": 3,
+      "sha256": "8c59d5ae257f7db26a165f196bf62272c547577ad8ccf3e1d4b8ca4c3ca362fe"
+    },
+    {
+      "scenario_id": "F_dev_09",
+      "track": "F",
+      "template_id": "f_09_docs_portal_ontime",
+      "session_count": 264,
+      "question_count": 3,
+      "sha256": "f33ee4c9998c487709482d038f95e63110c562def152799e42e1be6a367f35e3"
+    },
+    {
+      "scenario_id": "F_dev_10",
+      "track": "F",
+      "template_id": "f_10_paint_living_room_ontime",
+      "session_count": 264,
+      "question_count": 3,
+      "sha256": "b9f3fa3ad6cc32c52b8e099da3aa0b045ad189e01fafaa3ba0a8260b50613a7b"
+    },
+    {
+      "scenario_id": "F_dev_11",
+      "track": "F",
+      "template_id": "f_11_quarterly_tax_ontime",
+      "session_count": 264,
+      "question_count": 3,
+      "sha256": "7ec5e9ef17fca45a03d0eca4ed1926905a71ce92bc1c3e17bf45acee732d2a81"
+    },
+    {
+      "scenario_id": "I_dev_00",
+      "track": "I",
+      "template_id": "i_stress_00_sprint_carryover",
+      "session_count": 256,
+      "question_count": 1,
+      "sha256": "028a41664141158ca393ef84b4f1fae467e351f23836a0064ddc49dc7fb2cdec"
+    },
+    {
+      "scenario_id": "I_dev_01",
+      "track": "I",
+      "template_id": "i_stress_01_support_triage",
+      "session_count": 256,
+      "question_count": 1,
+      "sha256": "33807ab852e38ac8965611a8a22df3da76876947350b6226e0112226d77be648"
+    },
+    {
+      "scenario_id": "I_dev_02",
+      "track": "I",
+      "template_id": "i_stress_02_sleep_efficiency",
+      "session_count": 256,
+      "question_count": 1,
+      "sha256": "995de981fdb4bf50ad19409d7224ed814c028f17079539e5f4de0f70c883ccbf"
+    },
+    {
+      "scenario_id": "I_dev_03",
+      "track": "I",
+      "template_id": "i_stress_03_ci_build_time",
+      "session_count": 256,
+      "question_count": 1,
+      "sha256": "0b40b00698cc6af323bb8c3a06488874fc09527ba5354fad4efd661ca3aa315b"
+    },
+    {
+      "scenario_id": "I_dev_04",
+      "track": "I",
+      "template_id": "i_stress_04_checkout_conversion",
+      "session_count": 256,
+      "question_count": 1,
+      "sha256": "e125bfb5c15c084ef85f409a80a64fee2ea2de83ea3422b1abf574d1c349fb8f"
+    },
+    {
+      "scenario_id": "I_dev_05",
+      "track": "I",
+      "template_id": "i_stress_05_migraine_days",
+      "session_count": 256,
+      "question_count": 1,
+      "sha256": "3feb6e06634085709e689cfbae55c005e04d5a31f399d7b6500518c5c1562d2d"
+    },
+    {
+      "scenario_id": "I_dev_06",
+      "track": "I",
+      "template_id": "i_stress_06_warehouse_pick",
+      "session_count": 256,
+      "question_count": 1,
+      "sha256": "7c5623b60783f5defc29355cf50ec973359a002d9ab2de975a6cb9849eabe59a"
+    },
+    {
+      "scenario_id": "I_dev_07",
+      "track": "I",
+      "template_id": "i_stress_07_study_retention",
+      "session_count": 256,
+      "question_count": 1,
+      "sha256": "6fafa9fd69d499d3471e3896b0ae4c7688afdbbc6d2cd1fa748442e707bcd003"
+    },
+    {
+      "scenario_id": "I_dev_08",
+      "track": "I",
+      "template_id": "i_stress_08_cloud_spend",
+      "session_count": 256,
+      "question_count": 1,
+      "sha256": "60a52901e37971174db68317975e2ab4f14826b37b3b16897c8d26c63670203f"
+    },
+    {
+      "scenario_id": "I_dev_09",
+      "track": "I",
+      "template_id": "i_stress_09_api_p99",
+      "session_count": 256,
+      "question_count": 1,
+      "sha256": "c04a663110150430bc380146b5b583fe806388ad437c015e6348ce2968afeec7"
+    },
+    {
+      "scenario_id": "I_dev_10",
+      "track": "I",
+      "template_id": "i_stress_10_hvac_kwh",
+      "session_count": 256,
+      "question_count": 1,
+      "sha256": "82bbf3e53d2e039ca835a91547233f6869d4cad810fea278a9e2884c96c262c3"
+    },
+    {
+      "scenario_id": "I_dev_11",
+      "track": "I",
+      "template_id": "i_stress_11_churn_renewal",
+      "session_count": 256,
+      "question_count": 1,
+      "sha256": "bc20c30b818b6b0413698060aadde6a6f26d06fec684666c69a4398c0c4a9365"
+    },
+    {
+      "scenario_id": "P_dev_00",
+      "track": "P",
+      "template_id": "p_00_dining_preference",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "8a6ee36bb1b0e906b93f8f4987368a8898832972867778ad4a12182dae62ac87"
+    },
+    {
+      "scenario_id": "P_dev_01",
+      "track": "P",
+      "template_id": "p_01_pet_species",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "6f5b8ddda5681565c11ac78a48cad4874b98d36c984474c7ca672bb5ddf08035"
+    },
+    {
+      "scenario_id": "P_dev_02",
+      "track": "P",
+      "template_id": "p_02_programming_lang",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "4f0bde87b1423b718e785c41bf4be5349bd56dfa20a44a4fa82445d712d16416"
+    },
+    {
+      "scenario_id": "P_dev_03",
+      "track": "P",
+      "template_id": "p_03_commute_mode",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "9e58a4d1cd133d1702c0f04b7affecffcd1f28297778fbd092cc14438ec5fd0f"
+    },
+    {
+      "scenario_id": "P_dev_04",
+      "track": "P",
+      "template_id": "p_04_relocation_retraction",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "5a7283d75e4913cb62218af28db555031d5b3503cba21e089abe2b1c2a3cee2c"
+    },
+    {
+      "scenario_id": "P_dev_05",
+      "track": "P",
+      "template_id": "p_05_car_purchase_retraction",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "d99c6f414bd2d6dab58e8944f24095d81c29a975c99992ae6057ba41ca909d51"
+    },
+    {
+      "scenario_id": "P_dev_06",
+      "track": "P",
+      "template_id": "p_06_conference_retraction",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "ebe793886cffae0c9f86f5bad7802f75774f01aa7dd7ee3b84c621539eea06c9"
+    },
+    {
+      "scenario_id": "P_dev_07",
+      "track": "P",
+      "template_id": "p_07_contractor_retraction",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "728c3ecd4a5343156488c320721ad8d370329a9e9486ce6643fa8e5cec26c92c"
+    },
+    {
+      "scenario_id": "P_dev_08",
+      "track": "P",
+      "template_id": "p_08_cloud_false_summary",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "f3cbdd72900c1f08889b47305ae529eb28578fcd026cd3058aa64f57116557e0"
+    },
+    {
+      "scenario_id": "P_dev_09",
+      "track": "P",
+      "template_id": "p_09_budget_false_summary",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "e113ad74b19bcd1154354de034947b7be41a5ae5bad065760323b0bcbf04dd01"
+    },
+    {
+      "scenario_id": "P_dev_10",
+      "track": "P",
+      "template_id": "p_10_release_cadence_summary",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "5aa35a842f807c08a5c0d28e00bc252711a62d05b70ea17efbb41f226974ce8c"
+    },
+    {
+      "scenario_id": "P_dev_11",
+      "track": "P",
+      "template_id": "p_11_license_false_summary",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "541e15da6148242f99c5435b090989018028c2a11f843651ee420505c0a2d1da"
+    },
+    {
+      "scenario_id": "K_dev_00",
+      "track": "K",
+      "template_id": "k_00_hometown",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "1014c667eb723c51342e530b5a4e4128fe0267db4eed8456539a9465c91b7590"
+    },
+    {
+      "scenario_id": "K_dev_01",
+      "track": "K",
+      "template_id": "k_01_dog_name",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "243ea118ca0ed8ab1b8f9753b4700131e351162e135f9ed22a038c89c2405e95"
+    },
+    {
+      "scenario_id": "K_dev_02",
+      "track": "K",
+      "template_id": "k_02_university",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "1b4e0c81a6bfd31b3ec3599af77d0d51db42347b06d54054c2b490ee7cc2dd77"
+    },
+    {
+      "scenario_id": "K_dev_03",
+      "track": "K",
+      "template_id": "k_03_blood_type",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "57b32dc65204dca833312fb92c475f606a7169f5f91006ab02b7e6853ea44d4d"
+    },
+    {
+      "scenario_id": "K_dev_04",
+      "track": "K",
+      "template_id": "k_04_first_car",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "f92d9c0fddf5b75f40f67ffb1ab09298ad06a6baf0103071146d2d43c75b5c67"
+    },
+    {
+      "scenario_id": "K_dev_05",
+      "track": "K",
+      "template_id": "k_05_office_zip",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "8698ece780bcd48c7889bfe7a52134fd0fe43a9ec96e62a0534c0fcb55512d2e"
+    },
+    {
+      "scenario_id": "K_dev_06",
+      "track": "K",
+      "template_id": "k_06_instrument",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "618cf6d0cf3baa00a855f586ca09793522e536e364708ea63afd8ec1d66808d8"
+    },
+    {
+      "scenario_id": "K_dev_07",
+      "track": "K",
+      "template_id": "k_07_home_airport",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "0a8fe0235d695152d9c5e057364564f1991c16869fc634db177a726bba6d7b7f"
+    },
+    {
+      "scenario_id": "K_dev_08",
+      "track": "K",
+      "template_id": "k_08_accounting_software",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "2d3177cb598d22a33a50b7690f9519af0d959af41e1fe2fba1fd230eef8796bf"
+    },
+    {
+      "scenario_id": "K_dev_09",
+      "track": "K",
+      "template_id": "k_09_sister_city",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "57104854524b4a004d337d7016eca4afefa2fdc2c26edc0c24017a194ba9809d"
+    },
+    {
+      "scenario_id": "K_dev_10",
+      "track": "K",
+      "template_id": "k_10_house_year",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "d444ef9cb36e1bbc9338760c0197e4f7a7f9d1782fe9bd75a332afc50b911d42"
+    },
+    {
+      "scenario_id": "K_dev_11",
+      "track": "K",
+      "template_id": "k_11_domain_registrar",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "45cbcf9ee7da6f4e8ce21dc03090588a42de1a829c56b0d23bf73a88514f1b2c"
+    },
+    {
+      "scenario_id": "E_dev_00",
+      "track": "E",
+      "template_id": "e_00_api_key",
+      "session_count": 243,
+      "question_count": 3,
+      "sha256": "962b84022efc0ce9a62246ebebcba72ea753031a1536e6aeb85ad1291f165c83"
+    },
+    {
+      "scenario_id": "E_dev_01",
+      "track": "E",
+      "template_id": "e_01_glucose_lab",
+      "session_count": 243,
+      "question_count": 3,
+      "sha256": "a4847fbd23b41307a044c0bc3c9b6c22e7e7a37ac06fce6830e7a483e2c47ffc"
+    },
+    {
+      "scenario_id": "E_dev_02",
+      "track": "E",
+      "template_id": "e_02_exec_salary",
+      "session_count": 243,
+      "question_count": 3,
+      "sha256": "03bc417cd10055087432565509a86acac1cd20d1d3f88523f93be06b326db7bd"
+    },
+    {
+      "scenario_id": "E_dev_03",
+      "track": "E",
+      "template_id": "e_03_door_pin",
+      "session_count": 243,
+      "question_count": 3,
+      "sha256": "09ccccee8c63d00b73ba048799c8e4dcd8fff764f1e9454ad3eae765bfa2e635"
+    },
+    {
+      "scenario_id": "E_dev_04",
+      "track": "E",
+      "template_id": "e_04_passport_number",
+      "session_count": 243,
+      "question_count": 3,
+      "sha256": "0d1035924838cb3d6773867b5866d695407ec89cc6847e46210147a3e54ded7d"
+    },
+    {
+      "scenario_id": "E_dev_05",
+      "track": "E",
+      "template_id": "e_05_bank_routing",
+      "session_count": 243,
+      "question_count": 3,
+      "sha256": "ed44a557dad9f0f4f1f7016423f8547764eeacdc668d2b0a4cd53b74b352fe06"
+    },
+    {
+      "scenario_id": "E_dev_06",
+      "track": "E",
+      "template_id": "e_06_prescription_med",
+      "session_count": 243,
+      "question_count": 3,
+      "sha256": "fe974b44fa25d49daaff3e18e7d657ae948a327e75d6364f7c0fb3cbe0405e4f"
+    },
+    {
+      "scenario_id": "E_dev_07",
+      "track": "E",
+      "template_id": "e_07_db_password",
+      "session_count": 243,
+      "question_count": 3,
+      "sha256": "96323a8c97e5a8f17fb4629fd119d49a4f5d66d1573776b39d8bd2b5658641a6"
+    },
+    {
+      "scenario_id": "E_dev_08",
+      "track": "E",
+      "template_id": "e_08_merger_codename",
+      "session_count": 243,
+      "question_count": 3,
+      "sha256": "6246756bd515f45ace081b22a5cae5627ab9add9618a5945fe40f0700541ef63"
+    },
+    {
+      "scenario_id": "E_dev_09",
+      "track": "E",
+      "template_id": "e_09_ssh_recovery_code",
+      "session_count": 243,
+      "question_count": 3,
+      "sha256": "73e5a2112161c73fd84ff9da1bce3316b2d7caf5b200e90f8ff4a993194a2087"
+    },
+    {
+      "scenario_id": "E_dev_10",
+      "track": "E",
+      "template_id": "e_10_tax_id",
+      "session_count": 243,
+      "question_count": 3,
+      "sha256": "44448d9aa007cde5fce8ea27b05ff1593a6c0e6597308cd921edbd4f87adc1f4"
+    },
+    {
+      "scenario_id": "E_dev_11",
+      "track": "E",
+      "template_id": "e_11_biometric_pin",
+      "session_count": 243,
+      "question_count": 3,
+      "sha256": "0c69e99c0bb4eebc40e01a967168d49677cecc6713a10320342e1f0f031848d3"
+    },
+    {
+      "scenario_id": "Q_dev_00",
+      "track": "Q",
+      "template_id": "q_00_two_alexes",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "17fe5946f524d00c09a6ce97b24f84add9b04f5a7e551aca7c31e612d9703fcf"
+    },
+    {
+      "scenario_id": "Q_dev_01",
+      "track": "Q",
+      "template_id": "q_01_two_priyas",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "db2c8c0c12264f7c79a4377b685fa2248c8875e94f60eed71deb0009a33d6ec4"
+    },
+    {
+      "scenario_id": "Q_dev_02",
+      "track": "Q",
+      "template_id": "q_02_two_dashboards",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "16dabd339ba83746a5376c873002f24784981977c0eb378ef32f320136b33dbd"
+    },
+    {
+      "scenario_id": "Q_dev_03",
+      "track": "Q",
+      "template_id": "q_03_two_cabins",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "74b1d8321665320d5b844d9cb8bf3f7e6d25620d4db42eeff4390d47da976cf8"
+    },
+    {
+      "scenario_id": "Q_dev_04",
+      "track": "Q",
+      "template_id": "q_04_two_tuesdays",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "e631091d5eae6982e49b139b185c68690b10804400b883a208f02fbe6d2fef4d"
+    },
+    {
+      "scenario_id": "Q_dev_05",
+      "track": "Q",
+      "template_id": "q_05_two_dentist_slots",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "1df27c38f73291708811a7efe1e001eee2d48b04d96ff8ff9558ed2aca9b462f"
+    },
+    {
+      "scenario_id": "Q_dev_06",
+      "track": "Q",
+      "template_id": "q_06_two_flights",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "1ac85210143b08851d594a4b4ce4912a27d0225e63d28ade2dcb4419f4942608"
+    },
+    {
+      "scenario_id": "Q_dev_07",
+      "track": "Q",
+      "template_id": "q_07_two_maintenance_windows",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "bc57ed9914140c14b6f71b55747e1efbd4236bd9187d693c48d7560c4ee23a1b"
+    },
+    {
+      "scenario_id": "Q_dev_08",
+      "track": "Q",
+      "template_id": "q_08_conflicting_vendor_budget",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "f0b22bbbb1ffd148b135ede82d15713bb6fff0c0db4a6e0377126de91c2f029c"
+    },
+    {
+      "scenario_id": "Q_dev_09",
+      "track": "Q",
+      "template_id": "q_09_conflicting_headcount",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "0485dd25cf53de65299793df7f5f999381b3d9180addcf6d701c676aa97d8fcd"
+    },
+    {
+      "scenario_id": "Q_dev_10",
+      "track": "Q",
+      "template_id": "q_10_conflicting_tile_sqft",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "d0b1817f23f9cf2583a7d69855d3dde56e1f6f37c08e09b8f04075f5f64a20a1"
+    },
+    {
+      "scenario_id": "Q_dev_11",
+      "track": "Q",
+      "template_id": "q_11_conflicting_sla_tier",
+      "session_count": 241,
+      "question_count": 1,
+      "sha256": "df107d32fb6ab743fa583603507670fad4bbd2c91d0b0fd60a14409018ae573b"
+    }
+  ]
+}
