@@ -1,4 +1,4 @@
-# EpiBench
+# EpiBench (Beta)
 
 **EpiBench** is an open-source, deterministic benchmark for evaluating **epistemic long-term memory architectures** across evolving multi-session histories (`GENERATOR_VERSION = "2.2.0"`, `SCORER_VERSION = "2.0.0"`, `READER_PROMPT_VERSION = "2.0.0"`, `ADAPTER_CONTRACT_VERSION = "2.0.0"`).
 
