@@ -142,7 +142,7 @@ class ReaderLLM:
                         await asyncio.sleep(backoff)
                         continue
                     raise RuntimeError(f"Reader LLM API error {resp.status_code}: {resp.text}")
-                except (httpx.TimeoutException, httpx.ConnectError, httpx.ReadError) as exc:
+                except httpx.TransportError as exc:
                     last_err = exc
                     if attempt < 4:
                         backoff = 2.0 * (2 ** attempt)
